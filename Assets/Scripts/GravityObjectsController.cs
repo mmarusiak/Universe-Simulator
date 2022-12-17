@@ -6,6 +6,13 @@ public class GravityObjectsController : MonoBehaviour
     [SerializeField]
     public List<GravityObject> AllGravityObjects = new List<GravityObject>();
 
+    public void AddGravityObject(GravityObject obj)
+    {
+        AllGravityObjects.Add(obj);
+        foreach (var gravobj in AllGravityObjects)
+            gravobj.UpdatePrivateList();
+    }
+    
     public List<GravityObject> GetObjects(GravityObject gravityObject)
     {
         List<GravityObject> returnList = new List<GravityObject>();
