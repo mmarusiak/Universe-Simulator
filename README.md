@@ -2,7 +2,7 @@
 Just a small project for simulate planets and space objects in 2D
 
 
-![demo](https://user-images.githubusercontent.com/20907620/208252336-68b01672-c5dc-40fc-ad2d-7ed273c33fa1.png)
+![demo](https://user-images.githubusercontent.com/20907620/208252658-0018ae9f-a163-407c-ab8b-12683122b6f8.gif)
 
 
 ## Things to add:
