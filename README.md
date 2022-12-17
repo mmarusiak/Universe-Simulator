@@ -1,8 +1,7 @@
 # Universe-Simulator
 Just a small project for simulate planets and space objects in 2D
 
-
-![demo](https://user-images.githubusercontent.com/20907620/208252658-0018ae9f-a163-407c-ab8b-12683122b6f8.gif)
+![demo2](https://user-images.githubusercontent.com/20907620/208252709-312fe72c-6def-4137-9e7e-8cf92ae714ce.gif)
 
 
 ## Things to add:
