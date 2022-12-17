@@ -17,6 +17,7 @@ public class GravityObject : MonoBehaviour
     private float GStaticValue = 0.06674f;
     
     
+    
     // Start is called before the first frame update
     void Start()
     {
