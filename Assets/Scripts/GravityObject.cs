@@ -42,8 +42,8 @@ public class GravityObject : MonoBehaviour
         float forceValue = GConstantValue * mass * Mass / (distance * distance);
         float proportionScale = forceValue / distance;
 
-        float xForceValue = -proportion * vectorDist.x;
-        float yForceValue = -proportion * vectorDist.y;
+        float xForceValue = -proportionScale * vectorDist.x;
+        float yForceValue = -proportionScale * vectorDist.y;
 
         _rigidbody2D.AddForce(new Vector2(xForceValue, yForceValue),ForceMode2D.Impulse);
     }
