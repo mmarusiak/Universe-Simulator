@@ -2,7 +2,8 @@
 Just a small project for simulate planets and space objects in 2D
 
 
-![demo3](https://user-images.githubusercontent.com/20907620/208252822-1b273b2b-2346-4581-8e09-6102c0945103.gif)
+![demo7](https://user-images.githubusercontent.com/20907620/208253349-7901517c-3cde-4890-abdc-7035f5621639.gif)
+
 
 
 ## Things to add:
@@ -13,3 +14,4 @@ Just a small project for simulate planets and space objects in 2D
 
 
 For now you can simulate your own universe (universe need to be created via unity editor). Works fine with orbiting, escaping orbit or colliding. 
+
