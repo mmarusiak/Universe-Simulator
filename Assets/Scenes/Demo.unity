@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 730592871}
   - component: {fileID: 730592875}
   m_Layer: 0
-  m_Name: Planet
+  m_Name: Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,7 +311,7 @@ MonoBehaviour:
   Mass: 10
   Radius: 5
   GravityForce: 0
-  InitialVelocity: {x: 20, y: 2}
+  InitialVelocity: {x: 45, y: 2}
 --- !u!212 &730592873
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 1520621510}
   - component: {fileID: 1520621509}
   m_Layer: 0
-  m_Name: Planet (2)
+  m_Name: Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -482,7 +482,7 @@ MonoBehaviour:
   Mass: 10
   Radius: 5
   GravityForce: 0
-  InitialVelocity: {x: -15, y: 0}
+  InitialVelocity: {x: 10, y: 0}
 --- !u!212 &1520621512
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -549,7 +549,7 @@ GameObject:
   - component: {fileID: 2090762171}
   - component: {fileID: 2090762175}
   m_Layer: 0
-  m_Name: Planet (1)
+  m_Name: Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -591,7 +591,7 @@ MonoBehaviour:
   Mass: 60
   Radius: 5
   GravityForce: 0
-  InitialVelocity: {x: 4, y: 0}
+  InitialVelocity: {x: 30, y: 0}
 --- !u!212 &2090762173
 SpriteRenderer:
   m_ObjectHideFlags: 0

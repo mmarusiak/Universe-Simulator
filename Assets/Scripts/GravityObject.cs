@@ -42,10 +42,10 @@ public class GravityObject : MonoBehaviour
     private void ApplyAndCalculateForce(float distance, float mass, Vector2 vectorDist)
     {
         float forceValue = GStaticValue * mass * Mass / (distance * distance);
-        float flag = forceValue / distance;
+        float proportion = forceValue / distance;
 
-        float xForceValue = -flag * vectorDist.x;
-        float yForceValue = -flag * vectorDist.y;
+        float xForceValue = -proportion * vectorDist.x;
+        float yForceValue = -proportion * vectorDist.y;
 
         _rigidbody2D.AddForce(new Vector2(xForceValue, yForceValue),ForceMode2D.Impulse);
     }
