@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,8 +13,7 @@ public class GravityObject : MonoBehaviour
     public Vector2 InitialVelocity;
 
     //private float GStaticValue = 6.674f * (float)Math.Pow(10, -11);
-    private float GStaticValue = 0.06674f;
-    
+    private float GConstantValue = 0.06674f;
     
     
     // Start is called before the first frame update
@@ -41,8 +39,8 @@ public class GravityObject : MonoBehaviour
 
     private void ApplyAndCalculateForce(float distance, float mass, Vector2 vectorDist)
     {
-        float forceValue = GStaticValue * mass * Mass / (distance * distance);
-        float proportion = forceValue / distance;
+        float forceValue = GConstantValue * mass * Mass / (distance * distance);
+        float proportionScale = forceValue / distance;
 
         float xForceValue = -proportion * vectorDist.x;
         float yForceValue = -proportion * vectorDist.y;
