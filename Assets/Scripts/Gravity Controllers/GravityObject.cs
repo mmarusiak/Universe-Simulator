@@ -14,6 +14,8 @@ public class GravityObject : MonoBehaviour
 
     //private float GStaticValue = 6.674f * (float)Math.Pow(10, -11);
     private float GConstantValue = 0.06674f;
+
+    private Vector2 currentGravityForceVector;
     
     
     // Start is called before the first frame update
@@ -35,6 +37,8 @@ public class GravityObject : MonoBehaviour
             ApplyAndCalculateForce(Vector2.Distance(transform.position, obj.transform.position), obj.Mass,
                 new Vector2(transform.position.x - obj.transform.position.x,
                     transform.position.y - obj.transform.position.y));
+        _rigidbody2D.AddForce(currentGravityForceVector,ForceMode2D.Impulse);
+        currentGravityForceVector = Vector2.zero;
     }
 
     private void ApplyAndCalculateForce(float distance, float mass, Vector2 vectorDist)
@@ -45,11 +49,13 @@ public class GravityObject : MonoBehaviour
         float xForceValue = -proportionScale * vectorDist.x;
         float yForceValue = -proportionScale * vectorDist.y;
 
-        _rigidbody2D.AddForce(new Vector2(xForceValue, yForceValue),ForceMode2D.Impulse);
+        currentGravityForceVector = AddVectors2D(currentGravityForceVector, new Vector2(xForceValue, yForceValue));
     }
-    
-    public void UpdatePrivateList()
+
+    public void UpdatePrivateList() => listHolder = Controller.GetObjects(this);
+
+    Vector2 AddVectors2D(Vector2 a, Vector2 b)
     {
-        listHolder = Controller.GetObjects(this);
+        return new Vector2(a.x + b.x, a.y + b.y);
     }
 }
