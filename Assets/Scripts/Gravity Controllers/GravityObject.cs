@@ -11,6 +11,8 @@ public class GravityObject : MonoBehaviour
     private List<GravityObject> listHolder;
 
     public Vector2 InitialVelocity;
+    public Vector2 Velocity;
+    public Vector2 StartPos;
 
     //private float GStaticValue = 6.674f * (float)Math.Pow(10, -11);
     private float GConstantValue = 0.06674f;
@@ -18,27 +20,34 @@ public class GravityObject : MonoBehaviour
     private Vector2 currentGravityForceVector;
     
     
+    
     // Start is called before the first frame update
     void Start()
     {
         transform.localScale += new Vector3(Radius / 2, Radius / 2, Radius / 2);
+        StartPos = transform.position;
+        Velocity = InitialVelocity;
+        
         Controller = GameObject.FindWithTag("GravityController").GetComponent<GravityObjectsController>();
-        _rigidbody2D = GetComponent<Rigidbody2D>();
         Controller.AddGravityObject(this);
+        
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         _rigidbody2D.mass = Mass;
-
-        _rigidbody2D.velocity = InitialVelocity;
+        this.enabled = !Controller.isPaused;
     }
 
     // Update is called once per frame
     void Update()
     {
-        foreach (var obj in listHolder)
-            ApplyAndCalculateForce(Vector2.Distance(transform.position, obj.transform.position), obj.Mass,
-                new Vector2(transform.position.x - obj.transform.position.x,
-                    transform.position.y - obj.transform.position.y));
-        _rigidbody2D.AddForce(currentGravityForceVector,ForceMode2D.Impulse);
-        currentGravityForceVector = Vector2.zero;
+        if (!Controller.isPaused)
+        {
+            foreach (var obj in listHolder)
+                ApplyAndCalculateForce(Vector2.Distance(transform.position, obj.transform.position), obj.Mass,
+                    new Vector2(transform.position.x - obj.transform.position.x,
+                        transform.position.y - obj.transform.position.y));
+            _rigidbody2D.AddForce(currentGravityForceVector, ForceMode2D.Impulse);
+            currentGravityForceVector = Vector2.zero;
+        }
     }
 
     private void ApplyAndCalculateForce(float distance, float mass, Vector2 vectorDist)

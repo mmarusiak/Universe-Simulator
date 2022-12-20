@@ -20,34 +20,41 @@ public class PanelHolder : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnDrag(PointerEventData eventData)
     {
-        _transform.anchoredPosition = new Vector3(Math.Clamp(eventData.position.x - startDragX, -190, 0), 0, 0);
+        _transform.anchoredPosition = new Vector2(Math.Clamp(eventData.position.x - startDragX, -190, 0), 0);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (startDragX - eventData.position.x > 150)
+
+        if (shown)
         {
-            HidePanel();
+            if (startDragX - eventData.position.x > 150)
+            {
+                HidePanel();
+            }
+            else
+                ShowPanel();
         }
-        else if(startDragX - eventData.position.x < -150)
-        {
-            ShowPanel();
-        }
-        else if(shown)
-            ShowPanel();
         else
-            HidePanel();
+        {
+            if(startDragX - eventData.position.x < -150)
+            {
+                ShowPanel();
+            }
+            else
+                HidePanel();
+        }
     }
 
     public void HidePanel()
     {
-        _transform.anchoredPosition = new Vector3(-190, 0, 0);
+        _transform.anchoredPosition = new Vector2(-190, 0);
         shown = false;
     }
 
     public void ShowPanel()
     {
-        _transform.anchoredPosition = new Vector3(0, 0, 0);
+        _transform.anchoredPosition = new Vector2(0, 0);
         shown = true;
     }
 }
