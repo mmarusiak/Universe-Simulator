@@ -6,6 +6,7 @@ public class PanelHolder : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 {
     private float startDragX;
     private RectTransform _transform;
+    private bool shown = true;
 
     private void Start()
     {
@@ -15,7 +16,6 @@ public class PanelHolder : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public void OnBeginDrag(PointerEventData eventData)
     {
         startDragX = eventData.position.x;
-        Debug.Log("start: " + eventData.position.x);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -25,7 +25,6 @@ public class PanelHolder : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("end: " + eventData.position.x);
         if (startDragX - eventData.position.x > 150)
         {
             HidePanel();
@@ -34,17 +33,21 @@ public class PanelHolder : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         {
             ShowPanel();
         }
-        
-        Debug.Log(name + " end drag");
+        else if(shown)
+            ShowPanel();
+        else
+            HidePanel();
     }
 
     public void HidePanel()
     {
         _transform.anchoredPosition = new Vector3(-190, 0, 0);
+        shown = false;
     }
 
     public void ShowPanel()
     {
         _transform.anchoredPosition = new Vector3(0, 0, 0);
+        shown = true;
     }
 }
