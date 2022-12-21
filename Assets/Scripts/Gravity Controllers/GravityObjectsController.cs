@@ -54,5 +54,6 @@ public class GravityObjectsController : MonoBehaviour
             grav.gameObject.transform.position = grav.StartPos;
             grav.Velocity = grav.InitialVelocity;
         }
+        Camera.main.gameObject.transform.position = new Vector3(0, 0, -10);
     }
 }

@@ -18,5 +18,5 @@ For now you can simulate your own universe (universe need to be created via unit
 
 If you want to understand code, there is [documentation.](./Code%20Documentation)
 
-For now all graphics are just placeholder and I'll eventually change them in future
+For now all graphics are just placeholder and I'll eventually change them in future.
 
