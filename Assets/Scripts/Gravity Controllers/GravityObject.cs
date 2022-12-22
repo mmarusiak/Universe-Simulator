@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GravityObject : MonoBehaviour
 {
     public float Mass = 10f;
     public float Radius = 5f;
-    public float GravityForce;
+    public string PlanetName;
     private GravityObjectsController Controller;
     private Rigidbody2D _rigidbody2D;
     private List<GravityObject> listHolder;
@@ -33,7 +34,25 @@ public class GravityObject : MonoBehaviour
         
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _rigidbody2D.mass = Mass;
+
+        this.name = PlanetName;
+        CreatePlanetNameHolder();
+        
         this.enabled = !Controller.isPaused;
+    }
+
+    void CreatePlanetNameHolder()
+    {
+        GameObject textObject = new GameObject(PlanetName);
+        textObject.AddComponent<PlanetNameHolder>().PlanetController = this;
+        Text text = textObject.AddComponent<Text>();
+        text.text = PlanetName;
+        text.color = Color.white;
+        text.font = Font.CreateDynamicFontFromOSFont("Arial", 20);
+        text.fontSize = 20;
+
+        textObject.transform.SetParent(GameObject.Find("PlanetsNames").transform);
+        
     }
 
     // Update is called once per frame
