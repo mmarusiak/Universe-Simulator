@@ -6,8 +6,11 @@ public class GravityObjectsController : MonoBehaviour
     [SerializeField]
     public List<GravityObject> AllGravityObjects = new List<GravityObject>();
 
-    public bool isPaused = true;
-
+    void Start()
+    {
+        PlayPause();
+    }
+    
     public void AddGravityObject(GravityObject obj)
     {
         AllGravityObjects.Add(obj);
@@ -25,35 +28,35 @@ public class GravityObjectsController : MonoBehaviour
         
         return returnList;
     }
-    
+
     public void PlayPause()
     {
-        isPaused = !isPaused;
+        if (Time.timeScale == 1)
+            Pause();
+        else
+            UnPause();
+    }
 
-        foreach (var grav in AllGravityObjects)
-        {
-            Rigidbody2D rbody = grav.gameObject.GetComponent<Rigidbody2D>();
+    void Pause()
+    {
+        Time.timeScale = 0;
+    }
 
-            if (isPaused)
-                grav.Velocity = rbody.velocity;
-       
-            rbody.bodyType =
-                isPaused ? RigidbodyType2D.Kinematic : RigidbodyType2D.Dynamic;
-            rbody.velocity = isPaused ? Vector2.zero : grav.Velocity;
-            grav.enabled = !isPaused;
-        }
+    void UnPause()
+    {
+        Time.timeScale = 1;
     }
     
     public void ResetScene()
     {
-        if(!isPaused)
-            PlayPause();
+        Time.timeScale = 0;
 
         foreach (var grav in AllGravityObjects)
         {
             grav.gameObject.transform.position = grav.StartPos;
-            grav.Velocity = grav.InitialVelocity;
+            grav.GetComponent<Rigidbody2D>().velocity = grav.InitialVelocity;
         }
+        
         Camera.main.gameObject.transform.position = new Vector3(0, 0, -10);
     }
 }

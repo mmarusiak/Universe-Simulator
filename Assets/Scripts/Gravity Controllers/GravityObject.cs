@@ -12,7 +12,6 @@ public class GravityObject : MonoBehaviour
     private List<GravityObject> listHolder;
 
     public Vector2 InitialVelocity;
-    public Vector2 Velocity;
     public Vector2 StartPos;
 
     //private float GStaticValue = 6.674f * (float)Math.Pow(10, -11);
@@ -27,18 +26,17 @@ public class GravityObject : MonoBehaviour
     {
         transform.localScale += new Vector3(Radius / 2, Radius / 2, Radius / 2);
         StartPos = transform.position;
-        Velocity = InitialVelocity;
-        
+
         Controller = GameObject.FindWithTag("GravityController").GetComponent<GravityObjectsController>();
         Controller.AddGravityObject(this);
         
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _rigidbody2D.mass = Mass;
 
+        _rigidbody2D.velocity = InitialVelocity;
+
         this.name = PlanetName;
         CreatePlanetNameHolder();
-        
-        this.enabled = !Controller.isPaused;
     }
 
     void CreatePlanetNameHolder()
@@ -58,12 +56,11 @@ public class GravityObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!Controller.isPaused)
+        if (Time.timeScale == 1)
         {
             foreach (var obj in listHolder)
                 ApplyAndCalculateForce(Vector2.Distance(transform.position, obj.transform.position), obj.Mass,
-                    new Vector2(transform.position.x - obj.transform.position.x,
-                        transform.position.y - obj.transform.position.y));
+                    AddVectors2D(transform.position, -obj.transform.position));
             _rigidbody2D.AddForce(currentGravityForceVector, ForceMode2D.Impulse);
             currentGravityForceVector = Vector2.zero;
         }
