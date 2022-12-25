@@ -8,21 +8,28 @@ public class PlanetNameHolder : MonoBehaviour
     public GravityObjectsController controller;
     private RectTransform _transform;
     private float interval, startTime, offset;
-    private Vector2 planetPos;
+    private Vector2 textPos;
 
     // Start is called before the first frame update
     void Start()
     {
         Planet = PlanetController.gameObject;
-        Vector2 planetPos = Camera.main.WorldToScreenPoint(Planet.transform.position);
-
         offset = PlanetController.Radius * 15;
 
+        Planet.transform.Find("TextPos").localPosition = new Vector3(PlanetController.Radius * -1.4f, PlanetController.Radius / -5);
+        
         controller = GameObject.FindWithTag("GravityController").GetComponent<GravityObjectsController>();
 
         _transform = GetComponent<RectTransform>();
-        _transform.position = new Vector2(planetPos.x - PlanetController.Radius*15, planetPos.y - PlanetController.Radius*15);
         _transform.sizeDelta = new Vector2(GetComponent<RectTransform>().sizeDelta.x + 300,
             GetComponent<RectTransform>().sizeDelta.y + 100);
     }
+
+    void Update()
+    {
+        textPos = Camera.main.WorldToScreenPoint(Planet.transform.Find("TextPos").position);
+        if (Time.timeScale > 0)
+            _transform.position = new Vector2(textPos.x, textPos.y);
+    }
+    
 }

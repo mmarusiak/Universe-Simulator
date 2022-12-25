@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,8 @@ public class GravityObject : MonoBehaviour
 
     public Vector2 InitialVelocity;
     public Vector2 StartPos;
+
+    private Vector2 moveVector;
 
     //private float GStaticValue = 6.674f * (float)Math.Pow(10, -11);
     private float GConstantValue = 0.06674f;
@@ -48,6 +51,7 @@ public class GravityObject : MonoBehaviour
         text.color = Color.white;
         text.font = Font.CreateDynamicFontFromOSFont("Arial", 20);
         text.fontSize = 20;
+        text.alignment = TextAnchor.MiddleRight;
 
         textObject.transform.SetParent(GameObject.Find("PlanetsNames").transform);
         
@@ -56,7 +60,7 @@ public class GravityObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.timeScale == 1)
+        if (Time.timeScale > 0)
         {
             foreach (var obj in listHolder)
                 ApplyAndCalculateForce(Vector2.Distance(transform.position, obj.transform.position), obj.Mass,
@@ -64,6 +68,22 @@ public class GravityObject : MonoBehaviour
             _rigidbody2D.AddForce(currentGravityForceVector, ForceMode2D.Impulse);
             currentGravityForceVector = Vector2.zero;
         }
+    }
+
+    private void OnMouseDown()
+    {
+        if (Time.timeScale == 0)
+            moveVector = new Vector2(transform.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
+                transform.position.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+    }
+
+    private void OnMouseDrag()
+    {
+        if (Time.timeScale == 0)
+            transform.position =
+                new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + moveVector.x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y + moveVector.y);
+
+        StartPos = transform.position;
     }
 
     private void ApplyAndCalculateForce(float distance, float mass, Vector2 vectorDist)
