@@ -31,10 +31,10 @@ public class GravityObjectsController : MonoBehaviour
 
     public void PlayPause()
     {
-        if (Time.timeScale == 1)
-            Pause();
-        else
+        if (Time.timeScale == 0)
             UnPause();
+        else
+            Pause();
     }
 
     void Pause()

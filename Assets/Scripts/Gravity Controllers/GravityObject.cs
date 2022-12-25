@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,7 +34,6 @@ public class GravityObject : MonoBehaviour
         
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _rigidbody2D.mass = Mass;
-
         _rigidbody2D.velocity = InitialVelocity;
 
         this.name = PlanetName;
@@ -69,7 +67,18 @@ public class GravityObject : MonoBehaviour
             currentGravityForceVector = Vector2.zero;
         }
     }
+    
+    private void ApplyAndCalculateForce(float distance, float mass, Vector2 vectorDist)
+    {
+        float forceValue = GConstantValue * mass * Mass / (distance * distance);
+        float proportionScale = forceValue / distance;
 
+        float xForceValue = -proportionScale * vectorDist.x;
+        float yForceValue = -proportionScale * vectorDist.y;
+
+        currentGravityForceVector = AddVectors2D(currentGravityForceVector, new Vector2(xForceValue, yForceValue));
+    }
+    
     private void OnMouseDown()
     {
         if (Time.timeScale == 0)
@@ -84,17 +93,6 @@ public class GravityObject : MonoBehaviour
                 new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + moveVector.x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y + moveVector.y);
 
         StartPos = transform.position;
-    }
-
-    private void ApplyAndCalculateForce(float distance, float mass, Vector2 vectorDist)
-    {
-        float forceValue = GConstantValue * mass * Mass / (distance * distance);
-        float proportionScale = forceValue / distance;
-
-        float xForceValue = -proportionScale * vectorDist.x;
-        float yForceValue = -proportionScale * vectorDist.y;
-
-        currentGravityForceVector = AddVectors2D(currentGravityForceVector, new Vector2(xForceValue, yForceValue));
     }
 
     public void UpdatePrivateList() => listHolder = Controller.GetObjects(this);
