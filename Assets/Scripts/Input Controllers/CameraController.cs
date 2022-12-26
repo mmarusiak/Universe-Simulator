@@ -30,6 +30,13 @@ public class CameraController : MonoBehaviour
         {
             MoveCamera();    
         }
+
+        float scrollAxis = Input.GetAxis("Mouse ScrollWheel");
+
+        if (scrollAxis != 0)
+        {
+            mainCamera.orthographicSize -= scrollAxis * 18;
+        }
     }
 
     void MoveCamera()
