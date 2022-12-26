@@ -50,6 +50,7 @@ public class GravityObject : MonoBehaviour
         text.font = Font.CreateDynamicFontFromOSFont("Arial", 20);
         text.fontSize = 20;
         text.alignment = TextAnchor.MiddleRight;
+        text.fontStyle = FontStyle.BoldAndItalic;
 
         textObject.transform.SetParent(GameObject.Find("PlanetsNames").transform);
         

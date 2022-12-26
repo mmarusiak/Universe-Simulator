@@ -4,20 +4,16 @@ public class PlanetNameHolder : MonoBehaviour
 {
     public GameObject Planet;
     public GravityObject PlanetController;
-    public float Smoothness = 0.125f;
+    public float SmoothSpeed= 0.02f;
     public GravityObjectsController controller;
     private RectTransform _transform;
-    private float interval, startTime, offset;
     private Vector2 textPos;
 
     // Start is called before the first frame update
     void Start()
     {
         Planet = PlanetController.gameObject;
-        offset = PlanetController.Radius * 15;
 
-        Planet.transform.Find("TextPos").localPosition = new Vector3(PlanetController.Radius * -1.4f, PlanetController.Radius / -5);
-        
         controller = GameObject.FindWithTag("GravityController").GetComponent<GravityObjectsController>();
 
         _transform = GetComponent<RectTransform>();
@@ -25,11 +21,20 @@ public class PlanetNameHolder : MonoBehaviour
             GetComponent<RectTransform>().sizeDelta.y + 100);
     }
 
-    void Update()
+    void LateUpdate()
     {
+        Planet.transform.Find("TextPos").position = new Vector3(  Planet.transform.position.x - PlanetController.Radius * PlanetController.Radius,  Planet.transform.position.y - PlanetController.Radius /2);
+        
         textPos = Camera.main.WorldToScreenPoint(Planet.transform.Find("TextPos").position);
         if (Time.timeScale > 0)
             _transform.position = new Vector2(textPos.x, textPos.y);
+        else
+            SmoothFollow();
     }
-    
+
+    void SmoothFollow()
+    {
+        Vector3 smoothFollow = Vector3.Lerp(_transform.position, textPos, SmoothSpeed);
+        _transform.position = smoothFollow;
+    }
 }
