@@ -26,7 +26,7 @@ public class GravityObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.localScale += new Vector3(Radius / 2, Radius / 2, Radius / 2);
+        transform.localScale += new Vector3(Radius * 2, Radius * 2, Radius * 2);
         StartPos = transform.position;
 
         Controller = GameObject.FindWithTag("GravityController").GetComponent<GravityObjectsController>();
@@ -49,7 +49,7 @@ public class GravityObject : MonoBehaviour
         text.color = Color.white;
         text.font = Font.CreateDynamicFontFromOSFont("Arial", 20);
         text.fontSize = 20;
-        text.alignment = TextAnchor.MiddleRight;
+        text.alignment = TextAnchor.MiddleCenter;
         text.fontStyle = FontStyle.BoldAndItalic;
 
         textObject.transform.SetParent(GameObject.Find("PlanetsNames").transform);
