@@ -6,6 +6,8 @@ public class GravityObjectsController : MonoBehaviour
     [SerializeField]
     public List<GravityObject> AllGravityObjects = new List<GravityObject>();
 
+    public bool Reseted = false;
+
     void Start()
     {
         PlayPause();
@@ -45,6 +47,7 @@ public class GravityObjectsController : MonoBehaviour
     void UnPause()
     {
         Time.timeScale = 1;
+        Reseted = false;
     }
     
     public void ResetScene()
@@ -59,5 +62,7 @@ public class GravityObjectsController : MonoBehaviour
         
         Camera.main.gameObject.transform.position = new Vector3(0, 0, -10);
         Camera.main.orthographicSize = 60;
+        
+        Reseted = true;
     }
 }

@@ -94,7 +94,8 @@ public class GravityObject : MonoBehaviour
             transform.position =
                 new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + moveVector.x,
                     Camera.main.ScreenToWorldPoint(Input.mousePosition).y + moveVector.y);
-            StartPos = transform.position;
+            if(Controller.Reseted)
+                StartPos = transform.position;
         }
     }
 
