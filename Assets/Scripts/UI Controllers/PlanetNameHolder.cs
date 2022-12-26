@@ -24,8 +24,8 @@ public class PlanetNameHolder : MonoBehaviour
     void LateUpdate()
     {
         Planet.transform.Find("TextPos").position = new Vector3(  Planet.transform.position.x - PlanetController.Radius - 4f,  Planet.transform.position.y - PlanetController.Radius - 2.1f);
-        
         textPos = Camera.main.WorldToScreenPoint(Planet.transform.Find("TextPos").position);
+        
         if (Time.timeScale > 0)
             _transform.position = new Vector2(textPos.x, textPos.y);
         else
