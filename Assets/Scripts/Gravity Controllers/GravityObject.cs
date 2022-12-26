@@ -89,10 +89,12 @@ public class GravityObject : MonoBehaviour
     private void OnMouseDrag()
     {
         if (Time.timeScale == 0)
+        {
             transform.position =
-                new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + moveVector.x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y + moveVector.y);
-
-        StartPos = transform.position;
+                new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + moveVector.x,
+                    Camera.main.ScreenToWorldPoint(Input.mousePosition).y + moveVector.y);
+            StartPos = transform.position;
+        }
     }
 
     public void UpdatePrivateList() => listHolder = Controller.GetObjects(this);
