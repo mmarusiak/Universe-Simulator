@@ -9,4 +9,6 @@ public class ButtonsController : MonoBehaviour
     public void PlayPause() => _controller.PlayPause();
 
     public void ResetScene() => _controller.ResetScene();
+
+    public void LineCheck() => _controller.LineCheck();
 }

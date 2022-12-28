@@ -6,7 +6,7 @@ public class GravityObjectsController : MonoBehaviour
     [SerializeField]
     public List<GravityObject> AllGravityObjects = new List<GravityObject>();
 
-    public bool Reseted = false;
+    public bool Reseted = false, Paused = true, LinesVisible = true;
 
     void Start()
     {
@@ -42,12 +42,14 @@ public class GravityObjectsController : MonoBehaviour
     void Pause()
     {
         Time.timeScale = 0;
+        Paused = true;
     }
 
     void UnPause()
     {
         Time.timeScale = 1;
         Reseted = false;
+        Paused = false;
     }
     
     public void ResetScene()
@@ -64,5 +66,16 @@ public class GravityObjectsController : MonoBehaviour
         Camera.main.orthographicSize = 60;
         
         Reseted = true;
+    }
+
+    public void LineCheck()
+    {
+        LinesVisible = !LinesVisible;
+        var lines = GameObject.FindGameObjectsWithTag("PlanetLine");
+
+        foreach (var line in lines)
+        {
+            line.GetComponent<LineRenderer>().enabled = LinesVisible;
+        }
     }
 }
