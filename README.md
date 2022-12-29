@@ -8,6 +8,8 @@ Just a small project for simulate planets and space objects in 2D
 
 ## Roadmap:
 - [x] Gravity forces simulation;
+- [x] Pause/Play/Reset controls for simulation;
+- [x] Player's input controls (scrolling, moving camera and planets);
 - [ ] User menu/control panel for adding new planets;
 - [ ] Light to planets - they need to shine (at least some of them)!
 - [ ] Our universe demo in 2D;
