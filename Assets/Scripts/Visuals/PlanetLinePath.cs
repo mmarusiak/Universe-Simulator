@@ -48,4 +48,9 @@ public class PlanetLinePath : MonoBehaviour
         yield return new WaitForSeconds(WaitCount);
         ReadyForDraw = true;
     }
+
+    public GameObject GetLine()
+    {
+        return currentLineHolder;
+    }
 }

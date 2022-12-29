@@ -96,6 +96,13 @@ public class GravityObject : MonoBehaviour
                     Camera.main.ScreenToWorldPoint(Input.mousePosition).y + moveVector.y);
             if(Controller.Reseted)
                 StartPos = transform.position;
+
+            GameObject currentLineHolder = GetComponent<PlanetLinePath>().GetLine();
+            GetComponent<PlanetLinePath>().DrawState = false;
+            if (currentLineHolder != null && !currentLineHolder.activeSelf)
+            {
+                Destroy(currentLineHolder);
+            }
         }
     }
 
