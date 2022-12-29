@@ -6,7 +6,7 @@ public class GravityObjectsController : MonoBehaviour
     [SerializeField]
     public List<GravityObject> AllGravityObjects = new List<GravityObject>();
 
-    public bool Reseted = false, Paused = true, LinesVisible = true;
+    public bool Reseted = false, Paused = true, LinesVisible = true, RemovingPlanet = false;
 
     void Start()
     {
@@ -50,6 +50,7 @@ public class GravityObjectsController : MonoBehaviour
         Time.timeScale = 1;
         Paused = false;
         Reseted = false;
+        RemovingPlanet = false;
     }
     
     public void ResetScene()
@@ -85,5 +86,11 @@ public class GravityObjectsController : MonoBehaviour
         {
             line.GetComponent<LineRenderer>().enabled = LinesVisible;
         }
+    }
+
+    public void RemovePlanet(GameObject planet)
+    {
+        AllGravityObjects.Remove(planet.GetComponent<GravityObject>());
+        Destroy(planet);
     }
 }

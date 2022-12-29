@@ -2,8 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(PlanetLinePath))]
 public class GravityObject : MonoBehaviour
 {
+    public bool DemoPlanet = false;
     public float Mass = 10f;
     public float Radius = 5f;
     public string PlanetName;
@@ -25,6 +28,11 @@ public class GravityObject : MonoBehaviour
     
     // Start is called before the first frame update
     void Start()
+    {
+        if(DemoPlanet)
+            Init();
+    }
+    public void Init()
     {
         transform.localScale += new Vector3(Radius * 2, Radius * 2, Radius * 2);
         StartPos = transform.position;
@@ -82,9 +90,11 @@ public class GravityObject : MonoBehaviour
     
     private void OnMouseDown()
     {
-        if (Time.timeScale == 0)
+        if (Time.timeScale == 0 && Controller.RemovingPlanet)
             moveVector = new Vector2(transform.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
                 transform.position.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+        else if(Time.timeScale == 0 && !Controller.RemovingPlanet)
+            Controller.RemovePlanet(gameObject);
     }
 
     private void OnMouseDrag()
