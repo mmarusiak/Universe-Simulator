@@ -8,6 +8,7 @@ public class PlanetNameHolder : MonoBehaviour
     public GravityObjectsController controller;
     private RectTransform _transform;
     private Vector2 textPos;
+    private bool firstTime = true;
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +26,12 @@ public class PlanetNameHolder : MonoBehaviour
     {
         Planet.transform.Find("TextPos").position = new Vector3(  Planet.transform.position.x - PlanetController.Radius - 4f,  Planet.transform.position.y - PlanetController.Radius - 2.1f);
         textPos = Camera.main.WorldToScreenPoint(Planet.transform.Find("TextPos").position);
-        
-        if (Time.timeScale > 0)
+
+        if (Time.timeScale > 0 || firstTime)
+        {
             _transform.position = new Vector2(textPos.x, textPos.y);
+            firstTime = false;
+        }
         else
             SmoothFollow();
     }

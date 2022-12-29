@@ -48,23 +48,31 @@ public class GravityObjectsController : MonoBehaviour
     void UnPause()
     {
         Time.timeScale = 1;
-        Reseted = false;
         Paused = false;
+        Reseted = false;
     }
     
     public void ResetScene()
     {
-        Time.timeScale = 0;
+        Pause();
 
         foreach (var grav in AllGravityObjects)
         {
             grav.gameObject.transform.position = grav.StartPos;
             grav.GetComponent<Rigidbody2D>().velocity = grav.InitialVelocity;
+            
+            PlanetLinePath path = grav.GetComponent<PlanetLinePath>();
+            path.DrawState = false;
+            
+            foreach (var line in path.Lines)
+            {
+                Destroy(line);
+            }
         }
         
         Camera.main.gameObject.transform.position = new Vector3(0, 0, -10);
         Camera.main.orthographicSize = 60;
-        
+
         Reseted = true;
     }
 

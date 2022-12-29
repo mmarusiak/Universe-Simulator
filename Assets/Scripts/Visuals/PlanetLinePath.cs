@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlanetLinePath : MonoBehaviour
@@ -9,6 +10,8 @@ public class PlanetLinePath : MonoBehaviour
     public float WaitCount=  0.1f;
     public bool DrawState = false, ReadyForDraw = true;
     private GravityObjectsController _controller;
+
+    public List<GameObject> Lines = new List<GameObject>();
 
 
     void Start()
@@ -33,6 +36,8 @@ public class PlanetLinePath : MonoBehaviour
             currentLineHolder.transform.position = transform.position;
             currentLineHolder.SetActive(false);
             CurrentLineRenderer = currentLineHolder.GetComponent<LineRenderer>();
+            
+            Lines.Add(currentLineHolder);
         }
         CurrentLineRenderer.SetPosition(DrawState ? 1 : 0, transform.position);
         
