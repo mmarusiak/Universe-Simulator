@@ -6,18 +6,15 @@ public class PlanetLinePath : MonoBehaviour
 {
     public GameObject LinePrefab;
     private GameObject currentLineHolder;
-    public LineRenderer CurrentLineRenderer;
-    public float WaitCount=  0.1f;
+    private LineRenderer currentLineRenderer;
+    public float WaitCount=  0.05f;
     public bool DrawState = false, ReadyForDraw = true;
     private GravityObjectsController _controller;
 
     public List<GameObject> Lines = new List<GameObject>();
 
 
-    void Start()
-    {
-        _controller = GameObject.FindWithTag("GravityController").GetComponent<GravityObjectsController>();
-    }
+    void Start() => _controller = GameObject.FindWithTag("GravityController").GetComponent<GravityObjectsController>();
 
     void LateUpdate()
     {
@@ -35,18 +32,18 @@ public class PlanetLinePath : MonoBehaviour
             currentLineHolder = Instantiate(LinePrefab, transform);
             currentLineHolder.transform.position = transform.position;
             currentLineHolder.SetActive(false);
-            CurrentLineRenderer = currentLineHolder.GetComponent<LineRenderer>();
+            currentLineRenderer = currentLineHolder.GetComponent<LineRenderer>();
             
             Lines.Add(currentLineHolder);
         }
-        CurrentLineRenderer.SetPosition(DrawState ? 1 : 0, transform.position);
+        currentLineRenderer.SetPosition(DrawState ? 1 : 0, transform.position);
         
         DrawState = !DrawState;
         currentLineHolder.SetActive(!DrawState);
 
         if (!_controller.LinesVisible)
         {
-            CurrentLineRenderer.enabled = false;
+            currentLineRenderer.enabled = false;
         }
         yield return new WaitForSeconds(WaitCount);
         ReadyForDraw = true;
