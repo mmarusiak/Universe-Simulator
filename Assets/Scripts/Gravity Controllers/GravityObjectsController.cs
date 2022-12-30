@@ -16,6 +16,11 @@ public class GravityObjectsController : MonoBehaviour
     public void AddGravityObject(GravityObject obj)
     {
         AllGravityObjects.Add(obj);
+        UpdateLisInObjects();
+    }
+
+    public void UpdateLisInObjects()
+    {
         foreach (var gravobj in AllGravityObjects)
             gravobj.UpdatePrivateList();
     }
@@ -91,6 +96,8 @@ public class GravityObjectsController : MonoBehaviour
     public void RemovePlanet(GameObject planet)
     {
         AllGravityObjects.Remove(planet.GetComponent<GravityObject>());
+        Destroy(planet.GetComponent<GravityObject>().NameHolder);
         Destroy(planet);
+        UpdateLisInObjects();
     }
 }

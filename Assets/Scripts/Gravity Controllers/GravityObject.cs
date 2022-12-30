@@ -19,7 +19,7 @@ public class GravityObject : MonoBehaviour
 
     private Vector2 moveVector;
 
-    //private float GStaticValue = 6.674f * (float)Math.Pow(10, -11);
+    public GameObject NameHolder;
     private float GConstantValue = 0.06674f;
 
     private Vector2 currentGravityForceVector;
@@ -50,9 +50,9 @@ public class GravityObject : MonoBehaviour
 
     void CreatePlanetNameHolder()
     {
-        GameObject textObject = new GameObject(PlanetName);
-        textObject.AddComponent<PlanetNameHolder>().PlanetController = this;
-        Text text = textObject.AddComponent<Text>();
+        NameHolder = new GameObject(PlanetName);
+        NameHolder.AddComponent<PlanetNameHolder>().PlanetController = this;
+        Text text = NameHolder.AddComponent<Text>();
         text.text = PlanetName;
         text.color = Color.white;
         text.font = Font.CreateDynamicFontFromOSFont("Arial", 20);
@@ -60,8 +60,7 @@ public class GravityObject : MonoBehaviour
         text.alignment = TextAnchor.MiddleCenter;
         text.fontStyle = FontStyle.BoldAndItalic;
 
-        textObject.transform.SetParent(GameObject.Find("PlanetsNames").transform);
-        
+        NameHolder.transform.SetParent(GameObject.Find("PlanetsNames").transform);
     }
 
     // Update is called once per frame
@@ -90,10 +89,10 @@ public class GravityObject : MonoBehaviour
     
     private void OnMouseDown()
     {
-        if (Time.timeScale == 0 && Controller.RemovingPlanet)
+        if (Time.timeScale == 0 && !Controller.RemovingPlanet)
             moveVector = new Vector2(transform.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
                 transform.position.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-        else if(Time.timeScale == 0 && !Controller.RemovingPlanet)
+        else if(Time.timeScale == 0 && Controller.RemovingPlanet)
             Controller.RemovePlanet(gameObject);
     }
 

@@ -311,6 +311,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6be4f8efdfb364958d568b836c0ae7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &233266150
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 233266151}
+  - component: {fileID: 233266152}
+  m_Layer: 5
+  m_Name: CreatorController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &233266151
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233266150}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1396273459}
+  m_Father: {fileID: 1272314419}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 670}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &233266152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233266150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62fa3a2cfeea8478abad4cb20edbc83c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlanetPrefab: {fileID: 0}
+  PlanetName: 
+  InitialVelocity: {x: 0, y: 0}
+  Mass: 0
+  Radius: 0
+  StartPos: {x: 0, y: 0}
+  Panel: {fileID: 1396273458}
 --- !u!1 &248323551
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,11 +787,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6250ed3abd07a3be8631707980b0b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DemoPlanet: 1
   Mass: 10
   Radius: 1
   PlanetName: Blue planet
   InitialVelocity: {x: 45, y: 2}
   StartPos: {x: 0, y: 0}
+  NameHolder: {fileID: 0}
 --- !u!212 &730592873
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1149,11 +1208,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1396273459}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 401}
+  m_AnchoredPosition: {x: 0, y: 100}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &967500977
@@ -1197,6 +1256,82 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 967500975}
+  m_CullTransparentMesh: 1
+--- !u!1 &1092808550
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1092808551}
+  - component: {fileID: 1092808553}
+  - component: {fileID: 1092808552}
+  m_Layer: 5
+  m_Name: Bar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1092808551
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092808550}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1396273459}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 150}
+  m_SizeDelta: {x: 0, y: -300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1092808552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092808550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.27460843, g: 0.2868459, b: 0.31132078, a: 0.392}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1092808553
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092808550}
   m_CullTransparentMesh: 1
 --- !u!1 &1119934767
 GameObject:
@@ -1323,43 +1458,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160189211}
   m_CullTransparentMesh: 1
---- !u!1 &1191745714
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1191745715}
-  m_Layer: 5
-  m_Name: PanelHodler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1191745715
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1191745714}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1396273459}
-  m_Father: {fileID: 1272314419}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 670}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1256089718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1534,7 +1632,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1191745715}
+  - {fileID: 233266151}
   - {fileID: 211568994}
   - {fileID: 1718218557}
   m_Father: {fileID: 0}
@@ -1575,15 +1673,16 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1092808551}
   - {fileID: 967500976}
   - {fileID: 2061817652}
-  m_Father: {fileID: 1191745715}
+  m_Father: {fileID: 233266151}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -791, y: 0}
-  m_SizeDelta: {x: 140.01196, y: 418}
+  m_AnchoredPosition: {x: -788.9064, y: 375.5924}
+  m_SizeDelta: {x: 144.1991, y: -333.1849}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1396273460
 MonoBehaviour:
@@ -1706,7 +1805,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1414358589}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 233266152}
+        m_TargetAssemblyTypeName: CreatorHandler, Assembly-CSharp
+        m_MethodName: RemovePlanet
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1414358589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1831,11 +1942,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6250ed3abd07a3be8631707980b0b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DemoPlanet: 1
   Mass: 10
   Radius: 1
   PlanetName: Green planet
   InitialVelocity: {x: 10, y: 0}
   StartPos: {x: 0, y: 0}
+  NameHolder: {fileID: 0}
 --- !u!212 &1520621512
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1938,6 +2051,7 @@ MonoBehaviour:
   Reseted: 0
   Paused: 1
   LinesVisible: 1
+  RemovingPlanet: 0
 --- !u!4 &1608258358
 Transform:
   m_ObjectHideFlags: 0
@@ -2036,7 +2150,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1670814805}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 233266152}
+        m_TargetAssemblyTypeName: CreatorHandler, Assembly-CSharp
+        m_MethodName: CreateCall
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1670814805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2337,11 +2463,11 @@ RectTransform:
   m_Children:
   - {fileID: 1160189212}
   m_Father: {fileID: 1396273459}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 133, y: 511}
+  m_AnchoredPosition: {x: 150, y: 152.1}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2061817653
@@ -2480,11 +2606,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6250ed3abd07a3be8631707980b0b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DemoPlanet: 1
   Mass: 60
   Radius: 2
   PlanetName: Yellow planet
   InitialVelocity: {x: 30, y: 0}
   StartPos: {x: 0, y: 0}
+  NameHolder: {fileID: 0}
 --- !u!212 &2090762173
 SpriteRenderer:
   m_ObjectHideFlags: 0
