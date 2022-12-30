@@ -71,10 +71,16 @@ public class CreatorHandler : MonoBehaviour
         }
     }
 
-    public void RemovePlanet() => _controller.RemovingPlanet = !_controller.RemovingPlanet;
+    public void RemovePlanet()
+    {
+        if(!_controller.Paused)
+            _controller.PlayPause();
+        _controller.RemovingPlanet = !_controller.RemovingPlanet;
+    }
 
     public void Close()
     {
+        creatingPlanet = false;
         Panel.SetActive(false);
     }
 }
