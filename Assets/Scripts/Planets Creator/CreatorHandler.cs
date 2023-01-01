@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CreatorHandler : MonoBehaviour
 {
     public GameObject PlanetPrefab;
-    // planets' creator page args
+    // planets' creator page args/components
     public string PlanetName;
     public Vector2 InitialVelocity;
     public float Mass, Radius;
@@ -12,6 +13,7 @@ public class CreatorHandler : MonoBehaviour
     private GravityObjectsController _controller;
     public GameObject Panel;
     private bool creatingPlanet = false;
+    public Sprite PlanetImage;
 
     void Start()
     {
@@ -51,7 +53,7 @@ public class CreatorHandler : MonoBehaviour
     {
         Panel.GetComponent<RectTransform>().position =
             new Vector3( Input.mousePosition.x - Panel.GetComponent<RectTransform>().sizeDelta.x,
-                Input.mousePosition.y);
+                Input.mousePosition.y + Panel.GetComponent<RectTransform>().sizeDelta.y/2);
         Panel.SetActive(true);
     }
     
