@@ -95,6 +95,7 @@ public class GravityObjectsController : MonoBehaviour
 
     public void RemovePlanet(GameObject planet)
     {
+        RemovingPlanet = false;
         AllGravityObjects.Remove(planet.GetComponent<GravityObject>());
         Destroy(planet.GetComponent<GravityObject>().NameHolder);
         Destroy(planet);
