@@ -90,14 +90,21 @@ public class GravityObject : MonoBehaviour
 
         currentGravityForceVector = AddVectors2D(currentGravityForceVector, new Vector2(xForceValue, yForceValue));
     }
-    
+
     private void OnMouseDown()
     {
         if (Time.timeScale == 0 && !Controller.RemovingPlanet)
             moveVector = new Vector2(transform.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
                 transform.position.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+        
         else if(Time.timeScale == 0 && Controller.RemovingPlanet)
             Controller.RemovePlanet(gameObject);
+    }
+
+    private void OnMouseUp()
+    {
+        if(Time.timeScale == 0)
+            GameObject.FindWithTag("EditorController").GetComponent<EditorHandler>().ShowPanel(gameObject);
     }
 
     private void OnMouseDrag()

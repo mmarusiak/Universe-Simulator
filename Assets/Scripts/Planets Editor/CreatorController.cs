@@ -27,11 +27,11 @@ public class CreatorController : MonoBehaviour
 
             if (flag)
             {
-                GameObject planet = GameObject.Instantiate(PlanetPrefab, mousePosition, Quaternion.Euler(0,0,0), GameObject.FindWithTag("PlanetsHolder").transform);
+                creatingPlanet = false;
+                GameObject planet = Instantiate(PlanetPrefab, mousePosition, Quaternion.Euler(0,0,0), GameObject.FindWithTag("PlanetsHolder").transform);
                 planet.GetComponent<GravityObject>().UpdatePlanet();
 
                 _editorHandler.ShowPanel(planet);
-                creatingPlanet = false;
             }
         }
     }

@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,8 +13,8 @@ public class EditorHandler : MonoBehaviour
     void Start()
     {
         _controller = GameObject.FindWithTag("GravityController").GetComponent<GravityObjectsController>();
-        _planetNameBar = transform.GetChild(0).GetChild(0).GetComponent<Text>();
-        Panel.SetActive(false);
+        _planetNameBar = transform.GetChild(0).GetChild(1).GetComponent<Text>();
+        Close();
     }
 
     public void ShowPanel(GameObject targetPlanet)
@@ -23,17 +22,16 @@ public class EditorHandler : MonoBehaviour
         Planet = targetPlanet;
         GravityObject planetController = Planet.GetComponent<GravityObject>();
         
-        Panel.GetComponent<RectTransform>().position =
-            new Vector3( Input.mousePosition.x - Panel.GetComponent<RectTransform>().sizeDelta.x,
-                Input.mousePosition.y + Panel.GetComponent<RectTransform>().sizeDelta.y/1.5f);
+        gameObject.GetComponent<RectTransform>().position =
+            new Vector3( Input.mousePosition.x - GetComponent<RectTransform>().sizeDelta.x/2,
+                Input.mousePosition.y - GetComponent<RectTransform>().sizeDelta.y/1.5f);
         
-        _planetNameBar.text = planetController.PlanetName;
+       // _planetNameBar.text = planetController.PlanetName;
         transform.GetChild(0).Find("Components").GetComponent<ComponentEditor>().UpdateText(planetController.PlanetName, planetController.Mass, planetController.Radius);
-        Panel.SetActive(true);
     }
     
     public void Close()
     {
-        Panel.SetActive(false);
+        GetComponent<RectTransform>().transform.position = new Vector3(6000, 6000);
     }
 }
