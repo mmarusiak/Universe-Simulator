@@ -11,13 +11,13 @@ public class PreviewController : MonoBehaviour
     public Dropdown ImagesDropdown;
     public string Path;
 
-    private CreatorHandler componentsHandler;
+    private EditorHandler componentsHandler;
     private Texture2D selectedImage;
     private Sprite loaded;
     
     void Start()
     {
-        componentsHandler = transform.parent.transform.parent.GetComponent<CreatorHandler>();
+        componentsHandler = transform.parent.transform.parent.GetComponent<EditorHandler>();
     }
 
     // https://stackoverflow.com/a/18321162/13786856

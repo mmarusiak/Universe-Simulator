@@ -30,11 +30,11 @@ public class GravityObject : MonoBehaviour
     void Start()
     {
         if(DemoPlanet)
-            Init();
+            UpdatePlanet();
     }
-    public void Init()
+    public void UpdatePlanet()
     {
-        transform.localScale += new Vector3(Radius * 2, Radius * 2, Radius * 2);
+        transform.localScale = new Vector3(Radius * 2, Radius * 2, Radius * 2);
         StartPos = transform.position;
 
         Controller = GameObject.FindWithTag("GravityController").GetComponent<GravityObjectsController>();
@@ -43,9 +43,13 @@ public class GravityObject : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _rigidbody2D.mass = Mass;
         _rigidbody2D.velocity = InitialVelocity;
+        StartPos = transform.position;
 
         this.name = PlanetName;
-        CreatePlanetNameHolder();
+        if (NameHolder == null)
+            CreatePlanetNameHolder();
+        else
+            NameHolder.name = PlanetName;
     }
 
     void CreatePlanetNameHolder()

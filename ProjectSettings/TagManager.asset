@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GravityController
   - PlanetLine
+  - PlanetsHolder
   layers:
   - Default
   - TransparentFX
