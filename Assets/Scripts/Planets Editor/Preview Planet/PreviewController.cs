@@ -11,13 +11,12 @@ public class PreviewController : MonoBehaviour
     public Dropdown ImagesDropdown;
     public string Path;
 
-    private EditorHandler componentsHandler;
+    private EditorHandler editorHandler;
     private Texture2D selectedImage;
-    private Sprite loaded;
-    
+
     void Start()
     {
-        componentsHandler = transform.parent.transform.parent.GetComponent<EditorHandler>();
+        editorHandler = transform.parent.transform.parent.GetComponent<EditorHandler>();
     }
 
     // https://stackoverflow.com/a/18321162/13786856
@@ -54,7 +53,7 @@ public class PreviewController : MonoBehaviour
         {
             Debug.Log(file);
             Debug.Log("Path " + Path);
-            StartCoroutine(LoadImage(file));
+            StartCoroutine(LoadSpriteFromPath(file));
         }
     }
 
@@ -64,15 +63,22 @@ public class PreviewController : MonoBehaviour
             ImagesParent.SetActive(true);
         else if (ImagesDropdown.value > -1)
         {
-            componentsHandler.PlanetImage = ImagesDropdown.options[ImagesDropdown.value].image;
-            transform.GetChild(0).GetComponent<Image>().sprite = componentsHandler.PlanetImage;
+            LoadSpriteToPlanet(ImagesDropdown.options[ImagesDropdown.value].image, Color.white);
             ImagesParent.SetActive(false);
         }
-
-
     }
-    
-    IEnumerator LoadImage(string path)
+
+    public void LoadSpriteToPlanet(Sprite planetSprite, Color planetColor)
+    {
+        editorHandler.PlanetColor = planetColor;
+        editorHandler.PlanetImage = planetSprite;
+        
+        Image img = transform.GetChild(0).GetComponent<Image>();
+        img.sprite = planetSprite;
+        transform.GetChild(0).GetComponent<CanvasRenderer>().GetMaterial(0).SetColor("_Color", planetColor);
+    }
+
+    IEnumerator LoadSpriteFromPath(string path)
     {
         string correctPath = "file:///" + path.Remove(0, 1);
         Debug.Log(correctPath);
@@ -80,7 +86,7 @@ public class PreviewController : MonoBehaviour
         while (!www.isDone)
             yield return null;
         Debug.Log(www.texture);
-        loaded = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0.5f, 0.5f));
+        var loaded = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0.5f, 0.5f));
         ImagesDropdown.options.Add(new Dropdown.OptionData(path.Replace(Path + "/", ""), loaded));
     }
 }
