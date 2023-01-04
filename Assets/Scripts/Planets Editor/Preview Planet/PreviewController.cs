@@ -63,12 +63,12 @@ public class PreviewController : MonoBehaviour
             ImagesParent.SetActive(true);
         else if (ImagesDropdown.value > -1)
         {
-            LoadSpriteToPlanet(ImagesDropdown.options[ImagesDropdown.value].image, Color.white);
+            LoadSpriteToPreview(ImagesDropdown.options[ImagesDropdown.value].image, Color.white);
             ImagesParent.SetActive(false);
         }
     }
 
-    public void LoadSpriteToPlanet(Sprite planetSprite, Color planetColor)
+    public void LoadSpriteToPreview(Sprite planetSprite, Color planetColor)
     {
         editorHandler.PlanetColor = planetColor;
         editorHandler.PlanetImage = planetSprite;

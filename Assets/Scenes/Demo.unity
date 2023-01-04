@@ -671,6 +671,7 @@ GameObject:
   - component: {fileID: 233266151}
   - component: {fileID: 233266152}
   - component: {fileID: 233266153}
+  - component: {fileID: 233266154}
   m_Layer: 5
   m_Name: EditorController
   m_TagString: EditorController
@@ -717,7 +718,6 @@ MonoBehaviour:
   Panel: {fileID: 1396273458}
   PlanetImage: {fileID: 0}
   PlanetColor: {r: 0, g: 0, b: 0, a: 0}
-  Shown: 0
 --- !u!114 &233266153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -731,6 +731,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlanetPrefab: {fileID: 8576367349492122861, guid: 17514e5983e30ec39bd6b312889a0b9b, type: 3}
+--- !u!114 &233266154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233266150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43acbacbbeb5a7593946669010674fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Shown: 0
+  offsetX: 190
+  offsetY: 210
 --- !u!1 &248323551
 GameObject:
   m_ObjectHideFlags: 0
@@ -1890,13 +1905,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 596103004}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1396273459}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2954,7 +2969,7 @@ RectTransform:
   - {fileID: 2628355}
   - {fileID: 1769637491}
   m_Father: {fileID: 1396273459}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3166,7 +3181,7 @@ RectTransform:
   - {fileID: 1352163198}
   - {fileID: 1009161279}
   m_Father: {fileID: 1396273459}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4174,9 +4189,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1090148422}
   - {fileID: 1012265675}
   - {fileID: 596103005}
-  - {fileID: 1090148422}
   m_Father: {fileID: 233266151}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5443,7 +5458,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 151, y: 152.1}
+  m_AnchoredPosition: {x: 151.00006, y: 152.09995}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2061817653
@@ -5490,8 +5505,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 233266152}
-        m_TargetAssemblyTypeName: EditorHandler, Assembly-CSharp
+      - m_Target: {fileID: 233266154}
+        m_TargetAssemblyTypeName: WindowController, Assembly-CSharp
         m_MethodName: Close
         m_Mode: 1
         m_Arguments:

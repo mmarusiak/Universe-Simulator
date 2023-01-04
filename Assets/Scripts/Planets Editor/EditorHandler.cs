@@ -11,40 +11,30 @@ public class EditorHandler : MonoBehaviour
     
     private GravityObjectsController _controller;
     private Text _planetNameBar;
-    public bool Shown = false;
+    private WindowController window;
 
     void Start()
     {
         _controller = GameObject.FindWithTag("GravityController").GetComponent<GravityObjectsController>();
-        _planetNameBar = transform.GetChild(0).GetChild(1).GetComponent<Text>();
-        Close();
+        _planetNameBar = transform.GetChild(0).GetChild(2).GetComponent<Text>();
+        (window = GetComponent<WindowController>()).Close();
     }
 
     public void ShowPanel(GameObject targetPlanet)
     {
         Planet = targetPlanet;
         GravityObject planetController = Planet.GetComponent<GravityObject>();
-        
-        if(!Shown)
-            gameObject.GetComponent<RectTransform>().position =
-                new Vector3( Input.mousePosition.x - GetComponent<RectTransform>().sizeDelta.x/2,
-                    Input.mousePosition.y - GetComponent<RectTransform>().sizeDelta.y/1.5f);
-        Shown = true;
+
+        window.Show();
         
         _planetNameBar.text = planetController.PlanetName;
         transform.GetChild(0).Find("Components").GetComponent<ComponentEditor>().UpdateText(planetController.PlanetName, planetController.Mass, planetController.Radius);
-        transform.GetChild(0).GetChild(2).GetComponent<PreviewController>().LoadSpriteToPlanet(targetPlanet.GetComponent<SpriteRenderer>().sprite, targetPlanet.GetComponent<SpriteRenderer>().color);
+        transform.GetChild(0).GetChild(0).GetComponent<PreviewController>().LoadSpriteToPreview(targetPlanet.GetComponent<SpriteRenderer>().sprite, targetPlanet.GetComponent<SpriteRenderer>().color);
     }
 
-    public void AddSpriteToPlanet(Sprite spriteToAdd)
+    public void LoadSpriteToPlanet(Sprite spriteToAdd)
     {
         PlanetImage = spriteToAdd;
         Planet.GetComponent<SpriteRenderer>().sprite = spriteToAdd;
-    }
-    
-    public void Close()
-    {
-        Shown = false;
-        GetComponent<RectTransform>().transform.position = new Vector3(6000, 6000);
     }
 }
