@@ -9,6 +9,7 @@ public class PreviewController : MonoBehaviour
 {
     public GameObject ImagesParent;
     public Dropdown ImagesDropdown;
+    public Sprite DefaultSprite;
     public string Path;
 
     private EditorHandler editorHandler;
@@ -17,6 +18,8 @@ public class PreviewController : MonoBehaviour
     void Start()
     {
         editorHandler = transform.parent.transform.parent.GetComponent<EditorHandler>();
+        ImagesDropdown.options.Add(new Dropdown.OptionData("None", DefaultSprite));
+        ImagesDropdown.value = 0;
     }
 
     // https://stackoverflow.com/a/18321162/13786856
@@ -48,33 +51,35 @@ public class PreviewController : MonoBehaviour
         String searchFolder = Path;
         var filters = new String[] { "jpg", "jpeg", "png"};
         var files = GetFilesFrom(searchFolder, filters, false);
-
+        
         foreach (var file in files)
         {
-            Debug.Log(file);
-            Debug.Log("Path " + Path);
             StartCoroutine(LoadSpriteFromPath(file));
         }
     }
 
     public void GetImage()
     {
-        if (!ImagesParent.activeSelf)
-            ImagesParent.SetActive(true);
-        else if (ImagesDropdown.value > -1)
-        {
-            LoadSpriteToPreview(ImagesDropdown.options[ImagesDropdown.value].image, Color.white);
-            ImagesParent.SetActive(false);
-        }
+        if (!ImagesParent.GetComponent<WindowController>().Shown)
+            ImagesParent.GetComponent<WindowController>().Show();
     }
 
-    public void LoadSpriteToPreview(Sprite planetSprite, Color planetColor)
+    public void LoadSpriteFromDropdown()
     {
-        editorHandler.PlanetColor = planetColor;
+        LoadSpriteToPreview(ImagesDropdown.options[ImagesDropdown.value].image);
+    }
+
+    public void LoadSpriteToPreview(Sprite planetSprite)
+    {
         editorHandler.PlanetImage = planetSprite;
         
         Image img = transform.GetChild(0).GetComponent<Image>();
         img.sprite = planetSprite;
+    }
+
+    public void LoadColorToPreview(Color planetColor)
+    {
+        editorHandler.PlanetColor = planetColor;
         transform.GetChild(0).GetComponent<CanvasRenderer>().GetMaterial(0).SetColor("_Color", planetColor);
     }
 
