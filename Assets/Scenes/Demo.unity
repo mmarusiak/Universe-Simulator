@@ -4368,7 +4368,7 @@ GameObject:
   - component: {fileID: 1347228413}
   - component: {fileID: 1347228412}
   m_Layer: 5
-  m_Name: WindowLabelTXT
+  m_Name: VisualWindowPlanetTXT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
