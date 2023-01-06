@@ -979,9 +979,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 699808238}
   - {fileID: 2090762174}
   - {fileID: 1520621508}
+  - {fileID: 699808238}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1350,7 +1350,7 @@ MonoBehaviour:
   ToShow: {fileID: 0}
   ToHide: {fileID: 0}
   offsetX: -300
-  offsetY: 0
+  offsetY: 115
 --- !u!114 &368014327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2549,13 +2549,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 699808237}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.34549, y: 12.3, z: 0.006153301}
+  m_LocalPosition: {x: 0, y: 0, z: 0.006153301}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1265481473}
   m_Father: {fileID: 282855893}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &699808239
 MonoBehaviour:
@@ -3720,7 +3720,7 @@ MonoBehaviour:
   ImagesParent: {fileID: 368014324}
   ImagesDropdown: {fileID: 356909098}
   DefaultSprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  Path: 
+  Path: /home/mmarusiak/Desktop/UniversePictures
 --- !u!1 &1092808550
 GameObject:
   m_ObjectHideFlags: 0
@@ -4458,7 +4458,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265481472}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5254,7 +5254,7 @@ Transform:
   m_Children:
   - {fileID: 248323552}
   m_Father: {fileID: 282855893}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &1520621509
 CircleCollider2D:
@@ -6583,7 +6583,7 @@ Transform:
   m_Children:
   - {fileID: 1893926227}
   m_Father: {fileID: 282855893}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &2090762175
 CircleCollider2D:

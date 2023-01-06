@@ -20,6 +20,7 @@ public class PreviewController : MonoBehaviour
         editorHandler = transform.parent.transform.parent.GetComponent<EditorHandler>();
         ImagesDropdown.options.Add(new Dropdown.OptionData("None", DefaultSprite));
         ImagesDropdown.value = 0;
+        if(Path != "") LoadImagesFromPath();
     }
 
     // https://stackoverflow.com/a/18321162/13786856
@@ -34,9 +35,9 @@ public class PreviewController : MonoBehaviour
         return filesFound.ToArray();
     }
     
-    public void GetPath()
+    public void LoadImagesFromPath()
     {
-        Path = ImagesParent.transform.GetChild(1).GetComponent<InputField>().text;
+//        Path = ImagesParent.transform.GetChild(1).GetComponent<InputField>().text;
         
         // clear dropdown
         ImagesDropdown.options.Clear();
@@ -49,7 +50,7 @@ public class PreviewController : MonoBehaviour
         }
         
         String searchFolder = Path;
-        var filters = new String[] { "jpg", "jpeg", "png"};
+        var filters = new String[] { "jpg", "JPEG", "png"};
         var files = GetFilesFrom(searchFolder, filters, false);
         
         foreach (var file in files)
@@ -73,8 +74,10 @@ public class PreviewController : MonoBehaviour
     {
         editorHandler.PlanetImage = planetSprite;
         
-        Image img = transform.GetChild(0).GetComponent<Image>();
+        Image img = transform.GetChild(0).GetChild(0).GetComponent<Image>();
         img.sprite = planetSprite;
+        
+        editorHandler.Planet.GetComponent<SpriteRenderer>().sprite = planetSprite;
     }
 
     public void LoadColorToPreview(Color planetColor)
