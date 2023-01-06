@@ -997,7 +997,7 @@ GameObject:
   - component: {fileID: 306573032}
   - component: {fileID: 306573031}
   m_Layer: 5
-  m_Name: PlanetNameTXT
+  m_Name: PlanetNameOptionTXT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
