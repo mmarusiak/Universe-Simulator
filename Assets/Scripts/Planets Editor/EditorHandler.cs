@@ -28,7 +28,7 @@ public class EditorHandler : MonoBehaviour
         window.Show();
         
         _planetNameBar.text = planetController.PlanetName;
-        GameObject.Find("LookPlanetWindow").GetComponent<VisualWindowController>().Show(planetController.name, targetPlanet.GetComponent<Renderer>().material.GetColor("_Color"));
+        GameObject.Find("LookPlanetWindow").GetComponent<VisualWindowController>().Show(planetController.name, targetPlanet.GetComponent<SpriteRenderer>().color);
         transform.GetChild(0).Find("Components").GetComponent<ComponentEditor>().UpdateText(planetController.PlanetName, planetController.Mass, planetController.Radius);
         transform.GetChild(0).GetChild(0).GetComponent<PreviewController>().LoadSpriteToPreview(targetPlanet.GetComponent<SpriteRenderer>().sprite);
         transform.GetChild(0).GetChild(0).GetComponent<PreviewController>().LoadColorToPreview(targetPlanet.GetComponent<SpriteRenderer>().color);

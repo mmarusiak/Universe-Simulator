@@ -80,7 +80,7 @@ public class PreviewController : MonoBehaviour
     public void LoadColorToPreview(Color planetColor)
     {
         editorHandler.PlanetColor = planetColor;
-        transform.GetChild(0).GetComponent<CanvasRenderer>().GetMaterial(0).SetColor("_Color", planetColor);
+        transform.GetChild(0).GetChild(0).GetComponent<Image>().color = planetColor;
     }
 
     IEnumerator LoadSpriteFromPath(string path)
