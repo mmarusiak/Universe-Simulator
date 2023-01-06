@@ -5,7 +5,7 @@ public class VisualWindowController : MonoBehaviour
 {
     void Start()
     {
-        GetComponent<WindowController>().Close();
+        GetComponent<WindowController>().Close(true);
     }
 
     public void Show(string name, Color color)

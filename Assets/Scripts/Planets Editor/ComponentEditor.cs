@@ -41,6 +41,7 @@ public class ComponentEditor : MonoBehaviour
         componentsHandler.Planet.GetComponent<GravityObject>().PlanetName = inputs[0].text;
         GameObject.Find("PlanetNameTXT").GetComponent<Text>().text = componentsHandler.Planet.GetComponent<GravityObject>().PlanetName;
         componentsHandler.Planet.GetComponent<GravityObject>().NameHolder.GetComponent<Text>().text = inputs[0].text;
+        GameObject.Find("VisualWindowPlanetTXT").GetComponent<Text>().text = inputs[0].text + "'s look editor";
         componentsHandler.Planet.GetComponent<GravityObject>().UpdatePlanet();
     }
 

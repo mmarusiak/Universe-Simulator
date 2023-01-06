@@ -61,7 +61,7 @@ public class PreviewController : MonoBehaviour
     public void GetImage()
     {
         if (!ImagesParent.GetComponent<WindowController>().Shown)
-            ImagesParent.GetComponent<WindowController>().Show();
+            ImagesParent.GetComponent<WindowController>().Show(true);
     }
 
     public void LoadSpriteFromDropdown()
@@ -82,6 +82,8 @@ public class PreviewController : MonoBehaviour
         editorHandler.PlanetColor = planetColor;
         transform.GetChild(0).GetChild(0).GetComponent<Image>().color = planetColor;
     }
+
+    public void ApplyColor() => editorHandler.Planet.GetComponent<SpriteRenderer>().color = transform.GetChild(0).GetChild(0).GetComponent<Image>().color;
 
     IEnumerator LoadSpriteFromPath(string path)
     {

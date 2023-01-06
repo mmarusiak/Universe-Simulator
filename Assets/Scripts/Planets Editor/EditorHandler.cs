@@ -17,7 +17,7 @@ public class EditorHandler : MonoBehaviour
     {
         _controller = GameObject.FindWithTag("GravityController").GetComponent<GravityObjectsController>();
         _planetNameBar = transform.GetChild(0).GetChild(2).GetComponent<Text>();
-        (window = GetComponent<WindowController>()).Close();
+        (window = GetComponent<WindowController>()).Close(false);
     }
 
     public void ShowPanel(GameObject targetPlanet)
@@ -25,10 +25,10 @@ public class EditorHandler : MonoBehaviour
         Planet = targetPlanet;
         GravityObject planetController = Planet.GetComponent<GravityObject>();
 
-        window.Show();
+        window.Show(true);
         
         _planetNameBar.text = planetController.PlanetName;
-        GameObject.Find("LookPlanetWindow").GetComponent<VisualWindowController>().Show(planetController.name, targetPlanet.GetComponent<SpriteRenderer>().color);
+        GameObject.Find("LookPlanetWindow").GetComponent<VisualWindowController>().Show(planetController.PlanetName, targetPlanet.GetComponent<SpriteRenderer>().color);
         transform.GetChild(0).Find("Components").GetComponent<ComponentEditor>().UpdateText(planetController.PlanetName, planetController.Mass, planetController.Radius);
         transform.GetChild(0).GetChild(0).GetComponent<PreviewController>().LoadSpriteToPreview(targetPlanet.GetComponent<SpriteRenderer>().sprite);
         transform.GetChild(0).GetChild(0).GetComponent<PreviewController>().LoadColorToPreview(targetPlanet.GetComponent<SpriteRenderer>().color);
