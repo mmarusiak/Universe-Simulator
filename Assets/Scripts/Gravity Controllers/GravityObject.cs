@@ -118,7 +118,13 @@ public class GravityObject : MonoBehaviour
                 StartPos = transform.position;
 
             GameObject currentLineHolder = GetComponent<PlanetLinePath>().GetLine();
-            //GetComponent<PlanetLinePath>().DrawState = false;
+
+            var path = GetComponent<PlanetLinePath>();
+            if (!path.Lines[^1].Finished)
+            {
+                Destroy(path.Lines[^1].SegmentHolder);
+                path.Lines.Remove(path.Lines[^1]);
+            }
             if (currentLineHolder != null && !currentLineHolder.activeSelf)
             {
                 Destroy(currentLineHolder);
