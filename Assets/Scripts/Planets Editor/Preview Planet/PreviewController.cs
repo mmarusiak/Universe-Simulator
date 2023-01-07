@@ -11,16 +11,24 @@ public class PreviewController : MonoBehaviour
     public Dropdown ImagesDropdown;
     public Sprite DefaultSprite;
     public string Path;
+    public string CurrentPath;
 
     private EditorHandler editorHandler;
     private Texture2D selectedImage;
 
-    void Start()
+    private void Start()
     {
+        SetDropdown(0);
+    }
+
+    public void SetDropdown(int value)
+    {
+        CurrentPath = Path;
         editorHandler = transform.parent.transform.parent.GetComponent<EditorHandler>();
+        // clear dropdown
+        ImagesDropdown.options.Clear();
         ImagesDropdown.options.Add(new Dropdown.OptionData("None", DefaultSprite));
-        ImagesDropdown.value = 0;
-        if(Path != "") LoadImagesFromPath();
+        if(Path != "") LoadImagesFromPath(value);
     }
 
     // https://stackoverflow.com/a/18321162/13786856
@@ -35,13 +43,10 @@ public class PreviewController : MonoBehaviour
         return filesFound.ToArray();
     }
     
-    public void LoadImagesFromPath()
+    public void LoadImagesFromPath(int value)
     {
-//        Path = ImagesParent.transform.GetChild(1).GetComponent<InputField>().text;
-        
-        // clear dropdown
-        ImagesDropdown.options.Clear();
-        
+        // Path = ImagesParent.transform.GetChild(1).GetComponent<InputField>().text;
+
         // assign new items to dropdown
         Path = Path.Replace(@"\", @"/");
         if (Path[^1].Equals("/"))
@@ -55,7 +60,7 @@ public class PreviewController : MonoBehaviour
         
         foreach (var file in files)
         {
-            StartCoroutine(LoadSpriteFromPath(file));
+            StartCoroutine(LoadSpriteFromPath(file, value));
         }
     }
 
@@ -65,24 +70,22 @@ public class PreviewController : MonoBehaviour
             ImagesParent.GetComponent<WindowController>().Show(true);
     }
 
-    public void LoadSpriteFromDropdown()
-    {
-        LoadSpriteToPreview(ImagesDropdown.options[ImagesDropdown.value].image);
-    }
+    public void LoadSpriteFromDropdown() => LoadSpriteToPreview(ImagesDropdown.options[ImagesDropdown.value].image);
+    
     
     public void LoadSpriteToPreview(Sprite planetSprite)
     {
-        float radius = editorHandler.Planet.GetComponent<GravityObject>().Radius;
-        ResizeTool.Resize(planetSprite.texture, 256, 256);
-        editorHandler.PlanetImage = Sprite.Create(planetSprite.texture, new Rect(0, 0, 256, 256), new Vector2(0.5f, 0.5f));
-        
+        editorHandler.PlanetImage = planetSprite;
+
         Image img = transform.GetChild(0).GetChild(0).GetComponent<Image>();
         img.sprite = editorHandler.PlanetImage;
-        
+
         SpriteRenderer planetSpriteRend = editorHandler.Planet.transform.GetChild(0).GetComponent<SpriteRenderer>();
         planetSpriteRend.sprite = editorHandler.PlanetImage;
         
-        Debug.Log(planetSpriteRend.sprite.rect);
+        // setting scale of image
+        planetSpriteRend.transform.localScale = planetSprite == DefaultSprite ? Vector3.one : new Vector3(.75f, .75f, 1);
+
     }
 
     public void LoadColorToPreview(Color planetColor)
@@ -93,15 +96,24 @@ public class PreviewController : MonoBehaviour
 
     public void ApplyColor() => editorHandler.Planet.transform.GetChild(0).GetComponent<SpriteRenderer>().color = transform.GetChild(0).GetChild(0).GetComponent<Image>().color;
 
-    IEnumerator LoadSpriteFromPath(string path)
+    IEnumerator LoadSpriteFromPath(string path, int value)
     {
         string correctPath = "file:///" + path.Remove(0, 1);
-        Debug.Log(correctPath);
         WWW www = new WWW(correctPath);
         while (!www.isDone)
             yield return null;
-        Debug.Log(www.texture);
+
         var loaded = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0.5f, 0.5f));
+        // resizing sprite
+        if (loaded != DefaultSprite)
+        {
+            ResizeTool.Resize(loaded.texture, 128, 128);
+            loaded =
+                Sprite.Create(loaded.texture, new Rect(0, 0, 128, 128), new Vector2(0.5f, 0.5f));
+        }
+        
         ImagesDropdown.options.Add(new Dropdown.OptionData(path.Replace(Path + "/", ""), loaded));
+        if(ImagesDropdown.options.Count >= value)
+            ImagesDropdown.SetValueWithoutNotify(value);
     }
 }

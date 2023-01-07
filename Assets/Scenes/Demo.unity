@@ -557,6 +557,7 @@ GameObject:
   - component: {fileID: 112228356}
   - component: {fileID: 112228355}
   - component: {fileID: 112228354}
+  - component: {fileID: 112228358}
   m_Layer: 0
   m_Name: Yellow
   m_TagString: Untagged
@@ -573,7 +574,7 @@ Transform:
   m_GameObject: {fileID: 112228351}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 30.18, y: 0, z: 0.006153301}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2090762174}
@@ -704,6 +705,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!210 &112228358
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112228351}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &131708765
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,7 +996,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 220, y: 220}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &220381796
 MonoBehaviour:
@@ -3719,6 +3731,7 @@ MonoBehaviour:
   ImagesDropdown: {fileID: 356909098}
   DefaultSprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   Path: /home/mmarusiak/Desktop/UniversePictures
+  CurrentPath: 
 --- !u!1 &1092808550
 GameObject:
   m_ObjectHideFlags: 0
@@ -4550,6 +4563,7 @@ GameObject:
   - component: {fileID: 1323495024}
   - component: {fileID: 1323495023}
   - component: {fileID: 1323495022}
+  - component: {fileID: 1323495027}
   m_Layer: 0
   m_Name: Green
   m_TagString: Untagged
@@ -4697,6 +4711,17 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
+--- !u!210 &1323495027
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323495020}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &1347228410
 GameObject:
   m_ObjectHideFlags: 0

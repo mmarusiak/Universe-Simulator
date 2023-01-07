@@ -30,13 +30,22 @@ public class EditorHandler : MonoBehaviour
         _planetNameBar.text = planetController.PlanetName;
         GameObject.Find("LookPlanetWindow").GetComponent<VisualWindowController>().Show(planetController.PlanetName, targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().color);
         transform.GetChild(0).Find("Components").GetComponent<ComponentEditor>().UpdateText(planetController.PlanetName, planetController.Mass, planetController.Radius);
-        transform.GetChild(0).GetChild(0).GetComponent<PreviewController>().LoadSpriteToPreview(targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite);
-        transform.GetChild(0).GetChild(0).GetComponent<PreviewController>().LoadColorToPreview(targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().color);
-    }
-
-    public void LoadSpriteToPlanet(Sprite spriteToAdd)
-    {
-        PlanetImage = spriteToAdd;
-        Planet.GetComponent<SpriteRenderer>().sprite = spriteToAdd;
+        
+        PreviewController previewController = transform.GetChild(0).GetChild(0).GetComponent<PreviewController>();
+        previewController.LoadSpriteToPreview(targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite);
+        previewController.LoadColorToPreview(targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().color);
+        
+        if (previewController.ImagesDropdown.options[previewController.ImagesDropdown.value].image !=
+            targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite)
+        {
+            Debug.Log("APDSAO");
+            // getting index of sprite
+            for (int i = 0; i < previewController.ImagesDropdown.options.Count; i ++)
+                if (previewController.ImagesDropdown.options[i].image.texture.imageContentsHash == targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite.texture.imageContentsHash)
+                {
+                    previewController.SetDropdown(i);
+                    break;
+                }
+        }
     }
 }
