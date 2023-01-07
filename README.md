@@ -1,13 +1,7 @@
 # Universe-Simulator
 Just a small project for simulate planets and space objects in 2D
 
-
-
-![demosneekpeek](https://user-images.githubusercontent.com/20907620/211045257-8ee59272-62ab-4a8c-b65e-08f02d3bdf6e.gif)
-
-
-
-
+![DemoNew](https://user-images.githubusercontent.com/20907620/211164812-21b5abb6-00a5-425e-8251-7fed8d013e38.gif)
 
 ## Roadmap:
 - [x] Gravity forces simulation;
