@@ -68,12 +68,12 @@ public class GravityObjectsController : MonoBehaviour
             grav.GetComponent<Rigidbody2D>().velocity = grav.InitialVelocity;
             
             PlanetLinePath path = grav.GetComponent<PlanetLinePath>();
-            path.DrawState = false;
-            
+
             foreach (var line in path.Lines)
             {
-                Destroy(line);
+                Destroy(line.SegmentHolder);
             }
+            path.Lines.Clear();
         }
         
         Camera.main.gameObject.transform.position = new Vector3(0, 0, -10);
@@ -85,11 +85,16 @@ public class GravityObjectsController : MonoBehaviour
     public void LineCheck()
     {
         LinesVisible = !LinesVisible;
-        var lines = GameObject.FindGameObjectsWithTag("PlanetLine");
 
-        foreach (var line in lines)
+        foreach (var grav in AllGravityObjects)
         {
-            line.GetComponent<LineRenderer>().enabled = LinesVisible;
+            PlanetLinePath path = grav.GetComponent<PlanetLinePath>();
+
+            foreach (var line in path.Lines)
+            {
+                if (line.Finished)
+                    line.Renderer.enabled = LinesVisible;
+            }
         }
     }
 
