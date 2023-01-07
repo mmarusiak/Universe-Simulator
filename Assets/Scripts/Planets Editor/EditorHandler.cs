@@ -28,10 +28,10 @@ public class EditorHandler : MonoBehaviour
         window.Show(true);
         
         _planetNameBar.text = planetController.PlanetName;
-        GameObject.Find("LookPlanetWindow").GetComponent<VisualWindowController>().Show(planetController.PlanetName, targetPlanet.GetComponent<SpriteRenderer>().color);
+        GameObject.Find("LookPlanetWindow").GetComponent<VisualWindowController>().Show(planetController.PlanetName, targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().color);
         transform.GetChild(0).Find("Components").GetComponent<ComponentEditor>().UpdateText(planetController.PlanetName, planetController.Mass, planetController.Radius);
-        transform.GetChild(0).GetChild(0).GetComponent<PreviewController>().LoadSpriteToPreview(targetPlanet.GetComponent<SpriteRenderer>().sprite);
-        transform.GetChild(0).GetChild(0).GetComponent<PreviewController>().LoadColorToPreview(targetPlanet.GetComponent<SpriteRenderer>().color);
+        transform.GetChild(0).GetChild(0).GetComponent<PreviewController>().LoadSpriteToPreview(targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite);
+        transform.GetChild(0).GetChild(0).GetComponent<PreviewController>().LoadColorToPreview(targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().color);
     }
 
     public void LoadSpriteToPlanet(Sprite spriteToAdd)

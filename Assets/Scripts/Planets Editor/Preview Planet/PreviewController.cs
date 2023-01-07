@@ -69,15 +69,20 @@ public class PreviewController : MonoBehaviour
     {
         LoadSpriteToPreview(ImagesDropdown.options[ImagesDropdown.value].image);
     }
-
+    
     public void LoadSpriteToPreview(Sprite planetSprite)
     {
-        editorHandler.PlanetImage = planetSprite;
+        float radius = editorHandler.Planet.GetComponent<GravityObject>().Radius;
+        ResizeTool.Resize(planetSprite.texture, 256, 256);
+        editorHandler.PlanetImage = Sprite.Create(planetSprite.texture, new Rect(0, 0, 256, 256), new Vector2(0.5f, 0.5f));
         
         Image img = transform.GetChild(0).GetChild(0).GetComponent<Image>();
-        img.sprite = planetSprite;
+        img.sprite = editorHandler.PlanetImage;
         
-        editorHandler.Planet.GetComponent<SpriteRenderer>().sprite = planetSprite;
+        SpriteRenderer planetSpriteRend = editorHandler.Planet.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        planetSpriteRend.sprite = editorHandler.PlanetImage;
+        
+        Debug.Log(planetSpriteRend.sprite.rect);
     }
 
     public void LoadColorToPreview(Color planetColor)
@@ -86,7 +91,7 @@ public class PreviewController : MonoBehaviour
         transform.GetChild(0).GetChild(0).GetComponent<Image>().color = planetColor;
     }
 
-    public void ApplyColor() => editorHandler.Planet.GetComponent<SpriteRenderer>().color = transform.GetChild(0).GetChild(0).GetComponent<Image>().color;
+    public void ApplyColor() => editorHandler.Planet.transform.GetChild(0).GetComponent<SpriteRenderer>().color = transform.GetChild(0).GetChild(0).GetComponent<Image>().color;
 
     IEnumerator LoadSpriteFromPath(string path)
     {
