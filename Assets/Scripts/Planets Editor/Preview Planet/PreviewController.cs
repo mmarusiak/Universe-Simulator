@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class PreviewController : MonoBehaviour
@@ -99,21 +100,36 @@ public class PreviewController : MonoBehaviour
     IEnumerator LoadSpriteFromPath(string path, int value)
     {
         string correctPath = "file:///" + path.Remove(0, 1);
-        WWW www = new WWW(correctPath);
-        while (!www.isDone)
+        UnityWebRequest request = UnityWebRequestTexture.GetTexture(correctPath);
+        yield return request.SendWebRequest();
+        
+        while (!request.isDone)
             yield return null;
 
-        var loaded = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0.5f, 0.5f));
-        // resizing sprite
-        if (loaded != DefaultSprite)
+        if (request.result == UnityWebRequest.Result.Success)
         {
-            ResizeTool.Resize(loaded.texture, 128, 128);
-            loaded =
-                Sprite.Create(loaded.texture, new Rect(0, 0, 128, 128), new Vector2(0.5f, 0.5f));
+            DownloadHandlerTexture textureDownloadHandler = (DownloadHandlerTexture) request.downloadHandler;
+            Texture2D texture = textureDownloadHandler.texture;
+
+            if (texture == null)
+            {
+                Debug.LogError("Image not available...");
+                yield break;
+            }
+            
+            var loaded = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),
+                new Vector2(0.5f, 0.5f));
+            // resizing sprite
+            if (loaded != DefaultSprite)
+            {
+                ResizeTool.Resize(loaded.texture, 128, 128);
+                loaded =
+                    Sprite.Create(loaded.texture, new Rect(0, 0, 128, 128), new Vector2(0.5f, 0.5f));
+            }
+
+            ImagesDropdown.options.Add(new Dropdown.OptionData(path.Replace(Path + "/", ""), loaded));
+            if (ImagesDropdown.options.Count >= value && ImagesDropdown.value != value)
+                ImagesDropdown.SetValueWithoutNotify(value);
         }
-        
-        ImagesDropdown.options.Add(new Dropdown.OptionData(path.Replace(Path + "/", ""), loaded));
-        if(ImagesDropdown.options.Count >= value)
-            ImagesDropdown.SetValueWithoutNotify(value);
     }
 }
