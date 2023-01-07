@@ -6,7 +6,7 @@ public class GravityObjectsController : MonoBehaviour
     [SerializeField]
     public List<GravityObject> AllGravityObjects = new List<GravityObject>();
 
-    public bool Reseted = false, Paused = true, LinesVisible = true, RemovingPlanet = false;
+    public bool Reseted = true, Paused = true, LinesVisible = true, RemovingPlanet = false;
 
     void Start()
     {

@@ -105,6 +105,9 @@ public class GravityObject : MonoBehaviour
     {
         if(Time.timeScale == 0)
             GameObject.FindWithTag("EditorController").GetComponent<EditorHandler>().ShowPanel(gameObject);
+        
+        if(Controller.Reseted)
+            StartPos = transform.position;
     }
 
     private void OnMouseDrag()
@@ -114,13 +117,11 @@ public class GravityObject : MonoBehaviour
             transform.position =
                 new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + moveVector.x,
                     Camera.main.ScreenToWorldPoint(Input.mousePosition).y + moveVector.y);
-            if(Controller.Reseted)
-                StartPos = transform.position;
 
             GameObject currentLineHolder = GetComponent<PlanetLinePath>().GetLine();
 
             var path = GetComponent<PlanetLinePath>();
-            if (!path.Lines[^1].Finished)
+            if (path.Lines.Count > 0 && !path.Lines[^1].Finished)
             {
                 Destroy(path.Lines[^1].SegmentHolder);
                 path.Lines.Remove(path.Lines[^1]);
