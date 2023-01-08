@@ -29,7 +29,7 @@ public class WindowController : MonoBehaviour
     public void Close(bool instantClose)
     {
         Shown = false;
-        if(ToHide == null || instantClose)
+        if(ToHide == null || instantClose || ToHide == gameObject)
             gameObject.transform.position = new Vector3(6000,6000,0);
         else
             CloseAll();

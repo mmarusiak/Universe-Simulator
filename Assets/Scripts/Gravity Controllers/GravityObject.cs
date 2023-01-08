@@ -103,8 +103,7 @@ public class GravityObject : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if(Time.timeScale == 0)
-            GameObject.FindWithTag("EditorController").GetComponent<EditorHandler>().ShowPanel(gameObject);
+        GameObject.FindWithTag("EditorController").GetComponent<EditorHandler>().ShowPanel(gameObject);
         
         if(Controller.Reseted)
             StartPos = transform.position;
