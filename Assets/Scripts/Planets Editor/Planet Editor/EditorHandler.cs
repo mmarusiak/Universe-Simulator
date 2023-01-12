@@ -24,6 +24,7 @@ public class EditorHandler : MonoBehaviour
     {
         Planet = targetPlanet;
         GravityObject planetController = Planet.GetComponent<GravityObject>();
+        GameObject.FindWithTag("InfoController").GetComponent<InfoController>().CurrentPlanet = targetPlanet;
 
         window.Show(true);
         

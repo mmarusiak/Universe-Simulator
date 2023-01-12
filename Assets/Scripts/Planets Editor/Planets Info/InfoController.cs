@@ -41,10 +41,12 @@ public class InfoController : MonoBehaviour
             GameObject newWindow = Instantiate(InfoWindowPrefab, Input.mousePosition, Quaternion.Euler(0, 0, 0),
                 GameObject.Find("AllWindows").GetComponent<RectTransform>());
             newWindow.GetComponent<InfoHandler>().LoadInfoData(CurrentPlanet);
+            OpenedWindows.Add(new InfoWindow(newWindow, CurrentPlanet.GetComponent<GravityObject>()));
         }
         else
         {
-            Destroy(openedWindow.DataContainer.gameObject);
+            Debug.Log("AD");
+            Destroy(openedWindow.Window);
             OpenedWindows.Remove(openedWindow);
             Open();
         }
