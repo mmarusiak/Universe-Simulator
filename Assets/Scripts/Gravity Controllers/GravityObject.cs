@@ -22,7 +22,7 @@ public class GravityObject : MonoBehaviour
     public GameObject NameHolder;
     private float GConstantValue = 0.06674f;
 
-    private Vector2 currentGravityForceVector;
+    public Vector2 CurrentGravityForceVector;
     
     
     
@@ -75,8 +75,8 @@ public class GravityObject : MonoBehaviour
             foreach (var obj in listHolder)
                 ApplyAndCalculateForce(Vector2.Distance(transform.position, obj.transform.position), obj.Mass,
                     AddVectors2D(transform.position, -obj.transform.position));
-            _rigidbody2D.AddForce(currentGravityForceVector, ForceMode2D.Impulse);
-            currentGravityForceVector = Vector2.zero;
+            _rigidbody2D.AddForce(CurrentGravityForceVector, ForceMode2D.Impulse);
+            CurrentGravityForceVector = Vector2.zero;
         }
     }
     
@@ -88,7 +88,7 @@ public class GravityObject : MonoBehaviour
         float xForceValue = -proportionScale * vectorDist.x;
         float yForceValue = -proportionScale * vectorDist.y;
 
-        currentGravityForceVector = AddVectors2D(currentGravityForceVector, new Vector2(xForceValue, yForceValue));
+        CurrentGravityForceVector = AddVectors2D(CurrentGravityForceVector, new Vector2(xForceValue, yForceValue));
     }
 
     private void OnMouseDown()
