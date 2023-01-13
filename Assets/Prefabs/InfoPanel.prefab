@@ -729,6 +729,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttachedPlanet: {fileID: 0}
+  MainPlanetImg: {fileID: 3227584678628251655}
+  BackgroundPlanetImg: {fileID: 3227584679943836409}
 --- !u!1 &3227584679171743783
 GameObject:
   m_ObjectHideFlags: 0
