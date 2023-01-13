@@ -72,11 +72,11 @@ public class GravityObject : MonoBehaviour
     {
         if (Time.timeScale > 0)
         {
+            CurrentGravityForceVector = Vector2.zero;
             foreach (var obj in listHolder)
                 ApplyAndCalculateForce(Vector2.Distance(transform.position, obj.transform.position), obj.Mass,
                     AddVectors2D(transform.position, -obj.transform.position));
             _rigidbody2D.AddForce(CurrentGravityForceVector, ForceMode2D.Impulse);
-            CurrentGravityForceVector = Vector2.zero;
         }
     }
     
