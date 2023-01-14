@@ -24,7 +24,8 @@ public class GravityObject : MonoBehaviour
     private Vector2 moveVector;
 
     public GameObject NameHolder;
-    private float GConstantValue = 0.06674f;
+    
+    private float GravitionalConstantValue = 0.06674f;
 
     public Vector2 CurrentGravityForceVector;
     
@@ -86,7 +87,7 @@ public class GravityObject : MonoBehaviour
     
     private void ApplyAndCalculateForce(float distance, float mass, Vector2 vectorDist)
     {
-        float forceValue = GConstantValue * mass * Mass / (distance * distance);
+        float forceValue = GravitionalConstantValue * mass * Mass / (distance * distance);
         float proportionScale = forceValue / distance;
 
         float xForceValue = -proportionScale * vectorDist.x;
@@ -122,23 +123,27 @@ public class GravityObject : MonoBehaviour
     {
         if (Time.timeScale == 0)
         {
-            Debug.Log(dragTime);
             dragTime += Time.unscaledDeltaTime;
-            transform.position =
-                new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + moveVector.x,
-                    Camera.main.ScreenToWorldPoint(Input.mousePosition).y + moveVector.y);
-
-            GameObject currentLineHolder = GetComponent<PlanetLinePath>().GetLine();
-
-            var path = GetComponent<PlanetLinePath>();
-            if (path.Lines.Count > 0 && !path.Lines[^1].Finished)
+            
+            if (dragTime >= .25f)
             {
-                Destroy(path.Lines[^1].SegmentHolder);
-                path.Lines.Remove(path.Lines[^1]);
-            }
-            if (currentLineHolder != null && !currentLineHolder.activeSelf)
-            {
-                Destroy(currentLineHolder);
+                transform.position =
+                    new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + moveVector.x,
+                        Camera.main.ScreenToWorldPoint(Input.mousePosition).y + moveVector.y);
+
+                GameObject currentLineHolder = GetComponent<PlanetLinePath>().GetLine();
+
+                var path = GetComponent<PlanetLinePath>();
+                if (path.Lines.Count > 0 && !path.Lines[^1].Finished)
+                {
+                    Destroy(path.Lines[^1].SegmentHolder);
+                    path.Lines.Remove(path.Lines[^1]);
+                }
+
+                if (currentLineHolder != null && !currentLineHolder.activeSelf)
+                {
+                    Destroy(currentLineHolder);
+                }
             }
         }
         else

@@ -22,18 +22,45 @@ public class InfoHandler : MonoBehaviour
 
     void UpdateData()
     {
-        VelocityOutputs[0].text = AttachedPlanet.GetComponent<Rigidbody2D>().velocity.x.ToString(CultureInfo.InvariantCulture);
-        VelocityOutputs[1].text = AttachedPlanet.GetComponent<Rigidbody2D>().velocity.y.ToString(CultureInfo.InvariantCulture);
-        VelocityOutputs[2].text = AttachedPlanet.GetComponent<Rigidbody2D>().velocity.magnitude.ToString(CultureInfo.InvariantCulture);
+        var velocityOutArr = OutputsData(AttachedPlanet.GetComponent<Rigidbody2D>().velocity.x,
+            AttachedPlanet.GetComponent<Rigidbody2D>().velocity.y);
+        var forceOutArr = OutputsData(atatchedController.CurrentGravityForceVector.x,
+            atatchedController.CurrentGravityForceVector.y);
 
-        ForceOutputs[0].text = atatchedController.CurrentGravityForceVector.x.ToString(CultureInfo.InvariantCulture);
-        ForceOutputs[1].text = atatchedController.CurrentGravityForceVector.x.ToString(CultureInfo.InvariantCulture);
-        ForceOutputs[2].text = Mathf.Sqrt(
-            atatchedController.CurrentGravityForceVector.x * atatchedController.CurrentGravityForceVector.x +
-            atatchedController.CurrentGravityForceVector.y * atatchedController.CurrentGravityForceVector.y).ToString(CultureInfo.InvariantCulture);
+        VelocityOutputs[0].text = velocityOutArr[0];
+        VelocityOutputs[1].text = velocityOutArr[1];
+        VelocityOutputs[2].text = velocityOutArr[2];
+
+        ForceOutputs[0].text = forceOutArr[0];
+        ForceOutputs[1].text = forceOutArr[1];
+        ForceOutputs[2].text = forceOutArr[2];
 
         PositionOutputs[0].text = AttachedPlanet.transform.position.x.ToString(CultureInfo.InvariantCulture);
         PositionOutputs[1].text = AttachedPlanet.transform.position.y.ToString(CultureInfo.InvariantCulture);
+    }
+
+    static string[] OutputsData(float x, float y)
+    {
+        string xStr = (Mathf.Round(x*10000)/10000).ToString(CultureInfo.InvariantCulture);
+        while (xStr.Length < 6)
+        {
+            xStr += "0";
+        }
+        
+        string yStr = (Mathf.Round(y*10000)/10000).ToString(CultureInfo.InvariantCulture);
+        while (yStr.Length < 6)
+        {
+            yStr += "0";
+        }
+        
+        var magnitude = Mathf.Sqrt(x * x + y * y);
+        string magnitudeStr = (Mathf.Round(magnitude * 1000) / 1000).ToString(CultureInfo.InvariantCulture);
+        while (magnitudeStr.Length < 6)
+        {
+            magnitudeStr += "0";
+        }
+        
+        return new[] {xStr, yStr, magnitudeStr};
     }
     
     public void LoadInfoData(GameObject dataContainer)
