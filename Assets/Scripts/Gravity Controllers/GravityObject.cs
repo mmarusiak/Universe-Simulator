@@ -14,6 +14,10 @@ public class GravityObject : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private List<GravityObject> listHolder;
 
+    // if player starts drag during pause, there will be auto pause
+    private bool tempPause = false;
+    private float dragTime = 0;
+
     public Vector2 InitialVelocity;
     public Vector2 StartPos;
 
@@ -75,7 +79,7 @@ public class GravityObject : MonoBehaviour
             CurrentGravityForceVector = Vector2.zero;
             foreach (var obj in listHolder)
                 ApplyAndCalculateForce(Vector2.Distance(transform.position, obj.transform.position), obj.Mass,
-                    AddVectors2D(transform.position, -obj.transform.position));
+                    transform.position - obj.transform.position);
             _rigidbody2D.AddForce(CurrentGravityForceVector, ForceMode2D.Impulse);
         }
     }
@@ -88,7 +92,7 @@ public class GravityObject : MonoBehaviour
         float xForceValue = -proportionScale * vectorDist.x;
         float yForceValue = -proportionScale * vectorDist.y;
 
-        CurrentGravityForceVector = AddVectors2D(CurrentGravityForceVector, new Vector2(xForceValue, yForceValue));
+        CurrentGravityForceVector += new Vector2(xForceValue, yForceValue);
     }
 
     private void OnMouseDown()
@@ -103,16 +107,23 @@ public class GravityObject : MonoBehaviour
 
     private void OnMouseUp()
     {
-        GameObject.FindWithTag("EditorController").GetComponent<EditorHandler>().ShowPanel(gameObject);
+        if(dragTime < 0.25f)
+            GameObject.FindWithTag("EditorController").GetComponent<EditorHandler>().ShowPanel(gameObject);
         
         if(Controller.Reseted)
             StartPos = transform.position;
+
+        if (tempPause && Time.timeScale == 0)
+            Controller.PlayPause();
+        dragTime = 0;
     }
 
     private void OnMouseDrag()
     {
         if (Time.timeScale == 0)
         {
+            Debug.Log(dragTime);
+            dragTime += Time.unscaledDeltaTime;
             transform.position =
                 new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + moveVector.x,
                     Camera.main.ScreenToWorldPoint(Input.mousePosition).y + moveVector.y);
@@ -130,12 +141,12 @@ public class GravityObject : MonoBehaviour
                 Destroy(currentLineHolder);
             }
         }
+        else
+        {
+            tempPause = true;
+            Controller.PlayPause();
+        }
     }
 
     public void UpdatePrivateList() => listHolder = Controller.GetObjects(this);
-
-    Vector2 AddVectors2D(Vector2 a, Vector2 b)
-    {
-        return new Vector2(a.x + b.x, a.y + b.y);
-    }
 }

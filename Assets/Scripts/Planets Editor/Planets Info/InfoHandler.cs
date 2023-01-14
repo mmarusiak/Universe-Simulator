@@ -49,6 +49,8 @@ public class InfoHandler : MonoBehaviour
 
         AttachedPlanet = dataContainer;
         atatchedController = AttachedPlanet.GetComponent<GravityObject>();
+        
+        UpdateData();
     }
 
     public void Close()

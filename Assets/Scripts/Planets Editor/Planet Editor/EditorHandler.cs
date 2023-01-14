@@ -39,7 +39,6 @@ public class EditorHandler : MonoBehaviour
         if (previewController.ImagesDropdown.options[previewController.ImagesDropdown.value].image !=
             targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite)
         {
-            Debug.Log("APDSAO");
             // getting index of sprite
             for (int i = 0; i < previewController.ImagesDropdown.options.Count; i ++)
                 if (previewController.ImagesDropdown.options[i].image.texture.imageContentsHash == targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite.texture.imageContentsHash)
