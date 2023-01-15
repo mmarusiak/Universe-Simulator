@@ -29,8 +29,6 @@ public class GravityObject : MonoBehaviour
 
     public Vector2 CurrentGravityForceVector;
     
-    
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -115,7 +113,11 @@ public class GravityObject : MonoBehaviour
             StartPos = transform.position;
 
         if (tempPause && Time.timeScale == 0)
+        {
             Controller.PlayPause();
+            tempPause = false;
+        }
+
         dragTime = 0;
     }
 
@@ -125,7 +127,7 @@ public class GravityObject : MonoBehaviour
         {
             dragTime += Time.unscaledDeltaTime;
             
-            if (dragTime >= .25f)
+            if (dragTime >= .25f || !tempPause)
             {
                 transform.position =
                     new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + moveVector.x,
