@@ -64,13 +64,7 @@ public class PreviewController : MonoBehaviour
             StartCoroutine(LoadSpriteFromPath(file, value));
         }
     }
-
-    public void GetImage()
-    {
-        if (!ImagesParent.GetComponent<WindowController>().Shown)
-            ImagesParent.GetComponent<WindowController>().Show(true);
-    }
-
+    
     public void LoadSpriteFromDropdown() => LoadSpriteToPreview(ImagesDropdown.options[ImagesDropdown.value].image);
     
     
