@@ -75,7 +75,7 @@ public class PreviewController : MonoBehaviour
         Image img = transform.GetChild(0).GetChild(0).GetComponent<Image>();
         img.sprite = editorHandler.PlanetImage;
 
-        SpriteRenderer planetSpriteRend = editorHandler.Planet.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        SpriteRenderer planetSpriteRend = GlobalVariables.Instance.CurrentGravityObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
         planetSpriteRend.sprite = editorHandler.PlanetImage;
         
         // setting scale of image
@@ -89,7 +89,7 @@ public class PreviewController : MonoBehaviour
         transform.GetChild(0).GetChild(0).GetComponent<Image>().color = planetColor;
     }
 
-    public void ApplyColor() => editorHandler.Planet.transform.GetChild(0).GetComponent<SpriteRenderer>().color = transform.GetChild(0).GetChild(0).GetComponent<Image>().color;
+    public void ApplyColor() => GlobalVariables.Instance.CurrentGravityObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = transform.GetChild(0).GetChild(0).GetComponent<Image>().color;
 
     IEnumerator LoadSpriteFromPath(string path, int value)
     {

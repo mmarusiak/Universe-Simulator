@@ -23,6 +23,7 @@ public class InfoController : MonoBehaviour
 
     public void Open()
     {
+        CurrentPlanet = GlobalVariables.Instance.CurrentGravityObject.gameObject;
         
         InfoWindow openedWindow = new InfoWindow(null, null);
         bool isWindowCreated = false;
