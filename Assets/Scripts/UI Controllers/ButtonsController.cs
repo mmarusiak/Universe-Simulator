@@ -2,13 +2,9 @@ using UnityEngine;
 
 public class ButtonsController : MonoBehaviour
 {
-    private GravityObjectsController _controller;
+    public void PlayPause() => GravityObjectsController.Instance.PlayPause();
 
-    void Start() => _controller = GameObject.FindWithTag("GravityController").GetComponent<GravityObjectsController>();
-    
-    public void PlayPause() => _controller.PlayPause();
+    public void ResetScene() => GravityObjectsController.Instance.ResetScene();
 
-    public void ResetScene() => _controller.ResetScene();
-
-    public void LineCheck() => _controller.LineCheck();
+    public void LineCheck() => GravityObjectsController.Instance.LineCheck();
 }

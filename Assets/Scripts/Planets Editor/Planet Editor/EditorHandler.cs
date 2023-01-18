@@ -15,7 +15,7 @@ public class EditorHandler : MonoBehaviour
 
     void Start()
     {
-        _controller = GameObject.FindWithTag("GravityController").GetComponent<GravityObjectsController>();
+        _controller = GravityObjectsController.Instance;
         _planetNameBar = transform.GetChild(0).GetChild(2).GetComponent<Text>();
         (window = GetComponent<WindowController>()).Close(false);
     }

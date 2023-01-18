@@ -1595,9 +1595,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 368014327}
-        m_TargetAssemblyTypeName: SpritePicker, Assembly-CSharp
-        m_MethodName: PickSprite
+      - m_Target: {fileID: 1090148423}
+        m_TargetAssemblyTypeName: PreviewController, Assembly-CSharp
+        m_MethodName: LoadSpriteFromDropdown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

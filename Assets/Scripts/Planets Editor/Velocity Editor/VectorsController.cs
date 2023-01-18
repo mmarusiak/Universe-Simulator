@@ -5,9 +5,7 @@ public class VectorsController : MonoBehaviour
     private WindowController _windowController;
     public bool VectorsShown = false;
 
-    // 0 - x
-    // 1 - y
-    // 2 - r
+    // 0 - x, 1 - y, 2 - r
     [SerializeField]
     private LineRenderer[] VectorsLineRenderer = new LineRenderer[3];
 

@@ -21,7 +21,7 @@ public class PlanetLinePath : MonoBehaviour
     public List<LineSegment> Lines = new List<LineSegment>();
 
 
-    void Start() => _controller = GameObject.FindWithTag("GravityController").GetComponent<GravityObjectsController>();
+    void Start() => _controller = GravityObjectsController.Instance;
 
     void LateUpdate()
     {

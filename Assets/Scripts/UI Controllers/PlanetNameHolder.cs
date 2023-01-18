@@ -15,7 +15,7 @@ public class PlanetNameHolder : MonoBehaviour
     {
         Planet = PlanetController.gameObject;
 
-        controller = GameObject.FindWithTag("GravityController").GetComponent<GravityObjectsController>();
+        controller = GravityObjectsController.Instance;
 
         _transform = GetComponent<RectTransform>();
         _transform.sizeDelta = new Vector2(GetComponent<RectTransform>().sizeDelta.x + 300,

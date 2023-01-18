@@ -10,7 +10,7 @@ public class CreatorController : MonoBehaviour
     void Start()
     {
         _editorHandler = GetComponent<EditorHandler>();
-        _controller = GameObject.FindWithTag("GravityController").GetComponent<GravityObjectsController>();
+        _controller = GravityObjectsController.Instance;
     }
     
     void LateUpdate()

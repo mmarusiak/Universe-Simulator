@@ -3,6 +3,20 @@ using UnityEngine;
 
 public class GravityObjectsController : MonoBehaviour
 {
+    public static GravityObjectsController Instance { get; private set; }
+    
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+    
     [SerializeField]
     public List<GravityObject> AllGravityObjects = new List<GravityObject>();
 
@@ -12,6 +26,7 @@ public class GravityObjectsController : MonoBehaviour
     {
         PlayPause();
     }
+    
     
     public void AddGravityObject(GravityObject obj)
     {

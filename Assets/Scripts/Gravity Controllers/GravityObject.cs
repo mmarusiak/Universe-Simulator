@@ -40,7 +40,7 @@ public class GravityObject : MonoBehaviour
         transform.localScale = new Vector3(Radius * 2, Radius * 2, Radius * 2);
         StartPos = transform.position;
 
-        Controller = GameObject.FindWithTag("GravityController").GetComponent<GravityObjectsController>();
+        Controller = GravityObjectsController.Instance;
         Controller.AddGravityObject(this);
         
         _rigidbody2D = GetComponent<Rigidbody2D>();
