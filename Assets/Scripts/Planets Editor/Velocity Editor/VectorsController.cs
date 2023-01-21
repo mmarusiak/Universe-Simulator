@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VectorsController : MonoBehaviour
 {
     private WindowController _windowController;
+    [SerializeField] private Text windowLabel;
     
     public bool VectorsShown = false;
     public bool Ready;
@@ -27,7 +29,10 @@ public class VectorsController : MonoBehaviour
     void Update()
     {
         if (VectorsShown != _windowController.Shown)
+        {
             VectorsShown = !VectorsShown;
+            windowLabel.text = GlobalVariables.Instance.CurrentGravityObject.gameObject.name + "'s velocity editor";
+        }
 
         if (VectorsShown)
         {
