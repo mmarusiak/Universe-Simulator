@@ -255,9 +255,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LinePrefab: {fileID: 2195722983866791090, guid: 25e5fab0b7c5fa7a7973979cd039e40b, type: 3}
-  WaitCount: 0.05
-  DrawState: 0
-  ReadyForDraw: 1
+  SizeOfSegment: 0.2
+  PointsInSingleSegment: 4
   Lines: []
 --- !u!114 &4150519260747840995
 MonoBehaviour:
@@ -271,13 +270,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6250ed3abd07a3be8631707980b0b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DemoPlanet: 1
+  DemoPlanet: 0
   Mass: 10
   Radius: 5
   PlanetName: Yellow
   InitialVelocity: {x: 0, y: 0}
   StartPos: {x: 0, y: 0}
   NameHolder: {fileID: 0}
+  CurrentGravityForceVector: {x: 0, y: 0}
 --- !u!210 &4150519260747840999
 SortingGroup:
   m_ObjectHideFlags: 0

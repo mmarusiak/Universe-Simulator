@@ -41,7 +41,8 @@ public class GravityObject : MonoBehaviour
         StartPos = transform.position;
 
         Controller = GravityObjectsController.Instance;
-        Controller.AddGravityObject(this);
+        if(!Controller.AllGravityObjects.Contains(this))
+            Controller.AddGravityObject(this);
         
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _rigidbody2D.mass = Mass;

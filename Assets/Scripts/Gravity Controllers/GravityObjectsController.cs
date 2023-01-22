@@ -34,7 +34,7 @@ public class GravityObjectsController : MonoBehaviour
         UpdateLisInObjects();
     }
 
-    public void UpdateLisInObjects()
+    void UpdateLisInObjects()
     {
         foreach (var gravobj in AllGravityObjects)
             gravobj.UpdatePrivateList();
@@ -115,6 +115,7 @@ public class GravityObjectsController : MonoBehaviour
 
     public void RemovePlanet(GameObject planet)
     {
+        GameObject.Find("RemovePlanet").GetComponent<ToggleButton>().Toggle();
         RemovingPlanet = false;
         AllGravityObjects.Remove(planet.GetComponent<GravityObject>());
         Destroy(planet.GetComponent<GravityObject>().NameHolder);
