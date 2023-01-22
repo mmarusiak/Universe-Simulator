@@ -24,43 +24,50 @@ public class InfoHandler : MonoBehaviour
     {
         var velocityOutArr = OutputsData(AttachedPlanet.GetComponent<Rigidbody2D>().velocity.x,
             AttachedPlanet.GetComponent<Rigidbody2D>().velocity.y);
-        var forceOutArr = OutputsData(atatchedController.CurrentGravityForceVector.x,
-            atatchedController.CurrentGravityForceVector.y);
+        var forceOutArr = OutputsData(atatchedController.CurrentGravityForceVector.x*1000,
+            atatchedController.CurrentGravityForceVector.y*1000);
 
-        VelocityOutputs[0].text = velocityOutArr[0];
-        VelocityOutputs[1].text = velocityOutArr[1];
+        VelocityOutputs[0].text = "<color=red>" + velocityOutArr[0].Split('.')[0] + "</color><color=grey>." + velocityOutArr[0].Split('.')[1] + "</color>";
+        VelocityOutputs[1].text = "<color=green>" + velocityOutArr[1].Split('.')[0] + "</color><color=grey>." + velocityOutArr[1].Split('.')[1] + "</color>";
         VelocityOutputs[2].text = velocityOutArr[2];
 
-        ForceOutputs[0].text = forceOutArr[0];
-        ForceOutputs[1].text = forceOutArr[1];
+        ForceOutputs[0].text = "<color=red>" + forceOutArr[0].Split('.')[0] + "</color><color=grey>." + forceOutArr[0].Split('.')[1] + "</color>";
+        ForceOutputs[1].text = "<color=green>" + forceOutArr[1].Split('.')[0] + "</color><color=grey>." + forceOutArr[1].Split('.')[1] + "</color>";
         ForceOutputs[2].text = forceOutArr[2];
 
+        // need to format it
         PositionOutputs[0].text = AttachedPlanet.transform.position.x.ToString(CultureInfo.InvariantCulture);
         PositionOutputs[1].text = AttachedPlanet.transform.position.y.ToString(CultureInfo.InvariantCulture);
     }
 
-    static string[] OutputsData(float x, float y)
+    string[] OutputsData(float x, float y)
     {
-        string xStr = (Mathf.Round(x*10000)/10000).ToString(CultureInfo.InvariantCulture);
-        while (xStr.Length < 6)
-        {
-            xStr += "0";
-        }
-        
-        string yStr = (Mathf.Round(y*10000)/10000).ToString(CultureInfo.InvariantCulture);
-        while (yStr.Length < 6)
-        {
-            yStr += "0";
-        }
+        string xStr = SingleOutput(x);
+        string yStr = SingleOutput(y);
         
         var magnitude = Mathf.Sqrt(x * x + y * y);
-        string magnitudeStr = (Mathf.Round(magnitude * 1000) / 1000).ToString(CultureInfo.InvariantCulture);
-        while (magnitudeStr.Length < 6)
-        {
-            magnitudeStr += "0";
-        }
-        
+        string magnitudeStr = SingleOutput(magnitude);
+
         return new[] {xStr, yStr, magnitudeStr};
+    }
+
+    string SingleOutput(float input)
+    {
+        int rounder = (int)Mathf.Pow(10, ((int)input).ToString(CultureInfo.InvariantCulture).Length);
+        string output = 
+            (Mathf.Round(input*rounder)/rounder).ToString(CultureInfo.InvariantCulture);
+
+        if (output.Contains("."))
+        {
+            while (output.Split(".")[1].Length < 3)
+            {
+                output += "0";
+            }
+        }
+        else
+            output += ".000";
+
+        return output;
     }
     
     public void LoadInfoData(GameObject dataContainer)

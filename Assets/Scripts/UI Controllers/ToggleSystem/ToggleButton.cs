@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +19,20 @@ public class ToggleButton : MonoBehaviour
         float opacity = toggled ? baseColor.a : pressedOpacity * baseColor.a;
 
         Color newColor = new Color(baseColor.r, baseColor.g, baseColor.b, opacity);
-        transform.GetChild(0).GetComponent<Text>().color = newColor;
+
+        try
+        {
+            transform.GetChild(0).GetComponent<Text>().color = newColor;
+        }
+        catch (Exception e) { // ignored if there is no text in child
+        }
+        
         GetComponent<Image>().color = newColor;
+    }
+
+    public void ToggleToState(bool targetState)
+    {
+        toggled = !targetState;
+        Toggle();
     }
 }
