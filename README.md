@@ -1,15 +1,18 @@
 # Universe-Simulator
+
 Just a small project for simulate planets and space objects in 2D
 
-![DemoNew](https://user-images.githubusercontent.com/20907620/211164812-21b5abb6-00a5-425e-8251-7fed8d013e38.gif)
+![newUIShowcase1](https://user-images.githubusercontent.com/20907620/213918917-93f04c33-91da-400e-8993-0a906519c769.gif)
 
 ## Roadmap:
+
 - [x] Gravity forces simulation;
 - [x] Pause/Play/Reset controls for simulation;
 - [x] Player's input controls (scrolling, moving camera and planets);
 - [x] User menu/control panel for adding new planets;
 - [x] Displaying info window;
-- [ ] Add velocity vectors editor;
+- [x] Add velocity vectors editor;
+- [ ] Add settings;
 - [ ] Add save system;
 - [ ] Add community levels loader (?);
 - [ ] Add temperature to planets (?); 
