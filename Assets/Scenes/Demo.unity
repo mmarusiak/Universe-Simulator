@@ -1816,7 +1816,6 @@ GameObject:
   m_Component:
   - component: {fileID: 368014325}
   - component: {fileID: 368014326}
-  - component: {fileID: 368014327}
   - component: {fileID: 368014328}
   m_Layer: 5
   m_Name: LookPlanetWindow
@@ -1867,18 +1866,6 @@ MonoBehaviour:
   ToHide: {fileID: 0}
   offsetX: -300
   offsetY: 115
---- !u!114 &368014327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 368014324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7eb6027f880592b3084b450793cc5182, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &368014328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6059,7 +6046,7 @@ MonoBehaviour:
   DemoPlanet: 1
   Mass: 300
   Radius: 5
-  PlanetName: Green
+  PlanetName: Green planet
   InitialVelocity: {x: 0, y: 0}
   StartPos: {x: 0, y: 0}
   NameHolder: {fileID: 0}
@@ -9491,7 +9478,7 @@ MonoBehaviour:
   DemoPlanet: 1
   Mass: 10
   Radius: 2
-  PlanetName: Yellow
+  PlanetName: Yellow planet
   InitialVelocity: {x: 20, y: -3}
   StartPos: {x: 0, y: 0}
   NameHolder: {fileID: 0}

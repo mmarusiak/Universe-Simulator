@@ -17,7 +17,7 @@ public class CreatorController : MonoBehaviour
     
     public void CreateCall()
     {
-        creatingPlanet = true;
+        creatingPlanet = !creatingPlanet;
         _controller.RemovingPlanet = false;
         if(!_controller.Paused)
             _controller.PlayPause();

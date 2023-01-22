@@ -4,7 +4,7 @@ public class MultipleToggle : MonoBehaviour
 {
     [SerializeField] private ToggleButton[] togglesToDisable;
     [SerializeField] private ToggleButton[] togglesToActivate;
-
+    
     public void Toggle()
     {
         foreach (var tog in togglesToDisable)
@@ -14,9 +14,8 @@ public class MultipleToggle : MonoBehaviour
         }
         
         foreach (var tog in togglesToActivate)
-        {
-            if(!tog.toggled)
-                tog.Toggle();
+        { 
+            tog.Toggle();
         }
     }
 }

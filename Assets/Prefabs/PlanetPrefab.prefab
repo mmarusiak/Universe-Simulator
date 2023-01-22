@@ -273,7 +273,7 @@ MonoBehaviour:
   DemoPlanet: 0
   Mass: 10
   Radius: 5
-  PlanetName: Yellow
+  PlanetName: New planet
   InitialVelocity: {x: 0, y: 0}
   StartPos: {x: 0, y: 0}
   NameHolder: {fileID: 0}
