@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class InfoHandler : MonoBehaviour
 {
     public GameObject AttachedPlanet;
-    private GravityObject atatchedController;
+    private GravityObject attachedController;
     public Image MainPlanetImg;
     public Image BackgroundPlanetImg;
 
@@ -14,18 +14,28 @@ public class InfoHandler : MonoBehaviour
     public Text[] ForceOutputs = new Text[3];
     public Text[] PositionOutputs = new Text[2];
 
+    private bool setOnReset = false;
+
     void Update()
     {
-        if(Time.timeScale > 0 && AttachedPlanet != null)
+        if (Time.timeScale > 0 && AttachedPlanet != null && !GravityObjectsController.Instance.Reseted)
+        {
             UpdateData();
+            setOnReset = false;
+        }
+        else if (!setOnReset)
+        {
+            UpdateData();
+            setOnReset = true;
+        }
     }
 
     void UpdateData()
     {
         var velocityOutArr = OutputsData(AttachedPlanet.GetComponent<Rigidbody2D>().velocity.x*10,
             AttachedPlanet.GetComponent<Rigidbody2D>().velocity.y*10);
-        var forceOutArr = OutputsData(atatchedController.CurrentGravityForceVector.x*1000,
-            atatchedController.CurrentGravityForceVector.y*1000);
+        var forceOutArr = OutputsData(attachedController.CurrentGravityForceVector.x*1000,
+            attachedController.CurrentGravityForceVector.y*1000);
 
         VelocityOutputs[0].text = "<color=red>" + velocityOutArr[0].Split('.')[0] + "</color><color=grey>." + velocityOutArr[0].Split('.')[1] + "</color>";
         VelocityOutputs[1].text = "<color=green>" + velocityOutArr[1].Split('.')[0] + "</color><color=grey>." + velocityOutArr[1].Split('.')[1] + "</color>";
@@ -82,7 +92,7 @@ public class InfoHandler : MonoBehaviour
         BackgroundPlanetImg.sprite = planetSprite.sprite;
 
         AttachedPlanet = dataContainer;
-        atatchedController = AttachedPlanet.GetComponent<GravityObject>();
+        attachedController = AttachedPlanet.GetComponent<GravityObject>();
         
         UpdateData();
     }
