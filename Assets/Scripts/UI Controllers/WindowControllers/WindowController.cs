@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class WindowController : MonoBehaviour
     [InspectorLabel("Offset of position on show")]
     public float offsetX = 300;
     public float offsetY = 700;
+
+    public float TransitionTime = 0.5f;
     
     public void Show(bool instantShow)
     {

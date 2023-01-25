@@ -1240,6 +1240,7 @@ GameObject:
   - component: {fileID: 233266152}
   - component: {fileID: 233266153}
   - component: {fileID: 233266154}
+  - component: {fileID: 233266155}
   m_Layer: 5
   m_Name: EditorController
   m_TagString: EditorController
@@ -1318,6 +1319,19 @@ MonoBehaviour:
   ToHide: {fileID: 71381480}
   offsetX: 190
   offsetY: 210
+  TransitionTime: 0.5
+--- !u!114 &233266155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233266150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 239b41ecde8a1264fa60d24ccd208e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &255651364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1828,6 +1842,7 @@ GameObject:
   - component: {fileID: 368014325}
   - component: {fileID: 368014326}
   - component: {fileID: 368014328}
+  - component: {fileID: 368014329}
   m_Layer: 5
   m_Name: LookPlanetWindow
   m_TagString: Untagged
@@ -1877,6 +1892,7 @@ MonoBehaviour:
   ToHide: {fileID: 0}
   offsetX: -300
   offsetY: 115
+  TransitionTime: 0.5
 --- !u!114 &368014328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1887,6 +1903,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c69c1050a8b0eb859a1c880e782da202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &368014329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368014324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 239b41ecde8a1264fa60d24ccd208e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &393028455
@@ -2786,6 +2814,7 @@ GameObject:
   - component: {fileID: 546013340}
   - component: {fileID: 546013341}
   - component: {fileID: 546013343}
+  - component: {fileID: 546013344}
   m_Layer: 5
   m_Name: VelocityEditor
   m_TagString: Untagged
@@ -2833,6 +2862,7 @@ MonoBehaviour:
   ToHide: {fileID: 0}
   offsetX: -300
   offsetY: 115
+  TransitionTime: 0.5
 --- !u!114 &546013341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2865,6 +2895,18 @@ MonoBehaviour:
   - {fileID: 1951162169}
   - {fileID: 1849487375}
   - {fileID: 2098649737}
+--- !u!114 &546013344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546013338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 239b41ecde8a1264fa60d24ccd208e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &553860357
 GameObject:
   m_ObjectHideFlags: 0
@@ -4823,7 +4865,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7e1aff9652c0dac418d9aa42f5f24dc2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c5c3db21437e7ebd3ad67188d1939659, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7050,6 +7092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentGravityObject: {fileID: 0}
+  VelocityPrefab: {fileID: 6423463404554114905, guid: 0cd86444a5084e8188f2e44501fe2908, type: 3}
 --- !u!4 &1668256394
 Transform:
   m_ObjectHideFlags: 0

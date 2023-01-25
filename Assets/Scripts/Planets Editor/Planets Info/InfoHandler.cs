@@ -22,8 +22,8 @@ public class InfoHandler : MonoBehaviour
 
     void UpdateData()
     {
-        var velocityOutArr = OutputsData(AttachedPlanet.GetComponent<Rigidbody2D>().velocity.x,
-            AttachedPlanet.GetComponent<Rigidbody2D>().velocity.y);
+        var velocityOutArr = OutputsData(AttachedPlanet.GetComponent<Rigidbody2D>().velocity.x*10,
+            AttachedPlanet.GetComponent<Rigidbody2D>().velocity.y*10);
         var forceOutArr = OutputsData(atatchedController.CurrentGravityForceVector.x*1000,
             atatchedController.CurrentGravityForceVector.y*1000);
 
