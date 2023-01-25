@@ -5187,7 +5187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1092732459}
   m_Layer: 5
-  m_Name: Buttons
+  m_Name: EditorButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

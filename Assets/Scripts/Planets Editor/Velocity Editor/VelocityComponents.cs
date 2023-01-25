@@ -56,8 +56,12 @@ public class VelocityComponents : MonoBehaviour
         }
     }
 
-    void UpdateTexts(Vector3 vel)
+    void UpdateTexts(Vector3 velocity)
     {
+        Vector2 vel = new(velocity.x, velocity.y);
+        vel.x *= 10;
+        vel.y *= 10;
+        
         xField.text = vel.x.ToString(CultureInfo.InvariantCulture);
         yField.text = vel.y.ToString(CultureInfo.InvariantCulture);
         magnitudeText.text = vel.magnitude.ToString(CultureInfo.InvariantCulture);
@@ -73,12 +77,12 @@ public class VelocityComponents : MonoBehaviour
 
             if (GravityObjectsController.Instance.Reseted)
             {
-                GlobalVariables.Instance.CurrentGravityObject.InitialVelocity.x = valueX;
-                GlobalVariables.Instance.CurrentGravityObject.InitialVelocity.y = valueY;
+                GlobalVariables.Instance.CurrentGravityObject.InitialVelocity.x = valueX/10;
+                GlobalVariables.Instance.CurrentGravityObject.InitialVelocity.y = valueY/10;
             }
             
             GlobalVariables.Instance.CurrentGravityObject.GetComponent<Rigidbody2D>().velocity =
-                new Vector2(valueX, valueY);
+                new (valueX/10, valueY/10);
 
         }
     } 
