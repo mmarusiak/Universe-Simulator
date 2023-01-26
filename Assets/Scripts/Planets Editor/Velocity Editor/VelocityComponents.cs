@@ -11,13 +11,9 @@ public class VelocityComponents : MonoBehaviour
 
     private bool updatedOnChange = false;
     private bool updatedOnReset = false;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
+    private GravityObject lastPlanetsVelocity;
+    
     // Update is called once per frame
     void Update()
     {
@@ -52,7 +48,7 @@ public class VelocityComponents : MonoBehaviour
                 
                 UpdateTexts(VectorsController.Velocity);
             }
-
+            else if (lastPlanetsVelocity != GlobalVariables.Instance.CurrentGravityObject) updatedOnChange = false;
         }
     }
 
