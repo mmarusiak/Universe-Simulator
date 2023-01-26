@@ -92,7 +92,7 @@ public class GravityObjectsController : MonoBehaviour
         }
         
         Camera.main.gameObject.transform.position = new Vector3(0, 0, -10);
-        Camera.main.orthographicSize = 60;
+        Camera.main.orthographicSize = 85;
 
         Reseted = true;
     }

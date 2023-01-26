@@ -5,6 +5,9 @@ public class GlobalVariables : MonoBehaviour
     public static GlobalVariables Instance { get; private set; }
     
     public GravityObject CurrentGravityObject;
+
+    public bool OverlayShown = false;
+    
     // global prefabs
     public GameObject VelocityPrefab;
     
