@@ -5,6 +5,7 @@ public class PlanetNameHolder : MonoBehaviour
     public GameObject Planet;
     public GravityObject PlanetController;
     public GravityObjectsController controller;
+    public GameObject VelocityText;
     
     private RectTransform _nameTransform;
     private RectTransform _velocityTransform;
@@ -30,10 +31,10 @@ public class PlanetNameHolder : MonoBehaviour
 
     void SetUpVelocityHolder()
     {
-        GameObject newVel = Instantiate(GlobalVariables.Instance.VelocityPrefab, transform.parent);
-        newVel.name = gameObject.name + " velocity";
-        newVel.transform.GetChild(0).GetComponent<VelocityHolder>().SetRigid(Planet.GetComponent<Rigidbody2D>());
-        _velocityTransform = newVel.GetComponent<RectTransform>();
+        VelocityText = Instantiate(GlobalVariables.Instance.VelocityPrefab, transform.parent);
+        VelocityText.name = gameObject.name + " velocity";
+        VelocityText.transform.GetChild(0).GetComponent<VelocityHolder>().SetRigid(Planet.GetComponent<Rigidbody2D>());
+        _velocityTransform = VelocityText.GetComponent<RectTransform>();
     }
     
     void LateUpdate()

@@ -118,6 +118,7 @@ public class GravityObjectsController : MonoBehaviour
         GameObject.Find("RemovePlanet").GetComponent<ToggleButton>().Toggle();
         RemovingPlanet = false;
         AllGravityObjects.Remove(planet.GetComponent<GravityObject>());
+        Destroy(planet.GetComponent<GravityObject>().NameHolder.GetComponent<PlanetNameHolder>().VelocityText);
         Destroy(planet.GetComponent<GravityObject>().NameHolder);
         Destroy(planet);
         UpdateLisInObjects();
