@@ -3,6 +3,8 @@ using UnityEngine;
 public class PauseOverlayHandler : MonoBehaviour
 {
     public KeyCode ActivationKey = KeyCode.Escape;
+    [SerializeField]
+    private GameObject pauseOverlayHolder;
     
     
     // Start is called before the first frame update

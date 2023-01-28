@@ -7,6 +7,8 @@ public class GlobalVariables : MonoBehaviour
     public GravityObject CurrentGravityObject;
 
     public bool OverlayShown = false;
+
+    public Font GlobalFont;
     
     // global prefabs
     public GameObject VelocityPrefab;

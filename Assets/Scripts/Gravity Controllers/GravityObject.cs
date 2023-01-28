@@ -63,12 +63,13 @@ public class GravityObject : MonoBehaviour
         Text text = NameHolder.AddComponent<Text>();
         text.text = PlanetName;
         text.color = Color.white;
-        text.font = Font.CreateDynamicFontFromOSFont("Arial", 20);
+        text.font = GlobalVariables.Instance.GlobalFont;
         text.fontSize = 20;
         text.alignment = TextAnchor.MiddleCenter;
         text.fontStyle = FontStyle.BoldAndItalic;
 
         NameHolder.transform.SetParent(GameObject.Find("PlanetsNames").transform);
+        NameHolder.transform.localScale = Vector3.one;
     }
 
     // Update is called once per frame
