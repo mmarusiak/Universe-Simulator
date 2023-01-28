@@ -2,7 +2,8 @@
 
 Just a small project for simulate planets and space objects in 2D
 
-![newUIShowcase1](https://user-images.githubusercontent.com/20907620/213918917-93f04c33-91da-400e-8993-0a906519c769.gif)
+![demonewest](https://user-images.githubusercontent.com/20907620/214847010-b0f69665-5f49-43ab-b3e9-9abffe01ba6e.gif)
+
 
 ## Roadmap:
 
@@ -15,7 +16,7 @@ Just a small project for simulate planets and space objects in 2D
 - [ ] Add settings;
 - [ ] Add save system;
 - [ ] Add community levels/worlds (?);
-- [ ] Add logic levels creator and logic levels *(f.e. to beat level you need to reach 400 km/h with given planets, just play with positions)*;
+- [ ] Add logic levels and logic levels creator *(f.e. to beat level you need to reach 400 km/h with given planets, just play with positions)*;
 - [ ] Add temperature to planets (?); 
 - [ ] Light to planets - they need to shine (at least some of them)!
 - [ ] Our universe demo in 2D;
