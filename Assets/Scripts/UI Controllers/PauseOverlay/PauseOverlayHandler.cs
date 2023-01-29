@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseOverlayHandler : MonoBehaviour
 {
@@ -14,14 +15,11 @@ public class PauseOverlayHandler : MonoBehaviour
     private KeyCode ActivationKey = KeyCode.Escape;
     [SerializeField]
     private GameObject pauseOverlayHolder;
-    
-    private overlayState _state;
+    [SerializeField] private GameObject[] overlays = new GameObject[3];
+    [SerializeField] private Image[] overlaysButtonsImages = new Image[3];
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    void Start() => ShowOverlay(overlayState.LevelSettings);
 
     // Update is called once per frame
     void Update()
@@ -30,7 +28,7 @@ public class PauseOverlayHandler : MonoBehaviour
         {
             GlobalVariables.Instance.OverlayShown = !GlobalVariables.Instance.OverlayShown;
             TogglePause();
-            ShowOverlay(_state = overlayState.LevelSettings);
+            ShowOverlay(overlayState.LevelSettings);
         }
     }
 
@@ -38,8 +36,21 @@ public class PauseOverlayHandler : MonoBehaviour
     {
         Debug.Log(state);
         pauseOverlayHolder.SetActive(GlobalVariables.Instance.OverlayShown);
-        Debug.Log("Overlay pause shown");
+        for (int overlayIndex = 0; overlayIndex < overlays.Length; overlayIndex++)
+        {
+            // set section active
+            overlays[overlayIndex].SetActive(overlayIndex == (int)state && GlobalVariables.Instance.OverlayShown);
+            
+            // change buttons color
+            Color newColor = overlaysButtonsImages[overlayIndex].color;
+            newColor.a = overlayIndex == (int)state ? 1 : 0.38f;
+            overlaysButtonsImages[overlayIndex].color = newColor;
+            overlaysButtonsImages[overlayIndex].GetComponent<Shadow>().enabled = (int) state == overlayIndex;
+        }
     }
+
+    public void OverlayButtonClicked(int targetState) => ShowOverlay((overlayState) targetState);
+    
 
     
     private bool needToUnpause;
