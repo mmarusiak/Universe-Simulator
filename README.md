@@ -15,11 +15,11 @@ Just a small project for simulate planets and space objects in 2D
 - [x] Add velocity vectors editor;
 - [ ] Add settings;
 - [ ] Add save system;
-- [ ] Add community levels/worlds (?);
+- [ ] Add community workshop levels/worlds (?);
 - [ ] Add logic levels and logic levels creator *(f.e. to beat level you need to reach 400 km/h with given planets, just play with positions)*;
 - [ ] Add temperature to planets (?); 
-- [ ] Light to planets - they need to shine (at least some of them)!
-- [ ] Our universe demo in 2D;
+- [ ] Add light to planets - they need to shine (at least some of them)!
+- [ ] Add our universe demo in 2D;
 - [ ] Explosions (?);
 
 
