@@ -11,6 +11,7 @@ public class PlanetNameHolder : MonoBehaviour
     private RectTransform _velocityTransform;
     
     private Vector2 textPos;
+    // pixels relative to full hd res
     public Vector2 velocityOffset = new (0, -30);
     
     public float SmoothSpeed= 0.02f;
@@ -19,6 +20,7 @@ public class PlanetNameHolder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        velocityOffset = new( -velocityOffset.x * UnityEditor.Handles.GetMainGameViewSize().x / 1920, -velocityOffset.y * UnityEditor.Handles.GetMainGameViewSize().y / 1080);
         Planet = PlanetController.gameObject;
         SetUpVelocityHolder();
         
