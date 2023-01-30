@@ -40,7 +40,7 @@ public class EditorHandler : MonoBehaviour
         {
             // getting index of sprite
             for (int i = 0; i < previewController.ImagesDropdown.options.Count; i ++)
-                if (previewController.ImagesDropdown.options[i].image.texture.imageContentsHash == targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite.texture.imageContentsHash)
+                if (previewController.ImagesDropdown.options[i].image.texture.GetRawTextureData() == targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite.texture.GetRawTextureData())
                 {
                     previewController.SetDropdown(i);
                     break;
