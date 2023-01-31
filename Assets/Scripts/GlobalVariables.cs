@@ -11,7 +11,7 @@ public class GlobalVariables : MonoBehaviour
     public Font GlobalFont;
     
     // global prefabs
-    public GameObject VelocityPrefab;
+    public GameObject VelocityPrefab, DistancePrefab;
     
     void Awake()
     {

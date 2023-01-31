@@ -98,26 +98,32 @@ public class GravityObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (Time.timeScale == 0 && !Controller.RemovingPlanet)
-            moveVector = new Vector2(transform.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
-                transform.position.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-        
-        else if(Time.timeScale == 0 && Controller.RemovingPlanet)
-            Controller.RemovePlanet(gameObject);
+        if (!GlobalVariables.Instance.OverlayShown)
+        {
+            if (Time.timeScale == 0 && !Controller.RemovingPlanet)
+                moveVector = new Vector2(transform.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
+                    transform.position.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+
+            else if (Time.timeScale == 0 && Controller.RemovingPlanet)
+                Controller.RemovePlanet(gameObject);
+        }
     }
 
     private void OnMouseUp()
     {
-        if(dragTime < 0.25f)
-            GameObject.FindWithTag("EditorController").GetComponent<EditorHandler>().ShowPanel(gameObject);
-        
-        if(Controller.Reseted)
-            StartPos = transform.position;
-
-        if (tempPause && Time.timeScale == 0)
+        if (!GlobalVariables.Instance.OverlayShown)
         {
-            Controller.PlayPause();
-            tempPause = false;
+            if (dragTime < 0.25f)
+                GameObject.FindWithTag("EditorController").GetComponent<EditorHandler>().ShowPanel(gameObject);
+
+            if (Controller.Reseted)
+                StartPos = transform.position;
+
+            if (tempPause && Time.timeScale == 0)
+            {
+                Controller.PlayPause();
+                tempPause = false;
+            }
         }
 
         dragTime = 0;
@@ -125,7 +131,7 @@ public class GravityObject : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (Time.timeScale == 0)
+        if (Time.timeScale == 0 && !GlobalVariables.Instance.OverlayShown)
         {
             dragTime += Time.unscaledDeltaTime;
             
@@ -150,7 +156,7 @@ public class GravityObject : MonoBehaviour
                 }
             }
         }
-        else
+        else if(!GlobalVariables.Instance.OverlayShown)
         {
             tempPause = true;
             Controller.PlayPause();
