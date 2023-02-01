@@ -47,7 +47,9 @@ public class CreatorController : MonoBehaviour
                 creatingPlanet = false;
                 GameObject planet = Instantiate(PlanetPrefab, mousePosition, Quaternion.Euler(0, 0, 0),
                     GameObject.FindWithTag("PlanetsHolder").transform);
-                planet.GetComponent<GravityObject>().UpdatePlanet();
+                
+                GlobalVariables.Instance.CurrentGravityObject = planet.GetComponent<GravityObject>();
+                GlobalVariables.Instance.CurrentGravityObject.UpdatePlanet();
 
                 _editorHandler.ShowPanel(planet);
                 GameObject.Find("AddPlanet").GetComponent<ToggleButton>().Toggle();
