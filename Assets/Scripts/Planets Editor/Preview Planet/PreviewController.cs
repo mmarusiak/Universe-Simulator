@@ -19,10 +19,10 @@ public class PreviewController : MonoBehaviour
 
     private void Start()
     {
-        SetDropdown(0);
+        InitializeDropdown(0);
     }
 
-    public void SetDropdown(int value)
+    public void InitializeDropdown(int value)
     {
         CurrentPath = Path;
         editorHandler = transform.parent.transform.parent.GetComponent<EditorHandler>();
