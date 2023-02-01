@@ -2,17 +2,20 @@
 
 Just a small project for simulate planets and space objects in 2D
 
-![demonewest](https://user-images.githubusercontent.com/20907620/214847010-b0f69665-5f49-43ab-b3e9-9abffe01ba6e.gif)
+
+![newestGitHubDemo](https://user-images.githubusercontent.com/20907620/216118963-98220340-39dc-41d9-9299-402f9a1108b2.gif)
 
 
 ## Roadmap:
 
-- [x] Gravity forces simulation;
-- [x] Pause/Play/Reset controls for simulation;
-- [x] Player's input controls (scrolling, moving camera and planets);
-- [x] User menu/control panel for adding new planets;
-- [x] Displaying info window;
-- [x] Add velocity vectors editor;
+- [x] ~Gravity forces simulation;~
+- [x] ~Pause/Play/Reset controls for simulation;~
+- [x] ~Player's input controls (scrolling, moving camera and planets);~
+- [x] ~User menu/control panel for adding new planets;~
+- [x] ~Displaying info window;~
+- [x] ~Add tags (velocity and distance);~
+- [x] ~Add velocity vectors editor;~
+- [x] ~Add pause overlay;~
 - [ ] Add settings;
 - [ ] Add save system;
 - [ ] Add community workshop levels/worlds (?);
