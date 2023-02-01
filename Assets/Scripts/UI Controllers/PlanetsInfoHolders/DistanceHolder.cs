@@ -18,19 +18,19 @@ public class DistanceHolder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(attachedTransform.GetComponent<GravityObject>() != GlobalVariables.Instance.CurrentGravityObject && ((!GlobalVariables.Instance.OverlayShown && !GravityObjectsController.Instance.Paused) 
-            || lastAssigned != GlobalVariables.Instance.CurrentGravityObject))
+        if((attachedTransform.GetComponent<GravityObject>() != GlobalVariables.Instance.CurrentGravityObject && 
+            (!GlobalVariables.Instance.OverlayShown || lastAssigned != GlobalVariables.Instance.CurrentGravityObject) 
+            || lastAssigned != GlobalVariables.Instance.CurrentGravityObject && GetComponent<RectTransform>().parent.localScale == Vector3.zero) && GlobalVariables.Instance.CurrentGravityObject != null)
             UpdateText();
         else if (attachedTransform.GetComponent<GravityObject>() == GlobalVariables.Instance.CurrentGravityObject || GlobalVariables.Instance.CurrentGravityObject == null)
             GetComponent<RectTransform>().parent.localScale = Vector3.zero;
 
     }
 
-    void UpdateText()
+    public void UpdateText()
     {
         GetComponent<RectTransform>().parent.localScale = Vector3.one;
         lastAssigned = GlobalVariables.Instance.CurrentGravityObject;
         txt.text = Vector2.Distance(attachedTransform.position, lastAssigned.gameObject.transform.position) + " km";
-        Debug.Log(lastAssigned + " || " + GlobalVariables.Instance.CurrentGravityObject + " || " + txt.text);
     }
 }

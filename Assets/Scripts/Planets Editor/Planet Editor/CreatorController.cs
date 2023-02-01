@@ -33,7 +33,8 @@ public class CreatorController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (creatingPlanet && Input.GetMouseButton(0))
+        // Checking if no planet is overlapping
+        if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D[] hits = Physics2D.RaycastAll(mousePosition, new Vector2(0, 0), 0.01f);
@@ -41,7 +42,7 @@ public class CreatorController : MonoBehaviour
             bool flag = true;
             flag = !EventSystem.current.IsPointerOverGameObject();
 
-            if (flag)
+            if (flag && creatingPlanet)
             {
                 creatingPlanet = false;
                 GameObject planet = Instantiate(PlanetPrefab, mousePosition, Quaternion.Euler(0, 0, 0),
@@ -50,6 +51,9 @@ public class CreatorController : MonoBehaviour
 
                 _editorHandler.ShowPanel(planet);
                 GameObject.Find("AddPlanet").GetComponent<ToggleButton>().Toggle();
+            }else if (flag)
+            {
+                GlobalVariables.Instance.CurrentGravityObject = null;
             }
         }
     }

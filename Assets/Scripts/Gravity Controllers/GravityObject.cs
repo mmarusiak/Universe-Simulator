@@ -49,7 +49,7 @@ public class GravityObject : MonoBehaviour
         _rigidbody2D.velocity = InitialVelocity;
         StartPos = transform.position;
 
-        this.name = PlanetName;
+        name = PlanetName;
         if (NameHolder == null)
             CreatePlanetNameHolder();
         else
@@ -124,6 +124,8 @@ public class GravityObject : MonoBehaviour
                 Controller.PlayPause();
                 tempPause = false;
             }
+
+            GlobalVariables.Instance.CurrentGravityObject = this;
         }
 
         dragTime = 0;
