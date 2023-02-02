@@ -52,37 +52,18 @@ public class InfoHandler : MonoBehaviour
 
     string[] OutputsData(float x, float y)
     {
-        string xStr = SingleOutput(x);
-        string yStr = SingleOutput(y);
+        string xStr = UniverseMath.RoundOutput(x);
+        string yStr = UniverseMath.RoundOutput(y);
         
         var magnitude = Mathf.Sqrt(x * x + y * y);
-        string magnitudeStr = SingleOutput(magnitude);
+        string magnitudeStr = UniverseMath.RoundOutput(magnitude);
 
         return new[] {xStr, yStr, magnitudeStr};
     }
 
-    string SingleOutput(float input)
-    {
-        int rounder = (int)Mathf.Pow(10, ((int)input).ToString(CultureInfo.InvariantCulture).Length);
-        string output = 
-            (Mathf.Round(input*rounder)/rounder).ToString(CultureInfo.InvariantCulture);
-
-        if (output.Contains("."))
-        {
-            while (output.Split(".")[1].Length < 3)
-            {
-                output += "0";
-            }
-        }
-        else
-            output += ".000";
-
-        return output;
-    }
-    
     public void LoadInfoData(GameObject dataContainer)
     {
-        var gravityForce = dataContainer.GetComponent<GravityObject>().CurrentGravityForceVector;
+        //var gravityForce = dataContainer.GetComponent<GravityObject>().CurrentGravityForceVector;
         transform.Find("MenuPanel").Find("PlanetNameTXT").GetComponent<Text>().text = dataContainer.name + "'s info";
 
         SpriteRenderer planetSprite = dataContainer.transform.GetChild(0).GetComponent<SpriteRenderer>();
