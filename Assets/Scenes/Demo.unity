@@ -334,7 +334,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnDidEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1864106722}
+        m_TargetAssemblyTypeName: EditorSettings, Assembly-CSharp
+        m_MethodName: ApplyPath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -9892,6 +9904,7 @@ MonoBehaviour:
   CurrentGravityObject: {fileID: 0}
   OverlayShown: 0
   GlobalFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  PathToImages: 
   VelocityPrefab: {fileID: 6423463404554114905, guid: 0cd86444a5084e8188f2e44501fe2908, type: 3}
   DistancePrefab: {fileID: 6423463404554114905, guid: 034ddb454ba754cc48c18cfee65c4d6d, type: 3}
 --- !u!4 &1668256394
@@ -11238,6 +11251,7 @@ GameObject:
   - component: {fileID: 1864106719}
   - component: {fileID: 1864106721}
   - component: {fileID: 1864106720}
+  - component: {fileID: 1864106722}
   m_Layer: 5
   m_Name: TestEditorSettings
   m_TagString: Untagged
@@ -11308,6 +11322,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1864106718}
   m_CullTransparentMesh: 1
+--- !u!114 &1864106722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864106718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c18d7e0e150724c4960d8446a2ddc8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathField: {fileID: 37574946}
+  _visualEditor: {fileID: 1090148423}
 --- !u!1 &1895392264
 GameObject:
   m_ObjectHideFlags: 0

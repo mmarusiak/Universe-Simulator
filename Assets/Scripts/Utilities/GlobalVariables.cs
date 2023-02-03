@@ -9,6 +9,8 @@ public class GlobalVariables : MonoBehaviour
     public bool OverlayShown = false;
 
     public Font GlobalFont;
+
+    public string PathToImages;
     
     // global prefabs
     public GameObject VelocityPrefab, DistancePrefab;

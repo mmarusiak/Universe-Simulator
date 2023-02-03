@@ -31,20 +31,20 @@ public class EditorHandler : MonoBehaviour
         GameObject.Find("LookPlanetWindow").GetComponent<VisualWindowController>().Show(planetController.PlanetName, targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().color);
         transform.GetChild(0).Find("Components").GetComponent<ComponentEditor>().UpdateText(planetController.PlanetName, planetController.Mass, planetController.Radius);
         
-        PreviewController previewController = transform.GetChild(0).GetChild(0).GetComponent<PreviewController>();
-        previewController.LoadSpriteToPreview(targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite);
-        previewController.LoadColorToPreview(targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().color);
+        VisualEditor visualEditor = transform.GetChild(0).GetChild(0).GetComponent<VisualEditor>();
+        visualEditor.LoadSpriteToPreview(targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite);
+        visualEditor.LoadColorToPreview(targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().color);
         
-        if (previewController.ImagesDropdown.options[previewController.ImagesDropdown.value].image !=
+        if (visualEditor.ImagesDropdown.options[visualEditor.ImagesDropdown.value].image !=
             targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite)
         {
-            previewController.ImagesDropdown.SetValueWithoutNotify(0);
+            visualEditor.ImagesDropdown.SetValueWithoutNotify(0);
             // getting index of sprite
-            for (int i = 0; i < previewController.ImagesDropdown.options.Count; i++)
+            for (int i = 0; i < visualEditor.ImagesDropdown.options.Count; i++)
             {
-                if (previewController.ImagesDropdown.options[i].image == targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite)
+                if (visualEditor.ImagesDropdown.options[i].image == targetPlanet.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite)
                 {
-                    previewController.ImagesDropdown.SetValueWithoutNotify(i);
+                    visualEditor.ImagesDropdown.SetValueWithoutNotify(i);
                     break;
                 }
             }

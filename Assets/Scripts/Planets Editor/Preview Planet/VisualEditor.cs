@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class PreviewController : MonoBehaviour
+public class VisualEditor : MonoBehaviour
 {
     public GameObject ImagesParent;
     public Dropdown ImagesDropdown;
@@ -24,7 +24,7 @@ public class PreviewController : MonoBehaviour
 
     public void InitializeDropdown(int value)
     {
-        CurrentPath = Path;
+        CurrentPath = GlobalVariables.Instance.PathToImages;
         editorHandler = transform.parent.transform.parent.GetComponent<EditorHandler>();
         // clear dropdown
         ImagesDropdown.options.Clear();

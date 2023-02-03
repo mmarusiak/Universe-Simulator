@@ -129,7 +129,7 @@ public class ColorWheelControl : MonoBehaviour {
 		c = Color.Lerp(c, Color.black, inner.y);
 
 		Selection = c;
-		GameObject.Find("Preview").GetComponent<PreviewController>().LoadColorToPreview(Selection);
+		GameObject.Find("Preview").GetComponent<VisualEditor>().LoadColorToPreview(Selection);
 	}
 
 
