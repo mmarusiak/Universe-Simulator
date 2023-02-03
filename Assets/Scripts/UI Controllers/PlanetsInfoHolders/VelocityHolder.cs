@@ -18,6 +18,6 @@ public class VelocityHolder : MonoBehaviour
     void LateUpdate()
     {
         float velocity = rigid.velocity.magnitude;
-        txt.text = $"({UniverseMath.RoundOutput(velocity*10)} km/h)";
+        txt.text = $"({UniverseTools.RoundOutput(velocity*10)} km/h)";
     }
 }

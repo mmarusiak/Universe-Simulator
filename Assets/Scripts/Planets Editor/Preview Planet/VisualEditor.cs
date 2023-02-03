@@ -11,7 +11,6 @@ public class VisualEditor : MonoBehaviour
     public GameObject ImagesParent;
     public Dropdown ImagesDropdown;
     public Sprite DefaultSprite;
-    public string Path;
     public string CurrentPath;
 
     private EditorHandler editorHandler;
@@ -29,7 +28,7 @@ public class VisualEditor : MonoBehaviour
         // clear dropdown
         ImagesDropdown.options.Clear();
         ImagesDropdown.options.Add(new Dropdown.OptionData("None", DefaultSprite));
-        if(Path != "") LoadImagesFromPath(value);
+        if(CurrentPath != "") LoadImagesFromPath(value);
     }
 
     // https://stackoverflow.com/a/18321162/13786856
@@ -49,19 +48,19 @@ public class VisualEditor : MonoBehaviour
         // Path = ImagesParent.transform.GetChild(1).GetComponent<InputField>().text;
 
         // assign new items to dropdown
-        Path = Path.Replace(@"\", @"/");
-        if (Path[^1].Equals("/"))
+        CurrentPath = CurrentPath.Replace(@"\", @"/");
+        if (CurrentPath[^1].Equals("/"))
         {
-            Path.Remove(Path.Length - 1);
+            CurrentPath.Remove(CurrentPath.Length - 1);
         }
         
-        String searchFolder = Path;
+        String searchFolder = CurrentPath;
         var filters = new String[] { "jpg", "JPEG", "png"};
         var files = GetFilesFrom(searchFolder, filters, false);
         
         foreach (var file in files)
         {
-            StartCoroutine(LoadSpriteFromPath(file, value));
+            if(UniverseTools.IsSafeImage(file)) StartCoroutine(LoadSpriteFromPath(file, value));
         }
     }
     
@@ -121,7 +120,7 @@ public class VisualEditor : MonoBehaviour
                     Sprite.Create(loaded.texture, new Rect(0, 0, 128, 128), new Vector2(0.5f, 0.5f));
             }
 
-            ImagesDropdown.options.Add(new Dropdown.OptionData(path.Replace(Path + "/", ""), loaded));
+            ImagesDropdown.options.Add(new Dropdown.OptionData(path.Replace(CurrentPath + "/", ""), loaded));
             if (ImagesDropdown.options.Count >= value && ImagesDropdown.value != value)
                 ImagesDropdown.SetValueWithoutNotify(value);
         }

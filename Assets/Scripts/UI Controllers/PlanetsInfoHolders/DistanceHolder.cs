@@ -32,6 +32,6 @@ public class DistanceHolder : MonoBehaviour
         GetComponent<RectTransform>().parent.localScale = Vector3.one;
         lastAssigned = GlobalVariables.Instance.CurrentGravityObject;
         float dist = Vector2.Distance(attachedTransform.position, lastAssigned.gameObject.transform.position);
-        txt.text = $"{UniverseMath.RoundOutput(dist)} km";
+        txt.text = $"{UniverseTools.RoundOutput(dist)} km";
     }
 }

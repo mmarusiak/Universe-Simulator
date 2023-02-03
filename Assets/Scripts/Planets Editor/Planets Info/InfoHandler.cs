@@ -52,11 +52,11 @@ public class InfoHandler : MonoBehaviour
 
     string[] OutputsData(float x, float y)
     {
-        string xStr = UniverseMath.RoundOutput(x);
-        string yStr = UniverseMath.RoundOutput(y);
+        string xStr = UniverseTools.RoundOutput(x);
+        string yStr = UniverseTools.RoundOutput(y);
         
         var magnitude = Mathf.Sqrt(x * x + y * y);
-        string magnitudeStr = UniverseMath.RoundOutput(magnitude);
+        string magnitudeStr = UniverseTools.RoundOutput(magnitude);
 
         return new[] {xStr, yStr, magnitudeStr};
     }
