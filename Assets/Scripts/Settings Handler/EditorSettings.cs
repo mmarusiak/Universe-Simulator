@@ -17,6 +17,8 @@ public class EditorSettings : MonoBehaviour
         }
         else GlobalVariables.Instance.PathToImages = newPath;
 
+        GravityObjectsController.Instance.ResetAllImages();
+
         _visualEditor.InitializeDropdown(0);
     }
 }

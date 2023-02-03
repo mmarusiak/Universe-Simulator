@@ -10,7 +10,8 @@ public class VisualEditor : MonoBehaviour
 {
     public GameObject ImagesParent;
     public Dropdown ImagesDropdown;
-    public Sprite DefaultSprite;
+    [SerializeField] private Sprite defSprite;
+    public static Sprite DefaultSprite;
     public string CurrentPath;
 
     private EditorHandler editorHandler;
@@ -18,6 +19,7 @@ public class VisualEditor : MonoBehaviour
 
     private void Start()
     {
+        DefaultSprite = defSprite;
         InitializeDropdown(0);
     }
 

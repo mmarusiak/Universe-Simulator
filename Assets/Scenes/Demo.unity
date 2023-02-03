@@ -6530,8 +6530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ImagesParent: {fileID: 368014324}
   ImagesDropdown: {fileID: 356909098}
-  DefaultSprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  Path: /home/mmarusiak/Desktop/UniversePictures
+  defSprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   CurrentPath: 
 --- !u!1 &1092732458
 GameObject:

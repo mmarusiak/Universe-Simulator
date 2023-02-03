@@ -124,4 +124,11 @@ public class GravityObjectsController : MonoBehaviour
         Destroy(planet);
         UpdateLisInObjects();
     }
+
+    // when path changed we reset image of each planet to avoid weird bugs
+    public void ResetAllImages()
+    {
+        foreach (var planet in AllGravityObjects)
+            planet.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = VisualEditor.DefaultSprite;
+    }
 }
