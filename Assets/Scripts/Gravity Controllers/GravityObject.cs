@@ -25,7 +25,7 @@ public class GravityObject : MonoBehaviour
 
     public GameObject NameHolder;
     
-    private float GravitionalConstantValue = 0.06674f;
+    private readonly float GravitationalConstant = GlobalVariables.GravitationalConstant;
 
     public Vector2 CurrentGravityForceVector;
     
@@ -87,7 +87,7 @@ public class GravityObject : MonoBehaviour
     
     private void ApplyAndCalculateForce(float distance, float mass, Vector2 vectorDist)
     {
-        float forceValue = GravitionalConstantValue * mass * Mass / (distance * distance);
+        float forceValue = GravitationalConstant * mass * Mass / (distance * distance);
         float proportionScale = forceValue / distance;
 
         float xForceValue = -proportionScale * vectorDist.x;

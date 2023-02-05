@@ -11,6 +11,8 @@ public class GlobalVariables : MonoBehaviour
     public Font GlobalFont;
 
     public string PathToImages;
+
+    public static float GravitationalConstant = 0.06674f;
     
     // global prefabs
     public GameObject VelocityPrefab, DistancePrefab;

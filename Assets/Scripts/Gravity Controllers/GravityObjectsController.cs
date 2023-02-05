@@ -53,10 +53,29 @@ public class GravityObjectsController : MonoBehaviour
 
     public void PlayPause()
     {
+        DebugMath();
+        
         if (Time.timeScale == 0)
             UnPause();
         else
             Pause();
+    }
+
+    void DebugMath()
+    {
+        GravityObject star = AllGravityObjects[1];
+        GravityObject targetPlanet = AllGravityObjects[0];
+        targetPlanet.InitialVelocity = Vector2.zero;
+        List<UniverseTools.OrbitCalculator.Planet> objects = new List<UniverseTools.OrbitCalculator.Planet>();
+
+        foreach (var obj in AllGravityObjects)
+        {
+            if (star != obj && targetPlanet != obj)
+                objects.Add(obj);
+        }
+
+        var output = UniverseTools.OrbitCalculator.MinimumVelocity(star, targetPlanet, objects.ToArray());
+        Debug.Log($"Minimal velocity to reach orbit by {targetPlanet.PlanetName} on {star.PlanetName} is {output[0]}, {output[1]}");
     }
 
     void Pause()
