@@ -53,7 +53,7 @@ public class GravityObjectsController : MonoBehaviour
 
     public void PlayPause()
     {
-        DebugMath();
+        //DebugMath();
         
         if (Time.timeScale == 0)
             UnPause();
