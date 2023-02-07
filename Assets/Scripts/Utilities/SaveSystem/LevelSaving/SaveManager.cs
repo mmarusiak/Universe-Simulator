@@ -5,73 +5,41 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
-    public class VectorSaveData
-    {
-        public float X { get; set; }
-        public float Y { get; set; }
-
-        public VectorSaveData(float x, float y)
-        {
-            this.X = x;
-            this.Y = y;
-        }
-
-        public static implicit operator Vector2 (VectorSaveData data) => new(data.X, data.Y);
-        public static implicit operator VectorSaveData(Vector2 vec) => new VectorSaveData(vec.x, vec.y);
-    }
-
-    public class ColorSaveData
-    {
-        
-    }
-    
-    public class PlanetSaveData
-    {
-        public VectorSaveData InitialPos { get; set; }
-        public VectorSaveData InitialVel { get; set; }
-        public string Name;
-        public float Radius;
-        public float Mass;
-
-        public PlanetSaveData(VectorSaveData initialPos, VectorSaveData initialVel, string name, float radius, float mass)
-        {
-            this.InitialPos = initialPos;
-            this.InitialVel = initialVel;
-            this.Name = name;
-            this.Radius = radius;
-            this.Mass = mass;
-        }
-
-        public static implicit operator PlanetSaveData(GravityObject grav) => new PlanetSaveData(grav.StartPos,
-            grav.InitialVelocity, grav.PlanetName, grav.Radius, grav.Mass);
-
-        
-        public void InitializeData(GravityObject receiver)
-        {
-            receiver.StartPos = InitialPos;
-            receiver.InitialVelocity = InitialVel;
-            receiver.Mass = Mass;
-            receiver.Radius = Radius;
-        }
-    }
-    
-    
-    public string LevelName = "New Level";
+    public string LevelName = "New Level", LevelToLoad = "Test";
     private string filePath;
 
-    public void SaveCurrentLevel()
+    public void SaveCurrentLevel(string levelName)
     {
-        filePath = Application.persistentDataPath + LevelName.Replace(" ", "_") + ".json";
+        if (levelName == "") levelName = LevelName;
+        
+        filePath = Application.persistentDataPath + levelName.Replace(" ", "_") + ".json";
 
         List<PlanetSaveData> dataList = GetSaveData();
-        string json = "";
+        string json = JsonConvert.SerializeObject(SavedData.GetData(dataList));
 
-        foreach (var data in dataList)
-        {
-            json += JsonConvert.SerializeObject(data);
-        }
         Debug.Log(filePath);
         File.WriteAllText(filePath, json);
+    }
+
+    public void LoadData()
+    {
+        SavedData data = GetLoadedData<SavedData>(LevelToLoad);
+        Debug.Log(data.Data.Count);
+    }
+    
+    public T GetLoadedData<T>(string levelName){
+        
+        filePath = Application.persistentDataPath + levelName.Replace(" ", "_") + ".json";
+        if (File.Exists(filePath))
+        {
+            string json = File.ReadAllText(filePath);
+            return JsonConvert.DeserializeObject<T>(json);
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + filePath);
+            return default(T);
+        }
     }
     
     List<PlanetSaveData> GetSaveData()
@@ -83,4 +51,70 @@ public class SaveManager : MonoBehaviour
 
         return planetsDataList;
     }
+    
+    
+    public class VectorSaveData
+    {
+        private float X { get; set; }
+        private float Y { get; set; }
+
+        private VectorSaveData(float x, float y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public static implicit operator Vector2 (VectorSaveData data) => new(data.X, data.Y);
+        public static implicit operator VectorSaveData(Vector2 vec) => new(vec.x, vec.y);
+    }
+
+    public class ColorSaveData
+    {
+        
+    }
+    
+    public class PlanetSaveData
+    {
+        private VectorSaveData InitialPos { get; set; }
+        private VectorSaveData InitialVel { get; set; }
+        private string Name;
+        private float Radius;
+        private float Mass;
+
+        [JsonConstructor]
+        private PlanetSaveData(VectorSaveData initialPos, VectorSaveData initialVel, string name, float radius, float mass)
+        {
+            InitialPos = initialPos;
+            InitialVel = initialVel;
+            Name = name;
+            Radius = radius;
+            Mass = mass;
+        }
+
+        public static implicit operator PlanetSaveData(GravityObject grav) => new(grav.StartPos, grav.InitialVelocity, 
+            grav.PlanetName, grav.Radius, grav.Mass);
+
+        
+        public void InitializeData(GravityObject receiver)
+        {
+            receiver.StartPos = InitialPos;
+            receiver.InitialVelocity = InitialVel;
+            receiver.Mass = Mass;
+            receiver.Radius = Radius;
+        }
+    }
+
+    public class SavedData
+    {
+        public List<PlanetSaveData> Data;
+
+        public SavedData (List<PlanetSaveData> data) => Data = data;
+
+        public static SavedData GetData(List<PlanetSaveData> data) { return new SavedData(data); }
+
+        public static implicit operator SavedData(List<PlanetSaveData> data) => new (data);
+        
+        public static implicit operator List<PlanetSaveData> (SavedData data) => data.Data;
+    }
+
 }
