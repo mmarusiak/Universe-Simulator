@@ -5,14 +5,54 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
-    public class PlanetSaveData
+    public class VectorSaveData
+    {
+        public float X { get; set; }
+        public float Y { get; set; }
+
+        public VectorSaveData(float x, float y)
+        {
+            this.X = x;
+            this.Y = y;
+        }
+
+        public static implicit operator Vector2 (VectorSaveData data) => new(data.X, data.Y);
+        public static implicit operator VectorSaveData(Vector2 vec) => new VectorSaveData(vec.x, vec.y);
+    }
+
+    public class ColorSaveData
     {
         
     }
-
-    public class GravityControllerSaveData
+    
+    public class PlanetSaveData
     {
+        public VectorSaveData InitialPos { get; set; }
+        public VectorSaveData InitialVel { get; set; }
+        public string Name;
+        public float Radius;
+        public float Mass;
+
+        public PlanetSaveData(VectorSaveData initialPos, VectorSaveData initialVel, string name, float radius, float mass)
+        {
+            this.InitialPos = initialPos;
+            this.InitialVel = initialVel;
+            this.Name = name;
+            this.Radius = radius;
+            this.Mass = mass;
+        }
+
+        public static implicit operator PlanetSaveData(GravityObject grav) => new PlanetSaveData(grav.StartPos,
+            grav.InitialVelocity, grav.PlanetName, grav.Radius, grav.Mass);
+
         
+        public void InitializeData(GravityObject receiver)
+        {
+            receiver.StartPos = InitialPos;
+            receiver.InitialVelocity = InitialVel;
+            receiver.Mass = Mass;
+            receiver.Radius = Radius;
+        }
     }
     
     
@@ -22,33 +62,25 @@ public class SaveManager : MonoBehaviour
     public void SaveCurrentLevel()
     {
         filePath = Application.persistentDataPath + LevelName.Replace(" ", "_") + ".json";
-        
-        List<object> objectsToSave = GetSaveObjects();
+
+        List<PlanetSaveData> dataList = GetSaveData();
         string json = "";
 
-        foreach (var obj in objectsToSave)
+        foreach (var data in dataList)
         {
-            json += JsonConvert.SerializeObject(obj);
+            json += JsonConvert.SerializeObject(data);
         }
-        
+        Debug.Log(filePath);
         File.WriteAllText(filePath, json);
     }
     
-    List<object> GetSaveObjects()
+    List<PlanetSaveData> GetSaveData()
     {
-        // objects to save:
-        // planets
-        // gravity objects controller
+        List<PlanetSaveData> planetsDataList = new List<PlanetSaveData>();
 
-        List<object> saveObjs = new List<object>();
-        
-        // add gravity controller
-        saveObjs.Add(GravityObjectsController.Instance);
-        foreach (var grav in GravityObjectsController.Instance.AllGravityObjects)
-        {
-            saveObjs.Add(grav.gameObject);
-        }
-        
-        return saveObjs;
+        foreach(var data in GravityObjectsController.Instance.AllGravityObjects)
+            planetsDataList.Add(data);
+
+        return planetsDataList;
     }
 }
