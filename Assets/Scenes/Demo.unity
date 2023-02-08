@@ -4063,7 +4063,7 @@ MonoBehaviour:
       - m_Target: {fileID: 323354007}
         m_TargetAssemblyTypeName: SaveManager, Assembly-CSharp
         m_MethodName: SaveCurrentLevel
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -9918,6 +9918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e65195a6970a0a84b8eb000f7c738dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlanetsHolder: {fileID: 282855893}
   AllGravityObjects: []
   Reseted: 1
   Paused: 1

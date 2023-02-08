@@ -7,7 +7,17 @@ public class CreatorController : MonoBehaviour
     private GravityObjectsController _controller;
     private bool creatingPlanet = false;
     public GameObject PlanetPrefab;
-    
+
+    public static CreatorController Instance { get; set; }
+
+    private void Awake()
+    {
+        if(Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
+    }
+
     void Start()
     {
         _editorHandler = GetComponent<EditorHandler>();

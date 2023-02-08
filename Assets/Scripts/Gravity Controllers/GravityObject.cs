@@ -19,7 +19,7 @@ public class GravityObject : MonoBehaviour
     private float dragTime = 0;
 
     public Vector2 InitialVelocity;
-    public Vector2 StartPos;
+    public Vector2 InitialPos;
 
     private Vector2 moveVector;
 
@@ -35,10 +35,28 @@ public class GravityObject : MonoBehaviour
         if(DemoPlanet)
             UpdatePlanet();
     }
+
+    public void InitializePlanet()
+    {
+        transform.localScale = new Vector3(Radius * 2, Radius * 2, Radius * 2);
+        Controller = GravityObjectsController.Instance;
+        if(!Controller.AllGravityObjects.Contains(this))
+            Controller.AddGravityObject(this);
+        
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _rigidbody2D.mass = Mass;
+        _rigidbody2D.velocity = InitialVelocity;
+        transform.position = InitialPos;
+
+        name = PlanetName;
+        
+        CreateNameHolder();
+    }
+    
     public void UpdatePlanet()
     {
         transform.localScale = new Vector3(Radius * 2, Radius * 2, Radius * 2);
-        StartPos = transform.position;
+        InitialPos = transform.position;
 
         Controller = GravityObjectsController.Instance;
         if(!Controller.AllGravityObjects.Contains(this))
@@ -47,9 +65,15 @@ public class GravityObject : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _rigidbody2D.mass = Mass;
         _rigidbody2D.velocity = InitialVelocity;
-        StartPos = transform.position;
+        InitialPos = transform.position;
 
         name = PlanetName;
+        
+        CreateNameHolder();
+    }
+
+    void CreateNameHolder()
+    {
         if (NameHolder == null)
             CreatePlanetNameHolder();
         else
@@ -117,7 +141,7 @@ public class GravityObject : MonoBehaviour
                 GameObject.FindWithTag("EditorController").GetComponent<EditorHandler>().ShowPanel(gameObject);
 
             if (Controller.Reseted)
-                StartPos = transform.position;
+                InitialPos = transform.position;
 
             if (tempPause && Time.timeScale == 0)
             {

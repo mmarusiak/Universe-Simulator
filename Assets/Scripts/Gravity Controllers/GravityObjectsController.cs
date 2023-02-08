@@ -4,6 +4,7 @@ using UnityEngine;
 public class GravityObjectsController : MonoBehaviour
 {
     public static GravityObjectsController Instance { get; private set; }
+    public Transform PlanetsHolder;
     
     void Awake()
     {
@@ -98,7 +99,7 @@ public class GravityObjectsController : MonoBehaviour
 
         foreach (var grav in AllGravityObjects)
         {
-            grav.gameObject.transform.position = grav.StartPos;
+            grav.gameObject.transform.position = grav.InitialPos;
             grav.GetComponent<Rigidbody2D>().velocity = grav.InitialVelocity;
             
             PlanetLinePath path = grav.GetComponent<PlanetLinePath>();
@@ -144,10 +145,35 @@ public class GravityObjectsController : MonoBehaviour
         UpdateLisInObjects();
     }
 
+    public void ClearScene()
+    {
+        int planetsCount = PlanetsHolder.childCount;
+
+        for (int i = 0; i < planetsCount; i++)
+        {
+            RemovePlanet(PlanetsHolder.GetChild(i).gameObject);
+        }
+    }
+
     // when path changed we reset image of each planet to avoid weird bugs
     public void ResetAllImages()
     {
         foreach (var planet in AllGravityObjects)
             planet.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = VisualEditor.DefaultSprite;
     }
+
+    public void SetList(List<SaveManager.PlanetSaveData> dataList)
+    {
+        ClearScene();
+
+        foreach (var data in dataList)
+        {
+            var newPlanet = Instantiate(CreatorController.Instance.PlanetPrefab, PlanetsHolder);
+            var grav = newPlanet.GetComponent<GravityObject>();
+            data.DebugIt();
+            data.InitializeData(grav);
+            grav.InitializePlanet();
+        }
+    }
+    
 }

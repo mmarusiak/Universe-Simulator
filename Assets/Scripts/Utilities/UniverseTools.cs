@@ -67,7 +67,7 @@ public class UniverseTools : MonoBehaviour
 
             public static implicit operator Planet(GravityObject value)
             {
-                return new Planet(value.Mass, new []{value.InitialVelocity.x, value.InitialVelocity.y}, new [] {value.StartPos.x, value.StartPos.y});
+                return new Planet(value.Mass, new []{value.InitialVelocity.x, value.InitialVelocity.y}, new [] {value.InitialPos.x, value.InitialPos.y});
             }
         }
 
