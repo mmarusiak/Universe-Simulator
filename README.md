@@ -17,7 +17,7 @@ Just a small project for simulate planets and space objects in 2D
 - [x] ~Add velocity vectors editor;~
 - [x] ~Add pause overlay;~
 - [ ] Add settings;
-- [ ] Add save system;
+- [x] ~Add save system;~
 - [ ] Add community workshop levels/worlds (?);
 - [ ] Add logic levels and logic levels creator *(f.e. to beat level you need to reach 400 km/h with given planets, just play with positions)*;
 - [ ] Add temperature to planets (?); 
@@ -28,7 +28,7 @@ Just a small project for simulate planets and space objects in 2D
 
 For now you can simulate your own universe. Works fine with orbiting, escaping orbit or colliding. 
 
-If you want to understand code, there is [documentation.](./Code%20Documentation)
+If you want to understand code, there is ~[documentation](./Code%20Documentation)~ *(documentation will be finished when project will be done, for now documentation is > 1 month outdated)*.
 
 For now all graphics are just placeholder and I'll eventually change them in future.
 
