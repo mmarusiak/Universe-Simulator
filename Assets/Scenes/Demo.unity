@@ -8041,9 +8041,9 @@ MonoBehaviour:
   Radius: 5
   PlanetName: Green planet
   InitialVelocity: {x: 0, y: 0}
-  StartPos: {x: 0, y: 0}
-  NameHolder: {fileID: 0}
+  InitialPos: {x: 0, y: 0}
   CurrentGravityForceVector: {x: 0, y: 0}
+  NameHolder: {fileID: 0}
 --- !u!114 &1323495023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11335,9 +11335,9 @@ MonoBehaviour:
   Radius: 2
   PlanetName: Pink planet
   InitialVelocity: {x: 30, y: 2}
-  StartPos: {x: 0, y: 0}
-  NameHolder: {fileID: 0}
+  InitialPos: {x: 0, y: 0}
   CurrentGravityForceVector: {x: 0, y: 0}
+  NameHolder: {fileID: 0}
 --- !u!114 &1794169599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13089,9 +13089,9 @@ MonoBehaviour:
   Radius: 2
   PlanetName: Yellow planet
   InitialVelocity: {x: 0, y: 0}
-  StartPos: {x: 0, y: 0}
-  NameHolder: {fileID: 0}
+  InitialPos: {x: 0, y: 0}
   CurrentGravityForceVector: {x: 0, y: 0}
+  NameHolder: {fileID: 0}
 --- !u!114 &2103683751
 MonoBehaviour:
   m_ObjectHideFlags: 0

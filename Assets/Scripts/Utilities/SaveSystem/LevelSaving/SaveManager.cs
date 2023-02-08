@@ -66,12 +66,31 @@ public class SaveManager : MonoBehaviour
         public static implicit operator VectorSaveData(Vector2 vec) => new(vec.x, vec.y);
     }
 
+    public class ColorSaveData
+    {
+        [JsonProperty] private float _r, _g, _b, _a;
+
+        [JsonConstructor]
+        public ColorSaveData(float r, float g, float b, float a)
+        {
+            _r = r;
+            _g = g;
+            _b = b;
+            _a = a;
+        }
+
+        public static implicit operator ColorSaveData(Color color) => new (color.r, color.g, color.b, color.a);
+        public static implicit operator Color(ColorSaveData data) => new (data._r, data._g, data._b, data._a);
+    }
+
     public class PlanetSaveData
     {
         [JsonProperty]
         private readonly VectorSaveData _initialPos;
         [JsonProperty]
         private readonly VectorSaveData _initialVel;
+        [JsonProperty] 
+        private readonly ColorSaveData _colorData;
         [JsonProperty]
         private readonly string _name;
         [JsonProperty]
@@ -80,17 +99,18 @@ public class SaveManager : MonoBehaviour
         private readonly float _mass;
 
         [JsonConstructor]
-        private PlanetSaveData(VectorSaveData initialPos, VectorSaveData initialVel, string name, float radius, float mass)
+        private PlanetSaveData(VectorSaveData initialPos, VectorSaveData initialVel, ColorSaveData colorData , string name, float radius, float mass)
         {
             _initialPos = initialPos;
             _initialVel = initialVel;
+            _colorData = colorData;
             _name = name;
             _radius = radius;
             _mass = mass;
         }
 
         public static implicit operator PlanetSaveData(GravityObject grav) => new(grav.InitialPos, grav.InitialVelocity, 
-            grav.PlanetName, grav.Radius, grav.Mass);
+            grav.transform.GetChild(0).GetComponent<SpriteRenderer>().color, grav.PlanetName, grav.Radius, grav.Mass);
 
         
         public void InitializeData(GravityObject receiver)
@@ -99,6 +119,8 @@ public class SaveManager : MonoBehaviour
             receiver.InitialVelocity = _initialVel;
             receiver.Mass = _mass;
             receiver.Radius = _radius;
+
+            receiver.transform.GetChild(0).GetComponent<SpriteRenderer>().color = _colorData;
         }
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PlanetLinePath))]
 public class GravityObject : MonoBehaviour
 {
+    [SerializeField]
     private bool DemoPlanet = false;
     public float Mass = 10f;
     public float Radius = 5f;
