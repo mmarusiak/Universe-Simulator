@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -101,25 +100,5 @@ public class SaveManager : MonoBehaviour
             receiver.Mass = _mass;
             receiver.Radius = _radius;
         }
-
-        public void DebugIt()
-        {
-            Debug.Log(_initialPos + " " + _initialVel + " " + _mass + " " + _name + " " + _radius);
-        }
     }
-    
-    public class SavedData
-    {
-        public List<PlanetSaveData> Data;
-        
-        [JsonConstructor]
-        public SavedData (List<PlanetSaveData> data) => Data = data;
-
-        public static SavedData GetData(List<PlanetSaveData> data) { return new SavedData(data); }
-
-        public static implicit operator SavedData(List<PlanetSaveData> data) => new (data);
-        
-        public static implicit operator List<PlanetSaveData> (SavedData data) => data.Data;
-    }
-
 }

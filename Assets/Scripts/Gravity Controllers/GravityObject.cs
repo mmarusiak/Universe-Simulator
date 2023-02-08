@@ -6,29 +6,26 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PlanetLinePath))]
 public class GravityObject : MonoBehaviour
 {
-    public bool DemoPlanet = false;
+    private bool DemoPlanet = false;
     public float Mass = 10f;
     public float Radius = 5f;
     public string PlanetName;
-    private GravityObjectsController Controller;
+    private GravityObjectsController _controller;
     private Rigidbody2D _rigidbody2D;
-    private List<GravityObject> listHolder;
+    private List<GravityObject> _listHolder;
 
     // if player starts drag during pause, there will be auto pause
-    private bool tempPause = false;
-    private float dragTime = 0;
+    private bool _tempPause = false;
+    private float _dragTime = 0;
 
     public Vector2 InitialVelocity;
     public Vector2 InitialPos;
+    public Vector2 CurrentGravityForceVector;
 
-    private Vector2 moveVector;
+    private Vector2 _moveVector;
 
     public GameObject NameHolder;
-    
-    private readonly float GravitationalConstant = GlobalVariables.GravitationalConstant;
 
-    public Vector2 CurrentGravityForceVector;
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -39,9 +36,9 @@ public class GravityObject : MonoBehaviour
     public void InitializePlanet()
     {
         transform.localScale = new Vector3(Radius * 2, Radius * 2, Radius * 2);
-        Controller = GravityObjectsController.Instance;
-        if(!Controller.AllGravityObjects.Contains(this))
-            Controller.AddGravityObject(this);
+        _controller = GravityObjectsController.Instance;
+        if(!_controller.AllGravityObjects.Contains(this))
+            _controller.AddGravityObject(this);
         
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _rigidbody2D.mass = Mass;
@@ -58,9 +55,9 @@ public class GravityObject : MonoBehaviour
         transform.localScale = new Vector3(Radius * 2, Radius * 2, Radius * 2);
         InitialPos = transform.position;
 
-        Controller = GravityObjectsController.Instance;
-        if(!Controller.AllGravityObjects.Contains(this))
-            Controller.AddGravityObject(this);
+        _controller = GravityObjectsController.Instance;
+        if(!_controller.AllGravityObjects.Contains(this))
+            _controller.AddGravityObject(this);
         
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _rigidbody2D.mass = Mass;
@@ -102,7 +99,7 @@ public class GravityObject : MonoBehaviour
         if (Time.timeScale > 0)
         {
             CurrentGravityForceVector = Vector2.zero;
-            foreach (var obj in listHolder)
+            foreach (var obj in _listHolder)
                 ApplyAndCalculateForce(Vector2.Distance(transform.position, obj.transform.position), obj.Mass,
                     transform.position - obj.transform.position);
             _rigidbody2D.AddForce(CurrentGravityForceVector, ForceMode2D.Impulse);
@@ -111,7 +108,7 @@ public class GravityObject : MonoBehaviour
     
     private void ApplyAndCalculateForce(float distance, float mass, Vector2 vectorDist)
     {
-        float forceValue = GravitationalConstant * mass * Mass / (distance * distance);
+        float forceValue = GlobalVariables.GravitationalConstant * mass * Mass / (distance * distance);
         float proportionScale = forceValue / distance;
 
         float xForceValue = -proportionScale * vectorDist.x;
@@ -124,12 +121,12 @@ public class GravityObject : MonoBehaviour
     {
         if (!GlobalVariables.Instance.OverlayShown)
         {
-            if (Time.timeScale == 0 && !Controller.RemovingPlanet)
-                moveVector = new Vector2(transform.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
+            if (Time.timeScale == 0 && !_controller.RemovingPlanet)
+                _moveVector = new Vector2(transform.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
                     transform.position.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
 
-            else if (Time.timeScale == 0 && Controller.RemovingPlanet)
-                Controller.RemovePlanet(gameObject);
+            else if (Time.timeScale == 0 && _controller.RemovingPlanet)
+                _controller.RemovePlanet(gameObject);
         }
     }
 
@@ -137,35 +134,35 @@ public class GravityObject : MonoBehaviour
     {
         if (!GlobalVariables.Instance.OverlayShown)
         {
-            if (dragTime < 0.25f)
+            if (_dragTime < 0.25f)
                 GameObject.FindWithTag("EditorController").GetComponent<EditorHandler>().ShowPanel(gameObject);
 
-            if (Controller.Reseted)
+            if (_controller.Reseted)
                 InitialPos = transform.position;
 
-            if (tempPause && Time.timeScale == 0)
+            if (_tempPause && Time.timeScale == 0)
             {
-                Controller.PlayPause();
-                tempPause = false;
+                _controller.PlayPause();
+                _tempPause = false;
             }
 
             GlobalVariables.Instance.CurrentGravityObject = this;
         }
 
-        dragTime = 0;
+        _dragTime = 0;
     }
 
     private void OnMouseDrag()
     {
         if (Time.timeScale == 0 && !GlobalVariables.Instance.OverlayShown)
         {
-            dragTime += Time.unscaledDeltaTime;
+            _dragTime += Time.unscaledDeltaTime;
             
-            if (dragTime >= .25f || !tempPause)
+            if (_dragTime >= .25f || !_tempPause)
             {
                 transform.position =
-                    new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + moveVector.x,
-                        Camera.main.ScreenToWorldPoint(Input.mousePosition).y + moveVector.y);
+                    new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + _moveVector.x,
+                        Camera.main.ScreenToWorldPoint(Input.mousePosition).y + _moveVector.y);
 
                 GameObject currentLineHolder = GetComponent<PlanetLinePath>().GetLine();
 
@@ -184,10 +181,10 @@ public class GravityObject : MonoBehaviour
         }
         else if(!GlobalVariables.Instance.OverlayShown)
         {
-            tempPause = true;
-            Controller.PlayPause();
+            _tempPause = true;
+            _controller.PlayPause();
         }
     }
 
-    public void UpdatePrivateList() => listHolder = Controller.GetObjects(this);
+    public void UpdatePrivateList() => _listHolder = _controller.GetObjects(this);
 }

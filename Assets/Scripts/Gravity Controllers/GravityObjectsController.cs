@@ -170,7 +170,6 @@ public class GravityObjectsController : MonoBehaviour
         {
             var newPlanet = Instantiate(CreatorController.Instance.PlanetPrefab, PlanetsHolder);
             var grav = newPlanet.GetComponent<GravityObject>();
-            data.DebugIt();
             data.InitializeData(grav);
             grav.InitializePlanet();
         }
