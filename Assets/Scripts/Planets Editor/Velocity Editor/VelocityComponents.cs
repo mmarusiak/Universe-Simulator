@@ -22,33 +22,38 @@ public class VelocityComponents : MonoBehaviour
             xField.interactable = Time.timeScale == 0;
             yField.interactable = Time.timeScale == 0;
 
-            // unpaused
-            if (Time.timeScale > 0)
-            {
-                updatedOnChange = false;
-                updatedOnReset = false;
-                
-                UpdateTexts(VectorsController.Velocity);
-            }
+            //if (!xField.isFocused && yField.isFocused)
+            //{
+                // unpaused
+                if (Time.timeScale > 0)
+                {
+                    updatedOnChange = false;
+                    updatedOnReset = false;
 
-            // paused
-            else if (GravityObjectsController.Instance.Reseted && !updatedOnReset)
-            {
-                updatedOnChange = false;
-                updatedOnReset = true; 
-                
-                // dont look at this loop :)
-                while (!VectorsController.Ready) { }
-                
-                UpdateTexts(GlobalVariables.Instance.CurrentGravityObject.InitialVelocity);
-            }
-            else if (Time.timeScale == 0 && !updatedOnChange)
-            {
-                updatedOnChange = true;
-                
-                UpdateTexts(VectorsController.Velocity);
-            }
-            else if (lastPlanetsVelocity != GlobalVariables.Instance.CurrentGravityObject) updatedOnChange = false;
+                    UpdateTexts(VectorsController.Velocity);
+                }
+
+                // paused and reset
+                else if (GravityObjectsController.Instance.Reseted && !updatedOnReset)
+                {
+                    updatedOnChange = false;
+                    updatedOnReset = true;
+
+                    // dont look at this loop :)
+                    while (!VectorsController.Ready)
+                    {
+                    }
+
+                    UpdateTexts(GlobalVariables.Instance.CurrentGravityObject.InitialVelocity);
+                }
+                else if (Time.timeScale == 0 && !updatedOnChange)
+                {
+                    updatedOnChange = true;
+
+                    UpdateTexts(VectorsController.Velocity);
+                }
+                else if (lastPlanetsVelocity != GlobalVariables.Instance.CurrentGravityObject) updatedOnChange = false;
+            //}
         }
     }
 

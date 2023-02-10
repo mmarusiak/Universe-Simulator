@@ -162,7 +162,7 @@ public class GravityObjectsController : MonoBehaviour
             planet.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = VisualEditor.DefaultSprite;
     }
 
-    public void SetList(List<SaveManager.PlanetSaveData> dataList)
+    public void SetList(List<PlanetSaveData> dataList)
     {
         ClearScene();
 
