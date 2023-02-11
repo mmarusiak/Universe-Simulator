@@ -11,13 +11,14 @@ public class GravityComponent
     private float _mass;
     private Vector2 _initialPosition;
     private Vector2 _initialVelocity = Vector2.zero;
+    private string _name;
     // last saved components
     private Vector2 _currentVelocity;
     private Vector2 _currentPosition;
-    // static fields
-    private static SpriteRenderer _renderer;
-    private static Rigidbody2D _rigidbody;
-    private static Transform _planetTransform;
+    // readonly fields
+    private readonly SpriteRenderer _renderer;
+    private readonly Rigidbody2D _rigidbody;
+    private readonly Transform _planetTransform;
     // boolean that indicate if this planet is new created planet - only position is assigned in constructor
     // basically with this bool we assign not only current pos, but also initial pos if game is not reseted
     private bool _firstTouch = true;
@@ -75,9 +76,15 @@ public class GravityComponent
             _initialPosition = value; 
             _planetTransform.position = _initialPosition; }
     }
+
+    public string Name
+    {
+        get => _name;
+        set => SetPlanetName(value);
+    }
     
     public GravityComponent(Transform planetTransform, SpriteRenderer spriteRenderer, float radius, float mass,
-        Vector2 spawnPos)
+        Vector2 spawnPos, string name)
     {
         _planetTransform = planetTransform;
         _rigidbody = _planetTransform.GetComponent<Rigidbody2D>();
@@ -85,9 +92,8 @@ public class GravityComponent
         Radius = radius;
         Mass = mass;
         CurrentPosition = spawnPos;
-        
-        Debug.Log(_planetTransform.name + _rigidbody.name);
-        
+        Name = name;
+
         GravityComponentsController.Instance.AddNewGravityComponent(this);
     }
 
@@ -97,26 +103,24 @@ public class GravityComponent
         _otherComponents.Add(targetComponents);
     }
 
+    private float _temporaryMultiplier = 5;
     public void AddForce()
     {
         float gConstant = GlobalVariables.GravitationalConstant;
         Vector2 currentGravityForce = Vector2.zero;
+        CurrentPosition = _planetTransform.position;
         foreach (var otherComponent in _otherComponents)
         {
             float distance = Vector2.Distance(otherComponent.CurrentPosition, CurrentPosition);
             Vector2 distanceVector = otherComponent.CurrentPosition - CurrentPosition;
             
-            float force = gConstant * otherComponent.Mass * Mass / Mathf.Pow(distance, 2);
+            float force = gConstant * otherComponent.Mass * Mass/ Mathf.Pow(distance, 2);
             float proportionScale = force / distance;
             Vector2 forceVector = new (proportionScale * distanceVector.x, proportionScale * distanceVector.y);
             
-            currentGravityForce += forceVector;
+            currentGravityForce += forceVector * _temporaryMultiplier;
         }
-        //_rigidbody.AddForce(currentGravityForce * 1000000, ForceMode2D.Impulse);
-        Debug.Log(Mass);
-        var rg = _rigidbody;
-        Debug.Log(rg.mass + _planetTransform.gameObject.name);
-        _rigidbody.AddForce(new(100,100), ForceMode2D.Force);
+        _rigidbody.AddForce(currentGravityForce, ForceMode2D.Impulse);
     }
 
     // setters
@@ -157,5 +161,11 @@ public class GravityComponent
         if (reseted || _firstTouch) InitialPosition = newPos;
         _currentPosition = newPos;
         _firstTouch = false;
+    }
+
+    void SetPlanetName(string newName)
+    {
+        _name = newName;
+        _planetTransform.gameObject.name = _name;
     }
 }
