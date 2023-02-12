@@ -1,11 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class EditorController : MonoBehaviour
+public class EditorsController : MonoBehaviour
 {
-    public EditorController Instance;
+    public EditorsController Instance;
     private void Awake() => Instance = this;
 
     private PlanetComponent _lastEditedComponent;
+    [SerializeField]
+    private List<PlanetEditor> _editors = new ();
     
     public PlanetComponent LastEditedComponent
     {
@@ -20,6 +23,9 @@ public class EditorController : MonoBehaviour
     // When last edited component is changed make sure that the new one is being edited, not the old one
     void ChangeComponentInWindows()
     {
-        
+        foreach (var editor in _editors)
+        {
+            editor.MyBase.CurrentPlanet = _lastEditedComponent;
+        }
     }
 }

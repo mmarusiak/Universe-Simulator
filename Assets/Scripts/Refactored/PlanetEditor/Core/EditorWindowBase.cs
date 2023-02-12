@@ -19,8 +19,9 @@ public class EditorWindowBase
     [SerializeField] private GameObject _editorContainer;
     [SerializeField] private Text _barText;
     [SerializeField] private string _windowTitle;
-    [SerializeField] private UnityEvent _onEditedPlanetChanged;
     [SerializeField] private Vector2 _offsetToShow;
+    [Space]
+    [SerializeField] private UnityEvent _onEditedPlanetChanged;
     private Vector2 _hiddenPos = new(-9000, -9000);
 
     public PlanetComponent CurrentPlanet

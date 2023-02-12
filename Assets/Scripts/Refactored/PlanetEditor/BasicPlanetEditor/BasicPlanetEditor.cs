@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicPlanetEditor : MonoBehaviour
+public class BasicPlanetEditor : PlanetEditor
 {
-
-    [SerializeField] private EditorWindowBase _myBase;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
