@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GravityComponent
+public class PlanetComponent
 {
+    private PlanetComponentHandler _handler;
     // visuals
     private Sprite _planetSprite;
     private Color _planetColor;
@@ -10,7 +11,7 @@ public class GravityComponent
     private float _radius;
     private float _mass;
     private Vector2 _initialPosition;
-    private Vector2 _initialVelocity = Vector2.zero;
+    private Vector2 _initialVelocity;
     private string _name;
     // last saved components
     private Vector2 _currentVelocity;
@@ -23,10 +24,12 @@ public class GravityComponent
     // basically with this bool we assign not only current pos, but also initial pos if game is not reseted
     private bool _firstTouch = true;
     
-    private List<GravityComponent> _otherComponents;
+    private List<PlanetComponent> _otherComponents;
+    private static int _planetCount;
+    private int _planetNum;
 
     // properties
-    public List<GravityComponent> OtherComponents
+    public List<PlanetComponent> OtherComponents
     {
         get => _otherComponents;
         set => _otherComponents = value;
@@ -74,7 +77,8 @@ public class GravityComponent
         set
         {
             _initialPosition = value; 
-            _planetTransform.position = _initialPosition; }
+            _planetTransform.position = _initialPosition; 
+        }
     }
 
     public string Name
@@ -82,10 +86,24 @@ public class GravityComponent
         get => _name;
         set => SetPlanetName(value);
     }
-    
-    public GravityComponent(Transform planetTransform, SpriteRenderer spriteRenderer, float radius, float mass,
-        Vector2 spawnPos, string name)
+
+    public PlanetComponentHandler Handler
     {
+        get => _handler;
+        set => _handler = value;
+    }
+
+    private readonly Color32[] _defaultColorPalette =
+    {
+        new Color32(107, 129, 140, 255), // #6B818C - slate gray
+        new Color32(216, 228, 255, 255), // #D8E4FF - lavender (web)
+        new Color32(49, 233, 129, 225), // #31E981 - spring green
+        new Color32(193, 73, 83, 255), // #C14953 - bittersweet shimmer
+    };
+    public PlanetComponent(PlanetComponentHandler handler, Transform planetTransform, SpriteRenderer spriteRenderer, float radius, float mass,
+        Vector2 spawnPos, string name, Color color = default, Vector2 currentVelocity = default)
+    {
+        Handler = handler;
         _planetTransform = planetTransform;
         _rigidbody = _planetTransform.GetComponent<Rigidbody2D>();
         _renderer = spriteRenderer;
@@ -93,11 +111,22 @@ public class GravityComponent
         Mass = mass;
         CurrentPosition = spawnPos;
         Name = name;
+        PlanetColor = color;
 
-        GravityComponentsController.Instance.AddNewGravityComponent(this);
+        _planetNum = _planetCount;
+        _planetCount++;
+
+        // planets will have next colors: 1st planet - 1st color, 2nd planet - 2nd color, 5th planet - first color (only 4 colors)
+        if (color == default) color = _defaultColorPalette[_planetNum % _defaultColorPalette.Length];
+        PlanetColor = color;
+        
+        if(currentVelocity == default) currentVelocity = Vector2.zero;
+        CurrentVelocity = currentVelocity;
+
+        PlanetComponentsController.Instance.AddNewGravityComponent(this);
     }
 
-    public void AddGravityComponent(GravityComponent targetComponents)
+    public void AddGravityComponent(PlanetComponent targetComponents)
     {
         if (targetComponents == this) return;
         _otherComponents.Add(targetComponents);

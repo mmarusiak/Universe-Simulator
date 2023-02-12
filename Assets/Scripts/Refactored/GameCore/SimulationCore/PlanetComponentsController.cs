@@ -1,17 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GravityComponentsController : MonoBehaviour
+public class PlanetComponentsController : MonoBehaviour
 {
-    public static GravityComponentsController Instance;
+    public static PlanetComponentsController Instance;
     private void Awake() => Instance = this;
 
-    private List<GravityComponent> _allGravityComponents = new List<GravityComponent>();
+    private List<PlanetComponent> _allGravityComponents = new ();
 
-    public void AddNewGravityComponent(GravityComponent gravityComponent)
+    public void AddNewGravityComponent(PlanetComponent gravityComponent)
     {
         if (_allGravityComponents.Contains(gravityComponent)) return;
-        gravityComponent.OtherComponents = new List<GravityComponent>(_allGravityComponents);
+        gravityComponent.OtherComponents = new List<PlanetComponent>(_allGravityComponents);
         foreach (var createdComponent in _allGravityComponents)
             createdComponent.AddGravityComponent(gravityComponent);
 
