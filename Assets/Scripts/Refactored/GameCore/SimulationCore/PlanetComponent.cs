@@ -62,13 +62,13 @@ public class PlanetComponent
     public Vector2 CurrentPosition
     {
         get => _currentPosition;
-        set => SetPlanetCurrentPosition(value, true);
+        set => SetPlanetCurrentPosition(value);
     }
     
     public Vector2 CurrentVelocity
     {
         get => _currentVelocity;
-        set => SetPlanetCurrentVelocity(value, true);
+        set => SetPlanetCurrentVelocity(value);
     }
 
     public Vector2 InitialPosition
@@ -79,6 +79,12 @@ public class PlanetComponent
             _initialPosition = value; 
             _planetTransform.position = _initialPosition; 
         }
+    }
+
+    public Vector2 InitialVelocity
+    {
+        get => _initialVelocity;
+        set => _initialVelocity = value;
     }
 
     public string Name
@@ -140,7 +146,6 @@ public class PlanetComponent
     {
         float gConstant = GlobalVariables.GravitationalConstant;
         Vector2 currentGravityForce = Vector2.zero;
-        CurrentPosition = _planetTransform.position;
         foreach (var otherComponent in _otherComponents)
         {
             float distance = Vector2.Distance(otherComponent.CurrentPosition, CurrentPosition);
@@ -152,6 +157,9 @@ public class PlanetComponent
             
             currentGravityForce += forceVector * _temporaryMultiplier;
         }
+
+        CurrentVelocity = _rigidbody.velocity;
+        CurrentPosition = _planetTransform.position;
         _rigidbody.AddForce(currentGravityForce, ForceMode2D.Impulse);
     }
 
@@ -182,15 +190,16 @@ public class PlanetComponent
         _rigidbody.mass = _mass;
     }
     
-    void SetPlanetCurrentVelocity(Vector2 newVel, bool reseted)
+    void SetPlanetCurrentVelocity(Vector2 newVel)
     {
-        if (reseted) _initialVelocity = newVel;
+        if (PlaybackController.Instance.Playback.IsReset) InitialVelocity = newVel;
         _currentVelocity = newVel;
+        _rigidbody.velocity = _currentVelocity;
     }
 
-    void SetPlanetCurrentPosition(Vector2 newPos, bool reseted)
+    void SetPlanetCurrentPosition(Vector2 newPos)
     {
-        if (reseted || _firstTouch) InitialPosition = newPos;
+        if (PlaybackController.Instance.Playback.IsReset || _firstTouch) InitialPosition = newPos;
         _currentPosition = newPos;
         _firstTouch = false;
     }
@@ -199,5 +208,12 @@ public class PlanetComponent
     {
         _name = newName;
         _planetTransform.gameObject.name = _name;
+    }
+
+    public void Reset()
+    {
+        CurrentPosition = InitialPosition;
+        CurrentVelocity = InitialVelocity;
+        _rigidbody.angularVelocity = 0;
     }
 }

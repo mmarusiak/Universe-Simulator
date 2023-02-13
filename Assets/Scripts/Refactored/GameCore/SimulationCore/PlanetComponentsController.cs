@@ -18,4 +18,12 @@ public class PlanetComponentsController : MonoBehaviour
         _allGravityComponents.Add(gravityComponent);
         Debug.Log(_allGravityComponents.Count);
     }
+
+    public void ResetLevel()
+    {
+        foreach (var component in _allGravityComponents)
+        {
+            component.Reset();
+        }
+    }
 }

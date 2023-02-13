@@ -22,7 +22,7 @@ public class PlanetComponentHandler : MonoBehaviour
     }
     
     void Update()
-    {
-        _myComponent.AddForce();
+    { 
+        if(!PlaybackController.Instance.Playback.IsPaused) _myComponent.AddForce();
     }
 }
