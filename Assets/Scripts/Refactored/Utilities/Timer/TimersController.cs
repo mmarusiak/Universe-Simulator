@@ -8,12 +8,13 @@ public class TimersController : MonoBehaviour
 
     private List<UniverseTimer> _timers = new ();
 
-    public void BeginTimer(UniverseTimer timer)
+    public void StartTimer(UniverseTimer timer)
     {
+        timer.Time = 0;
         _timers.Add(timer);
     }
 
-    public void EndTimer(UniverseTimer timer)
+    public void StopTimer(UniverseTimer timer)
     {
         _timers.Remove(timer);
     }

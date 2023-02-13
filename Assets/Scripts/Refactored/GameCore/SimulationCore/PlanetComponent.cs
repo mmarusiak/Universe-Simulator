@@ -93,6 +93,9 @@ public class PlanetComponent
         set => _handler = value;
     }
 
+    public Transform PlanetTransform => _planetTransform;
+    public Rigidbody2D PlanetRigidbody => _rigidbody;
+    
     private readonly Color32[] _defaultColorPalette =
     {
         new Color32(107, 129, 140, 255), // #6B818C - slate gray

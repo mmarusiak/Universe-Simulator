@@ -1,6 +1,6 @@
 public class BasicPlanetEditor : PlanetEditor
 {
-    public BasicPlanetEditor Instance;
+    public static BasicPlanetEditor Instance;
 
     private void Awake() => Instance = this;
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EditorsController : MonoBehaviour
 {
-    public EditorsController Instance;
+    public static EditorsController Instance;
     private void Awake() => Instance = this;
 
     private PlanetComponent _lastEditedComponent;
@@ -15,7 +15,7 @@ public class EditorsController : MonoBehaviour
         get => _lastEditedComponent;
         set
         {
-            _lastEditedComponent = LastEditedComponent;
+            _lastEditedComponent = value;
             ChangeComponentInWindows();
         }
     }
