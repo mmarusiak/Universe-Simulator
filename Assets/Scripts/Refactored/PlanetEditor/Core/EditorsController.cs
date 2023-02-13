@@ -25,7 +25,7 @@ public class EditorsController : MonoBehaviour
     {
         foreach (var editor in _editors)
         {
-            editor.MyBase.CurrentPlanet = _lastEditedComponent;
+            editor.EditorBase.CurrentPlanet = _lastEditedComponent;
         }
     }
 }

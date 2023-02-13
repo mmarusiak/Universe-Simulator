@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlanetEditor : MonoBehaviour
 {
     [SerializeField]
-    private EditorWindowBase _myBase;
-    public EditorWindowBase MyBase
-    {
-        get => _myBase;
-        set => _myBase = value;
-    }
+    private EditorBase _editorBase;
+    public EditorBase EditorBase => _editorBase;
+
+    public void Show(bool targetState) => EditorBase.Shown = targetState;
 }

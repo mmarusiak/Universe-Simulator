@@ -4,7 +4,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 
 [Serializable]
-public class EditorWindowBase
+public class EditorBase
 {
     private PlanetComponent _currentPlanet;
     
@@ -22,6 +22,11 @@ public class EditorWindowBase
     [SerializeField] private Vector2 _offsetToShow;
     [Space]
     [SerializeField] private UnityEvent _onEditedPlanetChanged;
+    [Space]
+    [SerializeField] private UnityEvent _onWindowShow;
+    [Space]
+    [SerializeField] private UnityEvent _onWindowHide;
+    
     private Vector2 _hiddenPos = new(-9000, -9000);
 
     public PlanetComponent CurrentPlanet
@@ -30,7 +35,7 @@ public class EditorWindowBase
         set
         {
             _currentPlanet = value;
-            _barText.text = $"{_windowTitle} {_currentPlanet.Name}";
+            _barText.text = $"{_currentPlanet.Name}'s {_windowTitle}";
             _onEditedPlanetChanged.Invoke();
         }
     }
@@ -61,9 +66,11 @@ public class EditorWindowBase
                     : -_offsetToShow.y;
             
             _editorContainer.GetComponent<RectTransform>().position = Input.mousePosition - new Vector3(offsetX, offsetY);
+            _onWindowShow.Invoke();
             return;
         }
-
+        
+        _onWindowHide.Invoke();
         _editorContainer.GetComponent<RectTransform>().position = _hiddenPos;
     }
 }
