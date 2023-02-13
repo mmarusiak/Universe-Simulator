@@ -841,6 +841,24 @@ Transform:
   m_Father: {fileID: 1758730280}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &251351447 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6809323696498105207, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+  m_PrefabInstance: {fileID: 1778669830573480606}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &251351451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251351447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1301e0a702217356fbcba06d102b18e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _editorContainer: {fileID: 5102729126174242152}
 --- !u!1 &282855892
 GameObject:
   m_ObjectHideFlags: 0
@@ -5868,6 +5886,10 @@ PrefabInstance:
     - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
       propertyPath: _editorBase._onEditedPlanetChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6809323696253168492, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: m_Name
+      value: PlanetLookBTN
       objectReference: {fileID: 0}
     - target: {fileID: 6809323697509167094, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
       propertyPath: m_Pivot.x
