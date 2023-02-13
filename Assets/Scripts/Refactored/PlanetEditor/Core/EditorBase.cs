@@ -70,7 +70,7 @@ public class EditorBase
             return;
         }
         
-        _onWindowHide.Invoke();
         _editorContainer.GetComponent<RectTransform>().position = _hiddenPos;
+        _onWindowHide.Invoke();
     }
 }

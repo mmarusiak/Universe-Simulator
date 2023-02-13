@@ -425,6 +425,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 1
   m_SpriteSortPoint: 0
+--- !u!114 &80417810 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6809323697607803726, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+  m_PrefabInstance: {fileID: 1778669830573480606}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &135178275 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6809323697504745077, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+  m_PrefabInstance: {fileID: 1778669830573480606}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &144153605
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,6 +1165,17 @@ Transform:
   m_Father: {fileID: 145242649}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &373946359 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6809323696690926487, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+  m_PrefabInstance: {fileID: 1778669830573480606}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &444517012
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,6 +1326,17 @@ MonoBehaviour:
   baseColor: {r: 0.972549, g: 0.972549, b: 0.972549, a: 1}
   pressedOpacity: 0.5
   toggled: 0
+--- !u!114 &508648216 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6809323697333820915, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+  m_PrefabInstance: {fileID: 1778669830573480606}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -5734,6 +5778,26 @@ PrefabInstance:
     m_TransformParent: {fileID: 1272314419}
     m_Modifications:
     - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _planetMass
+      value: 
+      objectReference: {fileID: 373946359}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _planetName
+      value: 
+      objectReference: {fileID: 80417810}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _planetImage
+      value: 
+      objectReference: {fileID: 135178275}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _planetRadius
+      value: 
+      objectReference: {fileID: 508648216}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _defaultPlanetSprite
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
       propertyPath: _editorBase._barText
       value: 
       objectReference: {fileID: 5102729126746726865}
@@ -5748,6 +5812,62 @@ PrefabInstance:
     - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
       propertyPath: _editorBase._offsetToShow.y
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _editorBase._onWindowShow.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _editorBase._onEditedPlanetChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _editorBase._onWindowShow.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _editorBase._onWindowShow.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5102729126174242153}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _editorBase._onWindowShow.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _editorBase._onWindowShow.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnPlanetChanged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _editorBase._onEditedPlanetChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _editorBase._onEditedPlanetChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5102729126174242153}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _editorBase._onEditedPlanetChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _editorBase._onEditedPlanetChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnWindowShown
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _editorBase._onWindowShow.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BasicPlanetEditor, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _editorBase._onEditedPlanetChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BasicPlanetEditor, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _editorBase._onWindowShow.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778669830582479097, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
+      propertyPath: _editorBase._onEditedPlanetChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6809323697509167094, guid: a9e5dd1e7b46baf6aa7b378cc87dadbf, type: 3}
       propertyPath: m_Pivot.x
