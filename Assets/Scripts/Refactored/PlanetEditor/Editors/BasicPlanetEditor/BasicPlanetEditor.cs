@@ -10,7 +10,7 @@ public class BasicPlanetEditor : PlanetEditor
     [SerializeField] private Sprite _defaultPlanetSprite;
     [SerializeField] private Image _planetImage;
     [SerializeField] private InputField _planetName, _planetMass, _planetRadius;
-
+    public Sprite DefaultPlanetSprite => _defaultPlanetSprite;
     private void Awake() => Instance = this;
 
     public void OnWindowShown() => OnPlanetChanged();

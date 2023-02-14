@@ -166,8 +166,9 @@ public class PlanetComponent
     // setters
     void SetPlanetSprite(Sprite newSprite)
     {
-        _renderer.sprite = newSprite;
         _planetSprite = newSprite;
+        _renderer.sprite = _planetSprite;
+        PlanetLookEditor.Instance.PlanetPreviewImage.sprite = _planetSprite;
     }
 
     void SetPlanetColor(Color newColor)
