@@ -24,8 +24,7 @@ public class TimersController : MonoBehaviour
     {
         foreach (var rTimer in _timers)
         {
-            rTimer.Time += Time.fixedDeltaTime;
-            Debug.Log(rTimer.Time);
+            rTimer.Time += Time.unscaledDeltaTime;
         }
     }
 }

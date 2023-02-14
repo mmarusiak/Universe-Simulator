@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlanetMouseControls : MonoBehaviour
 {
     // if mouse is down on a planet for less than > 0.3s then show editor
-    private static float _timeToShowEditor = 0.3f;
+    private static float _timeToShowEditor = 0.09f;
     private UniverseTimer _timer = new ();
     private PlanetComponentHandler _myHandler;
     private Vector2 _planetOffset;
