@@ -5,11 +5,6 @@ public class UniverseTimer
     public float Time
     {
         get => _time;
-        set => SetTimer(value);
-    }
-
-    void SetTimer(float value)
-    {
-        _time = value;
+        set => _time = value;
     }
 }

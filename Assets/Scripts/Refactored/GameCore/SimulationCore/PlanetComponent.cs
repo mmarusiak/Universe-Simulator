@@ -201,6 +201,7 @@ public class PlanetComponent
     {
         if (PlaybackController.Instance.Playback.IsReset || _firstTouch) InitialPosition = newPos;
         _currentPosition = newPos;
+        _planetTransform.position = _currentPosition;
         _firstTouch = false;
     }
 

@@ -9,14 +9,22 @@ public class PlanetMouseControls : MonoBehaviour
     private PlanetComponentHandler _myHandler;
     private Vector2 _planetOffset;
 
+    private static bool _isOnTempPause;
+
     void Awake() => _myHandler = GetComponent<PlanetComponentHandler>();
     
     private void OnMouseDown()
     {
         _planetOffset = OffsetPlanetDrag();
         EditorsController.Instance.LastEditedComponent = _myHandler.MyComponent;
-        TimersController.Instance.StartTimer(_timer); 
-       // pause
+        TimersController.Instance.StartTimer(_timer);
+        
+        // temp pause if needed
+        if (!PlaybackController.Instance.Playback.IsPaused)
+        {
+            _isOnTempPause = true;
+            PlaybackController.Instance.Playback.IsPaused = true;
+        }
     }
 
     private void OnMouseDrag()
@@ -29,12 +37,19 @@ public class PlanetMouseControls : MonoBehaviour
 
     Vector2 OffsetPlanetDrag()
     {
-        return _myHandler.MyComponent.PlanetTransform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        return  Camera.main.ScreenToWorldPoint(Input.mousePosition) - _myHandler.MyComponent.PlanetTransform.position;
     }
 
     private void OnMouseUp()
     {
         TimersController.Instance.StopTimer(_timer);
+        
+        // unpause if was on temp pause
+        if (_isOnTempPause)
+        {
+            _isOnTempPause = false;
+            PlaybackController.Instance.Playback.IsPaused = false;
+        }
 
         if (_timer.Time > _timeToShowEditor) return;
         
