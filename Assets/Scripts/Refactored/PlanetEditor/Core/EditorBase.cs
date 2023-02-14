@@ -35,7 +35,7 @@ public class EditorBase
         set
         {
             _currentPlanet = value;
-            _barText.text = $"{_currentPlanet.Name}'s {_windowTitle}";
+            UpdateDisplayedPlanetName();
             _onEditedPlanetChanged.Invoke();
         }
     }
@@ -72,5 +72,11 @@ public class EditorBase
         
         _editorContainer.GetComponent<RectTransform>().position = _hiddenPos;
         _onWindowHide.Invoke();
+    }
+
+    public void UpdateDisplayedPlanetName()
+    {
+        if (_currentPlanet is null) return;
+        _barText.text = $"{_currentPlanet.Name}'s {_windowTitle}";
     }
 }

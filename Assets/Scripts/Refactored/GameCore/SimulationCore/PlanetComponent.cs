@@ -209,6 +209,7 @@ public class PlanetComponent
     {
         _name = newName;
         _planetTransform.gameObject.name = _name;
+        EditorsController.Instance.UpdateDisplayedPlanetNameInEditors();
     }
 
     public void Reset()

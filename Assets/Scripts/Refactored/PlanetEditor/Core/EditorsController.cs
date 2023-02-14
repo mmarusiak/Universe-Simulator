@@ -23,9 +23,12 @@ public class EditorsController : MonoBehaviour
     // When last edited component is changed make sure that the new one is being edited, not the old one
     void ChangeComponentInWindows()
     {
-        foreach (var editor in _editors)
-        {
-            editor.EditorBase.CurrentPlanet = _lastEditedComponent;
-        }
+        foreach (var editor in _editors) editor.EditorBase.CurrentPlanet = _lastEditedComponent;
+    }
+
+    public void UpdateDisplayedPlanetNameInEditors()
+    {
+        foreach (var editor in _editors) editor.EditorBase.UpdateDisplayedPlanetName();
+        
     }
 }
