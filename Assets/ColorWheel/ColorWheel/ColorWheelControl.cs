@@ -155,6 +155,8 @@ public class ColorWheelControl : MonoBehaviour {
 
 		//And update them once
 		UpdateMaterial();
+
+		Selection = c;
 	}
 
 

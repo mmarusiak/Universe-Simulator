@@ -84,7 +84,7 @@ public class PlanetComponent
     public Vector2 InitialVelocity
     {
         get => _initialVelocity;
-        set => _initialVelocity = value;
+        set => SetInitialVelocity(value);
     }
 
     public string Name
@@ -196,6 +196,8 @@ public class PlanetComponent
         if (PlaybackController.Instance.Playback.IsReset) InitialVelocity = newVel;
         _currentVelocity = newVel;
         _rigidbody.velocity = _currentVelocity;
+        
+        if(!PlaybackController.Instance.Playback.IsPaused)  VelocityEditor.Instance.ChangeVelocity(_currentVelocity);
     }
 
     void SetPlanetCurrentPosition(Vector2 newPos)
@@ -206,6 +208,13 @@ public class PlanetComponent
         _firstTouch = false;
     }
 
+    void SetInitialVelocity(Vector2 newVel)
+    {
+        _initialVelocity = newVel;
+
+        if (VelocityEditor.Instance.EditorBase.CurrentPlanet == this)
+            VelocityEditor.Instance.ChangeVelocity(_initialVelocity);
+    }
     void SetPlanetName(string newName)
     {
         _name = newName;

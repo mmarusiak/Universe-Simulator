@@ -29,6 +29,5 @@ public class EditorsController : MonoBehaviour
     public void UpdateDisplayedPlanetNameInEditors()
     {
         foreach (var editor in _editors) editor.EditorBase.UpdateDisplayedPlanetName();
-        
     }
 }
