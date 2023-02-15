@@ -47,7 +47,7 @@ public class Playback
         
         IsPaused = true;
         PlanetComponentsController.Instance.ResetLevel();
-        
+
         SetButtonsColors();
     }
 
