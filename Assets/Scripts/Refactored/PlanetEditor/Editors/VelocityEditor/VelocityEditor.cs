@@ -19,9 +19,10 @@ public class VelocityEditor : PlanetEditor
     
     public void ChangeVelocity(Vector2 targetVel)
     {
-        axisComponents[0].text = targetVel.x.ToString(CultureInfo.InvariantCulture);
-        axisComponents[1].text = targetVel.y.ToString(CultureInfo.InvariantCulture);
-        magComponent.text = targetVel.magnitude.ToString(CultureInfo.InvariantCulture);
+        axisComponents[0].text = UniverseTools.RoundOutput(targetVel.x);
+        axisComponents[1].text = UniverseTools.RoundOutput(targetVel.y);
+        magComponent.text = UniverseTools.RoundOutput(targetVel.magnitude);
+        Debug.Log(targetVel.y);
         
         onVelocityChanged.Invoke();
     }

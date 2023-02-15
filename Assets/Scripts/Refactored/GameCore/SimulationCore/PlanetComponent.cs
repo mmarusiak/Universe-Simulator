@@ -68,7 +68,7 @@ public class PlanetComponent
     public Vector2 CurrentVelocity
     {
         get => _currentVelocity;
-        set => SetPlanetCurrentVelocity(value);
+        set => SetPlanetCurrentVelocity(value, false);
     }
 
     public Vector2 InitialPosition
@@ -145,6 +145,7 @@ public class PlanetComponent
     public void AddForce()
     {
         float gConstant = GlobalVariables.GravitationalConstant;
+        SetPlanetCurrentVelocity(_rigidbody.velocity, true);
         Vector2 currentGravityForce = Vector2.zero;
         foreach (var otherComponent in _otherComponents)
         {
@@ -157,8 +158,7 @@ public class PlanetComponent
             
             currentGravityForce += forceVector * _temporaryMultiplier;
         }
-
-        CurrentVelocity = _rigidbody.velocity;
+        
         CurrentPosition = _planetTransform.position;
         _rigidbody.AddForce(currentGravityForce, ForceMode2D.Impulse);
     }
@@ -191,13 +191,13 @@ public class PlanetComponent
         _rigidbody.mass = _mass;
     }
     
-    void SetPlanetCurrentVelocity(Vector2 newVel)
+    void SetPlanetCurrentVelocity(Vector2 newVel, bool fromForceAdder)
     {
-        if (PlaybackController.Instance.Playback.IsReset) InitialVelocity = newVel;
         _currentVelocity = newVel;
-        _rigidbody.velocity = _currentVelocity;
-        
-        if(!PlaybackController.Instance.Playback.IsPaused)  VelocityEditor.Instance.ChangeVelocity(_currentVelocity);
+
+        if (PlaybackController.Instance.Playback.IsReset) InitialVelocity = _currentVelocity;
+        if(!fromForceAdder) _rigidbody.velocity = _currentVelocity;
+        if(!PlaybackController.Instance.Playback.IsPaused && VelocityEditor.Instance.EditorBase.CurrentPlanet == this)  VelocityEditor.Instance.ChangeVelocity(_currentVelocity);
     }
 
     void SetPlanetCurrentPosition(Vector2 newPos)
@@ -211,9 +211,6 @@ public class PlanetComponent
     void SetInitialVelocity(Vector2 newVel)
     {
         _initialVelocity = newVel;
-
-        if (VelocityEditor.Instance.EditorBase.CurrentPlanet == this)
-            VelocityEditor.Instance.ChangeVelocity(_initialVelocity);
     }
     void SetPlanetName(string newName)
     {
