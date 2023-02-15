@@ -19,6 +19,8 @@ public class PlanetComponentsController : MonoBehaviour
         Debug.Log(_allGravityComponents.Count);
     }
 
+    public void RemovePlanet(PlanetComponent planetComponent) => _allGravityComponents.Remove(planetComponent);
+
     public void ResetLevel()
     {
         foreach (var component in _allGravityComponents)

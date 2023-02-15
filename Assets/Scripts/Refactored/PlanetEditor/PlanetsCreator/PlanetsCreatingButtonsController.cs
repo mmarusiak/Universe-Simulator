@@ -37,6 +37,7 @@ public class PlanetsCreatingButtonsController : MonoBehaviour
         if(_isRemovingPlanet) foreach(var hit in hits)
             if (hit.collider.CompareTag("Planet"))
             {
+                PlanetComponentsController.Instance.RemovePlanet(hit.collider.gameObject.GetComponent<PlanetComponentHandler>().MyComponent);
                 Destroy(hit.collider.gameObject);
                 _isRemovingPlanet = false;
             }
