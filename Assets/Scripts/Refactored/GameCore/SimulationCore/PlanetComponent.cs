@@ -197,7 +197,7 @@ public class PlanetComponent
         _currentVelocity = newVel;
         _rigidbody.velocity = _currentVelocity;
         
-        if(!PlaybackController.Instance.Playback.IsPaused)  VelocityEditor.Instance.ChangeVelocity(_currentVelocity);
+        if(!PlaybackController.Instance.Playback.IsPaused && VelocityEditor.Instance.EditorBase.Shown)  VelocityEditor.Instance.ChangeVelocity(_currentVelocity);
     }
 
     void SetPlanetCurrentPosition(Vector2 newPos)
