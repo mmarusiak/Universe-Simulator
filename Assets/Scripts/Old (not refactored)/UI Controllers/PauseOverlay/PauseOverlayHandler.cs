@@ -55,13 +55,14 @@ public class PauseOverlayHandler : MonoBehaviour
     private bool needToUnpause;
     void TogglePause()
     {
-        if (needToUnpause) GravityObjectsController.Instance.PlayPause();
+        if (needToUnpause) PlaybackController.Instance.PlayLevel();
 
-        if (GlobalVariables.Instance.OverlayShown && !GravityObjectsController.Instance.Paused)
+        if (GlobalVariables.Instance.OverlayShown && !PlaybackController.Instance.Playback.IsPaused)
         {
             needToUnpause = true;
-            GravityObjectsController.Instance.PlayPause();
+            PlaybackController.Instance.PauseLevel();
+            return;
         }
-        else needToUnpause = false;
+        needToUnpause = false;
     }
 }
