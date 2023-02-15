@@ -6,7 +6,12 @@ public class VectorsRenderer : MonoBehaviour
    private bool _shown = false;
    [SerializeField] private PlanetEditor _attachedEditor;
 
-   public void ShowRenderer(bool shown) => _shown = shown;
+   public void ShowRenderer(bool shown)
+   {
+      _shown = shown;
+      if (shown) return;
+      foreach (var t in vectorsRenderer) t.SetPositions( new [] { Vector3.zero, Vector3.zero });
+   }
 
    public void UpdateVectors()
    { 

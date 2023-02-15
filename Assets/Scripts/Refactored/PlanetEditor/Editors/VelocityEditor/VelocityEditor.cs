@@ -11,19 +11,6 @@ public class VelocityEditor : PlanetEditor
     [SerializeField] private Text magComponent;
 
     [Space] [SerializeField] private UnityEvent onVelocityChanged;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void ChangeComponentsOnState(bool state)
     {
         axisComponents[0].interactable = !state;
