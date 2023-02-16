@@ -8,7 +8,7 @@ TagManager:
   - PlanetLine
   - PlanetsHolder
   - EditorController
-  - InfoController
+  - Planet
   layers:
   - Default
   - TransparentFX
