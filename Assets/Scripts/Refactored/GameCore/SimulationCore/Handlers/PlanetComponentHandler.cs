@@ -8,7 +8,11 @@ public class PlanetComponentHandler : MonoBehaviour
     [SerializeField] private bool isDemoPlanet, loadedFromSave;
     
     private PlanetComponent _myComponent = null;
-    
+
+    [SerializeField] private PlanetTextInfo _onNameChanged, _onVelocityChanged;
+    public PlanetTextInfo OnNameChanged => _onNameChanged;
+    public PlanetTextInfo OnVelocityChanged => _onVelocityChanged;
+
     public PlanetComponent MyComponent => _myComponent;
 
     private void Start()

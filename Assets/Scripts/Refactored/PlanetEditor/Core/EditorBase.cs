@@ -54,7 +54,7 @@ public class EditorBase
             float offsetX =
                 Input.mousePosition.x - _offsetToShow.x >
                 _editorContainer.GetComponent<RectTransform>().rect.width * 0.8f &&
-                Input.mousePosition.x - _offsetToShow.x < Screen.currentResolution.width * 0.8f
+                Input.mousePosition.x - _offsetToShow.x > Screen.currentResolution.width * 0.8f
                     ? _offsetToShow.x
                     : -_offsetToShow.x;
             

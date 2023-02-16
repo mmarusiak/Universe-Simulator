@@ -198,6 +198,8 @@ public class PlanetComponent
         if (PlaybackController.Instance.Playback.IsReset) InitialVelocity = _currentVelocity;
         if(!fromForceAdder) _rigidbody.velocity = _currentVelocity;
         if(!PlaybackController.Instance.Playback.IsPaused && VelocityEditor.Instance.EditorBase.CurrentPlanet == this)  VelocityEditor.Instance.ChangeVelocity(_currentVelocity);
+        
+        _handler.OnVelocityChanged.ChangeValue(UniverseTools.RoundOutput(_currentPosition.magnitude));
     }
 
     void SetPlanetCurrentPosition(Vector2 newPos)
@@ -217,6 +219,8 @@ public class PlanetComponent
         _name = newName;
         _planetTransform.gameObject.name = _name;
         EditorsController.Instance.UpdateDisplayedPlanetNameInEditors();
+        
+        _handler.OnNameChanged.ChangeValue(_name);
     }
 
     public void Reset()
