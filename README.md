@@ -3,11 +3,15 @@
 Just a small project for simulate planets and space objects in 2D
 
 
-![newestGitHubDemo](https://user-images.githubusercontent.com/20907620/216118963-98220340-39dc-41d9-9299-402f9a1108b2.gif)
+![NewUniverse](https://user-images.githubusercontent.com/20907620/219443255-fda1255c-eba5-4f41-b858-666113e0d398.gif)
+
+
+
 
 
 ## Roadmap:
 
+- [x] **~Refactor~**;
 - [x] ~Gravity forces simulation;~
 - [x] ~Pause/Play/Reset controls for simulation;~
 - [x] ~Player's input controls (scrolling, moving camera and planets);~
