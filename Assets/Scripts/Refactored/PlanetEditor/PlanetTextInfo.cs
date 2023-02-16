@@ -9,8 +9,11 @@ public class PlanetTextInfo : MonoBehaviour
     [SerializeField] private string _leftSide, _rightSide;
     [SerializeField] private Vector2 _textSize = new (600, 0);
     [SerializeField] private int _fontSize = 20;
+    [SerializeField] private Sprite _icon;
+    private static float _yOffsetBetweenTexts = 0.2f;
     private RectTransform _textTransform;
     private Vector2 _targetPos;
+    private Vector2 _iconOffset = Vector2.zero;
 
     void Start()
     {
@@ -19,8 +22,8 @@ public class PlanetTextInfo : MonoBehaviour
 
     void CreateNewText()
     {
-        var nameHolder = new GameObject(transform.parent.name);
-        _targetOutput = nameHolder.AddComponent<Text>();
+        var textHolder = new GameObject(transform.parent.name);
+        _targetOutput = textHolder.AddComponent<Text>();
         _targetOutput.color = Color.white;
         _targetOutput.font = GlobalVariables.Instance.GlobalFont;
         _targetOutput.fontSize = _fontSize;
@@ -31,17 +34,26 @@ public class PlanetTextInfo : MonoBehaviour
         _textSize = new(_textSize.x, Mathf.Ceil(_fontSize * 1.35f));
         _textTransform.sizeDelta = _textSize;
 
-        nameHolder.transform.SetParent(GameObject.Find("PlanetsUI").transform);
-        nameHolder.transform.localScale = Vector3.one;
+        textHolder.transform.SetParent(GameObject.Find("PlanetsUI").transform);
+        textHolder.transform.localScale = Vector3.one;
+
+        if (_icon == null) return;
+        var iconHolder = new GameObject(transform.parent.name + "Icon");
+        var img = iconHolder.AddComponent<Image>();
+        img.sprite = _icon;
+        iconHolder.transform.SetParent(textHolder.transform);
+        iconHolder.GetComponent<RectTransform>().sizeDelta = new Vector2(_textSize.y, _textSize.y);
+        iconHolder.GetComponent<RectTransform>().position = new Vector3(-_textSize.x/2 - iconHolder.GetComponent<RectTransform>().sizeDelta.x * 0.75f, -iconHolder.GetComponent<RectTransform>().sizeDelta.y * 0.25f, 0);
+        _iconOffset += new Vector2(iconHolder.GetComponent<RectTransform>().sizeDelta.x, 0);
     }
 
     void LateUpdate()
     {
         // calculating target pos - each next text container should have position of y + 1 - that will make them to display one row below
         // f.e. name holder y = 0 and velocity holder y = 1 -> that makes displaying name text in correct position, and one row below name holder velocity text
-        _targetPos = Camera.main.WorldToScreenPoint(transform.parent.position 
-                                                    - new Vector3(0,  transform.parent.localScale.y + 3.0f * transform.localPosition.y * _textTransform.lossyScale.y)) 
-                     + new Vector3(_textSize.x / 2, 0, 0);
+        _targetPos = Camera.main.WorldToScreenPoint(transform.parent.position - new Vector3
+                         (0,  transform.parent.localScale.y + 3.0f * transform.localPosition.y * _textTransform.lossyScale.y + _yOffsetBetweenTexts * transform.localPosition.y)) 
+                     + new Vector3(_textSize.x / 2, 0, 0) + (Vector3)_iconOffset;
 
         if(!PlaybackController.Instance.Playback.IsPaused) StrictFollow();
         else SmoothFollow();
