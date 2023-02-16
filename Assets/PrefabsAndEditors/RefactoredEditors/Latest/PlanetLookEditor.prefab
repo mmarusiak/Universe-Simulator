@@ -1500,7 +1500,7 @@ GameObject:
   - component: {fileID: 7457223654265715137}
   - component: {fileID: 7457223654265715134}
   - component: {fileID: 7457223654265715135}
-  - component: {fileID: 7457223654265715136}
+  - component: {fileID: 5556881350358763515}
   m_Layer: 5
   m_Name: Bar
   m_TagString: Untagged
@@ -1566,7 +1566,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7457223654265715136
+--- !u!114 &5556881350358763515
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1575,10 +1575,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7457223654265715138}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9177b2b928f22001bac5bb5fb4e5326a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1301e0a702217356fbcba06d102b18e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToDrag: {fileID: 7457223653402532875}
+  _editorContainer: {fileID: 7457223653402532874}
 --- !u!1 &7457223654379437679
 GameObject:
   m_ObjectHideFlags: 0

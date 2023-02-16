@@ -792,7 +792,7 @@ GameObject:
   - component: {fileID: 1237946834698053259}
   - component: {fileID: 1237946834698053256}
   - component: {fileID: 1237946834698053257}
-  - component: {fileID: 1237946834698053258}
+  - component: {fileID: 2343014395590531208}
   m_Layer: 5
   m_Name: Bar
   m_TagString: Untagged
@@ -858,7 +858,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1237946834698053258
+--- !u!114 &2343014395590531208
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -867,10 +867,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1237946834698053260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9177b2b928f22001bac5bb5fb4e5326a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1301e0a702217356fbcba06d102b18e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToDrag: {fileID: 1237946835195824181}
+  _editorContainer: {fileID: 1237946835195824180}
 --- !u!1 &1237946834731698486
 GameObject:
   m_ObjectHideFlags: 0
