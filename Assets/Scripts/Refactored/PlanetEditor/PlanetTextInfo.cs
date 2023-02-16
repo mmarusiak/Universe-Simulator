@@ -16,11 +16,19 @@ public class PlanetTextInfo : MonoBehaviour
     private Vector2 _iconOffset = Vector2.zero;
 
     void Start()
-    {
-       CreateNewText();
+    { 
+        if (_textTransform != null) return;
+        Initialize();
     }
 
-    void CreateNewText()
+    void Initialize()
+    {
+        var text = CreateNewText();
+        if (_icon == null) return;
+        CreateIcon(text);
+    }
+
+    GameObject CreateNewText()
     {
         var textHolder = new GameObject(transform.parent.name);
         _targetOutput = textHolder.AddComponent<Text>();
@@ -36,17 +44,20 @@ public class PlanetTextInfo : MonoBehaviour
 
         textHolder.transform.SetParent(GameObject.Find("PlanetsUI").transform);
         textHolder.transform.localScale = Vector3.one;
+        return textHolder;
+    }
 
-        if (_icon == null) return;
+    void CreateIcon(GameObject holder)
+    {
         var iconHolder = new GameObject(transform.parent.name + "Icon");
         var img = iconHolder.AddComponent<Image>();
         img.sprite = _icon;
-        iconHolder.transform.SetParent(textHolder.transform);
+        iconHolder.transform.SetParent(holder.transform);
         iconHolder.GetComponent<RectTransform>().sizeDelta = new Vector2(_textSize.y, _textSize.y);
         iconHolder.GetComponent<RectTransform>().position = new Vector3(-_textSize.x/2 - iconHolder.GetComponent<RectTransform>().sizeDelta.x * 0.75f, -iconHolder.GetComponent<RectTransform>().sizeDelta.y * 0.25f, 0);
         _iconOffset += new Vector2(iconHolder.GetComponent<RectTransform>().sizeDelta.x, 0);
     }
-
+    
     void LateUpdate()
     {
         // calculating target pos - each next text container should have position of y + 1 - that will make them to display one row below
@@ -70,6 +81,7 @@ public class PlanetTextInfo : MonoBehaviour
     
     public void ChangeValue(string value)
     {
+        if (_targetOutput == null) Initialize();
         _targetOutput.gameObject.name = value;
         _targetOutput.text = _leftSide + value + _rightSide;
     }
