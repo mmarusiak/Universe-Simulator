@@ -6,9 +6,9 @@ public class PlanetComponentHandler : MonoBehaviour
     [SerializeField] private string name;
     [SerializeField] private Vector2 spawnPos;
     [SerializeField] private bool isDemoPlanet, loadedFromSave;
-
+    
     private PlanetComponent _myComponent = null;
-
+    
     public PlanetComponent MyComponent => _myComponent;
 
     private void Start()

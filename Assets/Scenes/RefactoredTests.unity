@@ -1874,6 +1874,7 @@ GameObject:
   m_Component:
   - component: {fileID: 673647947}
   - component: {fileID: 673647948}
+  - component: {fileID: 673647949}
   m_Layer: 0
   m_Name: PlaybackController
   m_TagString: Untagged
@@ -1969,6 +1970,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &673647949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673647946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d07c3c98d01f3ca7a5db43b7891eba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &731326714
 GameObject:
   m_ObjectHideFlags: 0
@@ -5920,6 +5933,118 @@ PrefabInstance:
     - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
       propertyPath: isDemoPlanet
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _onNameChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _onVelocityChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _onNameChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _onNameChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 673647949}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _myComponent._onNameChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _onVelocityChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _onNameChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _onNameChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Check
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _onVelocityChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 673647949}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _myComponent._onVelocityChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _onVelocityChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _onVelocityChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Check
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _myComponent._onNameChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _myComponent._onNameChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 673647949}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _myComponent._onVelocityChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _myComponent._onNameChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _onNameChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlanetTextInfo, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _myComponent._onNameChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Check
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _myComponent._onVelocityChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 673647949}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _myComponent._onVelocityChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _onVelocityChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlanetTextInfo, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _myComponent._onVelocityChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Check
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _myComponent._onNameChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlanetTextInfo, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _myComponent._onVelocityChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlanetTextInfo, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _onNameChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _onVelocityChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _myComponent._onNameChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: _myComponent._onVelocityChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2730977995786505916, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
       propertyPath: m_RootOrder

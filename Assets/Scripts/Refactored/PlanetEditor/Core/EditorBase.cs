@@ -53,15 +53,15 @@ public class EditorBase
             // set offset to always display in window, not outside
             float offsetX =
                 Input.mousePosition.x - _offsetToShow.x >
-                _editorContainer.GetComponent<RectTransform>().rect.width &&
-                Input.mousePosition.x - _offsetToShow.x < Screen.currentResolution.width
+                _editorContainer.GetComponent<RectTransform>().rect.width * 0.8f &&
+                Input.mousePosition.x - _offsetToShow.x < Screen.currentResolution.width * 0.8f
                     ? _offsetToShow.x
                     : -_offsetToShow.x;
             
             float offsetY =
                 Input.mousePosition.y - _offsetToShow.y >
-                _editorContainer.GetComponent<RectTransform>().rect.height &&
-                Input.mousePosition.y - _offsetToShow.y < Screen.currentResolution.height
+                _editorContainer.GetComponent<RectTransform>().rect.height * 0.8f &&
+                Input.mousePosition.y - _offsetToShow.y < Screen.currentResolution.height * 0.8f
                     ? _offsetToShow.y
                     : -_offsetToShow.y;
             

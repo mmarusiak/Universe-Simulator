@@ -23,7 +23,7 @@ public class PlanetComponent
     // boolean that indicate if this planet is new created planet - only position is assigned in constructor
     // basically with this bool we assign not only current pos, but also initial pos if game is not reseted
     private bool _firstTouch = true;
-    
+
     private List<PlanetComponent> _otherComponents;
     private static int _planetCount;
     private int _planetNum;
