@@ -10,7 +10,8 @@ public class PlanetTextInfo : MonoBehaviour
     [SerializeField] private Vector2 _textSize = new (600, 0);
     [SerializeField] private int _fontSize = 20;
     [SerializeField] private Sprite _icon;
-    private static float _yOffsetBetweenTexts = 0.2f;
+    [SerializeField] private float _xDistanceBetweenIconAndText = 20.0f;
+    private static float _yOffsetBetweenTexts = 1f;
     private RectTransform _textTransform;
     private Vector2 _targetPos;
     private Vector2 _iconOffset = Vector2.zero;
@@ -35,7 +36,7 @@ public class PlanetTextInfo : MonoBehaviour
         _targetOutput.color = Color.white;
         _targetOutput.font = GlobalVariables.Instance.GlobalFont;
         _targetOutput.fontSize = _fontSize;
-        _targetOutput.alignment = TextAnchor.LowerLeft;
+        _targetOutput.alignment = TextAnchor.MiddleLeft;
         _targetOutput.fontStyle = FontStyle.BoldAndItalic;
 
         _textTransform = _targetOutput.GetComponent<RectTransform>();
@@ -54,8 +55,8 @@ public class PlanetTextInfo : MonoBehaviour
         img.sprite = _icon;
         iconHolder.transform.SetParent(holder.transform);
         iconHolder.GetComponent<RectTransform>().sizeDelta = new Vector2(_textSize.y, _textSize.y);
-        iconHolder.GetComponent<RectTransform>().position = new Vector3(-_textSize.x/2 - iconHolder.GetComponent<RectTransform>().sizeDelta.x * 0.75f, -iconHolder.GetComponent<RectTransform>().sizeDelta.y * 0.25f, 0);
-        _iconOffset += new Vector2(iconHolder.GetComponent<RectTransform>().sizeDelta.x, 0);
+        iconHolder.GetComponent<RectTransform>().position = new Vector3(-_textSize.x/2 - iconHolder.GetComponent<RectTransform>().sizeDelta.x/2 - _xDistanceBetweenIconAndText, 0, 0);
+        _iconOffset = new Vector2(iconHolder.GetComponent<RectTransform>().sizeDelta.x + _xDistanceBetweenIconAndText, 0);
     }
     
     void LateUpdate()
@@ -64,7 +65,7 @@ public class PlanetTextInfo : MonoBehaviour
         // f.e. name holder y = 0 and velocity holder y = 1 -> that makes displaying name text in correct position, and one row below name holder velocity text
         _targetPos = Camera.main.WorldToScreenPoint(transform.parent.position - new Vector3
                          (0,  transform.parent.localScale.y + 3.0f * transform.localPosition.y * _textTransform.lossyScale.y + _yOffsetBetweenTexts * transform.localPosition.y)) 
-                     + new Vector3(_textSize.x / 2, 0, 0) + (Vector3)_iconOffset;
+                     + new Vector3(_textSize.x / 2, 0, 0) + (Vector3)_iconOffset ;
 
         if(!PlaybackController.Instance.Playback.IsPaused) StrictFollow();
         else SmoothFollow();
