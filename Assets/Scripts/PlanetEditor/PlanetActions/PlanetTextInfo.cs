@@ -20,6 +20,7 @@ public class PlanetTextInfo : MonoBehaviour
     { 
         if (_textTransform != null) return;
         Initialize();
+        StrictFollow(CalculateTargetPos());
     }
 
     void Initialize()
@@ -63,20 +64,27 @@ public class PlanetTextInfo : MonoBehaviour
     {
         // calculating target pos - each next text container should have position of y + 1 - that will make them to display one row below
         // f.e. name holder y = 0 and velocity holder y = 1 -> that makes displaying name text in correct position, and one row below name holder velocity text
-        _targetPos = Camera.main.WorldToScreenPoint(transform.parent.position - new Vector3
-                         (0,  transform.parent.localScale.y + 3.0f * transform.localPosition.y * _textTransform.lossyScale.y + _yOffsetBetweenTexts * transform.localPosition.y)) 
-                     + new Vector3(_textSize.x / 2, 0, 0) + (Vector3)_iconOffset ;
-
-        if(!PlaybackController.Instance.Playback.IsPaused) StrictFollow();
-        else SmoothFollow();
+        _targetPos = CalculateTargetPos();
+        if(!PlaybackController.Instance.Playback.IsPaused) StrictFollow(_targetPos);
+        else SmoothFollow(_targetPos);
     }
 
-    void StrictFollow() => _textTransform.position = _targetPos;
-    
-
-    void SmoothFollow()
+    Vector3 CalculateTargetPos()
     {
-        Vector3 smoothFollow = Vector3.Lerp(_textTransform.position,_targetPos, _smoothSpeed);
+        if(Camera.main is null) return Vector3.zero;
+        
+        var parent = transform.parent;
+        var localPosition = transform.localPosition;
+        return Camera.main.WorldToScreenPoint(parent.position - new Vector3
+                (0, parent.localScale.y + 3.0f * localPosition.y * _textTransform.lossyScale.y +
+                    _yOffsetBetweenTexts * localPosition.y)) + new Vector3(_textSize.x / 2, 0, 0) + (Vector3) _iconOffset;
+    }
+    
+    void StrictFollow(Vector3 target) => _textTransform.position = target;
+
+    void SmoothFollow(Vector3 target)
+    {
+        Vector3 smoothFollow = Vector3.Lerp(_textTransform.position,target, _smoothSpeed);
         _textTransform.position = smoothFollow;
     }
     

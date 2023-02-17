@@ -26,9 +26,13 @@ public class VelocityEditor : PlanetEditor
         
         onVelocityChanged.Invoke();
     }
-    
-    public void InitializeVelocity() => ChangeVelocity(EditorBase.CurrentPlanet.CurrentVelocity);
-    
+
+    public void InitializeVelocity()
+    {
+        if (EditorBase.CurrentPlanet == null) return;
+        ChangeVelocity(EditorBase.CurrentPlanet.CurrentVelocity);
+    }
+
     public void EnterNewVelocity(bool isAxisX)
     {
         if (isAxisX)
