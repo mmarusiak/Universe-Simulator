@@ -145,6 +145,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2103632103404137475, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1668256395}
+    - target: {fileID: 2103632103404137475, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OverlayButtonClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632103492266505, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1668256395}
+    - target: {fileID: 2103632103492266505, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OverlayButtonClicked
+      objectReference: {fileID: 0}
     - target: {fileID: 2103632103973335286, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -240,6 +256,14 @@ PrefabInstance:
     - target: {fileID: 2103632104256725653, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
       propertyPath: m_Name
       value: PauseOverlay
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632104370954637, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1668256395}
+    - target: {fileID: 2103632104370954637, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OverlayButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 2103632104375178012, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
       propertyPath: m_AnchorMax.y
