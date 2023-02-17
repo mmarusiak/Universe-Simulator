@@ -74,15 +74,10 @@ public class PlanetLookEditor : PlanetEditor
     {
         _imageDropdownPlanet.options.Clear();
         _imageDropdownPlanet.options.Add(new Dropdown.OptionData("None", BasicPlanetEditor.Instance.DefaultPlanetSprite));
-        Debug.Log("Gere");
-        
-        var files = GetFilesFrom(_pathToImages, filters, false);
 
-        foreach (var file in files)
-        {
-            Debug.Log(file);
-            if (UniverseTools.IsSafeImage(file)) StartCoroutine(LoadSpriteFromPathToDropDown(file));
-        }
+        var files = GetFilesFrom(_pathToImages, filters, false);
+        foreach (var file in files) if (UniverseTools.IsSafeImage(file)) StartCoroutine(LoadSpriteFromPathToDropDown(file));
+        
         UpdateDropDownValue();
     }
     

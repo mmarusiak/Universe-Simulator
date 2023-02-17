@@ -22,6 +22,7 @@ public class PlanetTextInfo : MonoBehaviour
         if (_textTransform != null) return;
         Initialize();
         StrictFollow(CalculateTargetPos());
+        ChangeValue("test");
     }
 
     void Initialize()
@@ -99,9 +100,10 @@ public class PlanetTextInfo : MonoBehaviour
         _targetOutput.gameObject.name = value;
         _targetOutput.text = _leftSide + value + _rightSide;
     }
-
+    
     void OnDestroy()
     {
+        if (_targetOutput == null) return;
         Destroy(_targetOutput.gameObject);
     }
 }
