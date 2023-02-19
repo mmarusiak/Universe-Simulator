@@ -50,22 +50,21 @@ public class EditorBase
     {
         if (_shown)
         {
-            // set offset to always display in window, not outside
-            float offsetX =
-                Input.mousePosition.x - _offsetToShow.x >
-                _editorContainer.GetComponent<RectTransform>().rect.width * 0.8f &&
-                Input.mousePosition.x - _offsetToShow.x > Screen.currentResolution.width * 0.8f
-                    ? _offsetToShow.x
-                    : -_offsetToShow.x;
+            Vector2 windowDim = new(_editorContainer.GetComponent<RectTransform>().rect.width,
+                _editorContainer.GetComponent<RectTransform>().rect.height);
+            Debug.Log(windowDim.x + " " + windowDim.y);
+            float leftXEdge = Input.mousePosition.x + _offsetToShow.x - windowDim.x/2;
+            float rightXEdge = Input.mousePosition.x + _offsetToShow.x + windowDim.x/2;
+            float upperYEdge = Input.mousePosition.y + _offsetToShow.y + windowDim.y/2;
+            float loweYEdge = Input.mousePosition.y + _offsetToShow.y - windowDim.y/2;
+
+            bool isXOnScreen = leftXEdge > 0 && rightXEdge < Screen.currentResolution.width;
+            bool isYOnScreen = loweYEdge > 0 && upperYEdge < Screen.currentResolution.height;
+
+            float offsetX = isXOnScreen ? _offsetToShow.x : -_offsetToShow.x;
+            float offsetY = isYOnScreen ? _offsetToShow.y : -_offsetToShow.y;
             
-            float offsetY =
-                Input.mousePosition.y - _offsetToShow.y >
-                _editorContainer.GetComponent<RectTransform>().rect.height * 0.8f &&
-                Input.mousePosition.y - _offsetToShow.y < Screen.currentResolution.height * 0.8f
-                    ? _offsetToShow.y
-                    : -_offsetToShow.y;
-            
-            _editorContainer.GetComponent<RectTransform>().position = Input.mousePosition - new Vector3(offsetX, offsetY);
+            _editorContainer.GetComponent<RectTransform>().position = Input.mousePosition + new Vector3(offsetX, offsetY);
             _onWindowShow.Invoke();
             return;
         }

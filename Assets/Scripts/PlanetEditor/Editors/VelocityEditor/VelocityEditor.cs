@@ -21,8 +21,7 @@ public class VelocityEditor : PlanetEditor
         axisComponents[0].text = UniverseTools.RoundOutput(targetVel.x);
         axisComponents[1].text = UniverseTools.RoundOutput(targetVel.y);
         magComponent.text = UniverseTools.RoundOutput(targetVel.magnitude);
-        Debug.Log(targetVel.y);
-        
+
         onVelocityChanged.Invoke();
     }
 
