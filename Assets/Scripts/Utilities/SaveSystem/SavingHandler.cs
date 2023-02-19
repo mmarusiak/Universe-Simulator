@@ -43,6 +43,8 @@ public class SavingHandler : MonoBehaviour
         PlaybackController.Instance.Playback.IsPaused = newData.IsPaused;
         PlaybackController.Instance.Playback.IsReset = newData.IsReset;
         PlaybackController.Instance.Playback.TimeScale = newData.TimeScale;
+        // calling overlay that there is no more temp pause
+        PauseOverlayHandler.Instance.OnLoad();
     }
     
     private T GetLoadedData<T>(string saveName = "new_save")

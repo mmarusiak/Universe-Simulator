@@ -3,7 +3,10 @@ using UnityEngine.UI;
 
 public class PauseOverlayHandler : MonoBehaviour
 {
-    enum overlayState
+    public static PauseOverlayHandler Instance;
+    void Awake() => Instance = this;
+    
+    enum OverlayState
     {
         GameSettings,
         LevelSettings,
@@ -19,7 +22,7 @@ public class PauseOverlayHandler : MonoBehaviour
     [SerializeField] private Image[] overlaysButtonsImages = new Image[3];
 
     // Start is called before the first frame update
-    void Start() => ShowOverlay(overlayState.LevelSettings);
+    void Start() => ShowOverlay(OverlayState.LevelSettings);
 
     // Update is called once per frame
     void Update()
@@ -28,13 +31,13 @@ public class PauseOverlayHandler : MonoBehaviour
         {
             GlobalVariables.Instance.OverlayShown = !GlobalVariables.Instance.OverlayShown;
             TogglePause();
-            ShowOverlay(overlayState.LevelSettings);
+            ShowOverlay(OverlayState.LevelSettings);
         }
     }
 
     
-    public void OverlayButtonClicked(int targetState) => ShowOverlay((overlayState) targetState);
-    void ShowOverlay(overlayState state)
+    public void OverlayButtonClicked(int targetState) => ShowOverlay((OverlayState) targetState);
+    void ShowOverlay(OverlayState state)
     {
         Debug.Log(state);
         pauseOverlayHolder.SetActive(GlobalVariables.Instance.OverlayShown);
@@ -51,8 +54,8 @@ public class PauseOverlayHandler : MonoBehaviour
         }
     }
     
-    
     private bool needToUnpause;
+    
     void TogglePause()
     {
         if (needToUnpause) PlaybackController.Instance.PlayLevel();
@@ -65,4 +68,6 @@ public class PauseOverlayHandler : MonoBehaviour
         }
         needToUnpause = false;
     }
+    
+    public void OnLoad() =>needToUnpause = false;
 }
