@@ -6,7 +6,6 @@ public class PlanetComponentsController : MonoBehaviour
     public static PlanetComponentsController Instance;
     private void Awake() => Instance = this;
     
-    [SerializeField]
     private List<PlanetComponent> _allGravityComponents = new ();
 
     public List<PlanetComponent> AllGravityComponents

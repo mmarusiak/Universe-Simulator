@@ -52,7 +52,6 @@ public class EditorBase
         {
             Vector2 windowDim = new(_editorContainer.GetComponent<RectTransform>().rect.width,
                 _editorContainer.GetComponent<RectTransform>().rect.height);
-            Debug.Log(windowDim.x + " " + windowDim.y);
             float leftXEdge = Input.mousePosition.x + _offsetToShow.x - windowDim.x/2;
             float rightXEdge = Input.mousePosition.x + _offsetToShow.x + windowDim.x/2;
             float upperYEdge = Input.mousePosition.y + _offsetToShow.y + windowDim.y/2;
