@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlanetsCreatingButtonsController : MonoBehaviour
 {
-    [SerializeField] private GameObject _planetPrefab;
-    [SerializeField] private Transform _planetsHolder;
     [SerializeField] private Image[] _buttonsImage = new Image[2];
     private bool _isCreatingPlanet = false, _isRemovingPlanet = false;
 
@@ -37,14 +33,13 @@ public class PlanetsCreatingButtonsController : MonoBehaviour
         if(_isRemovingPlanet) foreach(var hit in hits)
             if (hit.collider.CompareTag("Planet"))
             {
-                PlanetComponentsController.Instance.RemovePlanet(hit.collider.gameObject.GetComponent<PlanetComponentHandler>().MyComponent);
-                Destroy(hit.collider.gameObject);
+                PlanetComponentsController.Instance.DestroyPlanet(hit.collider.gameObject.GetComponent<PlanetComponentHandler>());
                 _isRemovingPlanet = false;
             }
 
         if (_isCreatingPlanet)
         {
-            Instantiate(_planetPrefab, Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.Euler(0,0,0),  _planetsHolder);
+            PlanetComponentsController.Instance.CreatePlanet();
             _isCreatingPlanet = false;
         }
         

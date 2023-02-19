@@ -18,9 +18,22 @@ public class PlanetComponentHandler : MonoBehaviour
     private void Start()
     {
         if (!isDemoPlanet && !loadedFromSave) spawnPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        else if (loadedFromSave) return;
-        _myComponent = new PlanetComponent(this, transform, transform.GetChild(0).GetComponent<SpriteRenderer>(), radius, mass, spawnPos, name);
+        else if (loadedFromSave)
+        {
+            BeginLoad();
+        }
+        else Initialize();
+        PlanetComponentsController.Instance.AddNewGravityComponent(MyComponent);
     }
+
+    void BeginLoad()
+    {
+        _myComponent.Handler = this;
+        _myComponent.PlanetTransform = transform;
+        _myComponent.Renderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+    }
+    
+    public void Initialize() => _myComponent = new PlanetComponent(this, transform, transform.GetChild(0).GetComponent<SpriteRenderer>(), radius, mass, spawnPos, name);
 
     public void BeginDrag(Vector2 offset)
     {

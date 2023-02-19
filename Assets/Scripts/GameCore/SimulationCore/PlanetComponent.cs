@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class PlanetComponent
 {
     private PlanetComponentHandler _handler;
@@ -17,9 +19,9 @@ public class PlanetComponent
     private Vector2 _currentVelocity;
     private Vector2 _currentPosition;
     // readonly fields
-    private readonly SpriteRenderer _renderer;
+    private SpriteRenderer _renderer;
     private readonly Rigidbody2D _rigidbody;
-    private readonly Transform _planetTransform;
+    private Transform _planetTransform;
     // boolean that indicate if this planet is new created planet - only position is assigned in constructor
     // basically with this bool we assign not only current pos, but also initial pos if game is not reseted
     private bool _firstTouch = true;
@@ -99,7 +101,18 @@ public class PlanetComponent
         set => _handler = value;
     }
 
-    public Transform PlanetTransform => _planetTransform;
+    public Transform PlanetTransform
+    {
+        get => _planetTransform;
+        set => _planetTransform = value;
+    }
+
+    public SpriteRenderer Renderer
+    {
+        get => _renderer;
+        set => _renderer = value;
+    }
+
     public Rigidbody2D PlanetRigidbody => _rigidbody;
     
     private readonly Color32[] _defaultColorPalette =
@@ -131,10 +144,9 @@ public class PlanetComponent
         
         if(currentVelocity == default) currentVelocity = Vector2.zero;
         CurrentVelocity = currentVelocity;
-
-        PlanetComponentsController.Instance.AddNewGravityComponent(this);
+        
     }
-
+    
     public void AddGravityComponent(PlanetComponent targetComponents)
     {
         if (targetComponents == this) return;

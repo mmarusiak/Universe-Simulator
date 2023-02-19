@@ -147,7 +147,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2103632103079767006, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632103079767006, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632103079767006, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 519494973}
+    - target: {fileID: 2103632103079767006, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632103079767006, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SavingHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632103079767006, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: new_save
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632103079767006, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2103632103404137475, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -159,7 +183,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2103632103414411637, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632103414411637, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632103414411637, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 519494973}
+    - target: {fileID: 2103632103414411637, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SaveLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632103414411637, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SavingHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632103414411637, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2103632103492266505, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -456,6 +500,7 @@ Transform:
   - {fileID: 1825270272}
   - {fileID: 1922873536}
   - {fileID: 673647947}
+  - {fileID: 519494972}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -968,6 +1013,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &519494971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 519494972}
+  - component: {fileID: 519494973}
+  m_Layer: 0
+  m_Name: SaveController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &519494972
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519494971}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 68988363}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519494973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519494971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b59e768b961f4266b60c53acc1b6799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelName: new_save
 --- !u!1 &553860357
 GameObject:
   m_ObjectHideFlags: 0
@@ -2779,6 +2869,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ad8c5ce912e51609b698aa779932a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _allGravityComponents: []
+  _planetsHolder: {fileID: 282855893}
+  _planetPrefab: {fileID: 2730977995786505917, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+  _loadPrefab: {fileID: 2730977995786505917, guid: 2e141d6d86e4e897788005d1b4a7159c, type: 3}
 --- !u!1 &1617108217 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2103632104718754279, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
@@ -3423,8 +3517,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e70984d32caa6651ab219142ee41181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _planetPrefab: {fileID: 2730977995786505917, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
-  _planetsHolder: {fileID: 282855893}
   _buttonsImage:
   - {fileID: 1670814805}
   - {fileID: 1768881982}
