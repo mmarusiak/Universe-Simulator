@@ -3,7 +3,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 
 [Serializable]
-public class InputFieldEvent : UnityEvent<InputField>
+public class InputFieldEvent : UnityEvent<string>
 {
 
 }

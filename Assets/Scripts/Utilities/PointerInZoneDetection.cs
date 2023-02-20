@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class PointerInZoneDetection : MonoBehaviour
 {
@@ -8,7 +7,7 @@ public class PointerInZoneDetection : MonoBehaviour
     [SerializeField] private UnityEvent onEnterZone, onQuitZone;
     private Rect zone;
 
-    private bool _enteredZone = true, _isTextBeingEdited = false;
+    private bool _enteredZone = true;
 
     void OnValidate()
     {
@@ -25,7 +24,6 @@ public class PointerInZoneDetection : MonoBehaviour
     
     void Update()
     {
-        if (_isTextBeingEdited) return;
         if (_enteredZone != zone.Contains(Input.mousePosition))
         {
             _enteredZone = !_enteredZone;
