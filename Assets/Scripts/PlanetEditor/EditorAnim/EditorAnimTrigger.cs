@@ -25,9 +25,6 @@ public class EditorAnimTrigger : MonoBehaviour
         _targetPos = pos;
     }
 
-    public void ChangeState(bool value)
-    {
-        _isHideable = value;
-        Debug.Log(_isHideable);
-    }
+    public void ChangeState(bool value) => _isHideable = value;
+    
 }

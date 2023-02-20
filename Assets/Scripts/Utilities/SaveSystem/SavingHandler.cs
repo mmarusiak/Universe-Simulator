@@ -24,13 +24,11 @@ public class SavingHandler : MonoBehaviour
         UniverseDirectories.CreateNewDirectory(_pathToSaves, saveName);
         
         LevelSaveData newData = new LevelSaveData(PlanetComponentsController.Instance, PlaybackController.Instance);
-        Debug.Log(newData.SavedComponents.Count);
         var settings = new JsonSerializerSettings
         {
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
         };
         string jsonData = JsonConvert.SerializeObject(newData, settings);
-        Debug.Log(jsonData.Split("_planetName").Length);
         File.WriteAllText(pathToTargetSave + "/" + _saveFileName + ".json", jsonData);
     }
 
@@ -44,6 +42,8 @@ public class SavingHandler : MonoBehaviour
         PlaybackController.Instance.Playback.IsPaused = newData.IsPaused;
         PlaybackController.Instance.Playback.IsReset = newData.IsReset;
         PlaybackController.Instance.Playback.TimeScale = newData.TimeScale;
+        // load name
+        LevelInfoHolder.Instance.LevelName = newData.LevelName;
         // calling overlay that there is no more temp pause
         PauseOverlayHandler.Instance.OnLoad();
     }
