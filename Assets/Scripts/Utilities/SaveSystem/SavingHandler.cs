@@ -6,19 +6,20 @@ public class SavingHandler : MonoBehaviour
 {
     public static SavingHandler Instance;
     private string _pathToSaves;
-
+    
     void Awake()
     {
         Instance = this;
         _pathToSaves = Application.persistentDataPath;
     }
+    
+    private string _saveFileName = "data_save";
 
-    [SerializeField] private string _levelName = "new_save";
-    private static string _saveFileName = "data_save";
+    public string SaveFileName => _saveFileName;
 
     public void SaveLevel()
     {
-        string saveName = UniverseTools.RemoveAccents(_levelName).Replace(" ", "_");
+        string saveName = LevelInfoHolder.Instance.LevelName;
         string pathToTargetSave = _pathToSaves + "/" + saveName;
         UniverseDirectories.CreateNewDirectory(_pathToSaves, saveName);
         

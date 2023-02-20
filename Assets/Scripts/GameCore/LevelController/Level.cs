@@ -18,7 +18,10 @@ public class Level
 
     void SetName(string newName)
     {
-        if(newName == _name) return;
+        if(newName == _name || string.Empty == newName) return;
+        // correct level name
+        newName = UniverseTools.RemoveAccents(newName);
+        newName = newName.Replace(" ", "_");
         string currentPath = Directory.GetCurrentDirectory();
         string oldSavePath = currentPath + "/" + newName;
         Debug.Log(oldSavePath);
@@ -29,10 +32,5 @@ public class Level
         _name = newName;
         // create new directory for saves
         UniverseDirectories.CreateNewDirectory(currentPath, _name);
-    }
-
-    public void LoadLevelToScene()
-    {
-        
     }
 }

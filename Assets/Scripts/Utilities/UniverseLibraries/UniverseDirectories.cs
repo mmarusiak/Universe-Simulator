@@ -17,14 +17,18 @@ public static class UniverseDirectories
         }
     }
 
-    public static void CreateNewDirectory(string path, string directoryName)
+    public static void CreateNewDirectory(string path, string directoryName = "")
     {
-        if (Directory.Exists(path + "/" + directoryName))
+        string fullPath = path;
+        if (directoryName != "") fullPath += "/" + directoryName;
+        if (Directory.Exists(fullPath))
         {
-            DeleteFilesAndDirectoriesInPath(path + "/" + directoryName);
+            DeleteFilesAndDirectoriesInPath(fullPath);
             return;
         }
 
-        Directory.CreateDirectory(path + "/" + directoryName);
+        Directory.CreateDirectory(fullPath);
     }
+    
+    public static void RenameDirectory(string oldPath, string newPath) => Directory.Move(oldPath, newPath);
 }

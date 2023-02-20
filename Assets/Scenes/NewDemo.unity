@@ -1188,7 +1188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b59e768b961f4266b60c53acc1b6799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelName: new_save
 --- !u!1 &553860357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,7 +1362,6 @@ GameObject:
   - component: {fileID: 639859510}
   - component: {fileID: 639859508}
   - component: {fileID: 639859511}
-  - component: {fileID: 639859512}
   m_Layer: 5
   m_Name: LevelName
   m_TagString: Untagged
@@ -1459,23 +1457,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 639859512}
-        m_TargetAssemblyTypeName: LevelNameField, Assembly-CSharp
-        m_MethodName: Submit
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
   m_OnDidEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 639859512}
-        m_TargetAssemblyTypeName: LevelNameField, Assembly-CSharp
+      - m_Target: {fileID: 1668256396}
+        m_TargetAssemblyTypeName: LevelInfoHolder, Assembly-CSharp
         m_MethodName: Submit
         m_Mode: 0
         m_Arguments:
@@ -1547,18 +1533,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
---- !u!114 &639859512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 639859506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9abc9951bad324b3ea8512fa3c7976c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &642335153
 GameObject:
   m_ObjectHideFlags: 0
@@ -3399,6 +3373,7 @@ GameObject:
   - component: {fileID: 1668256394}
   - component: {fileID: 1668256393}
   - component: {fileID: 1668256395}
+  - component: {fileID: 1668256396}
   m_Layer: 0
   m_Name: MainController
   m_TagString: Untagged
@@ -3461,6 +3436,18 @@ MonoBehaviour:
   - {fileID: 979951686}
   - {fileID: 929278099}
   - {fileID: 2142068437}
+--- !u!114 &1668256396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668256392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abc9951bad324b3ea8512fa3c7976c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1670814802
 GameObject:
   m_ObjectHideFlags: 0
