@@ -28,6 +28,14 @@ public static class UniverseDirectories
 
         Directory.CreateDirectory(fullPath);
     }
+
+    public static void CreateDirectoryIfNotExists(string path, string directoryName = "")
+    {
+        string fullPath = path;
+        if (directoryName != "") fullPath += "/" + directoryName;
+        if (Directory.Exists(fullPath)) return;
+        Directory.CreateDirectory(fullPath);
+    }
     
     public static void RenameDirectory(string oldPath, string newPath) => Directory.Move(oldPath, newPath);
 }
