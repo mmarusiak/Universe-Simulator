@@ -5,7 +5,7 @@ public class MenuSingleSave
 {
     private Sprite _previewCapture;
     private Image _captureContainer;
-    private string _path;
+    private string _saveName;
 
     public Sprite PreviewCapture
     {
@@ -23,13 +23,13 @@ public class MenuSingleSave
         set => _captureContainer = value;
     }
 
-    public string Path
+    public string SaveName
     {
-        get => _path;
-        set => _path = value;
+        get => _saveName;
+        set => _saveName = value;
     }
 
-    public MenuSingleSave(Image container, Sprite capture, string path)
+    public MenuSingleSave(Image container, Sprite capture, string saveName)
     {
         
     }

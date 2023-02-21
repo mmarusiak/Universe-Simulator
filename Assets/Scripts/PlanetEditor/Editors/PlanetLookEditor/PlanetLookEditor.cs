@@ -104,25 +104,7 @@ public class PlanetLookEditor : PlanetEditor
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            DownloadHandlerTexture textureDownloadHandler = (DownloadHandlerTexture) request.downloadHandler;
-            Texture2D texture = textureDownloadHandler.texture;
-
-            if (texture == null)
-            {
-                Debug.LogError("Image not available...");
-                yield break;
-            }
-            
-            var loaded = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),
-                new Vector2(0.5f, 0.5f));
-            // resizing sprite
-            if (loaded != BasicPlanetEditor.Instance.DefaultPlanetSprite)
-            {
-                ResizeTool.Resize(loaded.texture, 128, 128);
-                loaded =
-                    Sprite.Create(loaded.texture, new Rect(0, 0, 128, 128), new Vector2(0.5f, 0.5f));
-            }
-
+            var loaded = UniversePictures.LoadSpriteFromRequest(request, 128, 128);
             _imageDropdownPlanet.options.Add(new Dropdown.OptionData(path.Replace(_pathToImages + "/", ""), loaded));
         }
     }

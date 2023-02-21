@@ -34,7 +34,7 @@ public class SavingHandler : MonoBehaviour
         };
         string jsonData = JsonConvert.SerializeObject(newData, settings);
         File.WriteAllText(pathToTargetSave + "/" + _saveFileName + ".json", jsonData);
-        StartCoroutine(UniverseScreenshots.ScreenshotGame(_pathToSaves + "/" + saveName + "/" + _captureFileName + ".png"));
+        StartCoroutine(UniversePictures.TakeGameScreenshot(_pathToSaves + "/" + saveName + "/" + _captureFileName + ".png"));
     }
     
     public void LoadLevel(string saveName = "new_save")
