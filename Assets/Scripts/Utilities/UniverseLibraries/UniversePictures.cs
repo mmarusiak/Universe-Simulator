@@ -1,20 +1,22 @@
 using System.Collections;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public static class UniversePictures
 { 
-    public static IEnumerator TakeGameScreenshot(string path)
+    // screenshots
+    public static async Task TakeGameScreenshot(string path)
     {
         // hide all UI
         GameObject toHide = GameObject.FindWithTag("NoScreenshotable");
         toHide.SetActive(false);
         // wait for next frame, to capture hidden overlay
-        yield return new WaitForNextFrameUnit();
+        await Task.Yield();
         // saving save picture
         ScreenCapture.CaptureScreenshot(path);
-        yield return new WaitForNextFrameUnit();
+        await Task.Yield();
         // show back them
         toHide.SetActive(true);
     }
@@ -24,11 +26,19 @@ public static class UniversePictures
         ScreenCapture.CaptureScreenshot(path);
     }
 
-    public static Sprite LoadSpriteFromRequest(UnityWebRequest request, int sizeX, int sizeY)
+    
+    // sprite loaders
+    public static async Task<Sprite> LoadSpriteFromPath(string path, int sizeX, int sizeY)
     {
-        DownloadHandlerTexture textureDownloadHandler = (DownloadHandlerTexture) request.downloadHandler;
-        Texture2D texture = textureDownloadHandler.texture;
+        Texture2D loadedTexture = await LoadTexture(path);
 
+        if (loadedTexture != null) return LoadSpriteFromTexture(loadedTexture, sizeX, sizeY);
+
+        return null;
+    }
+    
+    public static Sprite LoadSpriteFromTexture(Texture2D texture, int sizeX, int sizeY)
+    {
         if (texture == null)
         {
             Debug.LogError("Image not available...");
@@ -46,5 +56,29 @@ public static class UniversePictures
         }
         
         return loaded;
+    }
+    
+    public static async Task<Texture2D> LoadTexture(string path)
+    {
+        using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(path))
+        {
+            // Send the request and wait for a response
+            var operation = www.SendWebRequest();
+            while (!operation.isDone)
+            {
+                await Task.Delay(1);
+            }
+
+            // Check for errors
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log(www.error);
+                return null;
+            }
+
+            // Get the texture from the response
+            Texture2D texture = DownloadHandlerTexture.GetContent(www);
+            return texture;
+        }
     }
 }

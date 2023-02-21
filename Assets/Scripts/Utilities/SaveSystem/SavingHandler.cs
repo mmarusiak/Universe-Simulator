@@ -1,7 +1,5 @@
-using System.Collections;
 using System.IO;
 using Newtonsoft.Json;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SavingHandler : MonoBehaviour
@@ -12,7 +10,7 @@ public class SavingHandler : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        _pathToSaves = Application.persistentDataPath;
+        _pathToSaves = Application.persistentDataPath + "/Saves";
     }
     
     private string _saveFileName = "data_save";
@@ -20,7 +18,7 @@ public class SavingHandler : MonoBehaviour
     public string SaveFileName => _saveFileName;
     public string CaptureFileName => _captureFileName;
 
-    public void SaveLevel()
+    public async void SaveLevel()
     {
         string saveName = LevelInfoHolder.Instance.LevelName;
         string pathToTargetSave = _pathToSaves + "/" + saveName;
@@ -34,7 +32,7 @@ public class SavingHandler : MonoBehaviour
         };
         string jsonData = JsonConvert.SerializeObject(newData, settings);
         File.WriteAllText(pathToTargetSave + "/" + _saveFileName + ".json", jsonData);
-        StartCoroutine(UniversePictures.TakeGameScreenshot(_pathToSaves + "/" + saveName + "/" + _captureFileName + ".png"));
+        await UniversePictures.TakeGameScreenshot(_pathToSaves + "/" + saveName + "/" + _captureFileName + ".png");
     }
     
     public void LoadLevel(string saveName = "new_save")
