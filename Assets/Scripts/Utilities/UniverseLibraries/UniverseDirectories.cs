@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
 
 public static class UniverseDirectories 
@@ -38,4 +40,26 @@ public static class UniverseDirectories
     }
     
     public static void RenameDirectory(string oldPath, string newPath) => Directory.Move(oldPath, newPath);
+    
+    // https://stackoverflow.com/a/18321162/13786856
+    public static String[] GetFilesFromDirectory(String searchFolder, String[] filters, bool isRecursive)
+    {
+        List<String> filesFound = new List<String>();
+        var searchOption = isRecursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+        foreach (var filter in filters)
+        {
+            filesFound.AddRange(Directory.GetFiles(searchFolder, String.Format("*.{0}", filter), searchOption));
+        }
+        return filesFound.ToArray();
+    }
+
+    public static String[] GetFoldersInDirectory(string path)
+    {
+        string[] folders = Directory.GetDirectories(path);
+        for (int i = 0; i < folders.Length; i++)
+        {
+            folders[i] = Path.GetFileName(folders[i]);
+        }
+        return folders;
+    }
 }

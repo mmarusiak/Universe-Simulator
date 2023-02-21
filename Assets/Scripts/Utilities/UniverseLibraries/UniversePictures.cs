@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -30,8 +28,11 @@ public static class UniversePictures
     // sprite loaders
     public static async Task<Sprite> LoadSpriteFromPath(string path, int sizeX, int sizeY)
     {
-        Texture2D loadedTexture = await LoadTexture(path);
-
+        string correctPath = "file:///";
+        if (path[0] == '/') correctPath += path.Remove(0, 1);
+        else correctPath += path;
+        
+        Texture2D loadedTexture = await LoadTexture(correctPath);
         if (loadedTexture != null) return LoadSpriteFromTexture(loadedTexture, sizeX, sizeY);
 
         return null;
@@ -47,13 +48,11 @@ public static class UniversePictures
             
         var loaded = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),
             new Vector2(0.5f, 0.5f));
+      
         // resizing sprite
-        if (loaded != BasicPlanetEditor.Instance.DefaultPlanetSprite)
-        {
-            ResizeTool.Resize(loaded.texture, sizeX, sizeY);
-            loaded =
-                Sprite.Create(loaded.texture, new Rect(0, 0, sizeY, sizeX), new Vector2(0.5f, 0.5f));
-        }
+        ResizeTool.Resize(loaded.texture, sizeX, sizeY); 
+        loaded = Sprite.Create(loaded.texture, new Rect(0, 0, sizeX, sizeY), new Vector2(0.5f, 0.5f));
+        
         
         return loaded;
     }

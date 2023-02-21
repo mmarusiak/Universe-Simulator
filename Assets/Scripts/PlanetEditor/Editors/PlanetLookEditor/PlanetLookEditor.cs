@@ -75,31 +75,15 @@ public class PlanetLookEditor : PlanetEditor
         _imageDropdownPlanet.options.Clear();
         _imageDropdownPlanet.options.Add(new Dropdown.OptionData("None", BasicPlanetEditor.Instance.DefaultPlanetSprite));
 
-        var files = GetFilesFrom(_pathToImages, filters, false);
+        var files = UniverseDirectories.GetFilesFromDirectory(_pathToImages, filters, false);
         foreach (var file in files) if (UniverseTools.IsSafeImage(file)) LoadSpriteFromPathToDropDown(file);
         
         UpdateDropDownValue();
     }
-    
-    // https://stackoverflow.com/a/18321162/13786856
-    public static String[] GetFilesFrom(String searchFolder, String[] filters, bool isRecursive)
-    {
-        List<String> filesFound = new List<String>();
-        var searchOption = isRecursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
-        foreach (var filter in filters)
-        {
-            filesFound.AddRange(Directory.GetFiles(searchFolder, String.Format("*.{0}", filter), searchOption));
-        }
-        return filesFound.ToArray();
-    }
-    
+
     async void LoadSpriteFromPathToDropDown(string path)
     {
-        string correctPath = "file:///";
-        if (path[0] == '/') correctPath += path.Remove(0, 1);
-        else correctPath += path;
-
-        var loaded = await UniversePictures.LoadSpriteFromPath(correctPath, 128, 128);
+        var loaded = await UniversePictures.LoadSpriteFromPath(path, 128, 128);
         _imageDropdownPlanet.options.Add(new Dropdown.OptionData(path.Replace(_pathToImages + "/", ""), loaded));
     }
 

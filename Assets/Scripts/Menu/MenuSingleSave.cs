@@ -31,6 +31,8 @@ public class MenuSingleSave
 
     public MenuSingleSave(Image container, Sprite capture, string saveName)
     {
-        
+        _captureContainer = container;
+        _previewCapture = capture;
+        _saveName = saveName;
     }
 }
