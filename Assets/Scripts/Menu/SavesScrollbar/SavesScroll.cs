@@ -14,7 +14,7 @@ public class SavesScroll : MonoBehaviour
 
         float scrollAxis = Input.GetAxis("Mouse ScrollWheel");
         if (scrollAxis == 0) return;
-        _savesContainer.position += new Vector3(0, scrollAxis * sensivity, 0);
+        _savesContainer.position += new Vector3(0, -scrollAxis * sensivity, 0);
     }
 
     public void OnEnterScrollZone()

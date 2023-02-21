@@ -10,8 +10,7 @@ public class SavingHandler : MonoBehaviour
     
     void Awake()
     {
-        if(Instance != null) Destroy(this);
-        else Instance = this;
+        Instance = this;
         _pathToSaves = Application.persistentDataPath + "/Saves";
     }
     
@@ -37,7 +36,7 @@ public class SavingHandler : MonoBehaviour
         await UniversePictures.TakeGameScreenshot(_pathToSaves + "/" + saveName + "/" + _captureFileName + ".png");
     }
     
-    public async Task LoadLevel(string saveName = "new_save")
+    public async Task LoadLevel(bool fromMenu, string saveName = "new_save")
     {
         while (PlanetComponentsController.Instance == null) await Task.Yield();
         PlanetComponentsController.Instance.ClearLevel();
@@ -52,6 +51,8 @@ public class SavingHandler : MonoBehaviour
         LevelInfoHolder.Instance.LevelName = newData.LevelName;
         // calling overlay that there is no more temp pause
         PauseOverlayHandler.Instance.OnLoad();
+        
+        if(fromMenu) Destroy(this);
     }
     
     private T GetLoadedData<T>(string saveName = "new_save")

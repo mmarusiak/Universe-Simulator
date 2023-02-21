@@ -12,6 +12,6 @@ public class SaveMouseClick : MonoBehaviour, IPointerClickHandler
     {
         DontDestroyOnLoad(SavingHandler.Instance);
         SceneManager.LoadScene("Game");
-        await SavingHandler.Instance.LoadLevel(_saveName);
+        await SavingHandler.Instance.LoadLevel(true, _saveName);
     }
 }
