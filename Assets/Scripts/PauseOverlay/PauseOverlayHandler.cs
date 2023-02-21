@@ -39,8 +39,8 @@ public class PauseOverlayHandler : MonoBehaviour
     public void OverlayButtonClicked(int targetState) => ShowOverlay((OverlayState) targetState);
     void ShowOverlay(OverlayState state)
     {
-        Debug.Log(state);
         pauseOverlayHolder.SetActive(GlobalVariables.Instance.OverlayShown);
+        if (!GlobalVariables.Instance.OverlayShown) return;
         for (int overlayIndex = 0; overlayIndex < overlays.Length; overlayIndex++)
         {
             // set section active
@@ -53,7 +53,7 @@ public class PauseOverlayHandler : MonoBehaviour
             overlaysButtonsImages[overlayIndex].GetComponent<Shadow>().enabled = (int) state == overlayIndex;
         }
     }
-    
+
     private bool needToUnpause;
     
     void TogglePause()

@@ -14,7 +14,7 @@ public class GlobalVariables : MonoBehaviour
     
     // global prefabs
     public GameObject VelocityPrefab, DistancePrefab;
-    
+
     void Awake()
     {
         if (Instance == null)

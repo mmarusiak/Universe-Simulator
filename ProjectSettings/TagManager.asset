@@ -9,6 +9,7 @@ TagManager:
   - PlanetsHolder
   - EditorController
   - Planet
+  - NoScreenshotable
   layers:
   - Default
   - TransparentFX

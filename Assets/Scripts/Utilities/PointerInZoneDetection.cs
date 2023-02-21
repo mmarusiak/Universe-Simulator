@@ -31,10 +31,4 @@ public class PointerInZoneDetection : MonoBehaviour
             else onQuitZone.Invoke();
         }
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(new Vector3(zone.x + zone.width / 2, zone.y + zone.height / 2, 0), new Vector3(zone.width, zone.height, 0));
-    }
 }

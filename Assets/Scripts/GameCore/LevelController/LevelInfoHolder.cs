@@ -14,26 +14,35 @@ public class LevelInfoHolder : MonoBehaviour
     public string LevelName
     {
         get => _levelName;
-        set => Submit(value);
+        set => SetNewName(value);
     }
-    public void Submit(string value)
+
+    public void OnLevelNameChanged(string value)
     {
+        // validating input
         if (value == _levelName || string.Empty == value) return;
         // quitting input field - hiding it if mouse is not over it
         EventSystem.current.SetSelectedGameObject(null);
         // getting save paths
         string oldPath = Application.persistentDataPath + "/" + _levelName;
         string newPath = Application.persistentDataPath + "/" + value;
+        SetNewName(value);
+        // renaming save path
+        MoveSaves(oldPath, newPath);
+        // save current level to new path
+        SavingHandler.Instance.SaveLevel();
+    }
+    
+    void SetNewName(string value)
+    {
         // set new level name to new value
         _levelName = value;
         nameField.text = _levelName;
-        // renaming save path
-        MoveSaves(oldPath, newPath);
     }
 
     void MoveSaves(string oldPath, string newPath)
     {
-        if(Directory.Exists(oldPath)) UniverseDirectories.RenameDirectory(oldPath, newPath);
-        else SavingHandler.Instance.SaveLevel();
+        if (!Directory.Exists(oldPath)) return;
+        UniverseDirectories.RenameDirectory(oldPath, newPath);
     }
 }

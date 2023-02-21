@@ -2,7 +2,6 @@ using System.IO;
 
 public static class UniverseDirectories 
 {
-    
     public static void DeleteFilesAndDirectoriesInPath(string path)
     {
         DirectoryInfo di = new DirectoryInfo(path);

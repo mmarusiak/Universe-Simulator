@@ -1,5 +1,7 @@
+using System.Collections;
 using System.IO;
 using Newtonsoft.Json;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SavingHandler : MonoBehaviour
@@ -14,8 +16,9 @@ public class SavingHandler : MonoBehaviour
     }
     
     private string _saveFileName = "data_save";
-
+    private string _captureFileName = "capture";
     public string SaveFileName => _saveFileName;
+    public string CaptureFileName => _captureFileName;
 
     public void SaveLevel()
     {
@@ -23,6 +26,7 @@ public class SavingHandler : MonoBehaviour
         string pathToTargetSave = _pathToSaves + "/" + saveName;
         UniverseDirectories.CreateNewDirectory(_pathToSaves, saveName);
         
+        // saving save data
         LevelSaveData newData = new LevelSaveData(PlanetComponentsController.Instance, PlaybackController.Instance);
         var settings = new JsonSerializerSettings
         {
@@ -30,8 +34,9 @@ public class SavingHandler : MonoBehaviour
         };
         string jsonData = JsonConvert.SerializeObject(newData, settings);
         File.WriteAllText(pathToTargetSave + "/" + _saveFileName + ".json", jsonData);
+        StartCoroutine(UniverseScreenshots.ScreenshotGame(_pathToSaves + "/" + saveName + "/" + _captureFileName + ".png"));
     }
-
+    
     public void LoadLevel(string saveName = "new_save")
     {
         PlanetComponentsController.Instance.ClearLevel();
