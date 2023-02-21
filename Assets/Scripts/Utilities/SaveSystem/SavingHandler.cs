@@ -1,4 +1,5 @@
 using System.IO;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -9,7 +10,8 @@ public class SavingHandler : MonoBehaviour
     
     void Awake()
     {
-        Instance = this;
+        if(Instance != null) Destroy(this);
+        else Instance = this;
         _pathToSaves = Application.persistentDataPath + "/Saves";
     }
     
@@ -35,8 +37,9 @@ public class SavingHandler : MonoBehaviour
         await UniversePictures.TakeGameScreenshot(_pathToSaves + "/" + saveName + "/" + _captureFileName + ".png");
     }
     
-    public void LoadLevel(string saveName = "new_save")
+    public async Task LoadLevel(string saveName = "new_save")
     {
+        while (PlanetComponentsController.Instance == null) await Task.Yield();
         PlanetComponentsController.Instance.ClearLevel();
         LevelSaveData newData = GetLoadedData<LevelSaveData>(saveName);
         // load planets

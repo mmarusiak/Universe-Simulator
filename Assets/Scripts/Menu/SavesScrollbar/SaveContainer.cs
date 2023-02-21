@@ -9,6 +9,7 @@ public class SaveContainer : MonoBehaviour
     private Text _saveText;
     private RectTransform _view;
 
+    public string SaveName => _saveName;
     public async void Initialize(string saveName)
     {
         _view = transform.GetChild(0).GetComponent<RectTransform>();

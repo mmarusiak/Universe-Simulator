@@ -231,6 +231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 269498772}
   - component: {fileID: 269498773}
+  - component: {fileID: 269498774}
   m_Layer: 0
   m_Name: SaveHandler
   m_TagString: Untagged
@@ -266,6 +267,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveContainerPrefab: {fileID: 5736480341716855579, guid: 16c946341f1efc2358a36d4aae58d222, type: 3}
+--- !u!114 &269498774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269498771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b59e768b961f4266b60c53acc1b6799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &365345066
 GameObject:
   m_ObjectHideFlags: 0
