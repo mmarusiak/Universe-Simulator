@@ -20,7 +20,7 @@ public class MenuSaves : MonoBehaviour
         var saves = UniverseDirectories.GetFoldersInDirectory(_pathToSaves);
         for (int i = 0; i < saves.Length; i ++)
         {
-            SaveContainer container = Instantiate(saveContainerPrefab, new Vector3(550, 225 + 350 * i), Quaternion.Euler(0,0,0),  GameObject.Find("Canvas").transform).GetComponent<SaveContainer>();
+            SaveContainer container = Instantiate(saveContainerPrefab, new Vector3(400, 550 - 350 * i), Quaternion.identity,  GameObject.Find("SavesContainer").transform).GetComponent<SaveContainer>();
             container.Initialize(saves[i]);
         }
     }
