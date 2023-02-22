@@ -62,4 +62,9 @@ public static class UniverseDirectories
         }
         return folders;
     }
+
+    public static DateTime LastTimeModified(string filePath)
+    {
+        return File.GetLastWriteTime(filePath);
+    }
 }

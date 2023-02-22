@@ -28,9 +28,10 @@ public static class UniversePictures
     // sprite loaders
     public static async Task<Sprite> LoadSpriteFromPath(string path, int sizeX, int sizeY)
     {
+        if (!UniverseTools.IsSafeImage(path)) return null;
         string correctPath = "file:///";
-        if (path[0] == '/') correctPath += path.Remove(0, 1);
-        else correctPath += path;
+        if (path[0] != '/') correctPath += path;
+        else correctPath += path.Remove(0, 1);
         
         Texture2D loadedTexture = await LoadTexture(correctPath);
         if (loadedTexture != null) return LoadSpriteFromTexture(loadedTexture, sizeX, sizeY);
@@ -59,25 +60,23 @@ public static class UniversePictures
     
     public static async Task<Texture2D> LoadTexture(string path)
     {
-        using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(path))
+        using UnityWebRequest www = UnityWebRequestTexture.GetTexture(path);
+        // Send the request and wait for a response
+        var operation = www.SendWebRequest();
+        while (!operation.isDone)
         {
-            // Send the request and wait for a response
-            var operation = www.SendWebRequest();
-            while (!operation.isDone)
-            {
-                await Task.Delay(1);
-            }
-
-            // Check for errors
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.Log(www.error);
-                return null;
-            }
-
-            // Get the texture from the response
-            Texture2D texture = DownloadHandlerTexture.GetContent(www);
-            return texture;
+            await Task.Delay(1);
         }
+
+        // Check for errors
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(www.error);
+            return null;
+        }
+
+        // Get the texture from the response
+        Texture2D texture = DownloadHandlerTexture.GetContent(www);
+        return texture;
     }
 }
