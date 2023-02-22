@@ -6,11 +6,16 @@ using UnityEngine;
 public class SavingHandler : MonoBehaviour
 {
     public static SavingHandler Instance;
+    private static SavingHandler _next;
     private string _pathToSaves;
     
     void Awake()
     {
-        Instance = this;
+        // menu instance
+        if (Instance == null) Instance = this;
+        // on load instance
+        else _next = this;
+        
         _pathToSaves = Application.persistentDataPath + "/Saves";
     }
     
@@ -51,8 +56,12 @@ public class SavingHandler : MonoBehaviour
         LevelInfoHolder.Instance.LevelName = newData.LevelName;
         // calling overlay that there is no more temp pause
         PauseOverlayHandler.Instance.OnLoad();
-        
-        if(fromMenu) Destroy(this);
+
+        if (fromMenu)
+        {
+            Instance = _next;
+            Destroy(gameObject);
+        }
     }
     
     private T GetLoadedData<T>(string saveName = "new_save")

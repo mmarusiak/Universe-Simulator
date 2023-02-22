@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class PlanetComponentHandler : MonoBehaviour
@@ -15,14 +16,21 @@ public class PlanetComponentHandler : MonoBehaviour
 
     public PlanetComponent MyComponent => _myComponent;
 
-    private void Start()
+    private async void Start()
     {
         if (!isDemoPlanet && !loadedFromSave) spawnPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         else if (loadedFromSave)
         {
             BeginLoad();
         }
-        else Initialize();
+        if(!loadedFromSave) Initialize();
+
+        await AddToController();
+    }
+
+    async Task AddToController()
+    {
+        while (PlanetComponentsController.Instance == null) await Task.Yield();
         PlanetComponentsController.Instance.AddNewGravityComponent(MyComponent);
     }
 
