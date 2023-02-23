@@ -1,12 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonsMenuController : MonoBehaviour
 {
-    [SerializeField] private GameObject mainSectionsContainer, loaderContainer;
+    [SerializeField] private GameObject mainSectionsContainer, loaderContainer, newLevelContainer;
     
-    public void NewLevel()
+    public async void NewLevel(InputField field)
     {
-        // we need to create new level eventually also we should set name of the new level ???
+        await SavingHandler.Instance.CreateNewLevel(field);
+    }
+
+    public void NewLevelSwitch(bool state)
+    {
+        // go to new level creator from main menu
+        mainSectionsContainer.SetActive(!state);
+        newLevelContainer.SetActive(state);   
     }
 
     public void LoaderSwitch(bool state)

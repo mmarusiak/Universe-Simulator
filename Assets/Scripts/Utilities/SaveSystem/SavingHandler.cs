@@ -2,6 +2,8 @@ using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SavingHandler : MonoBehaviour
 {
@@ -40,7 +42,7 @@ public class SavingHandler : MonoBehaviour
         File.WriteAllText(pathToTargetSave + "/" + _saveFileName + ".json", jsonData);
         await UniversePictures.TakeGameScreenshot(_pathToSaves + "/" + saveName + "/" + _captureFileName + ".png");
     }
-    
+
     public async Task LoadLevel(bool fromMenu, string saveName = "new_save")
     {
         while (PlanetComponentsController.Instance == null) await Task.Yield();
@@ -62,6 +64,22 @@ public class SavingHandler : MonoBehaviour
             Instance = _next;
             Destroy(gameObject);
         }
+    }
+
+    public async Task CreateNewLevel(InputField inputName)
+    {
+        string name = inputName.text;
+        if (string.Empty == name) return;
+
+        DontDestroyOnLoad(this);
+        SceneManager.LoadScene("Game");
+
+        while (LevelInfoHolder.Instance == null) await Task.Yield();
+
+        LevelInfoHolder.Instance.LevelName = name;
+        Instance = _next;
+        Instance.SaveLevel();
+        Destroy(gameObject);
     }
     
     private T GetLoadedData<T>(string saveName = "new_save")
