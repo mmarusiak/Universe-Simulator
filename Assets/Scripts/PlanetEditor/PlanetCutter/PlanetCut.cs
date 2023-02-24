@@ -1,15 +1,10 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 
 public class PlanetCut : MonoBehaviour
 {
-    private SpriteMask spriteMask;
-    private Collider2D collider2D;
-
     public static PlanetCut Instance;
-
     void Awake() => Instance = this;
 
     List<GameObject> PlanetsOnLine(Vector2 start, Vector2 end)
@@ -37,21 +32,66 @@ public class PlanetCut : MonoBehaviour
             // slice sprite
             planet.GetComponent<SpriteMask>().sprite = SlicedSprite(sprite, points[0], points[1])[0];
             // slice collider
-            SliceCollider(planet, planet.GetComponent<SpriteMask>().sprite);
+            Destroy(planet.GetComponent<Collider2D>());
+            PolygonCollider2D polygonCollider = planet.AddComponent<PolygonCollider2D>();
+            SliceCollider(planet.GetComponent<SpriteMask>(), polygonCollider);
         }
     }
+    
+    // ----------------------------------------------------------------------------------
+    // COLLIDER SLICE
 
-    void SliceCollider(GameObject planet, Sprite targetShape)
+    void SliceCollider(SpriteMask mask, PolygonCollider2D polygonCollider)
     {
-        // Get the sprite's vertices and sort them in clockwise order
-        Vector2[] spriteVertices = targetShape.vertices;
-        spriteVertices = SortVerticesClockwise(spriteVertices);
+        var sprite = mask.sprite;
+        Vector2[] vertices = sprite.vertices;
+        Vector2[] worldVertices = new Vector2[vertices.Length];
 
-        Destroy(planet.GetComponent<Collider2D>());
-        // Set up the collider using the sorted vertices
-        PolygonCollider2D polygonCollider = planet.AddComponent<PolygonCollider2D>();
-        polygonCollider.points = spriteVertices;
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            worldVertices[i] = mask.transform.TransformPoint(vertices[i]);
+        }
+
+        vertices = SortVerticesClockwise(vertices);
+
+        ushort[] triangles = Triangulate(worldVertices);
+        polygonCollider.SetPath(0, vertices);
+        polygonCollider.pathCount = 1;
     }
+    
+    private ushort[] Triangulate(Vector2[] vertices)
+    {
+        List<Vector2> points = new List<Vector2>(vertices);
+        Triangulator triangulator = new Triangulator(points);
+        return triangulator.Triangulate();
+    }
+    
+    // Helper method to sort the vertices in clockwise order
+    private Vector2[] SortVerticesClockwise(Vector2[] vertices)
+    {
+        // Find the center point of the vertices
+        Vector2 center = Vector2.zero;
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            center += vertices[i];
+        }
+        center /= vertices.Length;
+
+        // Sort the vertices by angle relative to the center point
+        List<Vector2> sortedVertices = new List<Vector2>(vertices);
+        sortedVertices.Sort((a, b) =>
+        {
+            float angleA = Mathf.Atan2(a.y - center.y, a.x - center.x);
+            float angleB = Mathf.Atan2(b.y - center.y, b.x - center.x);
+            return angleA.CompareTo(angleB);
+        });
+
+        return sortedVertices.ToArray();
+    }
+    
+
+    // ---------------------------------------------------------------------------------
+    // SPRITE SLICE
     
     Sprite[] SlicedSprite(Sprite baseSprite, Vector2 a, Vector2 b)
     {
@@ -165,26 +205,5 @@ public class PlanetCut : MonoBehaviour
         }
         
         return new []{Vector2.zero, Vector2.zero};
-    }
-    
-    private Vector2[] SortVerticesClockwise(Vector2[] vertices)
-    {
-        // Calculate the centroid of the polygon
-        Vector2 centroid = Vector2.zero;
-        float signedArea = 0;
-        for (int i = 0; i < vertices.Length; i++)
-        {
-            Vector2 vertex1 = vertices[i];
-            Vector2 vertex2 = vertices[(i + 1) % vertices.Length];
-            float crossProduct = (vertex1.x * vertex2.y) - (vertex1.y * vertex2.x);
-            signedArea += crossProduct;
-            centroid += (vertex1 + vertex2) * crossProduct;
-        }
-        signedArea *= 0.5f;
-        centroid /= (6 * signedArea);
-
-        // Sort the vertices in clockwise order around the centroid
-        Vector2[] sortedVertices = vertices.OrderBy(v => Mathf.Atan2(v.y - centroid.y, v.x - centroid.x)).ToArray();
-        return sortedVertices;
     }
 }
