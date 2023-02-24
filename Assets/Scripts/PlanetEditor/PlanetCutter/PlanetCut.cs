@@ -45,35 +45,21 @@ public class PlanetCut : MonoBehaviour
     {
         var sprite = mask.sprite;
         Vector2[] vertices = sprite.vertices;
-        Vector2[] worldVertices = new Vector2[vertices.Length];
-
-        for (int i = 0; i < vertices.Length; i++)
-        {
-            worldVertices[i] = mask.transform.TransformPoint(vertices[i]);
-        }
-
         vertices = SortVerticesClockwise(vertices);
-
-        ushort[] triangles = Triangulate(worldVertices);
+        
         polygonCollider.SetPath(0, vertices);
         polygonCollider.pathCount = 1;
     }
     
-    private ushort[] Triangulate(Vector2[] vertices)
-    {
-        List<Vector2> points = new List<Vector2>(vertices);
-        Triangulator triangulator = new Triangulator(points);
-        return triangulator.Triangulate();
-    }
     
     // Helper method to sort the vertices in clockwise order
     private Vector2[] SortVerticesClockwise(Vector2[] vertices)
     {
         // Find the center point of the vertices
         Vector2 center = Vector2.zero;
-        for (int i = 0; i < vertices.Length; i++)
+        foreach (var vert in vertices)
         {
-            center += vertices[i];
+            center += vert;
         }
         center /= vertices.Length;
 
@@ -122,10 +108,10 @@ public class PlanetCut : MonoBehaviour
         int height = texture.height;
 
         // Create a new texture to hold the sliced result
-        Texture2D[] slicedTexture = new[]
+        Texture2D[] slicedTexture = 
         {
-            new Texture2D(width, height, TextureFormat.RGBA32, false),
-            new Texture2D(width, height, TextureFormat.RGBA32, false),
+            new (width, height, TextureFormat.RGBA32, false),
+            new (width, height, TextureFormat.RGBA32, false),
         };
 
         // Copy the pixels from the original texture to the sliced texture
