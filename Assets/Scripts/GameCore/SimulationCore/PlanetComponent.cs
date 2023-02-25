@@ -125,7 +125,7 @@ public class PlanetComponent
     {
         Handler = handler;
         _planetTransform = planetTransform;
-        _rigidbody = _planetTransform.GetComponent<Rigidbody2D>();
+        _rigidbody = _planetTransform.GetChild(0).GetComponent<Rigidbody2D>();
         _renderer = spriteRenderer;
         Radius = radius;
         Mass = mass;

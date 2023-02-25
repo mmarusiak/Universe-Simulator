@@ -874,9 +874,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8420271a4dc1fa569d926805ada0a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteMask: {fileID: 0}
-  collider2D: {fileID: 0}
-  spriteRenderer: {fileID: 0}
 --- !u!1001 &308360980
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2573,7 +2570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _planetsHolder: {fileID: 282855893}
-  _planetPrefab: {fileID: 2730977995786505917, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+  _planetPrefab: {fileID: 2077315353205059218, guid: af616f92e0dc09adfb2b7bfe686e1ce1, type: 3}
   _loadPrefab: {fileID: 2730977995786505917, guid: 2e141d6d86e4e897788005d1b4a7159c, type: 3}
 --- !u!1 &1617108217 stripped
 GameObject:

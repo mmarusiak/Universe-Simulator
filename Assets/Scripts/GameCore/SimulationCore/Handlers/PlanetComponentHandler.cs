@@ -31,6 +31,7 @@ public class PlanetComponentHandler : MonoBehaviour
     async Task AddToController()
     {
         while (PlanetComponentsController.Instance == null) await Task.Yield();
+        // whole component loads from saving handler script
         PlanetComponentsController.Instance.AddNewGravityComponent(MyComponent);
     }
 
@@ -41,7 +42,7 @@ public class PlanetComponentHandler : MonoBehaviour
         _myComponent.Renderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
     
-    public void Initialize() => _myComponent = new PlanetComponent(this, transform, transform.GetChild(0).GetComponent<SpriteRenderer>(), radius, mass, spawnPos, name);
+    public void Initialize() => _myComponent = new PlanetComponent(this, transform.parent, transform.GetChild(0).GetComponent<SpriteRenderer>(), radius, mass, spawnPos, name);
 
     public void BeginDrag(Vector2 offset)
     {

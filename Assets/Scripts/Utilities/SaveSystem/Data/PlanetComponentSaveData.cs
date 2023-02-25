@@ -41,11 +41,9 @@ public class PlanetComponentSaveData
     {
         GameObject newPlanetGO = PlanetComponentsController.Instance.LoadPlanet();
         PlanetComponentHandler planetHandler = newPlanetGO.GetComponent<PlanetComponentHandler>();
-        Debug.Log(planetHandler.name);
         planetHandler.Initialize();
 
         SetValuesToComponent(planetHandler.MyComponent, data);
-        Debug.Log(planetHandler.MyComponent.Name);
         return planetHandler.MyComponent;
     }
     
