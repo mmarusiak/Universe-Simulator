@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlanetComponentHandler))]
 public class PlanetMouseControls : MonoBehaviour
 {
     // if mouse is down on a planet for less than > 0.3s then show editor
@@ -11,10 +10,11 @@ public class PlanetMouseControls : MonoBehaviour
 
     private static bool _isOnTempPause;
 
-    void Awake() => _myHandler = GetComponent<PlanetComponentHandler>();
+    void Awake() => _myHandler = transform.GetChild(0).GetComponent<PlanetComponentHandler>();
     
     private void OnMouseDown()
     {
+        Debug.Log("Aaaa");
         _planetOffset = OffsetPlanetDrag();
         EditorsController.Instance.LastEditedComponent = _myHandler.MyComponent;
         TimersController.Instance.StartTimer(_timer);

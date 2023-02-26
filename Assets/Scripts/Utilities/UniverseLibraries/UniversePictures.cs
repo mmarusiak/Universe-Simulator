@@ -79,4 +79,81 @@ public static class UniversePictures
         Texture2D texture = DownloadHandlerTexture.GetContent(www);
         return texture;
     }
+    
+    
+    // ---------------------------
+    // SPRITE CUTTER
+    public static Sprite[] SlicedSprite(Sprite baseSprite,Vector2 worldPointA, Vector2 worldPointB, Vector2 planetPos, float radius)
+    {
+        // Get the texture of the sprite
+        Texture2D texture = baseSprite.texture;
+        
+        // get points that line goes thru on texture
+        Vector2[] points = UniverseLine.CalculateIntersectionPointsForTexture(texture, worldPointA, worldPointB, planetPos, radius);
+        if (points == null) return null;
+        
+        // Slice the textures along the line using the intersection points as the fixed points
+        Texture2D[] slicedTextures = SliceTexture(texture, points[0], points[1]);
+        
+        // Create a new sprites using the sliced textures
+        Sprite[] slicedSprites = new Sprite[slicedTextures.Length];
+        for (int i = 0; i < slicedTextures.Length; i ++ )
+        {
+            Sprite slicedSprite = Sprite.Create(slicedTextures[i],
+                new Rect(0, 0, slicedTextures[i].width, slicedTextures[i].height),
+                new Vector2(0.5f, 0.5f), baseSprite.pixelsPerUnit);
+            slicedSprites[i] = slicedSprite;
+        }
+
+        // Set the sliced sprite on the game object
+        return slicedSprites;
+    }
+
+    // Helper method to slice a texture along a line
+    static Texture2D[] SliceTexture(Texture2D texture, Vector2 startCoord, Vector2 endCoord)
+    {
+        int width = texture.width;
+        int height = texture.height;
+
+        // Create a new texture to hold the sliced result
+        Texture2D[] slicedTexture = 
+        {
+            new (width, height, TextureFormat.RGBA32, false),
+            new (width, height, TextureFormat.RGBA32, false),
+        };
+
+        // Copy the pixels from the original texture to the sliced texture
+        slicedTexture[0].SetPixels32(texture.GetPixels32());
+        slicedTexture[1].SetPixels32(texture.GetPixels32());
+
+        // Calculate the slope and y-intercept of the slice line
+        float slope = (endCoord.y - startCoord.y) / (endCoord.x - startCoord.x);
+        float yIntercept = startCoord.y - slope
+            * startCoord.x;
+
+        // Iterate over all pixels in the texture
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                // Calculate the y-coordinate of the slice line at this x-coordinate
+                float sliceY = slope * x + yIntercept;
+
+                // Set the pixel to transparent
+                Color32 pixel = slicedTexture[0].GetPixel(x, y);
+                pixel.a = 0;
+                
+                // Check if the current pixel is above or below the slice line
+                if (y > sliceY) slicedTexture[1].SetPixel(x, y, pixel);
+                
+                else slicedTexture[0].SetPixel(x, y, pixel);
+            }
+        }
+
+        // Apply the changes to the sliced texture
+        slicedTexture[0].Apply();
+        slicedTexture[1].Apply();
+
+        return slicedTexture;
+    }
 }

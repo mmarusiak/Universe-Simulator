@@ -9,14 +9,17 @@ public class PlanetCut : MonoBehaviour
 
     List<GameObject> PlanetsOnLine(Vector2 start, Vector2 end)
     {
-        RaycastHit2D[] hits = Physics2D.LinecastAll(start, end);
-        List<GameObject> planetsOnLine = new();
-        foreach (var hit in hits)
+        List<GameObject> result = new ();
+        foreach (var component in PlanetComponentsController.Instance.AllGravityComponents)
         {
-            if (hit.transform.gameObject.CompareTag("Planet")) planetsOnLine.Add(hit.transform.gameObject);
+            var spriteBounds = component.Handler.GetComponent<SpriteMask>().bounds;
+            Vector2 spriteMin = new Vector2(spriteBounds.min.x, spriteBounds.min.y);
+            Vector2 spriteMax = new Vector2(spriteBounds.max.x, spriteBounds.max.y);
+            
+            if(UniverseLine.Intersect(start, end, spriteMin, spriteMax)) result.Add(component.Handler.gameObject);
         }
 
-        return planetsOnLine;
+        return result;
     }
 
     public void Slice(Vector2 pointA, Vector2 pointB)
@@ -31,14 +34,16 @@ public class PlanetCut : MonoBehaviour
             float radius = planet.transform.lossyScale.x / 2;
             
             // slice sprite
-            planet.GetComponent<SpriteMask>().sprite = UniverseCutter.SlicedSprite(sprite, pointA, pointB,planetPos, radius)[0];
+            planet.GetComponent<SpriteMask>().sprite = UniversePictures.SlicedSprite(sprite, pointA, pointB,planetPos, radius)[0];
             // slice collider
             Destroy(planet.GetComponent<Collider2D>());
             PolygonCollider2D polygonCollider = planet.AddComponent<PolygonCollider2D>();
             SliceCollider(planet.GetComponent<SpriteMask>(), polygonCollider);
             
             // center transform to center of new sprite
-            MovePivot(planet.GetComponent<SpriteMask>().sprite.bounds.center, planet.transform.parent);
+            var center = GetCenterFromCollider(polygonCollider);
+            Debug.Log(center);
+            MovePivot(center, planet.transform.parent);
         }
     }
 
@@ -76,11 +81,29 @@ public class PlanetCut : MonoBehaviour
         return sortedVertices.ToArray();
     }
     
-    public void MovePivot(Vector3 position, Transform target)
+    void MovePivot(Vector3 position, Transform target)
     {
         Vector3 offset = target.position - position;
+        Debug.Log(offset);
         foreach (Transform child in target)
             child.transform.position += offset;
         target.position = position;
+    }
+
+    Vector2 GetCenterFromCollider(PolygonCollider2D collider)
+    {
+        Vector2[] vertices = collider.GetPath(0);
+        float area = 0f;
+        Vector2 centroid = Vector2.zero;
+        for (int i = 0; i < vertices.Length; i++) {
+            Vector2 vertex1 = vertices[i];
+            Vector2 vertex2 = vertices[(i + 1) % vertices.Length];
+            float crossProduct = vertex1.x * vertex2.y - vertex2.x * vertex1.y;
+            area += crossProduct;
+            centroid += (vertex1 + vertex2) * crossProduct;
+        }
+        centroid /= 3f * area;
+        
+        return collider.transform.TransformPoint(centroid);
     }
 }

@@ -813,7 +813,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282855892}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -30, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2571,7 +2571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _planetsHolder: {fileID: 282855893}
   _planetPrefab: {fileID: 2077315353205059218, guid: af616f92e0dc09adfb2b7bfe686e1ce1, type: 3}
-  _loadPrefab: {fileID: 2730977995786505917, guid: 2e141d6d86e4e897788005d1b4a7159c, type: 3}
+  _loadPrefab: {fileID: 2077315353205059218, guid: 60e72a1bb8b638b32a2d481bdaf2f22c, type: 3}
 --- !u!1 &1617108217 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2103632104718754279, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}

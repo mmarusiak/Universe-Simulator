@@ -9,8 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3629354501420560343}
+  - component: {fileID: 4001336736673242564}
+  - component: {fileID: 7538424377492987285}
   m_Layer: 0
-  m_Name: Planet
+  m_Name: LoadPlanetCutable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,6 +34,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &4001336736673242564
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077315353205059218}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &7538424377492987285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077315353205059218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c2d2c2b55c8c9cf8679531abcd63c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3016064560533089609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39,9 +74,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3629354501420560343}
     m_Modifications:
+    - target: {fileID: 2730977995786505892, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
       propertyPath: radius
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: loadedFromSave
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2730977995786505916, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
       propertyPath: m_RootOrder
@@ -99,7 +142,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2730977995786505895, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+    - {fileID: 2730977995786505892, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
 --- !u!4 &881954253407216629 stripped
 Transform:
