@@ -82,7 +82,7 @@ public class PlanetTextInfo : MonoBehaviour
         Vector2 camSizeOffset = new(0,  yCamOffset);
         
         return Camera.main.WorldToScreenPoint(parent.position - new Vector3
-                (0, parent.lossyScale.y + 3.0f * localPosition.y * _textTransform.lossyScale.y +
+                (0, parent.GetComponent<PolygonCollider2D>().bounds.size.y + 3.0f * localPosition.y * _textTransform.lossyScale.y +
                     _yOffsetBetweenTexts * localPosition.y)) + new Vector3(_textSize.x / 2, 0, 0) + (Vector3) _iconOffset - (Vector3) camSizeOffset * localPosition.y;
     }
     

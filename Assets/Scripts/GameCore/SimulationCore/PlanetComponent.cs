@@ -18,6 +18,7 @@ public class PlanetComponent
     private Vector2 _currentPosition;
     // readonly fields
     private SpriteRenderer _renderer;
+    private SpriteMask _mask;
     private readonly Rigidbody2D _rigidbody;
     private Transform _planetTransform;
     // boolean that indicate if this planet is new created planet - only position is assigned in constructor
@@ -111,6 +112,13 @@ public class PlanetComponent
         set => _renderer = value;
     }
 
+    public SpriteMask Mask
+    {
+        get => _mask;
+        set => _mask = value;
+    }
+    
+
     public Rigidbody2D PlanetRigidbody => _rigidbody;
     
     private readonly Color32[] _defaultColorPalette =
@@ -127,6 +135,7 @@ public class PlanetComponent
         _planetTransform = planetTransform;
         _rigidbody = _planetTransform.GetComponent<Rigidbody2D>();
         _renderer = spriteRenderer;
+        Mask = planetTransform.GetChild(0).GetComponent<SpriteMask>();
         Radius = radius;
         Mass = mass;
         CurrentPosition = spawnPos;
@@ -142,7 +151,6 @@ public class PlanetComponent
         
         if(currentVelocity == default) currentVelocity = Vector2.zero;
         CurrentVelocity = currentVelocity;
-        
     }
     
     public void AddGravityComponent(PlanetComponent targetComponents)
@@ -237,6 +245,7 @@ public class PlanetComponent
     {
         CurrentPosition = InitialPosition;
         CurrentVelocity = InitialVelocity;
+        Mask.sprite = BasicPlanetEditor.Instance.DefaultPlanetSprite;
         _rigidbody.angularVelocity = 0;
     }
 }
