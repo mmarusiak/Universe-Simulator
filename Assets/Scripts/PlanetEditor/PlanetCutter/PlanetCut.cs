@@ -36,8 +36,7 @@ public class PlanetCut : MonoBehaviour
             // slice sprite
             planet.GetComponent<SpriteMask>().sprite = UniversePictures.SlicedSprite(sprite, pointA, pointB,planetPos, radius)[0];
             // slice collider
-            Destroy(planet.GetComponent<Collider2D>());
-            PolygonCollider2D polygonCollider = planet.AddComponent<PolygonCollider2D>();
+            PolygonCollider2D polygonCollider = planet.GetComponent<PolygonCollider2D>();
             SliceCollider(planet.GetComponent<SpriteMask>(), polygonCollider);
             
             // center transform to center of new sprite
@@ -47,7 +46,7 @@ public class PlanetCut : MonoBehaviour
         }
     }
 
-    void SliceCollider(SpriteMask mask, PolygonCollider2D polygonCollider)
+    public void SliceCollider(SpriteMask mask, PolygonCollider2D polygonCollider)
     {
         var sprite = mask.sprite;
         Vector2[] vertices = sprite.vertices;
