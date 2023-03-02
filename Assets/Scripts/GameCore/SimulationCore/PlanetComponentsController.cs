@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlanetComponentsController : MonoBehaviour
 {
@@ -31,9 +32,20 @@ public class PlanetComponentsController : MonoBehaviour
 
     public void ResetLevel()
     {
+        DestroyClones();
+        foreach (var component in _allGravityComponents) component.Reset();
+    }
+
+    void DestroyClones()
+    {
         foreach (var component in _allGravityComponents)
         {
-            component.Reset();
+            if (!component.IsOriginalPlanet)
+            {
+                component.DestroySelf();
+                DestroyClones();
+                break;
+            }
         }
     }
 
@@ -60,6 +72,6 @@ public class PlanetComponentsController : MonoBehaviour
     public void DestroyPlanet(PlanetComponentHandler handler)
     {
         RemovePlanet(handler.MyComponent);
-        Destroy(handler.gameObject);
+        Destroy(handler.transform.parent.gameObject);
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 
@@ -22,28 +23,57 @@ public class PlanetCut : MonoBehaviour
         return result;
     }
 
-    public void Slice(Vector2 pointA, Vector2 pointB)
+    public async Task Slice(Vector2 pointA, Vector2 pointB)
     {
         List<GameObject> planetsToCut = PlanetsOnLine(pointA, pointB);
         foreach (var planet in planetsToCut)
         {
-            Debug.Log(planet.name);
+            var planetT = planet.transform.parent;
+            
             // now we should create two new game objects -> calculate mass of them -> add a bit of force and offset to de-attach them
             var sprite = planet.GetComponent<SpriteMask>().sprite;
             Vector2 planetPos = planet.transform.position;
             float radius = planet.transform.lossyScale.x / 2;
+            float originalArea = CalculatePolygonArea(planet.GetComponent<PolygonCollider2D>().points);
+
+            // cloning planet
+            var cloneT = Instantiate(planetT.gameObject, planetT.parent);
+            var cloneBase = cloneT.transform.GetChild(0).gameObject;
+
+            var handler = cloneBase.GetComponent<PlanetComponentHandler>();
+            while (handler.MyComponent is null) await Task.Yield();
+
+            handler.MyComponent.IsOriginalPlanet = false;
+            cloneT.transform.position = planetT.position;
             
-            // slice sprite
-            planet.GetComponent<SpriteMask>().sprite = UniversePictures.SlicedSprite(sprite, pointA, pointB,planetPos, radius)[0];
-            // slice collider
-            PolygonCollider2D polygonCollider = planet.GetComponent<PolygonCollider2D>();
-            SliceCollider(planet.GetComponent<SpriteMask>(), polygonCollider);
+            var sprites = UniversePictures.SlicedSprite(sprite, pointA, pointB, planetPos, radius);
             
-            // center transform to center of new sprite
-            var center = GetCenterFromCollider(polygonCollider);
-            Debug.Log(center);
-            MovePivot(center, planet.transform.parent);
+            // making two slices
+            ApplySlice(planet, sprites[0], originalArea);
+            ApplySlice(cloneBase, sprites[1], originalArea);
+
+            planetT.transform.position += new Vector3(.1f, .1f, 0);
+            cloneT.transform.position -= new Vector3(.1f, .1f, 0);
         }
+    }
+
+    void ApplySlice(GameObject target, Sprite sprite, float originalArea)
+    { 
+        // slice sprite
+        target.GetComponent<SpriteMask>().sprite = sprite;
+        // slice collider
+        PolygonCollider2D polygonCollider = target.GetComponent<PolygonCollider2D>();
+        SliceCollider(target.GetComponent<SpriteMask>(), polygonCollider);
+            
+        // center transform to center of new sprite
+        var center = GetCenterFromCollider(polygonCollider);
+        Debug.Log(center);
+        MovePivot(center, target.transform.parent);
+        
+        // separate them
+        float divider = CalculatePolygonArea(polygonCollider.points)/originalArea;
+        var handler = target.GetComponent<PlanetComponentHandler>();
+        handler.MyComponent.Mass *= divider;
     }
 
     public void SliceCollider(SpriteMask mask, PolygonCollider2D polygonCollider)
@@ -104,5 +134,23 @@ public class PlanetCut : MonoBehaviour
         centroid /= 3f * area;
         
         return collider.transform.TransformPoint(centroid);
+    }
+    
+    float CalculatePolygonArea(Vector2[] points)
+    {
+        float area = 0;
+
+        for (int i = 0; i < points.Length; i++)
+        {
+            Vector2 p1 = points[i];
+            Vector2 p2 = i == points.Length - 1 ? points[0] : points[i + 1];
+
+            area += (p1.x * p2.y - p2.x * p1.y);
+        }
+
+        area /= 2;
+        area = Mathf.Abs(area);
+
+        return area;
     }
 }

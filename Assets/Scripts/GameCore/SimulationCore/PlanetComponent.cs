@@ -29,6 +29,14 @@ public class PlanetComponent
     private static int _planetCount;
     private int _planetNum;
 
+    private bool _isOriginalPlanet = true;
+
+    public bool IsOriginalPlanet
+    {
+        get => _isOriginalPlanet;
+        set => _isOriginalPlanet = value;
+    }
+
     // properties
     public List<PlanetComponent> OtherComponents
     {
@@ -248,5 +256,10 @@ public class PlanetComponent
         Mask.sprite = BasicPlanetEditor.Instance.DefaultPlanetSprite;
         PlanetCut.Instance.SliceCollider(Mask, _planetTransform.GetChild(0).GetComponent<PolygonCollider2D>());
         _rigidbody.angularVelocity = 0;
+    }
+
+    public void DestroySelf()
+    {
+        PlanetComponentsController.Instance.DestroyPlanet(_handler);
     }
 }
