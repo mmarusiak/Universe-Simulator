@@ -40,10 +40,12 @@ public class PlanetCut : MonoBehaviour
             var cloneT = Instantiate(planetT.gameObject, planetT.parent);
             var cloneBase = cloneT.transform.GetChild(0).gameObject;
 
-            var handler = cloneBase.GetComponent<PlanetComponentHandler>();
-            while (handler.MyComponent is null) await Task.Yield();
+            var clonedHandler = cloneBase.GetComponent<PlanetComponentHandler>();
+            var originalHandler = planet.GetComponent<PlanetComponentHandler>();
+            while (clonedHandler.MyComponent is null) await Task.Yield();
 
-            handler.MyComponent.IsOriginalPlanet = false;
+            clonedHandler.MyComponent.PlanetColor = originalHandler.MyComponent.PlanetColor;
+            clonedHandler.MyComponent.IsOriginalPlanet = false;
             cloneT.transform.position = planetT.position;
             
             var sprites = UniversePictures.SlicedSprite(sprite, pointA, pointB, planetPos, radius);
