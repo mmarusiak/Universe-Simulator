@@ -3510,6 +3510,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1928792376569096800}
+    - target: {fileID: 5100645942956115383, guid: 19aa554244a40075f956a12de6c3ee72, type: 3}
+      propertyPath: _defaultPlanetSprite
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: 548e408a53772f9a2a80cfc1f7095e1f, type: 3}
     m_RemovedComponents:
     - {fileID: 7225369688835805, guid: 19aa554244a40075f956a12de6c3ee72, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 19aa554244a40075f956a12de6c3ee72, type: 3}
