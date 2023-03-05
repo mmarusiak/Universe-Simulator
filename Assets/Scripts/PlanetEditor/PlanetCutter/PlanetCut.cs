@@ -28,25 +28,34 @@ public class PlanetCut : MonoBehaviour
         List<GameObject> planetsToCut = PlanetsOnLine(pointA, pointB);
         foreach (var planet in planetsToCut)
         {
+            if (planet is null) continue;
+            
             var planetT = planet.transform.parent;
             
             // now we should create two new game objects -> calculate mass of them -> add a bit of force and offset to de-attach them
             var sprite = planet.GetComponent<SpriteMask>().sprite;
             Vector2 planetPos = planet.transform.position;
             float radius = planet.transform.lossyScale.x / 2;
+            // original area is used to calculate masses
             float originalArea = CalculatePolygonArea(planet.GetComponent<PolygonCollider2D>().points);
-
-            // cloning planet
-            var cloneT = Instantiate(planetT.gameObject, planetT.parent);
-            var cloneBase = cloneT.transform.GetChild(0).gameObject;
-
-            var clonedHandler = cloneBase.GetComponent<PlanetComponentHandler>();
+            
             var originalHandler = planet.GetComponent<PlanetComponentHandler>();
-            while (clonedHandler.MyComponent is null) await Task.Yield();
+            originalHandler.IsCloned = true;
 
+            // cloning planet - clone t contains real position of planet - position on which forces are calculated, also contains rigidbody
+            var cloneT = Instantiate(planetT.gameObject, planetT.parent);
+            // clone base contains mask and collider
+            var cloneBase = cloneT.transform.GetChild(0).gameObject;
+            
+            var clonedHandler = cloneBase.GetComponent<PlanetComponentHandler>();
+
+            while (clonedHandler.MyComponent is null) await Task.Yield();
+            
             clonedHandler.MyComponent.PlanetColor = originalHandler.MyComponent.PlanetColor;
             clonedHandler.MyComponent.IsOriginalPlanet = false;
             cloneT.transform.position = planetT.position;
+            
+            originalHandler.IsCloned = false;
             
             var sprites = UniversePictures.SlicedSprite(sprite, pointA, pointB, planetPos, radius);
             
@@ -54,10 +63,7 @@ public class PlanetCut : MonoBehaviour
             ApplySlice(planet, sprites[0], originalArea);
             ApplySlice(cloneBase, sprites[1], originalArea);
             
-            Debug.Log(planet.name);
-
-            planetT.transform.position += new Vector3(.1f, .1f, 0);
-            cloneT.transform.position -= new Vector3(.1f, .1f, 0);
+            // now we need to move them out a bit
         }
     }
 
@@ -77,7 +83,6 @@ public class PlanetCut : MonoBehaviour
         // change mass of the slices
         float divider = CalculatePolygonArea(polygonCollider.points)/originalArea;
         var handler = target.GetComponent<PlanetComponentHandler>();
-        //Debug.Log(divider);
         handler.MyComponent.Mass *= divider;
     }
 

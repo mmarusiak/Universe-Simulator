@@ -6,19 +6,26 @@ public class PlanetComponentHandler : MonoBehaviour
     [SerializeField] private float mass, radius;
     [SerializeField] private string name;
     [SerializeField] private Vector2 spawnPos;
-    [SerializeField] private bool isDemoPlanet, loadedFromSave;
-    
+    [SerializeField] private bool isDemoPlanet, loadedFromSave, isCloned;
+
     private PlanetComponent _myComponent = null;
 
     [SerializeField] private PlanetTextInfo _onNameChanged, _onVelocityChanged;
     public PlanetTextInfo OnNameChanged => _onNameChanged;
     public PlanetTextInfo OnVelocityChanged => _onVelocityChanged;
-
     public PlanetComponent MyComponent => _myComponent;
+    public bool IsCloned
+    {
+        get => isCloned;
+        set => isCloned = value;
+    }
+
 
     private async void Start()
     {
-        if (!isDemoPlanet && !loadedFromSave) spawnPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (!isDemoPlanet && !loadedFromSave && !isCloned) spawnPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // hide it when slicing
+        else if (isCloned) spawnPos = new Vector2(9999, 9999);
         else if (loadedFromSave)
         {
             BeginLoad();
