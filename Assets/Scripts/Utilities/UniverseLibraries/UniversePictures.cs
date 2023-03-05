@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -155,5 +156,74 @@ public static class UniversePictures
         slicedTexture[1].Apply();
 
         return slicedTexture;
+    }
+
+    public static List<Vector2> GetOutlineFromSprite(Sprite sprite, Transform holder)
+    {
+        Texture2D spriteTexture = sprite.texture;
+        int width = spriteTexture.width;
+        int height = spriteTexture.height;
+
+        // Convert sprite texture to binary image
+        Color[] pixels = spriteTexture.GetPixels();
+        bool[] binaryImage = new bool[pixels.Length];
+        for (int i = 0; i < pixels.Length; i++)
+        {
+            binaryImage[i] = pixels[i].a > 0.5f;
+        }
+
+        // Apply dilation operation
+        bool[] dilatedImage = new bool[pixels.Length];
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                int index = x + y * width;
+                if (binaryImage[index])
+                {
+                    for (int dx = -1; dx <= 1; dx++)
+                    {
+                        for (int dy = -1; dy <= 1; dy++)
+                        {
+                            int neighborX = x + dx;
+                            int neighborY = y + dy;
+                            if (neighborX >= 0 && neighborX < width &&
+                                neighborY >= 0 && neighborY < height &&
+                                !binaryImage[neighborX + neighborY * width])
+                            {
+                                dilatedImage[neighborX + neighborY * width] = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Subtract binary image from dilated image to obtain outline
+        bool[] outlineImage = new bool[pixels.Length];
+        for (int i = 0; i < pixels.Length; i++)
+        {
+            outlineImage[i] = dilatedImage[i] && !binaryImage[i];
+        }
+
+        float yScale = holder.transform.localScale.y / spriteTexture.height; 
+        float xScale = holder.transform.localScale.x / spriteTexture.width; 
+        
+        // Convert outline pixels to list of local space vectors
+        List<Vector2> outlinePoints = new List<Vector2>();
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                int index = x + y * width;
+                if (outlineImage[index])
+                {
+                    Vector3 worldPos = new(x * xScale + holder.localPosition.x - holder.localScale.x/2, y * yScale + holder.localPosition.y - holder.localScale.y/2);
+                    outlinePoints.Add(worldPos);
+                }
+            }
+        }
+
+        return outlinePoints;
     }
 }

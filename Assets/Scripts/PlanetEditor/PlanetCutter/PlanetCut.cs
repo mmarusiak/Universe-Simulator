@@ -53,6 +53,8 @@ public class PlanetCut : MonoBehaviour
             // making two slices
             ApplySlice(planet, sprites[0], originalArea);
             ApplySlice(cloneBase, sprites[1], originalArea);
+            
+            Debug.Log(planet.name);
 
             planetT.transform.position += new Vector3(.1f, .1f, 0);
             cloneT.transform.position -= new Vector3(.1f, .1f, 0);
@@ -60,7 +62,7 @@ public class PlanetCut : MonoBehaviour
     }
 
     void ApplySlice(GameObject target, Sprite sprite, float originalArea)
-    { 
+    {
         // slice sprite
         target.GetComponent<SpriteMask>().sprite = sprite;
         // slice collider
@@ -69,26 +71,27 @@ public class PlanetCut : MonoBehaviour
             
         // center transform to center of new sprite
         var center = GetCenterFromCollider(polygonCollider);
-        Debug.Log(center);
+       // Debug.Log(center);
         MovePivot(center, target.transform.parent);
         
-        // separate them
+        // change mass of the slices
         float divider = CalculatePolygonArea(polygonCollider.points)/originalArea;
         var handler = target.GetComponent<PlanetComponentHandler>();
+        //Debug.Log(divider);
         handler.MyComponent.Mass *= divider;
     }
 
     public void SliceCollider(SpriteMask mask, PolygonCollider2D polygonCollider)
     {
         var sprite = mask.sprite;
-        Vector2[] vertices = sprite.vertices;
+        Vector2[] vertices = UniversePictures.GetOutlineFromSprite(sprite, mask.transform).ToArray();
+        Debug.Log(vertices.Length);
         vertices = SortVerticesClockwise(vertices);
         
         polygonCollider.SetPath(0, vertices);
         polygonCollider.pathCount = 1;
     }
-    
-    
+
     // Helper method to sort the vertices in clockwise order
     private Vector2[] SortVerticesClockwise(Vector2[] vertices)
     {
@@ -115,7 +118,6 @@ public class PlanetCut : MonoBehaviour
     void MovePivot(Vector3 position, Transform target)
     {
         Vector3 offset = target.position - position;
-        Debug.Log(offset);
         foreach (Transform child in target)
             child.transform.position += offset;
         target.position = position;
