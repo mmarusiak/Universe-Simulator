@@ -48,9 +48,8 @@ public class PlanetCut : MonoBehaviour
             var cloneBase = cloneT.transform.GetChild(0).gameObject;
             
             var clonedHandler = cloneBase.GetComponent<PlanetComponentHandler>();
+            clonedHandler.LoadAsSlice(originalHandler.MyComponent);
 
-            while (clonedHandler.MyComponent is null) await Task.Yield();
-            
             clonedHandler.MyComponent.PlanetColor = originalHandler.MyComponent.PlanetColor;
             clonedHandler.MyComponent.IsOriginalPlanet = false;
             cloneT.transform.position = planetT.position;
@@ -77,7 +76,7 @@ public class PlanetCut : MonoBehaviour
             
         // center transform to center of new sprite
         var center = GetCenterFromCollider(polygonCollider);
-       // Debug.Log(center);
+        // Debug.Log(center);
         MovePivot(center, target.transform.parent);
         
         // change mass of the slices

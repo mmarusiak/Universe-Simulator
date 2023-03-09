@@ -25,7 +25,7 @@ public class PlanetComponentHandler : MonoBehaviour
     {
         if (!isDemoPlanet && !loadedFromSave && !isCloned) spawnPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // hide it when slicing
-        else if (isCloned) spawnPos = new Vector2(9999, 9999);
+        else if (isCloned) return;
         else if (loadedFromSave)
         {
             BeginLoad();
@@ -40,6 +40,11 @@ public class PlanetComponentHandler : MonoBehaviour
         while (PlanetComponentsController.Instance == null) await Task.Yield();
         // whole component loads from saving handler script
         PlanetComponentsController.Instance.AddNewGravityComponent(MyComponent);
+    }
+
+    public void LoadAsSlice(PlanetComponent src)
+    {
+        _myComponent = new PlanetComponent(this, transform.parent, transform.GetChild(0).GetComponent<SpriteRenderer>(), src.Radius, src.Mass, src.InitialPosition, src.Name);
     }
 
     void BeginLoad()
