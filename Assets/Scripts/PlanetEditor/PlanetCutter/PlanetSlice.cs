@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 
-public class PlanetCut : MonoBehaviour
+public class PlanetSlice : MonoBehaviour
 {
-    public static PlanetCut Instance;
+    public static PlanetSlice Instance;
     void Awake() => Instance = this;
 
     List<GameObject> PlanetsOnLine(Vector2 start, Vector2 end)
@@ -23,7 +22,7 @@ public class PlanetCut : MonoBehaviour
         return result;
     }
 
-    public async Task Slice(Vector2 pointA, Vector2 pointB)
+    public void Slice(Vector2 pointA, Vector2 pointB)
     {
         List<GameObject> planetsToCut = PlanetsOnLine(pointA, pointB);
         foreach (var planet in planetsToCut)
@@ -47,18 +46,15 @@ public class PlanetCut : MonoBehaviour
             // clone base contains mask and collider
             var cloneBase = cloneT.transform.GetChild(0).gameObject;
             
+            // load cloned component for handler
             var clonedHandler = cloneBase.GetComponent<PlanetComponentHandler>();
             clonedHandler.LoadAsSlice(originalHandler.MyComponent);
-
-            clonedHandler.MyComponent.PlanetColor = originalHandler.MyComponent.PlanetColor;
-            clonedHandler.MyComponent.IsOriginalPlanet = false;
-            cloneT.transform.position = originalT.position;
-            
             originalHandler.IsCloned = false;
             
+            // slice sprites
             var sprites = UniversePictures.SlicedSprite(sprite, pointA, pointB, planetPos, radius);
             
-            // making two slices
+            // apply sliced sprites to planets and slice collider
             ApplySlice(planet, sprites[0], originalArea);
             ApplySlice(cloneBase, sprites[1], originalArea);
             originalHandler.MyComponent.GetPosFromTransform();

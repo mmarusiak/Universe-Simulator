@@ -75,7 +75,7 @@ public class LeftSideButtonsController : MonoBehaviour
             else
             {
                 _cutsVectors[1] = mousePosition;
-                PlanetCut.Instance.Slice(_cutsVectors[0], _cutsVectors[1]);
+                PlanetSlice.Instance.Slice(_cutsVectors[0], _cutsVectors[1]);
                 _isCutable = false;
             }
         }

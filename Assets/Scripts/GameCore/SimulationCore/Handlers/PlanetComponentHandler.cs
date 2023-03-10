@@ -44,7 +44,7 @@ public class PlanetComponentHandler : MonoBehaviour
 
     public void LoadAsSlice(PlanetComponent src)
     {
-        _myComponent = new PlanetComponent(this, transform.parent, transform.GetChild(0).GetComponent<SpriteRenderer>(), src.Radius, src.Mass, src.InitialPosition, src.Name);
+        _myComponent = new PlanetComponent(this, transform.parent, transform.GetChild(0).GetComponent<SpriteRenderer>(), src.Radius, src.Mass, src.InitialPosition, src.Name, src.PlanetColor);
         AddToController();
     }
 

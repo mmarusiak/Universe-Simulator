@@ -272,7 +272,7 @@ public class PlanetComponent
         CurrentPosition = InitialPosition;
         CurrentVelocity = InitialVelocity;
         Mask.sprite = BasicPlanetEditor.Instance.DefaultPlanetSprite;
-        PlanetCut.Instance.SliceCollider(Mask, _planetTransform.GetChild(0).GetComponent<PolygonCollider2D>());
+        PlanetSlice.Instance.SliceCollider(Mask, _planetTransform.GetChild(0).GetComponent<PolygonCollider2D>());
         _rigidbody.angularVelocity = 0;
     }
 
