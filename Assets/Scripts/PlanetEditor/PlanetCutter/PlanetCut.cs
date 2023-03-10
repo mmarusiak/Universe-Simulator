@@ -61,12 +61,14 @@ public class PlanetCut : MonoBehaviour
             // making two slices
             ApplySlice(planet, sprites[0], originalArea);
             ApplySlice(cloneBase, sprites[1], originalArea);
-            
+            originalHandler.MyComponent.GetPosFromTransform();
+            clonedHandler.MyComponent.GetPosFromTransform();
+
             // now we need to move them out a bit
             int xFlag = originalT.position.x > cloneT.transform.position.x ? 1 : -1, yFlag = originalT.position.y > cloneT.transform.position.y ? 1 : -1;
-            Vector3 posToMove = new(xFlag, yFlag);
-            originalT.position += posToMove / 10;
-            cloneT.transform.position -= posToMove / 10;
+            Vector2 posToMove = new(xFlag, yFlag);
+            originalHandler.MyComponent.InitialPosition += posToMove / 10;
+            clonedHandler.MyComponent.InitialPosition -= posToMove / 10;
             // we need to think about saving slices??
         }
     }

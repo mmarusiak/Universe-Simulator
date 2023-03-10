@@ -182,12 +182,30 @@ public class PlanetComponent
             float proportionScale = force / distance;
             Vector2 forceVector = new (proportionScale * distanceVector.x, proportionScale * distanceVector.y);
             
+            if (float.IsNaN(forceVector.x) || float.IsNaN(forceVector.y))
+            {
+                Debug.LogWarning($"One of currentGravityForce values is NaN. " +
+                                 $"\n\nvector values: {forceVector}" +
+                                 $"\n distance: {distanceVector}" +
+                                 $"\nplanet (receiver) info: " +
+                                 $"\n- name = {_name}" +
+                                 $"\n- mass = {_mass}" +
+                                 $"\n- radius = {_radius}" +
+                                 $"\nplanet (sender) info:" +
+                                 $"\n- name = {otherComponent._name}" +
+                                 $"\n- mass = {otherComponent._mass}" +
+                                 $"\n- radius = {otherComponent._radius}");
+                continue;
+            }
+            
             currentGravityForce += forceVector * _temporaryMultiplier;
         }
         
         CurrentPosition = _planetTransform.position;
         _rigidbody.AddForce(currentGravityForce, ForceMode2D.Impulse);
     }
+
+    public void GetPosFromTransform() => CurrentPosition = PlanetTransform.position;
 
     // setters
     void SetPlanetSprite(Sprite newSprite)
