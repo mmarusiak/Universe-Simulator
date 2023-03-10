@@ -158,7 +158,7 @@ public static class UniversePictures
         return slicedTexture;
     }
 
-    public static List<Vector2> GetOutlineFromSprite(Sprite sprite, Transform holder)
+    public static List<Vector2> GetOutlineFromSprite(Sprite sprite, Transform holder, int resolution)
     {
         Texture2D spriteTexture = sprite.texture;
         int width = spriteTexture.width;
@@ -174,7 +174,7 @@ public static class UniversePictures
 
         // Apply dilation operation
         bool[] dilatedImage = new bool[pixels.Length];
-        for (int x = 0; x < width; x++)
+        for (int x = 0; x < width; x += resolution)
         {
             for (int y = 0; y < height; y++)
             {
@@ -211,9 +211,9 @@ public static class UniversePictures
         
         // Convert outline pixels to list of local space vectors
         List<Vector2> outlinePoints = new List<Vector2>();
-        for (int x = 0; x < width; x++)
+        for (int x = 0; x < width; x += resolution)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < height; y += resolution)
             {
                 int index = x + y * width;
                 if (outlineImage[index])

@@ -30,7 +30,7 @@ public class PlanetCut : MonoBehaviour
         {
             if (planet is null) continue;
             
-            var planetT = planet.transform.parent;
+            var originalT = planet.transform.parent;
             
             // now we should create two new game objects -> calculate mass of them -> add a bit of force and offset to de-attach them
             var sprite = planet.GetComponent<SpriteMask>().sprite;
@@ -43,7 +43,7 @@ public class PlanetCut : MonoBehaviour
             originalHandler.IsCloned = true;
 
             // cloning planet - clone t contains real position of planet - position on which forces are calculated, also contains rigidbody
-            var cloneT = Instantiate(planetT.gameObject, planetT.parent);
+            var cloneT = Instantiate(originalT.gameObject, originalT.parent);
             // clone base contains mask and collider
             var cloneBase = cloneT.transform.GetChild(0).gameObject;
             
@@ -52,7 +52,7 @@ public class PlanetCut : MonoBehaviour
 
             clonedHandler.MyComponent.PlanetColor = originalHandler.MyComponent.PlanetColor;
             clonedHandler.MyComponent.IsOriginalPlanet = false;
-            cloneT.transform.position = planetT.position;
+            cloneT.transform.position = originalT.position;
             
             originalHandler.IsCloned = false;
             
@@ -63,6 +63,11 @@ public class PlanetCut : MonoBehaviour
             ApplySlice(cloneBase, sprites[1], originalArea);
             
             // now we need to move them out a bit
+            int xFlag = originalT.position.x > cloneT.transform.position.x ? 1 : -1, yFlag = originalT.position.y > cloneT.transform.position.y ? 1 : -1;
+            Vector3 posToMove = new(xFlag, yFlag);
+            originalT.position += posToMove / 10;
+            cloneT.transform.position -= posToMove / 10;
+            // we need to think about saving slices??
         }
     }
 
@@ -88,7 +93,7 @@ public class PlanetCut : MonoBehaviour
     public void SliceCollider(SpriteMask mask, PolygonCollider2D polygonCollider)
     {
         var sprite = mask.sprite;
-        Vector2[] vertices = UniversePictures.GetOutlineFromSprite(sprite, mask.transform).ToArray();
+        Vector2[] vertices = UniversePictures.GetOutlineFromSprite(sprite, mask.transform, 2).ToArray();
         Debug.Log(vertices.Length);
         vertices = SortVerticesClockwise(vertices);
         
