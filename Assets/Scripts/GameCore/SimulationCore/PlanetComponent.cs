@@ -275,6 +275,7 @@ public class PlanetComponent
         Mask.sprite = BasicPlanetEditor.Instance.DefaultPlanetSprite;
         ClearPivot();
         PlanetSlice.Instance.SliceCollider(Mask, _planetTransform.GetChild(0).GetComponent<PolygonCollider2D>());
+        _planetTransform.rotation = Quaternion.Euler(0,0,0);
         _rigidbody.angularVelocity = 0;
     }
 
