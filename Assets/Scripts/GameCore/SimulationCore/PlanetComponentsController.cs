@@ -28,8 +28,13 @@ public class PlanetComponentsController : MonoBehaviour
         _allGravityComponents.Add(gravityComponent);
     }
 
-    public void RemovePlanet(PlanetComponent planetComponent) => _allGravityComponents.Remove(planetComponent);
+    void RemovePlanet(PlanetComponent planetComponent) => _allGravityComponents.Remove(planetComponent);
 
+    void RemovePlanettOnPlanets(PlanetComponent planetComponent)
+    {
+        foreach (var createdComponent in _allGravityComponents)
+            createdComponent.OtherComponents.Remove(planetComponent);
+    }
     public void ResetLevel()
     {
         DestroyClones();
@@ -42,6 +47,8 @@ public class PlanetComponentsController : MonoBehaviour
         {
             if (!component.IsOriginalPlanet)
             {
+                RemovePlanettOnPlanets(component);
+                RemovePlanet(component);
                 component.DestroySelf();
                 DestroyClones();
                 break;
@@ -71,6 +78,7 @@ public class PlanetComponentsController : MonoBehaviour
 
     public void DestroyPlanet(PlanetComponentHandler handler)
     {
+        RemovePlanettOnPlanets(handler.MyComponent);
         RemovePlanet(handler.MyComponent);
         Destroy(handler.transform.parent.gameObject);
     }

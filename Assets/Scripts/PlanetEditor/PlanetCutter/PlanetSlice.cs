@@ -30,6 +30,9 @@ public class PlanetSlice : MonoBehaviour
             if (planet is null) continue;
             
             var originalT = planet.transform.parent;
+            var originalHandler = planet.GetComponent<PlanetComponentHandler>();
+            originalHandler.IsCloned = true;
+            originalHandler.ClonedMoment = true;
             
             // now we should create two new game objects -> calculate mass of them -> add a bit of force and offset to de-attach them
             var sprite = planet.GetComponent<SpriteMask>().sprite;
@@ -38,9 +41,6 @@ public class PlanetSlice : MonoBehaviour
             // original area is used to calculate masses
             float originalArea = CalculatePolygonArea(planet.GetComponent<PolygonCollider2D>().points);
             
-            var originalHandler = planet.GetComponent<PlanetComponentHandler>();
-            originalHandler.IsCloned = true;
-
             // cloning planet - clone t contains real position of planet - position on which forces are calculated, also contains rigidbody
             var cloneT = Instantiate(originalT.gameObject, originalT.parent);
             // clone base contains mask and collider
@@ -48,6 +48,7 @@ public class PlanetSlice : MonoBehaviour
             
             // load cloned component for handler
             var clonedHandler = cloneBase.GetComponent<PlanetComponentHandler>();
+            clonedHandler.ClonedMoment = true;
             clonedHandler.LoadAsSlice(originalHandler.MyComponent);
             originalHandler.IsCloned = false;
             
@@ -63,9 +64,11 @@ public class PlanetSlice : MonoBehaviour
             // now we need to move them out a bit
             int xFlag = originalT.position.x > cloneT.transform.position.x ? 1 : -1, yFlag = originalT.position.y > cloneT.transform.position.y ? 1 : -1;
             Vector2 posToMove = new(xFlag, yFlag);
-            originalHandler.MyComponent.InitialPosition += posToMove / 10;
-            clonedHandler.MyComponent.InitialPosition -= posToMove / 10;
+            originalHandler.MyComponent.CurrentPosition += posToMove / 10;
+            clonedHandler.MyComponent.CurrentPosition -= posToMove / 10;
             // we need to think about saving slices??
+            clonedHandler.ClonedMoment = false;
+            originalHandler.ClonedMoment = false;
         }
     }
 
@@ -79,7 +82,6 @@ public class PlanetSlice : MonoBehaviour
             
         // center transform to center of new sprite
         var center = GetCenterFromCollider(polygonCollider);
-        // Debug.Log(center);
         MovePivot(center, target.transform.parent);
         
         // change mass of the slices

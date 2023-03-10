@@ -780,7 +780,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: cutter
+  m_Text: slicer
 --- !u!222 &192456815
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1928,7 +1928,7 @@ GameObject:
   - component: {fileID: 767438442}
   - component: {fileID: 767438441}
   m_Layer: 5
-  m_Name: CutCheck
+  m_Name: Slice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

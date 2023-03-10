@@ -6,8 +6,8 @@ public class PlanetComponentHandler : MonoBehaviour
     [SerializeField] private float mass, radius;
     [SerializeField] private string name;
     [SerializeField] private Vector2 spawnPos;
-    [SerializeField] private bool isDemoPlanet, loadedFromSave, isCloned;
-
+    [SerializeField] private bool isDemoPlanet, loadedFromSave, isCloned, clonedMoment;
+    
     private PlanetComponent _myComponent = null;
 
     [SerializeField] private PlanetTextInfo _onNameChanged, _onVelocityChanged;
@@ -19,6 +19,13 @@ public class PlanetComponentHandler : MonoBehaviour
         get => isCloned;
         set => isCloned = value;
     }
+    
+    public bool ClonedMoment
+    {
+        get => clonedMoment;
+        set => clonedMoment = value;
+    }
+
 
 
     private async void Start()
@@ -45,6 +52,7 @@ public class PlanetComponentHandler : MonoBehaviour
     public void LoadAsSlice(PlanetComponent src)
     {
         _myComponent = new PlanetComponent(this, transform.parent, transform.GetChild(0).GetComponent<SpriteRenderer>(), src.Radius, src.Mass, src.InitialPosition, src.Name, src.PlanetColor);
+        _myComponent.IsOriginalPlanet = false;
         AddToController();
     }
 

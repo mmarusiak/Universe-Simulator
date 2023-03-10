@@ -200,12 +200,13 @@ public class PlanetComponent
             
             currentGravityForce += forceVector * _temporaryMultiplier;
         }
-        
-        CurrentPosition = _planetTransform.position;
+
+        if (_handler.ClonedMoment) return;
+        GetPosFromTransform();
         _rigidbody.AddForce(currentGravityForce, ForceMode2D.Impulse);
     }
 
-    public void GetPosFromTransform() => CurrentPosition = PlanetTransform.position;
+    public void GetPosFromTransform() => _currentPosition = PlanetTransform.position;
 
     // setters
     void SetPlanetSprite(Sprite newSprite)
