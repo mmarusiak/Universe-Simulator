@@ -31,12 +31,13 @@ public class PlanetSlice : MonoBehaviour
             
             var originalT = planet.transform.parent;
             var originalHandler = planet.GetComponent<PlanetComponentHandler>();
+            bool isOriginalClone = originalHandler.IsCloned;
             originalHandler.IsCloned = true;
             originalHandler.ClonedMoment = true;
             
             // now we should create two new game objects -> calculate mass of them -> add a bit of force and offset to de-attach them
-            var sprite = planet.GetComponent<SpriteMask>().sprite;
-            Vector2 planetPos = planet.transform.position;
+            var originalSprite = planet.GetComponent<SpriteMask>().sprite;
+            Vector2 planetPos = originalT.transform.position;
             float radius = planet.transform.lossyScale.x / 2;
             // original area is used to calculate masses
             float originalArea = CalculatePolygonArea(planet.GetComponent<PolygonCollider2D>().points);
@@ -50,14 +51,14 @@ public class PlanetSlice : MonoBehaviour
             var clonedHandler = cloneBase.GetComponent<PlanetComponentHandler>();
             clonedHandler.ClonedMoment = true;
             clonedHandler.LoadAsSlice(originalHandler.MyComponent);
-            originalHandler.IsCloned = false;
+            originalHandler.IsCloned = isOriginalClone;
             
             // slice sprites
-            var sprites = UniversePictures.SlicedSprite(sprite, pointA, pointB, planetPos, radius);
+            var slicedSprites = UniversePictures.SlicedSprite(originalSprite, pointA, pointB, planetPos, radius);
             
             // apply sliced sprites to planets and slice collider
-            ApplySlice(planet, sprites[0], originalArea);
-            ApplySlice(cloneBase, sprites[1], originalArea);
+            ApplySlice(planet, slicedSprites[0], originalArea);
+            ApplySlice(cloneBase, slicedSprites[1], originalArea);
             originalHandler.MyComponent.GetPosFromTransform();
             clonedHandler.MyComponent.GetPosFromTransform();
 

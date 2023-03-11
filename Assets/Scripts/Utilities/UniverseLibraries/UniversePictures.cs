@@ -218,7 +218,7 @@ public static class UniversePictures
                 int index = x + y * width;
                 if (outlineImage[index])
                 {
-                    Vector3 worldPos = new Vector3(x * xScale, y * yScale) + holder.transform.localPosition - holder.transform.localScale/2;
+                    Vector3 worldPos = new Vector3(x * xScale, y * yScale) - holder.localScale/2;
                     outlinePoints.Add(worldPos);
                 }
             }
