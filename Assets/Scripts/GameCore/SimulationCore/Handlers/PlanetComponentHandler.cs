@@ -6,7 +6,7 @@ public class PlanetComponentHandler : MonoBehaviour
     [SerializeField] private float mass, radius;
     [SerializeField] private string name;
     [SerializeField] private Vector2 spawnPos;
-    [SerializeField] private bool isDemoPlanet, loadedFromSave, isCloned, clonedMoment;
+    [SerializeField] private bool isDemoPlanet, loadedFromSave, isCloned;
     
     private PlanetComponent _myComponent = null;
 
@@ -19,14 +19,6 @@ public class PlanetComponentHandler : MonoBehaviour
         get => isCloned;
         set => isCloned = value;
     }
-    
-    public bool ClonedMoment
-    {
-        get => clonedMoment;
-        set => clonedMoment = value;
-    }
-
-
 
     private async void Start()
     {

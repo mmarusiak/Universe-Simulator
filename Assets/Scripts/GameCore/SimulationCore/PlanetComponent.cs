@@ -200,8 +200,7 @@ public class PlanetComponent
             
             currentGravityForce += forceVector * _temporaryMultiplier;
         }
-
-        if (_handler.ClonedMoment) return;
+        
         GetPosFromTransform();
         _rigidbody.AddForce(currentGravityForce, ForceMode2D.Impulse);
     }
