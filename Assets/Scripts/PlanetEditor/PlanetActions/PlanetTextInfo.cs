@@ -100,6 +100,11 @@ public class PlanetTextInfo : MonoBehaviour
         _targetOutput.gameObject.name = value;
         _targetOutput.text = _leftSide + value + _rightSide;
     }
+
+    public string GetValue()
+    {
+        return _targetOutput.text;
+    }
     
     void OnDestroy()
     {

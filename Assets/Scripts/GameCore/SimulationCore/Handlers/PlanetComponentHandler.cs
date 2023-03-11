@@ -46,6 +46,8 @@ public class PlanetComponentHandler : MonoBehaviour
         _myComponent = new PlanetComponent(this, transform.parent, transform.GetChild(0).GetComponent<SpriteRenderer>(), src.Radius, src.Mass, src.CurrentPosition, src.Name, src.PlanetColor, src.CurrentVelocity);
         _myComponent.IsOriginalPlanet = false;
         AddToController();
+        // slice doesnt have own planet text name info container!!!
+        Debug.Log(_onNameChanged.GetValue());
     }
 
     void BeginLoad()

@@ -70,6 +70,8 @@ public class PlanetSlice : MonoBehaviour
         var clonedHandler = cloneBase.GetComponent<PlanetComponentHandler>();
         clonedHandler.LoadAsSlice(originalHandler.MyComponent); // action
         originalHandler.IsCloned = isOriginalClone;
+        // need to probably instaniate slice in different way, because planet text info is missing right now...
+        clonedHandler.MyComponent.Name = "Slice of " + clonedHandler.MyComponent.Name;
         return clonedHandler;
     }
 
