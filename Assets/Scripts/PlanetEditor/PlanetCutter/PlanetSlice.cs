@@ -11,15 +11,12 @@ public class PlanetSlice : MonoBehaviour
     List<GameObject> PlanetsOnLine(Vector2 start, Vector2 end)
     {
         List<GameObject> result = new ();
-        foreach (var component in PlanetComponentsController.Instance.AllGravityComponents)
-        {
-            var spriteBounds = component.Handler.GetComponent<SpriteMask>().bounds;
-            Vector2 spriteMin = new Vector2(spriteBounds.min.x, spriteBounds.min.y);
-            Vector2 spriteMax = new Vector2(spriteBounds.max.x, spriteBounds.max.y);
-            
-            if(UniverseLine.Intersect(start, end, spriteMin, spriteMax)) result.Add(component.Handler.gameObject);
-        }
-
+       
+        var hit = Physics2D.LinecastAll(start, end);
+        foreach (var coll in hit)
+            if (coll.collider != null)
+                result.Add(coll.collider.gameObject);
+        
         return result;
     }
 
@@ -28,17 +25,17 @@ public class PlanetSlice : MonoBehaviour
         List<GameObject> planetsToCut = PlanetsOnLine(pointA, pointB);
         foreach (var planet in planetsToCut)
         {
-            // NEED TO REFACTOR THIS PIECE
+            // NEED TO REFACTOR THIS PIECE 
             if (planet is null) continue;
 
             var originalT = planet.transform.parent;
             var originalHandler = planet.GetComponent<PlanetComponentHandler>();
             var originalSprite = planet.GetComponent<SpriteMask>().sprite;
+            Debug.Log(originalT.name);
             // slice sprites
-            var slicedSprites = UniversePictures.SlicedSprite(originalSprite, pointA, pointB,originalT.position, planet.transform.lossyScale.x/2);
-            
-            if(slicedSprites.Contains(null)) continue;
-            
+            var slicedSprites = UniversePictures.SlicedSprite(originalSprite, pointA, pointB,planet.transform.position, planet.transform.lossyScale.x/2);
+
+            if (slicedSprites is null) continue;
             
             // original area is used to calculate masses
             float originalArea = CalculatePolygonArea(planet.GetComponent<PolygonCollider2D>().points); // action
@@ -99,7 +96,6 @@ public class PlanetSlice : MonoBehaviour
     {
         var sprite = mask.sprite;
         Vector2[] vertices = UniversePictures.GetOutlineFromSprite(sprite, mask.transform, 2).ToArray();
-        Debug.Log(vertices.Length);
         vertices = SortVerticesClockwise(vertices);
         
         polygonCollider.SetPath(0, vertices);
@@ -110,12 +106,7 @@ public class PlanetSlice : MonoBehaviour
     private Vector2[] SortVerticesClockwise(Vector2[] vertices)
     {
         // Find the center point of the vertices
-        Vector2 center = Vector2.zero;
-        foreach (var vert in vertices)
-        {
-            center += vert;
-        }
-        center /= vertices.Length;
+        Vector2 center = GetCenterFromVertices(vertices);
 
         // Sort the vertices by angle relative to the center point
         List<Vector2> sortedVertices = new List<Vector2>(vertices);
@@ -140,18 +131,18 @@ public class PlanetSlice : MonoBehaviour
     Vector2 GetCenterFromCollider(PolygonCollider2D collider)
     {
         Vector2[] vertices = collider.GetPath(0);
-        float area = 0f;
-        Vector2 centroid = Vector2.zero;
-        for (int i = 0; i < vertices.Length; i++) {
-            Vector2 vertex1 = vertices[i];
-            Vector2 vertex2 = vertices[(i + 1) % vertices.Length];
-            float crossProduct = vertex1.x * vertex2.y - vertex2.x * vertex1.y;
-            area += crossProduct;
-            centroid += (vertex1 + vertex2) * crossProduct;
+        return GetCenterFromVertices(vertices);
+    }
+
+    Vector2 GetCenterFromVertices(Vector2[] vertices)
+    {
+        Vector2 center = Vector2.zero;
+        foreach (var vert in vertices)
+        {
+            center += vert;
         }
-        centroid /= 3f * area;
-        
-        return collider.transform.TransformPoint(centroid);
+        center /= vertices.Length;
+        return center;
     }
     
     float CalculatePolygonArea(Vector2[] points)

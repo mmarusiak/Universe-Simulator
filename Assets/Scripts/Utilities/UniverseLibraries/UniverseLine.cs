@@ -3,26 +3,6 @@ using UnityEngine;
 
 public static class UniverseLine
 {
-    public static bool Intersect(Vector2 lineStart, Vector2 lineEnd, Vector2 spriteMin, Vector2 spriteMax)
-    {
-        float denominator = ((spriteMax.y - spriteMin.y) * (lineEnd.x - lineStart.x)) - ((spriteMax.x - spriteMin.x) * (lineEnd.y - lineStart.y));
-
-        if (denominator == 0)
-        {
-            return false;
-        }
-
-        float ua = (((spriteMax.x - spriteMin.x) * (lineStart.y - spriteMin.y)) - ((spriteMax.y - spriteMin.y) * (lineStart.x - spriteMin.x))) / denominator;
-        float ub = (((lineEnd.x - lineStart.x) * (lineStart.y - spriteMin.y)) - ((lineEnd.y - lineStart.y) * (lineStart.x - spriteMin.x))) / denominator;
-
-        if (ua is >= 0 and <= 1 && ub is >= 0 and <= 1)
-        {
-            return true;
-        }
-
-        return false;
-    }
-    
     public static Vector2[] CalculateIntersectionPointsForTexture(Texture2D texture, Vector2 worldPointA, Vector2 worldPointB,
         Vector2 planetPos, float radius)
     {

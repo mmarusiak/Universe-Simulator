@@ -66,7 +66,6 @@ public class LeftSideButtonsController : MonoBehaviour
 
         if (_isCutable)
         {
-            Debug.Log(_cutState);
             if (!_cutState)
             {
                 _cutsVectors[0] = mousePosition;
