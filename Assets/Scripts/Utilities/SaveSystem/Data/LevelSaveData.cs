@@ -32,6 +32,7 @@ public class LevelSaveData
         _savedComponents = new();
         foreach (var comp in components.AllGravityComponents)
         {
+            if (!comp.IsOriginalPlanet) continue; 
             _savedComponents.Add(comp);
         }
         _isPaused = playback.Playback.IsPaused;

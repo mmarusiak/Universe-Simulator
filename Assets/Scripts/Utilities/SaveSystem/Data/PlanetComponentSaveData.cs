@@ -40,7 +40,7 @@ public class PlanetComponentSaveData
     public static implicit operator PlanetComponent(PlanetComponentSaveData data)
     {
         GameObject newPlanetGO = PlanetComponentsController.Instance.LoadPlanet();
-        PlanetComponentHandler planetHandler = newPlanetGO.GetComponent<PlanetComponentHandler>();
+        PlanetComponentHandler planetHandler = newPlanetGO.transform.GetChild(0).GetComponent<PlanetComponentHandler>();
         planetHandler.Initialize();
 
         SetValuesToComponent(planetHandler.MyComponent, data);
