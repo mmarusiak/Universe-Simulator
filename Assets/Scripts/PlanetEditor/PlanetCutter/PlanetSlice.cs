@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 
@@ -50,8 +49,8 @@ public class PlanetSlice : MonoBehaviour
             // now we need to move them out a bit
             int xFlag = originalT.position.x > cloneT.position.x ? 1 : -1, yFlag = originalT.position.y > cloneT.position.y ? 1 : -1;
             Vector2 posToMove = new(xFlag, yFlag);
-            originalHandler.MyComponent.CurrentPosition += posToMove / 10;
-            clonedHandler.MyComponent.CurrentPosition -= posToMove / 10;
+            originalHandler.MyComponent.CurrentPosition += posToMove/10;
+            clonedHandler.MyComponent.CurrentPosition -= posToMove/10;
             // we need to think about saving slices??
         }
     }
@@ -133,7 +132,7 @@ public class PlanetSlice : MonoBehaviour
     Vector2 GetCenterFromCollider(PolygonCollider2D collider)
     {
         Vector2[] vertices = collider.GetPath(0);
-        return GetCenterFromVertices(vertices);
+        return collider.transform.TransformPoint(GetCenterFromVertices(vertices));
     }
 
     Vector2 GetCenterFromVertices(Vector2[] vertices)

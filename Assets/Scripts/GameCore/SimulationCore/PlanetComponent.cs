@@ -205,7 +205,7 @@ public class PlanetComponent
         _rigidbody.AddForce(currentGravityForce, ForceMode2D.Impulse);
     }
 
-    public void GetPosFromTransform() => _currentPosition = PlanetTransform.position;
+    public void GetPosFromTransform() => CurrentPosition = PlanetTransform.position;
 
     // setters
     void SetPlanetSprite(Sprite newSprite)
