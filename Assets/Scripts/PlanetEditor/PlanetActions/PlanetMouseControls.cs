@@ -14,7 +14,6 @@ public class PlanetMouseControls : MonoBehaviour
     
     private void OnMouseDown()
     {
-        Debug.Log("Aaaa");
         _planetOffset = OffsetPlanetDrag();
         EditorsController.Instance.LastEditedComponent = _myHandler.MyComponent;
         TimersController.Instance.StartTimer(_timer);

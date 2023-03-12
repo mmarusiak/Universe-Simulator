@@ -25,10 +25,7 @@ public class PlanetComponentHandler : MonoBehaviour
         if (!isDemoPlanet && !loadedFromSave && !isCloned) spawnPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // hide it when slicing
         else if (isCloned) return;
-        else if (loadedFromSave)
-        {
-            BeginLoad();
-        }
+        else if (loadedFromSave) BeginLoad();
         if(!loadedFromSave) Initialize();
 
         await AddToController();
@@ -43,11 +40,11 @@ public class PlanetComponentHandler : MonoBehaviour
 
     public void LoadAsSlice(PlanetComponent src)
     {
-        _myComponent = new PlanetComponent(this, transform.parent, transform.GetChild(0).GetComponent<SpriteRenderer>(), src.Radius, src.Mass, src.CurrentPosition, src.Name, src.PlanetColor, src.CurrentVelocity);
+        _myComponent = new PlanetComponent(this, transform.parent, transform.GetChild(0).GetComponent<SpriteRenderer>(), src.Radius, src.Mass, src.CurrentPosition, 
+            "Slice of " + src.Name, src.PlanetColor, src.CurrentVelocity);
         _myComponent.IsOriginalPlanet = false;
+
         AddToController();
-        // slice doesnt have own planet text name info container!!!
-        Debug.Log(_onNameChanged.GetValue());
     }
 
     void BeginLoad()
@@ -67,5 +64,11 @@ public class PlanetComponentHandler : MonoBehaviour
     void Update()
     { 
         if(!PlaybackController.Instance.Playback.IsPaused && _myComponent != null) _myComponent.AddForce();
+    }
+
+    public void NullTexts()
+    {
+        _onNameChanged.MakeNull();
+        _onVelocityChanged.MakeNull();
     }
 }

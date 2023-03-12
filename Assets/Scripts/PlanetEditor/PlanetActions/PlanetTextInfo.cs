@@ -20,9 +20,7 @@ public class PlanetTextInfo : MonoBehaviour
     void Start()
     { 
         if (_textTransform != null) return;
-        Initialize();
-        StrictFollow(CalculateTargetPos());
-        ChangeValue("test");
+        _targetOutput = null;
     }
 
     void Initialize()
@@ -30,6 +28,7 @@ public class PlanetTextInfo : MonoBehaviour
         var text = CreateNewText();
         if (_icon == null) return;
         CreateIcon(text);
+        StrictFollow(CalculateTargetPos());
     }
 
     GameObject CreateNewText()
@@ -64,6 +63,7 @@ public class PlanetTextInfo : MonoBehaviour
     
     void LateUpdate()
     {
+        if (_targetOutput == null) return;
         // calculating target pos - each next text container should have position of y + 1 - that will make them to display one row below
         // f.e. name holder y = 0 and velocity holder y = 1 -> that makes displaying name text in correct position, and one row below name holder velocity text
         _targetPos = CalculateTargetPos();
@@ -105,7 +105,17 @@ public class PlanetTextInfo : MonoBehaviour
     {
         return _targetOutput.text;
     }
-    
+
+    public string GetName()
+    {
+        return _targetOutput.name;
+    }
+
+    public void MakeNull()
+    {
+        _targetOutput = null;
+    }
+
     void OnDestroy()
     {
         if (_targetOutput == null) return;

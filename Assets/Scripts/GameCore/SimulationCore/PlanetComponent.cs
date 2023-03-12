@@ -206,7 +206,7 @@ public class PlanetComponent
     }
 
     public void GetPosFromTransform() => CurrentPosition = PlanetTransform.position;
-
+    
     // setters
     void SetPlanetSprite(Sprite newSprite)
     {
@@ -262,7 +262,7 @@ public class PlanetComponent
     {
         _name = newName;
         _planetTransform.gameObject.name = _name;
-        EditorsController.Instance.UpdateDisplayedPlanetNameInEditors();
+        EditorsController.Instance.UpdateDisplayedPlanetNameInEditors(); 
         
         _handler.OnNameChanged.ChangeValue(_name);
     }

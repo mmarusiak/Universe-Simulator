@@ -30,7 +30,6 @@ public class PlanetSlice : MonoBehaviour
             var originalT = planet.transform.parent;
             var originalHandler = planet.GetComponent<PlanetComponentHandler>();
             var originalSprite = planet.GetComponent<SpriteMask>().sprite;
-            Debug.Log(originalT.name);
             // slice sprites
             var slicedSprites = UniversePictures.SlicedSprite(originalSprite, pointA, pointB,planet.transform.position, planet.transform.lossyScale.x/2);
 
@@ -52,6 +51,7 @@ public class PlanetSlice : MonoBehaviour
             originalHandler.MyComponent.CurrentPosition += posToMove/10;
             clonedHandler.MyComponent.CurrentPosition -= posToMove/10;
             // we need to think about saving slices??
+            // need to probably instantiate slice in different way, because planet text info is missing right now...
         }
     }
 
@@ -67,10 +67,9 @@ public class PlanetSlice : MonoBehaviour
             
         // load cloned component for handler
         var clonedHandler = cloneBase.GetComponent<PlanetComponentHandler>();
+        clonedHandler.NullTexts();
         clonedHandler.LoadAsSlice(originalHandler.MyComponent); // action
         originalHandler.IsCloned = isOriginalClone;
-        // need to probably instaniate slice in different way, because planet text info is missing right now...
-        clonedHandler.MyComponent.Name = "Slice of " + clonedHandler.MyComponent.Name;
         return clonedHandler;
     }
 
