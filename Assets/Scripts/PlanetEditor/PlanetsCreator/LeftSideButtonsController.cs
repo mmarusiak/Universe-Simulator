@@ -43,6 +43,7 @@ public class LeftSideButtonsController : MonoBehaviour
 
     void Update()
     {
+        if (_cutState) DrawSliceLine();
         if (!Input.GetMouseButtonDown(0)) return;
         
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition); 
@@ -82,6 +83,11 @@ public class LeftSideButtonsController : MonoBehaviour
         UpdateButtons();
     }
 
+    void DrawSliceLine()
+    {
+        // line drawer
+    }
+    
     void UpdateButtons()
     {
         _buttonsImage[0].color = _isCreatingPlanet ? new Color(1, 1, 1, 1) : new Color(1, 1, 1, 0.6f);

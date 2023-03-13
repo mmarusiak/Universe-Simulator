@@ -131,10 +131,10 @@ public class PlanetComponent
     
     private readonly Color32[] _defaultColorPalette =
     {
-        new Color32(107, 129, 140, 255), // #6B818C - slate gray
-        new Color32(216, 228, 255, 255), // #D8E4FF - lavender (web)
-        new Color32(49, 233, 129, 225), // #31E981 - spring green
-        new Color32(193, 73, 83, 255), // #C14953 - bittersweet shimmer
+        new (107, 129, 140, 255), // #6B818C - slate gray
+        new (216, 228, 255, 255), // #D8E4FF - lavender (web)
+        new (49, 233, 129, 225), // #31E981 - spring green
+        new (193, 73, 83, 255), // #C14953 - bittersweet shimmer
     };
     public PlanetComponent(PlanetComponentHandler handler, Transform planetTransform, SpriteRenderer spriteRenderer, float radius, float mass,
         Vector2 spawnPos, string name, Color color = default, Vector2 currentVelocity = default)
@@ -167,7 +167,7 @@ public class PlanetComponent
         _otherComponents.Add(targetComponents);
     }
 
-    private float _temporaryMultiplier = 5;
+    private static float _temporaryMultiplier = 5;
     public void AddForce()
     {
         float gConstant = GlobalVariables.GravitationalConstant;
@@ -254,10 +254,8 @@ public class PlanetComponent
         _firstTouch = false;
     }
 
-    void SetInitialVelocity(Vector2 newVel)
-    {
-        _initialVelocity = newVel;
-    }
+    void SetInitialVelocity(Vector2 newVel) => _initialVelocity = newVel;
+    
     void SetPlanetName(string newName)
     {
         _name = newName;
@@ -286,8 +284,5 @@ public class PlanetComponent
         }
     }
 
-    public void DestroySelf()
-    {
-        PlanetComponentsController.Instance.DestroyPlanet(_handler);
-    }
+    public void DestroySelf() => PlanetComponentsController.Instance.DestroyPlanet(_handler);
 }

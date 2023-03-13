@@ -56,10 +56,7 @@ public class PlanetComponentHandler : MonoBehaviour
     
     public void Initialize() => _myComponent = new PlanetComponent(this, transform.parent, transform.GetChild(0).GetComponent<SpriteRenderer>(), radius, mass, spawnPos, name);
 
-    public void BeginDrag(Vector2 offset)
-    {
-        MyComponent.CurrentPosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - offset;
-    }
+    public void BeginDrag(Vector2 offset) => MyComponent.CurrentPosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - offset;
     
     void Update()
     { 
