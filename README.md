@@ -52,4 +52,5 @@ If you found some issue, for example bug, please let me know it in [issues secti
 
 ## Closing words
 
-Feel free to contact via [mail](marcel.marusiak@gmail.com). *If you know any good gif tool for Linux also you can let me know because as you can see background of my gifs are a bit off (using Peek)*.
+Thanks for reading and feel free to contact me via [mail](marcel.marusiak@gmail.com) or on my [Twitter](https://twitter.com/mmarusiak_). Every feedback is appreciated.  
+*If you know any good gif tool for Linux also you can let me know because as you can see background of my gifs are a bit off (using Peek)*.
