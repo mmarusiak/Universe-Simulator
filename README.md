@@ -32,7 +32,8 @@ I started the project with simple idea - I want to create my own universe simula
 
 ## Contributions
 
-To improve *overall look of the project* (UI) I've contacted with [rovintm]() on Fiverr and was very happy of our collaboration. It really made project to look more like actual game not like some just prototype project.  
+To improve *overall look of the project* (UI) I've contacted with [rovintm]() on Fiverr and was very happy of our collaboration. It really made project to look more like actual game not like some just prototype project.
+ 
 But what if you want to **contribute to this project**?  
 I would be glad if you would want to do it, _so feel free to do it_. ~~I'm even working on some [code documentation](https://github.com/mmarusiak/Universe-Simulator/tree/main/Code%20Documentation)~~ *(outdated, but will catch up on some point)*.
 
