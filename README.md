@@ -39,7 +39,7 @@ I would be glad if you would want to do it, _so feel free to do it_. ~~I'm even 
 
 ## Installation
 
-To install actual game you need to beta release of it *(then it will be avaiable on itch.io or Steam)*. I would want to release beta when features that I've mentioned earlier will be implemented (or will be knows as too hard to implement).
+To install actual game you need to beta release of it *(then it will be avaiable on itch.io or Steam)*. I would want to release beta when features that I've mentioned earlier will be implemented (or will be known as too hard to implement).
 
 However if you want to just play with the project in Unity, here are some quick guide for you:
 * I'm using ``Unity 2021.3.9f1`` but honestly most of newer versions should work just fine *(pretty sure for like > 2018)*;
