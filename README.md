@@ -1,4 +1,5 @@
-![logo](https://user-images.githubusercontent.com/20907620/224778378-4ec96bcb-5922-489b-bb0e-c0ede5909176.png)
+![logo](https://user-images.githubusercontent.com/20907620/224792498-8602d768-855d-4970-aa48-97af0a27e074.png)
+
 
 
 ## About
