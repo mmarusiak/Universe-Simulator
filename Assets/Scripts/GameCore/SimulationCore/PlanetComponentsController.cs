@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlanetComponentsController : MonoBehaviour
 {
@@ -57,10 +56,7 @@ public class PlanetComponentsController : MonoBehaviour
 
     public void ClearLevel()
     {
-        foreach (var component in _allGravityComponents)
-        {
-            Destroy(component.Handler.gameObject);
-        }
+        foreach (var component in _allGravityComponents) Destroy(component.Handler.gameObject);
         _allGravityComponents = new();
     }
 

@@ -6,9 +6,7 @@ public static class UniverseLine
     public static Vector2[] CalculateIntersectionPointsForTexture(Texture2D texture, Vector2 worldPointA, Vector2 worldPointB,
         Vector2 planetPos, float radius)
     {
-        // here we are converting world points to texture points
-        float slope = (worldPointB.y - worldPointA.y) / (worldPointB.x - worldPointA.x);
-        float bias = worldPointA.y - slope * worldPointA.x;
+        UniverseMath.GetLinearFunctionParams(worldPointA, worldPointB, out var slope, out var bias);
         // 0 = ax^2 + bx + c -> quadratic formula
         float a = 1 + Mathf.Pow(slope, 2);
         float b = -2 * planetPos.x + 2 * slope * (worldPointA.y - slope * worldPointA.x) - 2 * planetPos.y * slope;
