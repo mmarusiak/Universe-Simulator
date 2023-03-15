@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public static class UniverseLine
 {
     public static Vector2[] CalculateIntersectionPointsForTexture(Texture2D texture, Vector2 worldPointA, Vector2 worldPointB,
