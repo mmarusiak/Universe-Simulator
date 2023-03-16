@@ -31,7 +31,7 @@ public class PlanetComponentsController : MonoBehaviour
 
     void RemovePlanetOnPlanets(PlanetComponent planetComponent)
     {
-        foreach (var createdComponent in _allGravityComponents)
+        foreach (var createdComponent in planetComponent.OtherComponents)
             createdComponent.OtherComponents.Remove(planetComponent);
     }
     public void ResetLevel()
@@ -67,8 +67,7 @@ public class PlanetComponentsController : MonoBehaviour
     }
     public GameObject LoadPlanet()
     {
-        return Instantiate(_loadPrefab, Camera.main.ScreenToWorldPoint(Input.mousePosition),
-            Quaternion.Euler(0, 0, 0), _planetsHolder);
+        return Instantiate(_loadPrefab, Vector3.zero, Quaternion.Euler(0, 0, 0), _planetsHolder);
     }
 
     public void DestroyPlanet(PlanetComponentHandler handler)

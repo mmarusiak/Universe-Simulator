@@ -184,6 +184,7 @@ public class PlanetComponent
             
             if (float.IsNaN(forceVector.x) || float.IsNaN(forceVector.y))
             {
+                // error message contains all infos about 2 planets
                 Debug.LogWarning($"One of currentGravityForce values is NaN. " +
                                  $"\n\nvector values: {forceVector}" +
                                  $"\n distance: {distanceVector}" +
