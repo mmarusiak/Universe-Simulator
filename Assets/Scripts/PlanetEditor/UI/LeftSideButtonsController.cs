@@ -43,10 +43,13 @@ public class LeftSideButtonsController : MonoBehaviour
 
     void Update()
     {
-        if (_cutState) DrawSliceLine();
+        if (GlobalVariables.Instance.OverlayShown) return;
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+        
+        if (_cutState) DrawSliceLine(mousePosition);
+        else HideSliceLine();
         if (!Input.GetMouseButtonDown(0)) return;
         
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition); 
         RaycastHit2D[] hits = Physics2D.RaycastAll (mousePosition, new Vector2 (0, 0), 0.01f);
         
         // if player wants to place new planet on existing planet
@@ -77,17 +80,17 @@ public class LeftSideButtonsController : MonoBehaviour
                 _cutsVectors[1] = mousePosition;
                 PlanetSlice.Instance.Slice(_cutsVectors[0], _cutsVectors[1]);
                 _isCutable = false;
+                _cutState = false;
             }
         }
 
         UpdateButtons();
     }
 
-    void DrawSliceLine()
-    {
-        // line drawer
-    }
-    
+    private Vector2 tempOffset = new (1, 1);
+    void DrawSliceLine(Vector2 mousePos) => SliceRenderer.Instance.DrawLine(_cutsVectors[0], mousePos - tempOffset);
+    void HideSliceLine() => SliceRenderer.Instance.Hide();
+
     void UpdateButtons()
     {
         _buttonsImage[0].color = _isCreatingPlanet ? new Color(1, 1, 1, 1) : new Color(1, 1, 1, 0.6f);
