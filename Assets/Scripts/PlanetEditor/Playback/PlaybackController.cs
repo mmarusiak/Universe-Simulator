@@ -19,19 +19,19 @@ public class PlaybackController : MonoBehaviour
     void Start() => _playback.IsReset = true;
     public void PlayLevel()
     {
-        _playback.IsPaused = false;
         _onPlayed.Invoke();
+        _playback.IsPaused = false;
     }
 
     public void PauseLevel()
     {
-        _playback.IsPaused = true;
         _onPaused.Invoke();
+        _playback.IsPaused = true;
     }
 
     public void ResetLevel()
     {
-        _playback.IsReset = true;
         _onReset.Invoke();
+        _playback.IsReset = true;
     }
 }
