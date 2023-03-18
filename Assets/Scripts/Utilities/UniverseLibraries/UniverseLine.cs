@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public static class UniverseLine
@@ -41,5 +42,21 @@ public static class UniverseLine
         }
 
         return null;
+    }
+    
+    // using in rendering planets paths
+    public static void CheckForMaxPoints(int maxPoints, LineRenderer lineRenderer)
+    {
+        int currentAmountPoints = lineRenderer.positionCount;
+        if (currentAmountPoints <= maxPoints) return;
+        
+        Vector3[] positions = new Vector3[currentAmountPoints]; 
+        Vector3[] newPos = new Vector3[maxPoints];
+        
+        lineRenderer.GetPositions(positions);
+        Array.Copy(positions, currentAmountPoints - maxPoints, newPos, 0, maxPoints);
+        
+        lineRenderer.positionCount = maxPoints; 
+        lineRenderer.SetPositions(newPos);
     }
 }
