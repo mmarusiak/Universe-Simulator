@@ -70,14 +70,6 @@ public class PlanetComponentsController : MonoBehaviour
         return Instantiate(_loadPrefab, Vector3.zero, Quaternion.Euler(0, 0, 0), _planetsHolder);
     }
 
-    public void OnPauseChanged() => CallPlanetsOnPauseChanged();
-
-    void CallPlanetsOnPauseChanged()
-    {
-        foreach (var planet in _allGravityComponents)
-            planet.OnPauseChanged();
-    }
-
     public void DestroyPlanet(PlanetComponentHandler handler)
     {
         RemovePlanetOnPlanets(handler.MyComponent);

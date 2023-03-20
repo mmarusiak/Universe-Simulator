@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3629354501420560343}
   - component: {fileID: 4001336736673242564}
   - component: {fileID: 7538424377492987285}
-  - component: {fileID: 4739071248308227914}
+  - component: {fileID: 1754798351742352238}
+  - component: {fileID: 8542550899568521467}
   m_Layer: 0
   m_Name: LoadPlanetCutable
   m_TagString: Untagged
@@ -68,9 +69,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c2d2c2b55c8c9cf8679531abcd63c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!96 &4739071248308227914
-TrailRenderer:
-  serializedVersion: 2
+--- !u!120 &1754798351742352238
+LineRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -110,7 +110,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 4
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -126,22 +126,13 @@ TrailRenderer:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: -0.3887446
-        outSlope: -0.3887446
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.27188012
-        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -173,9 +164,22 @@ TrailRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
-  m_Autodestruct: 1
-  m_Emitting: 1
+  m_UseWorldSpace: 1
+  m_Loop: 0
+--- !u!114 &8542550899568521467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077315353205059218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b2e1bb328fec49b9168443b4f0a0d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vertSize: 0.5
+  amountOfPoints: 1000
 --- !u!1001 &3016064560533089609
 PrefabInstance:
   m_ObjectHideFlags: 0

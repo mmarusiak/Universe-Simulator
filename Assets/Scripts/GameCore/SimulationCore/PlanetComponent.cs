@@ -20,8 +20,8 @@ public class PlanetComponent
     private SpriteRenderer _renderer;
     private SpriteMask _mask;
     private readonly Rigidbody2D _rigidbody;
+    private UniverseTrail _universeTrail;
     private Transform _planetTransform;
-    private TrailRenderer _trailRenderer;
     // boolean that indicate if this planet is new created planet - only position is assigned in constructor
     // basically with this bool we assign not only current pos, but also initial pos if game is not reseted
     private bool _firstTouch = true;
@@ -142,8 +142,8 @@ public class PlanetComponent
     {
         Handler = handler;
         _planetTransform = planetTransform;
+        _universeTrail = _planetTransform.GetComponent<UniverseTrail>();
         _rigidbody = _planetTransform.GetComponent<Rigidbody2D>();
-        _trailRenderer = planetTransform.GetComponent<TrailRenderer>();
         _renderer = spriteRenderer;
         Mask = planetTransform.GetChild(0).GetComponent<SpriteMask>();
         Radius = radius;
@@ -161,7 +161,6 @@ public class PlanetComponent
         
         if(currentVelocity == default) currentVelocity = Vector2.zero;
         CurrentVelocity = currentVelocity;
-        OnPauseChanged();
     }
     
     public void AddGravityComponent(PlanetComponent targetComponents)
@@ -223,7 +222,7 @@ public class PlanetComponent
     {
         _planetColor = newColor;
         _renderer.color = _planetColor;
-        _trailRenderer.startColor = _planetColor;
+        _universeTrail.SetStartColor(_planetColor);
     }
 
     void SetPlanetRadius(float newRadius)
@@ -272,7 +271,6 @@ public class PlanetComponent
 
     public void Reset()
     {
-        _trailRenderer.Clear();
         CurrentPosition = InitialPosition;
         CurrentVelocity = InitialVelocity;
         Mask.sprite = BasicPlanetEditor.Instance.DefaultPlanetSprite;
@@ -280,14 +278,8 @@ public class PlanetComponent
         PlanetSlice.Instance.SliceCollider(Mask, _planetTransform.GetChild(0).GetComponent<PolygonCollider2D>());
         _planetTransform.rotation = Quaternion.Euler(0,0,0);
         _rigidbody.angularVelocity = 0;
-        OnPauseChanged();
     }
-
-    public void OnPauseChanged()
-    {
-        //Debug.Log("HERE???");
-        //_trailRenderer. = !PlaybackController.Instance.Playback.IsPaused;
-    }
+    
 
     void ClearPivot()
     {

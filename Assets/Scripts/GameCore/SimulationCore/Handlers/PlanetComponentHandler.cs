@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ public class PlanetComponentHandler : MonoBehaviour
         get => isCloned;
         set => isCloned = value;
     }
+    
+    private void OnDestroy() => Debug.LogError("Destroyed on frame ");
 
     private async void Start()
     {
