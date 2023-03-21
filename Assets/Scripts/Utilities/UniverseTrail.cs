@@ -49,5 +49,5 @@ public class UniverseTrail : MonoBehaviour
 
     public void Clear() => _renderer.positionCount = 0;
     
-    public void SetStartColor(Color color) => _renderer.startColor = color;
+    public void SetColor(Color color) => _renderer.endColor = color;
 }

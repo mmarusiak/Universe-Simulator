@@ -126,7 +126,7 @@ public class PlanetComponent
         get => _mask;
         set => _mask = value;
     }
-    
+    public UniverseTrail UniverseTrail => _universeTrail;
 
     public Rigidbody2D PlanetRigidbody => _rigidbody;
     
@@ -222,7 +222,7 @@ public class PlanetComponent
     {
         _planetColor = newColor;
         _renderer.color = _planetColor;
-        _universeTrail.SetStartColor(_planetColor);
+        _universeTrail.SetColor(_planetColor);
     }
 
     void SetPlanetRadius(float newRadius)
@@ -271,6 +271,7 @@ public class PlanetComponent
 
     public void Reset()
     {
+        _universeTrail.Clear();
         CurrentPosition = InitialPosition;
         CurrentVelocity = InitialVelocity;
         Mask.sprite = BasicPlanetEditor.Instance.DefaultPlanetSprite;

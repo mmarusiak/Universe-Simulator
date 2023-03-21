@@ -21,8 +21,6 @@ public class PlanetComponentHandler : MonoBehaviour
         set => isCloned = value;
     }
     
-    private void OnDestroy() => Debug.LogError("Destroyed on frame ");
-
     private async void Start()
     {
         if (!isDemoPlanet && !loadedFromSave && !isCloned) spawnPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

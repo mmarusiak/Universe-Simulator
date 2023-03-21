@@ -41,6 +41,7 @@ public class PlanetMouseControls : MonoBehaviour
 
     private void OnMouseUp()
     {
+        _myHandler.MyComponent.UniverseTrail.Clear();
         TimersController.Instance.StopTimer(_timer);
         
         // unpause if was on temp pause
