@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertSize: 0.5
-  amountOfPoints: 400
+  amountOfPoints: 200
 --- !u!1001 &3016064560533089609
 PrefabInstance:
   m_ObjectHideFlags: 0
