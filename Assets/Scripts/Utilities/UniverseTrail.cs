@@ -11,10 +11,12 @@ public class UniverseTrail : MonoBehaviour
     [SerializeField] private int amountOfPoints = 1000;
 
     void Start()
-    {
-        _renderer = GetComponent<LineRenderer>();
+    { 
+        InitializeRenderer();
         _lastPos = transform.position;
     }
+
+    void InitializeRenderer() => _renderer = GetComponent<LineRenderer>();
 
     void Update()
     {
@@ -48,6 +50,10 @@ public class UniverseTrail : MonoBehaviour
     }
 
     public void Clear() => _renderer.positionCount = 0;
-    
-    public void SetColor(Color color) => _renderer.endColor = color;
+
+    public void SetColor(Color color)
+    {
+        if (_renderer == null) InitializeRenderer();
+        _renderer.endColor = color;
+    }
 }
