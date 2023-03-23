@@ -1,3 +1,4 @@
+using System.Drawing;
 using UnityEngine;
 
 public class VectorsRenderer : MonoBehaviour
@@ -43,10 +44,48 @@ public class VectorsRenderer : MonoBehaviour
          UpdateVector(i, start, end);
       }
    }
-
+   
    void UpdateVector(int index, Vector2 start, Vector2 end)
    {
       vectorsRenderer[index].SetPosition(0, start);
       vectorsRenderer[index].SetPosition(1, start + end);
+
+      if (Vector2.Distance(start, end) <= .5f)
+      {
+         // Clear arrow
+         return;
+      }
+      if (Vector2.Distance(start, end) > 0.5f)
+      {
+         UniverseMath.GetLinearFunctionParams(start, end, out float a, out float b);
+         DrawLine(start + (end - start)*.8f, a);
+         
+      }
    }
+
+   void DrawLine(Vector3 point, float fa, float size = 10f)
+   {
+      float a = -1 / fa;
+      float b = point.y - point.x * a;
+      
+      // quadratic function
+      float qa = 1 + a;
+      float qb = -2 * (point.x + b + point.y);
+      float qc = Mathf.Pow(point.x, 2) + Mathf.Pow(b, 2) + Mathf.Pow(point.y, 2) + Mathf.Pow(size, 2) - 2 * point.y * b;
+
+      float delta = Mathf.Pow(qb, 2) - 4 * qa * qc;
+      float sd = Mathf.Sqrt(delta);
+
+      float x1 = (-qb - sd) / (2 * qa);
+      float y1 = a * x1 + b;
+      
+      float x2 = (-qb - sd) / (2 * qa);
+      float y2 = a * x2 + b;
+      
+      LogPoints(x1, y1);
+      LogPoints(x2, y2);
+   }
+
+   void LogPoints(float x, float y) => Debug.Log($"({x}, {y})");
+   
 }
