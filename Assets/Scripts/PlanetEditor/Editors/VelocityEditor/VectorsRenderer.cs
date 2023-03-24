@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 using System.Linq;
 using UnityEngine;
@@ -12,7 +13,11 @@ public class VectorsRenderer : MonoBehaviour
    {
       _shown = shown;
       if (shown) return;
-      foreach (var t in vectorsRenderer) t.SetPositions( new [] { Vector3.zero, Vector3.zero });
+      for (int i = 0; i < vectorsRenderer.Length; i++)
+      {
+         vectorsRenderer[i].SetPositions(new[] {Vector3.zero, Vector3.zero});
+         HideArrow(i);
+      }
    }
 
    public void UpdateVectors()
@@ -50,57 +55,21 @@ public class VectorsRenderer : MonoBehaviour
    {
       vectorsRenderer[index].SetPosition(0, start);
       vectorsRenderer[index].SetPosition(1, start + end);
-
-      if (Vector2.Distance(start, end) <= .5f)
-      {
-         // Clear arrow
-         return;
-      }
-      if (Vector2.Distance(start, end) > 0.5f)
-      {
-         UniverseMath.GetLinearFunctionParams(start, end, out float a, out float b);
-         DrawLine(index, start + (end - start)*.8f, a);
-         
-      }
+      if (Vector2.Distance(start, start + end) <= 0.2f) HideArrow(index);
+      else SetArrowEnd(index, start, start + end);
    }
 
-   void DrawLine(int index, Vector3 point, float fa, float size = 10f)
+   void HideArrow(int index)
    {
-      Vector3 endPoint = vectorsRenderer[index].GetPosition(1);
-      float b, a;
-      if (fa == 0)
-      {
-         b = point.y;
-         return;
-      }
-      a = -1 / fa;
-      b = point.y - point.x * a;
-      
-      // quadratic function
-      float qa = 1 + Mathf.Pow(a, 2);
-      float qb = 2 * (-point.x + b * a - point.y * a);
-      float qc = Mathf.Pow(point.x, 2) + Mathf.Pow(b, 2) + Mathf.Pow(point.y, 2) - Mathf.Pow(size, 2) - 2 * point.y * b;
-
-      float delta = Mathf.Pow(qb, 2) - 4 * qa * qc;
-      Debug.Log(delta);
-      float sd = Mathf.Sqrt(delta);
-
-      float x1 = (-qb - sd) / (2 * qa);
-      float y1 = a * x1 + b;
-      
-      float x2 = (-qb + sd) / (2 * qa);
-      float y2 = a * x2 + b;
-
-      Vector3[] currPos =
-      {
-         vectorsRenderer[index].GetPosition(0),
-         vectorsRenderer[index].GetPosition(1)
-      };
-      Vector3[] newPos = {new (x1, y1), new (x2, y2), endPoint};
-      Vector3[] posToSet = currPos.Concat(newPos).ToArray();
-      vectorsRenderer[index].SetPositions(posToSet);
+      Transform arrow = vectorsRenderer[index].transform.GetChild(0);
+      arrow.position = new Vector3(10000, 10000, arrow.position.z);
    }
-
-   void LogPoints(float x, float y) => Debug.Log($"({x}, {y})");
    
+   void SetArrowEnd(int index, Vector2 start, Vector2 end)
+   { 
+      Transform arrow = vectorsRenderer[index].transform.GetChild(0);
+      arrow.position = new Vector3(end.x, end.y, arrow.position.z);
+      var angle = MathF.Atan((end.y - start.y) / (end.x - start.x)) * 180 / MathF.PI - 90;
+      arrow.rotation = Quaternion.Euler(0, 0, angle);
+   }
 }
