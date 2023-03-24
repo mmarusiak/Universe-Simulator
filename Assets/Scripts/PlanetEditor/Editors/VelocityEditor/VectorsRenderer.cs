@@ -1,14 +1,15 @@
 using System;
-using System.Drawing;
-using System.Linq;
 using UnityEngine;
 
 public class VectorsRenderer : MonoBehaviour
 {
+   public static VectorsRenderer Instance;
    [SerializeField] private LineRenderer[] vectorsRenderer = new LineRenderer[3];
    private bool _shown = false;
    [SerializeField] private PlanetEditor _attachedEditor;
 
+   void Awake() => Instance = this;
+   
    public void ShowRenderer(bool shown)
    {
       _shown = shown;

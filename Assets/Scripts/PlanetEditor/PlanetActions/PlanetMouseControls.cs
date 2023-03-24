@@ -31,6 +31,7 @@ public class PlanetMouseControls : MonoBehaviour
         if (_timer.Time > _timeToShowEditor)
         {
             _myHandler.BeginDrag(_planetOffset);
+            VectorsRenderer.Instance.UpdateVectors();
         }
     }
 
