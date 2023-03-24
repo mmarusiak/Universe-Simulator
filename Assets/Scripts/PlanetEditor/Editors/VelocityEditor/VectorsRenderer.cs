@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Linq;
 using UnityEngine;
 
 public class VectorsRenderer : MonoBehaviour
@@ -58,32 +59,46 @@ public class VectorsRenderer : MonoBehaviour
       if (Vector2.Distance(start, end) > 0.5f)
       {
          UniverseMath.GetLinearFunctionParams(start, end, out float a, out float b);
-         DrawLine(start + (end - start)*.8f, a);
+         DrawLine(index, start + (end - start)*.8f, a);
          
       }
    }
 
-   void DrawLine(Vector3 point, float fa, float size = 10f)
+   void DrawLine(int index, Vector3 point, float fa, float size = 10f)
    {
-      float a = -1 / fa;
-      float b = point.y - point.x * a;
+      Vector3 endPoint = vectorsRenderer[index].GetPosition(1);
+      float b, a;
+      if (fa == 0)
+      {
+         b = point.y;
+         return;
+      }
+      a = -1 / fa;
+      b = point.y - point.x * a;
       
       // quadratic function
-      float qa = 1 + a;
-      float qb = -2 * (point.x + b + point.y);
-      float qc = Mathf.Pow(point.x, 2) + Mathf.Pow(b, 2) + Mathf.Pow(point.y, 2) + Mathf.Pow(size, 2) - 2 * point.y * b;
+      float qa = 1 + Mathf.Pow(a, 2);
+      float qb = 2 * (-point.x + b * a - point.y * a);
+      float qc = Mathf.Pow(point.x, 2) + Mathf.Pow(b, 2) + Mathf.Pow(point.y, 2) - Mathf.Pow(size, 2) - 2 * point.y * b;
 
       float delta = Mathf.Pow(qb, 2) - 4 * qa * qc;
+      Debug.Log(delta);
       float sd = Mathf.Sqrt(delta);
 
       float x1 = (-qb - sd) / (2 * qa);
       float y1 = a * x1 + b;
       
-      float x2 = (-qb - sd) / (2 * qa);
+      float x2 = (-qb + sd) / (2 * qa);
       float y2 = a * x2 + b;
-      
-      LogPoints(x1, y1);
-      LogPoints(x2, y2);
+
+      Vector3[] currPos =
+      {
+         vectorsRenderer[index].GetPosition(0),
+         vectorsRenderer[index].GetPosition(1)
+      };
+      Vector3[] newPos = {new (x1, y1), new (x2, y2), endPoint};
+      Vector3[] posToSet = currPos.Concat(newPos).ToArray();
+      vectorsRenderer[index].SetPositions(posToSet);
    }
 
    void LogPoints(float x, float y) => Debug.Log($"({x}, {y})");
