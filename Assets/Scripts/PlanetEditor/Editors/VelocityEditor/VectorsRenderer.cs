@@ -56,6 +56,7 @@ public class VectorsRenderer : MonoBehaviour
    {
       vectorsRenderer[index].SetPosition(0, start);
       vectorsRenderer[index].SetPosition(1, start + end);
+      
       if (Vector2.Distance(start, start + end) <= 0.2f) HideArrow(index);
       else SetArrowEnd(index, start, start + end);
    }
@@ -70,6 +71,7 @@ public class VectorsRenderer : MonoBehaviour
    { 
       Transform arrow = vectorsRenderer[index].transform.GetChild(0);
       arrow.position = new Vector3(end.x, end.y, arrow.position.z);
+      
       var angle = MathF.Atan((end.y - start.y) / (end.x - start.x)) * 180 / MathF.PI - 90;
       arrow.rotation = Quaternion.Euler(0, 0, angle);
    }
