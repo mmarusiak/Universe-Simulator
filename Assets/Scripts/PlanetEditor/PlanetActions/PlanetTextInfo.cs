@@ -80,10 +80,11 @@ public class PlanetTextInfo : MonoBehaviour
         // offset that is connected with camera zoom
         float yCamOffset = (float) Math.Pow(Camera.main.orthographicSize / GlobalVariables.Instance.CameraDefSize, 3);
         Vector2 camSizeOffset = new(0,  yCamOffset);
+        Vector3 baseY = new Vector3
+        (0, parent.GetComponent<Collider2D>().bounds.size.y / 2 + 3.0f * localPosition.y * _textTransform.lossyScale.y +
+            _yOffsetBetweenTexts * localPosition.y);
         
-        return Camera.main.WorldToScreenPoint(parent.position - new Vector3
-                (0, parent.GetComponent<Collider2D>().bounds.size.y + 3.0f * localPosition.y * _textTransform.lossyScale.y +
-                    _yOffsetBetweenTexts * localPosition.y)) + new Vector3(_textSize.x / 2, 0, 0) + (Vector3) _iconOffset - (Vector3) camSizeOffset * localPosition.y;
+        return Camera.main.WorldToScreenPoint(parent.position - baseY) + new Vector3(_textSize.x / 1.8f, -_textSize.y/2, 0) + (Vector3) _iconOffset - (Vector3) camSizeOffset * localPosition.y;
     }
     
     void StrictFollow(Vector3 target) => _textTransform.position = target;
