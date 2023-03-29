@@ -32,6 +32,7 @@ public class PlaybackController : MonoBehaviour
     public void ResetLevel()
     {
         _playback.IsReset = true;
+        UniverseCamera.Instance.Reset();
         _onReset.Invoke();
     }
 }

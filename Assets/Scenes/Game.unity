@@ -1318,7 +1318,6 @@ GameObject:
   - component: {fileID: 519420034}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1397,20 +1396,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &519420035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2507de9e2f02bfac18d93d6158accedc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myCamera: {fileID: 519420031}
-  outPos: {fileID: 1248950945}
 --- !u!1 &519494971
 GameObject:
   m_ObjectHideFlags: 0
@@ -2020,18 +2005,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1608258359}
-        m_TargetAssemblyTypeName: PlanetComponentsController, Assembly-CSharp
-        m_MethodName: OnPauseChanged
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   _onPlayed:
     m_PersistentCalls:
       m_Calls:
@@ -2039,18 +2012,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: VelocityEditor, Assembly-CSharp
         m_MethodName: ChangeComponentsOnState
         m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1608258359}
-        m_TargetAssemblyTypeName: PlanetComponentsController, Assembly-CSharp
-        m_MethodName: OnPauseChanged
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2797,6 +2758,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1119934768}
   - component: {fileID: 1119934769}
+  - component: {fileID: 1119934770}
   m_Layer: 0
   m_Name: PlayerCameraController
   m_TagString: Untagged
@@ -2832,6 +2794,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: 0.1
+--- !u!114 &1119934770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119934767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2507de9e2f02bfac18d93d6158accedc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myCamera: {fileID: 519420031}
+  outPos: {fileID: 1248950945}
 --- !u!1 &1133735072
 GameObject:
   m_ObjectHideFlags: 0

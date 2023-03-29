@@ -1,11 +1,11 @@
-using System;
-using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UniverseCamera : MonoBehaviour
 {
     public static UniverseCamera Instance;
+    public static readonly Vector3 CameraInitialPosition = new (0, 0, - 10);
+    public static readonly float CameraInitialZoom = 85;
     void Awake() => Instance = this;
     
     [SerializeField]
@@ -23,13 +23,18 @@ public class UniverseCamera : MonoBehaviour
         }
         UpdatePos();
     }
-     
-    
+
 
     public void SetCameraPosition(Vector3 newPos)
     {
         myCamera.transform.position = newPos;
         UpdatePos();
+    }
+
+    public void Reset()
+    {
+        SetCameraPosition(CameraInitialPosition);
+        myCamera.orthographicSize = CameraInitialZoom;
     }
 
     public Vector3 WorldToScreen(Vector3 world)
