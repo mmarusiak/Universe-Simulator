@@ -44,7 +44,7 @@ public class LeftSideButtonsController : MonoBehaviour
     void Update()
     {
         if (GlobalVariables.Instance.OverlayShown) return;
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+        Vector2 mousePosition = UniverseCamera.Instance.ScreenToWorld(Input.mousePosition);
         
         if (_cutState) DrawSliceLine(mousePosition);
         else HideSliceLine();

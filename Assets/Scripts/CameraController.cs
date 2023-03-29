@@ -2,27 +2,22 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float Sensivity = 0.1f;
-    private Camera mainCamera;
-    private GameObject cameraGO;
-    private Vector2 pointerStartPos, scaler;
+    [SerializeField]
+    private float sensitivity = 0.1f;
+    private Transform _cam;
+    private Vector2 _pointerStartPos, _scaler;
     
     // Start is called before the first frame update
-    void Start()
-    {
-        mainCamera = Camera.main;
-        cameraGO = mainCamera.gameObject;
-    }
-
+    void Start() => _cam = UniverseCamera.Instance.Camera.transform;
+    
     // Update is called once per frame
     void Update()
     {
         // triggers while user pressed
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            pointerStartPos = Input.mousePosition*Sensivity;
-            scaler = new Vector2(cameraGO.transform.position.x - pointerStartPos.x,
-                cameraGO.transform.position.y - pointerStartPos.y);
+            _pointerStartPos = Input.mousePosition*sensitivity;
+            _scaler = new Vector2( _cam.position.x - _pointerStartPos.x, _cam.position.y - _pointerStartPos.y);
         }
         
         // triggers while user holds
@@ -34,13 +29,15 @@ public class CameraController : MonoBehaviour
         float scrollAxis = Input.GetAxis("Mouse ScrollWheel");
 
         if (scrollAxis != 0)
-        {
-            mainCamera.orthographicSize -= scrollAxis * 18;
+        { 
+            // we should also display zoom ?
+            UniverseCamera.Instance.Camera.orthographicSize -= scrollAxis * 18;
         }
     }
 
     void MoveCamera()
-    {
-        cameraGO.transform.position = new Vector3(Input.mousePosition.x*Sensivity + scaler.x, Input.mousePosition.y*Sensivity + scaler.y, -10);
+    { 
+        Vector3 newPos = new Vector3(Input.mousePosition.x*sensitivity + _scaler.x, Input.mousePosition.y*sensitivity + _scaler.y, -10);
+        UniverseCamera.Instance.SetCameraPosition(newPos);
     }
 }

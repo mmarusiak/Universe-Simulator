@@ -22,7 +22,7 @@ public class PlanetComponentHandler : MonoBehaviour
     
     private async void Start()
     {
-        if (!isDemoPlanet && !loadedFromSave && !isCloned) spawnPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (!isDemoPlanet && !loadedFromSave && !isCloned) spawnPos =  UniverseCamera.Instance.ScreenToWorld(Input.mousePosition);
         // hide it when slicing
         else if (isCloned) return;
         else if (loadedFromSave) BeginLoad();
@@ -56,7 +56,7 @@ public class PlanetComponentHandler : MonoBehaviour
     
     public void Initialize() => _myComponent = new PlanetComponent(this, transform.parent, transform.GetChild(0).GetComponent<SpriteRenderer>(), radius, mass, spawnPos, name);
 
-    public void BeginDrag(Vector2 offset) => MyComponent.CurrentPosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - offset;
+    public void BeginDrag(Vector2 offset) => MyComponent.CurrentPosition = (Vector2)UniverseCamera.Instance.ScreenToWorld(Input.mousePosition) - offset;
     
     void Update()
     { 
