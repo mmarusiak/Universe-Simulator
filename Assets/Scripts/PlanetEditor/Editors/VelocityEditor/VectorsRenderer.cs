@@ -71,8 +71,10 @@ public class VectorsRenderer : MonoBehaviour
    { 
       Transform arrow = vectorsRenderer[index].transform.GetChild(0);
       arrow.position = new Vector3(end.x, end.y, arrow.position.z);
-      
-      var angle = MathF.Atan((end.y - start.y) / (end.x - start.x)) * 180 / MathF.PI - 90;
+
+      int multiplier = 1;
+      if (end.x < start.x) multiplier = -1;
+      var angle = MathF.Atan((end.y - start.y) / (end.x - start.x)) * 180 / MathF.PI - multiplier * 90;
       arrow.rotation = Quaternion.Euler(0, 0, angle);
    }
 }
