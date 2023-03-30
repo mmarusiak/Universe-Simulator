@@ -37,11 +37,16 @@ public class VelocityEditor : PlanetEditor
         {
             ChangeXAxis();
             onVelocityChanged.Invoke();
-            return;
         }
-        ChangeYAxis();
-        onVelocityChanged.Invoke();
+        else
+        {
+            ChangeYAxis();
+            onVelocityChanged.Invoke();
+        }
+        UpdateMagnitudeTxt();
     }
+    
+    void UpdateMagnitudeTxt() => magComponent.text = UniverseTools.RoundOutput(EditorBase.CurrentPlanet.CurrentVelocity.magnitude);
 
     void ChangeYAxis() => EditorBase.CurrentPlanet.CurrentVelocity =
         new(EditorBase.CurrentPlanet.CurrentVelocity.x, UniverseMath.StringToFloat(axisComponents[1].text));
