@@ -13,6 +13,8 @@ public class UniverseCamera : MonoBehaviour
     [SerializeField] private Text outPos;
     public Camera Camera => myCamera;
 
+    private bool _isCameraMoving;
+
     void Start()
     {
         if (myCamera == null)
@@ -37,15 +39,14 @@ public class UniverseCamera : MonoBehaviour
         myCamera.orthographicSize = CameraInitialZoom;
     }
 
-    public Vector3 WorldToScreen(Vector3 world)
-    {
-        return myCamera.WorldToScreenPoint(world);
-    }
+    public Vector3 WorldToScreen(Vector3 world) => myCamera.WorldToScreenPoint(world);
 
-    public Vector3 ScreenToWorld(Vector3 screen)
-    {
-        return myCamera.ScreenToWorldPoint(screen);
-    }
+    public Vector3 ScreenToWorld(Vector3 screen) => myCamera.ScreenToWorldPoint(screen);
+
+    public void ChangeMoveState(bool target) => _isCameraMoving = target;
+
+    public bool GetMoveState() => _isCameraMoving;
+    
     
     void UpdatePos()
     {

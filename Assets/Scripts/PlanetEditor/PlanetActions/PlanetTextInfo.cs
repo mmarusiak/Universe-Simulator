@@ -67,7 +67,7 @@ public class PlanetTextInfo : MonoBehaviour
         // calculating target pos - each next text container should have position of y + 1 - that will make them to display one row below
         // f.e. name holder y = 0 and velocity holder y = 1 -> that makes displaying name text in correct position, and one row below name holder velocity text
         _targetPos = CalculateTargetPos();
-        if(!PlaybackController.Instance.Playback.IsPaused) StrictFollow(_targetPos);
+        if(!PlaybackController.Instance.Playback.IsPaused || UniverseCamera.Instance.GetMoveState()) StrictFollow(_targetPos);
         else SmoothFollow(_targetPos);
     }
 

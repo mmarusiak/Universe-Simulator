@@ -23,13 +23,15 @@ public class CameraController : MonoBehaviour
         // triggers while user holds
         if (Input.GetKey(KeyCode.Mouse1))
         {
+            UniverseCamera.Instance.ChangeMoveState(true);
             MoveCamera();    
         }
+        else UniverseCamera.Instance.ChangeMoveState(false);
 
         float scrollAxis = Input.GetAxis("Mouse ScrollWheel");
 
         if (scrollAxis != 0)
-        { 
+        {
             // we should also display zoom ?
             UniverseCamera.Instance.Camera.orthographicSize -= scrollAxis * 18;
         }
