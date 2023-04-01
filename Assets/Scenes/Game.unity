@@ -145,6 +145,50 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2103632102898004461, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnSubmit.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632102898004461, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632102898004461, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1928792376569096800}
+    - target: {fileID: 2103632102898004461, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnDidEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632102898004461, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632102898004461, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnDidEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1928792376569096800}
+    - target: {fileID: 2103632102898004461, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetNewPath
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632102898004461, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnDidEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetNewPath
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632102898004461, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlanetLookEditor, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632102898004461, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnDidEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlanetLookEditor, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103632102898004461, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
+      propertyPath: m_OnSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2103632103079767006, guid: e6dbef0e0ca55645db0b8da1c351181b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1

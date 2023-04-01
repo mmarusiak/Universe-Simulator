@@ -62,7 +62,7 @@ public class PlanetLookEditor : PlanetEditor
                 return;
             }
         }
-        
+        // if not detected then it's probably default sprite (so value of dropdown should be set to NONE (value = 0))
         _imageDropdownPlanet.value = 0;
     }
 

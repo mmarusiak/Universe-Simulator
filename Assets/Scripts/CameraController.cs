@@ -26,10 +26,14 @@ public class CameraController : MonoBehaviour
             UniverseCamera.Instance.ChangeMoveState(true);
             MoveCamera();    
         }
+        // with this booleans ^v texts don't follow smooth planet when camera is being moved by player
+        // texts are UI, not Scene Objects!
         else UniverseCamera.Instance.ChangeMoveState(false);
 
+        // get scroll axis
         float scrollAxis = Input.GetAxis("Mouse ScrollWheel");
-
+    
+        // scroll if user scrolls
         if (scrollAxis != 0)
         {
             // we should also display zoom ?

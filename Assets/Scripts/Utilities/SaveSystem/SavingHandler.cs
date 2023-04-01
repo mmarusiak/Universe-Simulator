@@ -72,7 +72,7 @@ public class SavingHandler : MonoBehaviour
         if (string.Empty == name) return;
 
         DontDestroyOnLoad(this);
-        SceneManager.LoadScene("CutDemo");
+        SceneManager.LoadScene("Game");
 
         while (LevelInfoHolder.Instance == null) await Task.Yield();
 
