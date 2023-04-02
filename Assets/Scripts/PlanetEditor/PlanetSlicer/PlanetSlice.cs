@@ -68,8 +68,9 @@ public class PlanetSlice : MonoBehaviour
         // load cloned component for handler
         var clonedHandler = cloneBase.GetComponent<PlanetComponentHandler>();
         clonedHandler.NullTexts();
-        clonedHandler.LoadAsSlice(originalHandler.MyComponent); // action
+        clonedHandler.LoadAsSlice(originalHandler.MyComponent);
         originalHandler.IsCloned = isOriginalClone;
+        clonedHandler.MyComponent.PlanetSprite = originalHandler.MyComponent.PlanetSprite;
         return clonedHandler;
     }
 
