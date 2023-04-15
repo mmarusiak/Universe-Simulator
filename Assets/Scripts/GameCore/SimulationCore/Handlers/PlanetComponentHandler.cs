@@ -50,8 +50,9 @@ public class PlanetComponentHandler : MonoBehaviour
     void BeginLoad()
     {
         _myComponent.Handler = this;
-        _myComponent.PlanetTransform = transform;
+        _myComponent.PlanetTransform = transform.parent;
         _myComponent.Renderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        var pos = _myComponent.CurrentPosition;
         PlanetSlice.Instance.LoadSlices(this);
     }
     

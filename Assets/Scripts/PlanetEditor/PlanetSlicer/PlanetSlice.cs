@@ -44,10 +44,10 @@ public class PlanetSlice : MonoBehaviour
 
             // apply sliced sprites to planets and slice collider
             originalHandler.MyComponent.Slices.Add(new SliceData(pointA - originalHandler.MyComponent.CurrentPosition, pointB - originalHandler.MyComponent.CurrentPosition, 0));
-            ApplySlice(originalHandler, slicedSprites[0], originalArea);
+            ApplySlice(originalHandler, slicedSprites[0], originalArea, true);
             
             clonedHandler.MyComponent.Slices.Add(new SliceData(pointA - clonedHandler.MyComponent.CurrentPosition, pointB - clonedHandler.MyComponent.CurrentPosition, 1));
-            ApplySlice(clonedHandler, slicedSprites[1], originalArea);
+            ApplySlice(clonedHandler, slicedSprites[1], originalArea, true);
 
             // apply the same sprite to the slice
             clonedHandler.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
@@ -65,6 +65,7 @@ public class PlanetSlice : MonoBehaviour
 
     public void LoadSlices(PlanetComponentHandler handler)
     {
+        var initialPos = handler.MyComponent.CurrentPosition;
         if (handler.MyComponent.Slices.Count == 0) return;
         GameObject planet = handler.gameObject;
         Transform planetT = handler.transform;
@@ -77,8 +78,10 @@ public class PlanetSlice : MonoBehaviour
                 planet.transform.lossyScale.x / 2);
             
             float originalArea = CalculatePolygonArea(planet.GetComponent<PolygonCollider2D>().points);
-            ApplySlice(handler, slicedSprites[slice.SliceIndex()], originalArea);
+            ApplySlice(handler, slicedSprites[slice.SliceIndex()], originalArea, false);
         }
+
+        handler.MyComponent.CurrentPosition = initialPos;
     }
     
     PlanetComponentHandler CreateSlice(PlanetComponentHandler originalHandler, Transform originalT)
@@ -100,7 +103,7 @@ public class PlanetSlice : MonoBehaviour
         return clonedHandler;
     }
 
-    void ApplySlice(PlanetComponentHandler handler, Sprite sprite, float originalArea)
+    void ApplySlice(PlanetComponentHandler handler, Sprite sprite, float originalArea, bool massApplier)
     {
         var target = handler.gameObject;
         // slice sprite
@@ -112,7 +115,8 @@ public class PlanetSlice : MonoBehaviour
         // center transform to center of new sprite
         var center = GetCenterFromCollider(polygonCollider);
         MovePivot(center, target.transform.parent);
-        
+
+        if(!massApplier) return;
         // change mass of the slices
         float divider = CalculatePolygonArea(polygonCollider.points)/originalArea;
         handler.MyComponent.Mass *= divider;
