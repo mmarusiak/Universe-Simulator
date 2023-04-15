@@ -19,6 +19,7 @@ public class SavingHandler : MonoBehaviour
         else _next = this;
         
         _pathToSaves = Application.persistentDataPath + "/Saves";
+        Debug.Log(_pathToSaves);
     }
     
     private string _saveFileName = "data_save";

@@ -52,6 +52,7 @@ public class PlanetComponentHandler : MonoBehaviour
         _myComponent.Handler = this;
         _myComponent.PlanetTransform = transform;
         _myComponent.Renderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        PlanetSlice.Instance.LoadSlices(this);
     }
     
     public void Initialize() => _myComponent = new PlanetComponent(this, transform.parent, transform.GetChild(0).GetComponent<SpriteRenderer>(), radius, mass, spawnPos, name);

@@ -31,6 +31,7 @@ public class PlanetComponent
     private int _planetNum;
 
     private bool _isOriginalPlanet = true;
+    private List<SliceData> _slices = new ();
 
     public bool IsOriginalPlanet
     {
@@ -126,6 +127,13 @@ public class PlanetComponent
         get => _mask;
         set => _mask = value;
     }
+
+    public List<SliceData> Slices
+    {
+        get => _slices;
+        set => _slices = value;
+    }
+
     public UniverseTrail UniverseTrail => _universeTrail;
 
     public Rigidbody2D PlanetRigidbody => _rigidbody;

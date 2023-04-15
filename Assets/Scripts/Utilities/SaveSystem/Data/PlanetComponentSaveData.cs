@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -9,11 +10,13 @@ public class PlanetComponentSaveData
     [JsonProperty] private float _radius, _mass;
     [JsonProperty] private ColorSaveData _planetColor;
     [JsonProperty] private string _planetName;
+    [JsonProperty] private List<SliceData> _slices;
+    [JsonProperty] private bool _isOriginal;
 
 
     [JsonConstructor]
     public PlanetComponentSaveData(VectorSaveData inPos, VectorSaveData inVel, VectorSaveData cPos, VectorSaveData cVel,
-        float radius, float mass, ColorSaveData color, string name)
+        float radius, float mass, ColorSaveData color, string name, List<SliceData> slices, bool isOriginal)
     {
         _initialPosition = inPos;
         _initialVelocity = inVel;
@@ -23,6 +26,8 @@ public class PlanetComponentSaveData
         _mass = mass;
         _planetColor = color;
         _planetName = name;
+        _slices = slices;
+        _isOriginal = isOriginal;
     }
     
     public PlanetComponentSaveData(PlanetComponent component)
@@ -35,6 +40,8 @@ public class PlanetComponentSaveData
         _mass = component.Mass;
         _planetName = component.Name;
         _planetColor = component.PlanetColor;
+        _slices = component.Slices;
+        _isOriginal = component.IsOriginalPlanet;
     }
 
     public static implicit operator PlanetComponent(PlanetComponentSaveData data)
@@ -64,5 +71,7 @@ public class PlanetComponentSaveData
         receiver.Radius = sender._radius;
         receiver.PlanetColor = sender._planetColor;
         receiver.Name = sender._planetName;
+        receiver.Slices = sender._slices;
+        receiver.IsOriginalPlanet = sender._isOriginal;
     }
 }

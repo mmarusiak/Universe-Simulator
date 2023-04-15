@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -42,8 +43,15 @@ public class PlanetSlice : MonoBehaviour
             var cloneT = clonedHandler.transform.parent;
 
             // apply sliced sprites to planets and slice collider
+            originalHandler.MyComponent.Slices.Add(new SliceData(pointA - originalHandler.MyComponent.CurrentPosition, pointB - originalHandler.MyComponent.CurrentPosition, 0));
             ApplySlice(originalHandler, slicedSprites[0], originalArea);
+            
+            clonedHandler.MyComponent.Slices.Add(new SliceData(pointA - clonedHandler.MyComponent.CurrentPosition, pointB - clonedHandler.MyComponent.CurrentPosition, 1));
             ApplySlice(clonedHandler, slicedSprites[1], originalArea);
+
+            // apply the same sprite to the slice
+            clonedHandler.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
+                originalHandler.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
 
             // now we need to move them out a bit
             int xFlag = originalT.position.x > cloneT.position.x ? 1 : -1, yFlag = originalT.position.y > cloneT.position.y ? 1 : -1;
@@ -55,6 +63,24 @@ public class PlanetSlice : MonoBehaviour
         }
     }
 
+    public void LoadSlices(PlanetComponentHandler handler)
+    {
+        if (handler.MyComponent.Slices.Count == 0) return;
+        GameObject planet = handler.gameObject;
+        Transform planetT = handler.transform;
+        Transform parentT = planetT.parent;
+        foreach (var slice in handler.MyComponent.Slices)
+        {
+            Debug.Log(slice.SliceIndex());
+            var originalSprite = planet.GetComponent<SpriteMask>().sprite;
+            var slicedSprites = UniversePictures.SlicedSprite(originalSprite, slice.StartPoint, slice.EndPoint, Vector2.zero,
+                planet.transform.lossyScale.x / 2);
+            
+            float originalArea = CalculatePolygonArea(planet.GetComponent<PolygonCollider2D>().points);
+            ApplySlice(handler, slicedSprites[slice.SliceIndex()], originalArea);
+        }
+    }
+    
     PlanetComponentHandler CreateSlice(PlanetComponentHandler originalHandler, Transform originalT)
     {
         // making new slice "clone"

@@ -279,7 +279,56 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2730977995786505895, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
     - {fileID: 2730977995786505892, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+    - {fileID: 2730977995786505888, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+--- !u!1 &881954253407216628 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2730977995786505917, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+  m_PrefabInstance: {fileID: 3016064560533089609}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &6128672023907811305
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881954253407216628}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.393795, y: 0.33079147}
+      - {x: 0.19350052, y: 0.47593498}
+      - {x: 0, y: 0.5}
+      - {x: -0.09529877, y: 0.50434875}
+      - {x: -0.26070786, y: 0.4451313}
+      - {x: -0.37109375, y: 0.35931396}
+      - {x: -0.47552827, y: 0.15450849}
+      - {x: -0.49586487, y: -0.04235077}
+      - {x: -0.47602463, y: -0.16599655}
+      - {x: -0.40823746, y: -0.30293655}
+      - {x: -0.2938926, y: -0.40450853}
+      - {x: -0.19417953, y: -0.46116257}
+      - {x: 0.00019836426, y: -0.50243187}
+      - {x: 0.17581177, y: -0.47406006}
+      - {x: 0.29389268, y: -0.40450847}
+      - {x: 0.4587021, y: -0.20982742}
+      - {x: 0.5130882, y: -0.032527924}
+      - {x: 0.47552824, y: 0.15450856}
 --- !u!4 &881954253407216629 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2730977995786505916, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
