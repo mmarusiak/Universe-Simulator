@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 991
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Console
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 421}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 7508
+  controlID: 90
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 7509
+  controlID: 91
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 7510
+  controlID: 92
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -363,7 +363,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -425,9 +425,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 3e180000
       m_LastClickedID: 0
-      m_ExpandedIDs: b424ffff6c2bffffba2bffff503affff2842ffff1ebaffff2abaffffacbdfffff0caffff98daffffa4daffff78deffff84deffffa0e2ffffa6f3ffff24fbffff606000007660000086600000be600000e4600000086100000c610000186100009ea80000cccf0000f6cf00001ed0000046d00000
+      m_ExpandedIDs: 24fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -698,9 +698,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 456.88, y: 550.595, z: 0}
+    m_Target: {x: -110.87677, y: 4.172765, z: 0}
     speed: 2
-    m_Value: {x: 456.88, y: 550.595, z: 0}
+    m_Value: {x: -110.87677, y: 4.172765, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -751,9 +751,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 10
+    m_Target: 7.071068
     speed: 2
-    m_Value: 10
+    m_Value: 7.071068
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -819,22 +819,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts/Utilities/SaveSystem
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts/Utilities/SaveSystem
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /home/mmarusiak/Desktop/Programming/unity/Universe-Simulator
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: aa660000
-    m_LastClickedID: 26282
-    m_ExpandedIDs: 00000000586600005a6600005c6600005e66000060660000626600006466000066660000686600006a6600006c6600006e66000070660000726600007466000076660000786600007a6600007c6600007e66000080660000826600008466000086660000ac660000c4660000e066000000ca9a3b
+    scrollPos: {x: 0, y: 304}
+    m_SelectedIDs: f0610000
+    m_LastClickedID: 25072
+    m_ExpandedIDs: 000000006a6100006c6100006e61000070610000726100007461000076610000786100007a6100007c6100007e61000080610000826100008461000086610000886100008a6100008c6100008e6100009061000092610000946100009661000098610000cc610000e4610000ea610000f061000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -862,7 +862,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000586600005a6600005c6600005e66000060660000626600006466000066660000686600006a6600006c6600006e66000070660000726600007466000076660000786600007a6600007c6600007e6600008066000082660000846600008666000000ca9a3b
+    m_ExpandedIDs: 000000006a6100006c6100006e61000070610000726100007461000076610000786100007a6100007c6100007e61000080610000826100008461000086610000886100008a6100008c6100008e6100009061000092610000946100009661000098610000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -887,8 +887,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 3e180000
+    m_LastClickedInstanceID: 6206
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000d0640000c2640000726200007c620000fa9e00007e6200004a650000
     m_RenameOverlay:

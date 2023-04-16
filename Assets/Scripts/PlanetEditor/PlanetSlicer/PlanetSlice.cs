@@ -100,6 +100,7 @@ public class PlanetSlice : MonoBehaviour
         clonedHandler.LoadAsSlice(originalHandler.MyComponent);
         originalHandler.IsCloned = isOriginalClone;
         clonedHandler.MyComponent.PlanetSprite = originalHandler.MyComponent.PlanetSprite;
+        clonedHandler.MyComponent.Slices = new List<SliceData>(originalHandler.MyComponent.Slices);
         return clonedHandler;
     }
 
