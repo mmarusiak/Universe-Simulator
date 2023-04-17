@@ -43,10 +43,10 @@ public class PlanetSlice : MonoBehaviour
             var cloneT = clonedHandler.transform.parent;
 
             // apply sliced sprites to planets and slice collider
-            originalHandler.MyComponent.Slices.Add(new SliceData(pointA - originalHandler.MyComponent.CurrentPosition, pointB - originalHandler.MyComponent.CurrentPosition, 0));
+            originalHandler.MyComponent.Slices.Add(new SliceData(pointA - (Vector2)originalT.GetChild(0).position, pointB - (Vector2)originalT.GetChild(0).position, 0));
             ApplySlice(originalHandler, slicedSprites[0], originalArea, true);
             
-            clonedHandler.MyComponent.Slices.Add(new SliceData(pointA - clonedHandler.MyComponent.CurrentPosition, pointB - clonedHandler.MyComponent.CurrentPosition, 1));
+            clonedHandler.MyComponent.Slices.Add(new SliceData(pointA - (Vector2)cloneT.GetChild(0).position, pointB - (Vector2)cloneT.GetChild(0).position, 1));
             ApplySlice(clonedHandler, slicedSprites[1], originalArea, true);
 
             // apply the same sprite to the slice
@@ -72,9 +72,9 @@ public class PlanetSlice : MonoBehaviour
         Transform parentT = planetT.parent;
         foreach (var slice in handler.MyComponent.Slices)
         {
-            Debug.Log(slice.SliceIndex());
             var originalSprite = planet.GetComponent<SpriteMask>().sprite;
-            var slicedSprites = UniversePictures.SlicedSprite(originalSprite, slice.StartPoint, slice.EndPoint, Vector2.zero,
+            Debug.Log(planetT.localPosition);
+            var slicedSprites = UniversePictures.SlicedSprite(originalSprite, slice.StartPoint, slice.EndPoint, planetT.localPosition,
                 planet.transform.lossyScale.x / 2);
             
             float originalArea = CalculatePolygonArea(planet.GetComponent<PolygonCollider2D>().points);
