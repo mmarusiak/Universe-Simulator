@@ -5,26 +5,21 @@ using UnityEngine;
 public class LevelSaveData
 {
     [JsonProperty] private List<PlanetComponentSaveData> _savedComponents = new();
-    [JsonProperty] private bool _isPaused, _isReset;
-    [JsonProperty] private float _timeScale;
-    [JsonProperty] private string _levelName;
+    [JsonProperty] public bool IsPaused { get; }
+    [JsonProperty] public bool IsReset { get; }
+    [JsonProperty] public float TimeScale { get; }
+    [JsonProperty] public string LevelName { get; }
 
-    [JsonIgnore]
-    public List<PlanetComponentSaveData> SavedComponents => _savedComponents;
-
-    [JsonIgnore] public bool IsPaused => _isPaused;
-    [JsonIgnore] public bool IsReset => _isReset;
-    [JsonIgnore] public float TimeScale => _timeScale;
-    [JsonIgnore] public string LevelName => _levelName;
-
+    [JsonIgnore] public List<PlanetComponentSaveData> SavedComponents => _savedComponents;
+    
     [JsonConstructor]
     public LevelSaveData(List<PlanetComponentSaveData> dataList, bool isP, bool isR, float timeS, string levelName)
     {
         _savedComponents = dataList;
-        _isPaused = isP;
-        _isReset = isR;
-        _timeScale = timeS;
-        _levelName = levelName;
+        IsPaused = isP;
+        IsReset = isR;
+        TimeScale = timeS;
+        LevelName = levelName;
     }
     
     public LevelSaveData(PlanetComponentsController components, PlaybackController playback)
@@ -34,10 +29,10 @@ public class LevelSaveData
         {
             _savedComponents.Add(comp);
         }
-        _isPaused = playback.Playback.IsPaused;
-        _isReset = playback.Playback.IsReset;
-        _timeScale = playback.Playback.TimeScale;
-        _levelName = LevelInfoHolder.Instance.LevelName;
+        IsPaused = playback.Playback.IsPaused;
+        IsReset = playback.Playback.IsReset;
+        TimeScale = playback.Playback.TimeScale;
+        LevelName = LevelInfoHolder.Instance.LevelName;
     }
 
     public void LoadList()
