@@ -78,9 +78,16 @@ public class LeftSideButtonsController : MonoBehaviour
             else
             {
                 _cutsVectors[1] = mousePosition;
-                PlanetSlice.Instance.Slice(_cutsVectors[0], _cutsVectors[1]);
                 _isCutable = false;
                 _cutState = false;
+                
+                if (PlaybackController.Instance.Playback.IsReset)
+                {
+                    Debug.LogWarning("You can't cut on reset!!!");
+                    return;
+                }
+                
+                PlanetSlice.Instance.Slice(_cutsVectors[0], _cutsVectors[1]);
             }
         }
 
