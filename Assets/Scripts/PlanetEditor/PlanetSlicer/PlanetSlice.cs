@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -43,10 +42,14 @@ public class PlanetSlice : MonoBehaviour
             var cloneT = clonedHandler.transform.parent;
 
             // apply sliced sprites to planets and slice collider
-            originalHandler.MyComponent.Slices.Add(new SliceData(pointA - (Vector2)originalT.GetChild(0).position, pointB - (Vector2)originalT.GetChild(0).position, 0));
+            originalHandler.MyComponent.Slices.Add(new SliceData
+                (pointA - (Vector2)originalT.GetChild(0).position, 
+                    pointB - (Vector2)originalT.GetChild(0).position, 0, PlaybackController.Instance.Playback.IsReset));
             ApplySlice(originalHandler, slicedSprites[0], originalArea, true);
             
-            clonedHandler.MyComponent.Slices.Add(new SliceData(pointA - (Vector2)cloneT.GetChild(0).position, pointB - (Vector2)cloneT.GetChild(0).position, 1));
+            clonedHandler.MyComponent.Slices.Add(new SliceData
+                (pointA - (Vector2)cloneT.GetChild(0).position,
+                    pointB - (Vector2)cloneT.GetChild(0).position, 1, PlaybackController.Instance.Playback.IsReset));
             ApplySlice(clonedHandler, slicedSprites[1], originalArea, true);
 
             // apply the same sprite to the slice
@@ -58,8 +61,6 @@ public class PlanetSlice : MonoBehaviour
             Vector2 posToMove = new(xFlag, yFlag);
             originalHandler.MyComponent.CurrentPosition += posToMove/10;
             clonedHandler.MyComponent.CurrentPosition -= posToMove/10;
-            // we need to think about saving slices??
-            // need to probably instantiate slice in different way, because planet text info is missing right now...
         }
     }
 
@@ -73,7 +74,6 @@ public class PlanetSlice : MonoBehaviour
         foreach (var slice in handler.MyComponent.Slices)
         {
             var originalSprite = planet.GetComponent<SpriteMask>().sprite;
-            Debug.Log(planetT.localPosition);
             var slicedSprites = UniversePictures.SlicedSprite(originalSprite, slice.StartPoint, slice.EndPoint, planetT.localPosition,
                 planet.transform.lossyScale.x / 2);
             

@@ -283,10 +283,27 @@ public class PlanetComponent
         CurrentPosition = InitialPosition;
         CurrentVelocity = InitialVelocity;
         Mask.sprite = BasicPlanetEditor.Instance.DefaultPlanetSprite;
+        
         ClearPivot();
-        PlanetSlice.Instance.SliceCollider(Mask, _planetTransform.GetChild(0).GetComponent<PolygonCollider2D>());
         _planetTransform.rotation = Quaternion.Euler(0,0,0);
         _rigidbody.angularVelocity = 0;
+        
+        int slicesCount = _slices.Count;
+        for (int i = 0; i < slicesCount; i++)
+        {
+            if (!_slices[i].CreatedOnReset)
+            {
+                _slices.RemoveRange(i, slicesCount - i);
+                break;
+            }
+        }
+        if (_slices.Count > 0)
+        {
+            PlanetSlice.Instance.LoadSlices(_handler);
+            return;
+        }
+
+        PlanetSlice.Instance.SliceCollider(Mask, _planetTransform.GetChild(0).GetComponent<PolygonCollider2D>());
     }
     
 

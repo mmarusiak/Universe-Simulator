@@ -24,7 +24,14 @@ public class PlanetComponentHandler : MonoBehaviour
     {
         if (!isDemoPlanet && !loadedFromSave && !isCloned) spawnPos =  UniverseCamera.Instance.ScreenToWorld(Input.mousePosition);
         // hide it when slicing
-        else if (isCloned) return;
+        else if (isCloned)
+        {
+            // we want to actually set new slice as new planet if it is sliced on reset
+            isCloned = !PlaybackController.Instance.Playback.IsReset;
+            _myComponent.IsOriginalPlanet = !isCloned;
+            Debug.Log(isCloned);
+            return;
+        }
         else if (loadedFromSave) BeginLoad();
         if(!loadedFromSave) Initialize();
 
@@ -42,9 +49,9 @@ public class PlanetComponentHandler : MonoBehaviour
     {
         _myComponent = new PlanetComponent(this, transform.parent, transform.GetChild(0).GetComponent<SpriteRenderer>(), src.Radius, src.Mass, src.CurrentPosition, 
             "Slice of " + src.Name, src.PlanetColor, src.CurrentVelocity);
-        _myComponent.IsOriginalPlanet = false;
 
         AddToController();
+        
     }
 
     void BeginLoad()
