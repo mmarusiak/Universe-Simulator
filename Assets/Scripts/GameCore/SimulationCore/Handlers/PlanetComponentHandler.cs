@@ -52,8 +52,6 @@ public class PlanetComponentHandler : MonoBehaviour
         _myComponent.Handler = this;
         _myComponent.PlanetTransform = transform.parent;
         _myComponent.Renderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        Debug.Log(_myComponent.Radius + " - r");
-        Debug.Log(_myComponent.Handler.transform.GetChild(0).lossyScale.x);
         PlanetSlice.Instance.LoadSlices(this);
     }
     

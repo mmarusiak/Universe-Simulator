@@ -5,8 +5,8 @@ using UnityEngine.UI;
 [Serializable]
 public class Playback
 {
-    private bool _isPaused;
-    private bool _isReset;
+    private bool _isPaused = true;
+    private bool _isReset = true;
     private float _timeScale = 1.0f;
 
     [SerializeField] private Image _playIMG, _pauseIMG, _resetIMG;
@@ -58,7 +58,7 @@ public class Playback
         Time.timeScale = TimeScale;
     }
 
-    void SetButtonsColors()
+    public void SetButtonsColors()
     {
         _resetIMG.color = IsReset ? new Color(1, 1, 1, 1) : new Color(1, 1, 1, 0.6f);
         _pauseIMG.color = IsPaused ? new Color(1, 1, 1, 1) : new Color(1, 1, 1, 0.6f);

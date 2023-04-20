@@ -16,7 +16,7 @@ public class PlaybackController : MonoBehaviour
     [SerializeField] private UnityEvent _onReset;
     public Playback Playback => _playback;
 
-    void Start() => _playback.IsReset = true;
+    void Start() => _playback.SetButtonsColors();
     public void PlayLevel()
     {
         _playback.IsPaused = false;

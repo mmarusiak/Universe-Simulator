@@ -52,9 +52,12 @@ public class SavingHandler : MonoBehaviour
         // load planets
         newData.LoadList();
         // load playback
+        Debug.Log(newData.IsPaused);
+        Debug.Log(newData.IsReset);
         PlaybackController.Instance.Playback.IsPaused = newData.IsPaused;
         PlaybackController.Instance.Playback.IsReset = newData.IsReset;
         PlaybackController.Instance.Playback.TimeScale = newData.TimeScale;
+        PlaybackController.Instance.Playback.SetButtonsColors();
         // load name
         LevelInfoHolder.Instance.LevelName = newData.LevelName;
         // calling overlay that there is no more temp pause

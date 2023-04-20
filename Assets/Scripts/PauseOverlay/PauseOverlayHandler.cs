@@ -69,5 +69,5 @@ public class PauseOverlayHandler : MonoBehaviour
         needToUnpause = false;
     }
     
-    public void OnLoad() =>needToUnpause = false;
+    public void OnLoad() => needToUnpause = false;
 }

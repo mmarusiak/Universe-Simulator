@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using UnityEngine;
 
 public class LevelSaveData
 {
@@ -13,12 +12,12 @@ public class LevelSaveData
     [JsonIgnore] public List<PlanetComponentSaveData> SavedComponents => _savedComponents;
     
     [JsonConstructor]
-    public LevelSaveData(List<PlanetComponentSaveData> dataList, bool isP, bool isR, float timeS, string levelName)
+    public LevelSaveData(List<PlanetComponentSaveData> dataList, bool isPaused, bool isReset, float timeScale, string levelName)
     {
         _savedComponents = dataList;
-        IsPaused = isP;
-        IsReset = isR;
-        TimeScale = timeS;
+        IsPaused = isPaused;
+        IsReset = isReset;
+        TimeScale = timeScale;
         LevelName = levelName;
     }
     
