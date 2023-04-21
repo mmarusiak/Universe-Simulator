@@ -12,11 +12,11 @@ public class PlanetComponentSaveData
     [JsonProperty] private string _planetName;
     [JsonProperty] private List<SliceData> _slices;
     [JsonProperty] private bool _isOriginal;
-
+    [JsonProperty] private float _angularVelocity;
 
     [JsonConstructor]
     public PlanetComponentSaveData(VectorSaveData inPos, VectorSaveData inVel, VectorSaveData cPos, VectorSaveData cVel,
-        float radius, float mass, ColorSaveData color, string name, List<SliceData> slices, bool isOriginal)
+        float radius, float mass, ColorSaveData color, string name, List<SliceData> slices, bool isOriginal, float angularVelocity)
     {
         _initialPosition = inPos;
         _initialVelocity = inVel;
@@ -28,6 +28,7 @@ public class PlanetComponentSaveData
         _planetName = name;
         _slices = slices;
         _isOriginal = isOriginal;
+        _angularVelocity = angularVelocity;
     }
     
     public PlanetComponentSaveData(PlanetComponent component)
@@ -42,6 +43,7 @@ public class PlanetComponentSaveData
         _planetColor = component.PlanetColor;
         _slices = component.Slices;
         _isOriginal = component.IsOriginalPlanet;
+        _angularVelocity = component.PlanetRigidbody.angularVelocity;
     }
 
     public static implicit operator PlanetComponent(PlanetComponentSaveData data)
@@ -73,5 +75,6 @@ public class PlanetComponentSaveData
         receiver.Name = sender._planetName;
         receiver.Slices = sender._slices;
         receiver.IsOriginalPlanet = sender._isOriginal;
+        receiver.PlanetRigidbody.angularVelocity = sender._angularVelocity;
     }
 }
