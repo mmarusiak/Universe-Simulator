@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlanetComponent
 {
+    public const float OriginalInertia = 125;
     private PlanetComponentHandler _handler;
     // visuals
     private Sprite _planetSprite;
@@ -134,6 +135,12 @@ public class PlanetComponent
         set => _slices = value;
     }
 
+    public float Inertia
+    {
+        get => _rigidbody.inertia;
+        set => _rigidbody.inertia = value;
+    }
+    
     public UniverseTrail UniverseTrail => _universeTrail;
 
     public Rigidbody2D PlanetRigidbody => _rigidbody;
@@ -159,6 +166,7 @@ public class PlanetComponent
         CurrentPosition = spawnPos;
         Name = name;
         PlanetColor = color;
+        Inertia = OriginalInertia;
 
         _planetNum = _planetCount;
         _planetCount++;

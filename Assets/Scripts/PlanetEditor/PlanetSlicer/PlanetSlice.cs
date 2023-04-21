@@ -41,20 +41,18 @@ public class PlanetSlice : MonoBehaviour
             var clonedHandler = CreateSlice(originalHandler, originalT);
             var cloneT = clonedHandler.transform.parent;
 
-            // apply sliced sprites to planets and slice collider
-            originalHandler.MyComponent.Slices.Add(new SliceData
-                (pointA - (Vector2)originalT.GetChild(0).position, 
-                    pointB - (Vector2)originalT.GetChild(0).position, 0, PlaybackController.Instance.Playback.IsReset));
-            ApplySlice(originalHandler, slicedSprites[0], originalArea, true);
+            var originalPos = (Vector2) originalT.GetChild(0).position;
+            var clonedPos = (Vector2) cloneT.GetChild(0).position;
             
-            clonedHandler.MyComponent.Slices.Add(new SliceData
-                (pointA - (Vector2)cloneT.GetChild(0).position,
-                    pointB - (Vector2)cloneT.GetChild(0).position, 1, PlaybackController.Instance.Playback.IsReset));
+            // apply sliced sprites to planets and slice collider
+            ApplySlice(originalHandler, slicedSprites[0], originalArea, true);
+            originalHandler.MyComponent.Slices.Add(new SliceData(pointA - originalPos, pointB - originalPos, 0, PlaybackController.Instance.Playback.IsReset));
+            
             ApplySlice(clonedHandler, slicedSprites[1], originalArea, true);
-
+            clonedHandler.MyComponent.Slices.Add(new SliceData(pointA - clonedPos, pointB - clonedPos, 1, PlaybackController.Instance.Playback.IsReset));
+            
             // apply the same sprite to the slice
-            clonedHandler.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite =
-                originalHandler.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+            clonedHandler.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = originalHandler.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
 
             // now we need to move them out a bit
             int xFlag = originalT.position.x > cloneT.position.x ? 1 : -1, yFlag = originalT.position.y > cloneT.position.y ? 1 : -1;

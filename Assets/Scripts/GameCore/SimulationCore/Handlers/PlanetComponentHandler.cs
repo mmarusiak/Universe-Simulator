@@ -51,7 +51,6 @@ public class PlanetComponentHandler : MonoBehaviour
             "Slice of " + src.Name, src.PlanetColor, src.CurrentVelocity);
 
         AddToController();
-        
     }
 
     void BeginLoad()
@@ -68,6 +67,9 @@ public class PlanetComponentHandler : MonoBehaviour
     
     void Update()
     { 
+        Debug.Log(_myComponent.Inertia + " inertia");
+        Debug.Log(_myComponent.PlanetRigidbody.angularVelocity + " ang");
+        Debug.Log(_myComponent.PlanetRigidbody.angularDrag);
         if(!PlaybackController.Instance.Playback.IsPaused && _myComponent != null) _myComponent.AddForce();
     }
 
