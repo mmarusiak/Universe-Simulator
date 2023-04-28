@@ -23,15 +23,16 @@ public class LevelSaveData
     
     public LevelSaveData(PlanetComponentsController components, PlaybackController playback)
     {
+        IsPaused = playback.Playback.IsPaused;
+        IsReset = playback.Playback.IsReset;
+        TimeScale = playback.Playback.TimeScale;
+        LevelName = LevelInfoHolder.Instance.LevelName;
+        
         _savedComponents = new();
         foreach (var comp in components.AllGravityComponents)
         {
             _savedComponents.Add(comp);
         }
-        IsPaused = playback.Playback.IsPaused;
-        IsReset = playback.Playback.IsReset;
-        TimeScale = playback.Playback.TimeScale;
-        LevelName = LevelInfoHolder.Instance.LevelName;
     }
 
     public void LoadList()

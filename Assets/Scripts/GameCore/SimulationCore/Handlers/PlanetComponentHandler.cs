@@ -1,10 +1,11 @@
 using System.Threading.Tasks;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlanetComponentHandler : MonoBehaviour
 {
     [SerializeField] private float mass, radius;
-    [SerializeField] private string name;
+    [SerializeField] private string planetName;
     [SerializeField] private Vector2 spawnPos;
     [SerializeField] private bool isDemoPlanet, loadedFromSave, isCloned;
     
@@ -43,6 +44,7 @@ public class PlanetComponentHandler : MonoBehaviour
         while (PlanetComponentsController.Instance == null) await Task.Yield();
         // whole component loads from saving handler script
         PlanetComponentsController.Instance.AddNewGravityComponent(MyComponent);
+        Debug.Log(_myComponent.CurrentVelocity);
     }
 
     public void LoadAsSlice(PlanetComponent src)
@@ -53,23 +55,23 @@ public class PlanetComponentHandler : MonoBehaviour
         AddToController();
     }
 
-    void BeginLoad()
+    async void BeginLoad()
     {
         _myComponent.Handler = this;
         _myComponent.PlanetTransform = transform.parent;
         _myComponent.Renderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        PlanetSlice.Instance.LoadSlices(this);
+        var rot = _myComponent.PlanetTransform.rotation;
+        _myComponent.PlanetTransform.rotation = quaternion.Euler(0, 0, 0);
+        await PlanetSlice.Instance.LoadSlices(this);
+        _myComponent.PlanetTransform.rotation = rot;
     }
     
-    public void Initialize() => _myComponent = new PlanetComponent(this, transform.parent, transform.GetChild(0).GetComponent<SpriteRenderer>(), radius, mass, spawnPos, name);
+    public void Initialize() => _myComponent = new PlanetComponent(this, transform.parent, transform.GetChild(0).GetComponent<SpriteRenderer>(), radius, mass, spawnPos, planetName);
 
     public void BeginDrag(Vector2 offset) => MyComponent.CurrentPosition = (Vector2)UniverseCamera.Instance.ScreenToWorld(Input.mousePosition) - offset;
     
     void Update()
-    { 
-        Debug.Log(_myComponent.Inertia + " inertia");
-        Debug.Log(_myComponent.PlanetRigidbody.angularVelocity + " ang");
-        Debug.Log(_myComponent.PlanetRigidbody.angularDrag);
+    {
         if(!PlaybackController.Instance.Playback.IsPaused && _myComponent != null) _myComponent.AddForce();
     }
 

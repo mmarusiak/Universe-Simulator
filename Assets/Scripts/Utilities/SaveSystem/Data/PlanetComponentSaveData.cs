@@ -7,6 +7,7 @@ public class PlanetComponentSaveData
     // vectors
     [JsonProperty] private VectorSaveData _initialPosition, _initialVelocity, _currentPosition, _currentVelocity;
     // planet basic infos
+    [JsonProperty] private Quaternion _planetRotation;
     [JsonProperty] private float _radius, _mass;
     [JsonProperty] private ColorSaveData _planetColor;
     [JsonProperty] private string _planetName;
@@ -15,13 +16,14 @@ public class PlanetComponentSaveData
     [JsonProperty] private float _angularVelocity;
 
     [JsonConstructor]
-    public PlanetComponentSaveData(VectorSaveData inPos, VectorSaveData inVel, VectorSaveData cPos, VectorSaveData cVel,
+    public PlanetComponentSaveData(VectorSaveData inPos, VectorSaveData inVel, VectorSaveData cPos, VectorSaveData cVel, Quaternion planetRotation,
         float radius, float mass, ColorSaveData color, string name, List<SliceData> slices, bool isOriginal, float angularVelocity)
     {
         _initialPosition = inPos;
         _initialVelocity = inVel;
         _currentPosition = cPos;
         _currentVelocity = cVel;
+        _planetRotation = planetRotation;
         _radius = radius;
         _mass = mass;
         _planetColor = color;
@@ -37,6 +39,7 @@ public class PlanetComponentSaveData
         _initialVelocity = component.InitialVelocity;
         _currentPosition = component.CurrentPosition;
         _currentVelocity = component.CurrentVelocity;
+        _planetRotation = component.PlanetTransform.rotation;
         _radius = component.Radius;
         _mass = component.Mass;
         _planetName = component.Name;
@@ -76,5 +79,6 @@ public class PlanetComponentSaveData
         receiver.Slices = sender._slices;
         receiver.IsOriginalPlanet = sender._isOriginal;
         receiver.PlanetRigidbody.angularVelocity = sender._angularVelocity;
+        receiver.PlanetTransform.rotation = sender._planetRotation;
     }
 }

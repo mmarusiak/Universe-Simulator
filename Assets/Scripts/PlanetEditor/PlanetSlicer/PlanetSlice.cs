@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 
@@ -62,13 +63,17 @@ public class PlanetSlice : MonoBehaviour
         }
     }
 
-    public void LoadSlices(PlanetComponentHandler handler)
+    public async Task LoadSlices(PlanetComponentHandler handler)
     {
+        // keep values that will change on slice separetly
+        var velocity = handler.MyComponent.CurrentVelocity;
         var initialPos = handler.MyComponent.CurrentPosition;
+        
         if (handler.MyComponent.Slices.Count == 0) return;
+        
         GameObject planet = handler.gameObject;
         Transform planetT = handler.transform;
-        Transform parentT = planetT.parent;
+        
         foreach (var slice in handler.MyComponent.Slices)
         {
             var originalSprite = planet.GetComponent<SpriteMask>().sprite;
@@ -79,7 +84,9 @@ public class PlanetSlice : MonoBehaviour
             ApplySlice(handler, slicedSprites[slice.SliceIndex()], originalArea, false);
         }
 
+        await Task.Yield();
         handler.MyComponent.CurrentPosition = initialPos;
+        handler.MyComponent.CurrentVelocity = velocity;
     }
     
     PlanetComponentHandler CreateSlice(PlanetComponentHandler originalHandler, Transform originalT)

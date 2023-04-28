@@ -208,6 +208,10 @@ PrefabInstance:
       propertyPath: radius
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2730977995786505893, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
+      propertyPath: planetName
+      value: New Planet
+      objectReference: {fileID: 0}
     - target: {fileID: 2730977995786505916, guid: 993953b5d7b81c56f9886f6d5ff3b905, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -14,8 +14,6 @@ public class PlanetComponent
     private Vector2 _initialPosition;
     private Vector2 _initialVelocity;
     private string _name;
-    // last saved components
-    private Vector2 _currentVelocity;
     private Vector2 _currentPosition;
     // readonly fields
     private SpriteRenderer _renderer;
@@ -79,8 +77,8 @@ public class PlanetComponent
     
     public Vector2 CurrentVelocity
     {
-        get => _currentVelocity;
-        set => SetPlanetCurrentVelocity(value, false);
+        get => _rigidbody.velocity;
+        set => SetPlanetCurrentVelocity(value);
     }
 
     public Vector2 InitialPosition
@@ -189,7 +187,7 @@ public class PlanetComponent
     public void AddForce()
     {
         float gConstant = GlobalVariables.GravitationalConstant;
-        SetPlanetCurrentVelocity(_rigidbody.velocity, true);
+        SetPlanetCurrentVelocity(_rigidbody.velocity);
         Vector2 currentGravityForce = Vector2.zero;
         foreach (var otherComponent in _otherComponents)
         {
@@ -255,15 +253,15 @@ public class PlanetComponent
         _rigidbody.mass = _mass;
     }
     
-    void SetPlanetCurrentVelocity(Vector2 newVel, bool fromForceAdder)
+    void SetPlanetCurrentVelocity(Vector2 newVel)
     {
-        _currentVelocity = newVel;
+        _rigidbody.velocity = newVel;
+        Debug.Log(newVel);
 
-        if (PlaybackController.Instance.Playback.IsReset) InitialVelocity = _currentVelocity;
-        if(!fromForceAdder) _rigidbody.velocity = _currentVelocity;
-        if(!PlaybackController.Instance.Playback.IsPaused && VelocityEditor.Instance.EditorBase.CurrentPlanet == this)  VelocityEditor.Instance.ChangeVelocity(_currentVelocity);
+        if (PlaybackController.Instance.Playback.IsReset) InitialVelocity = CurrentVelocity;
+        if(!PlaybackController.Instance.Playback.IsPaused && VelocityEditor.Instance.EditorBase.CurrentPlanet == this)  VelocityEditor.Instance.ChangeVelocity(CurrentVelocity);
         
-        _handler.OnVelocityChanged.ChangeValue(UniverseTools.RoundOutput(_currentVelocity.magnitude));
+        _handler.OnVelocityChanged.ChangeValue(UniverseTools.RoundOutput(CurrentVelocity.magnitude));
     }
 
     void SetPlanetCurrentPosition(Vector2 newPos)
