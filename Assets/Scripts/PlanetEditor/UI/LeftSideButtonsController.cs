@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UniverseSound;
 
 public class LeftSideButtonsController : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class LeftSideButtonsController : MonoBehaviour
         _isCutable = false;
         _cutsVectors = new Vector2[2];
         _cutState = false;
+        UniverseSoundTree.Instance.PlaySoundByName("TEST");
 
         UpdateButtons();
     }
@@ -26,7 +28,8 @@ public class LeftSideButtonsController : MonoBehaviour
         _isCutable = false;
         _cutsVectors = new Vector2[2];
         _cutState = false;
-
+        UniverseSoundTree.Instance.PlaySoundByName("TEST");
+        
         UpdateButtons();
     }
 
@@ -37,6 +40,7 @@ public class LeftSideButtonsController : MonoBehaviour
         _isCreatingPlanet = false;
         _cutsVectors = new Vector2[2];
         _cutState = false;
+        UniverseSoundTree.Instance.PlaySoundByName("TEST");
         
         UpdateButtons();
     }

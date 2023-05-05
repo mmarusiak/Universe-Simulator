@@ -44,7 +44,6 @@ public class PlanetComponentHandler : MonoBehaviour
         while (PlanetComponentsController.Instance == null) await Task.Yield();
         // whole component loads from saving handler script
         PlanetComponentsController.Instance.AddNewGravityComponent(MyComponent);
-        Debug.Log(_myComponent.CurrentVelocity);
     }
 
     public void LoadAsSlice(PlanetComponent src)

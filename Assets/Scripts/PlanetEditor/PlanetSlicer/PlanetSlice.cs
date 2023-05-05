@@ -68,7 +68,7 @@ public class PlanetSlice : MonoBehaviour
         // keep values that will change on slice separetly
         var velocity = handler.MyComponent.CurrentVelocity;
         var initialPos = handler.MyComponent.CurrentPosition;
-        
+
         if (handler.MyComponent.Slices.Count == 0) return;
         
         GameObject planet = handler.gameObject;
