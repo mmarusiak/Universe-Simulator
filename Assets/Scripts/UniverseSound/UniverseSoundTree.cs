@@ -7,25 +7,29 @@ namespace UniverseSound
 {
     public class UniverseSoundTree : MonoBehaviour
     {
+        // nodes - all clips with properties which developer configures in editor
+        // hash table is used to get better performance on loops
         public static UniverseSoundTree Instance;
         [SerializeField] private AudioSource source;
         [SerializeField] private List<UniverseSoundNode> nodes;
-        
+        private readonly UniverseSoundHash _hashTable = new ();
         
         public void Awake() => Instance = this;
+
+        void Start()
+        {
+            foreach(var node in nodes)
+                _hashTable.AddToSet(node);
+        }
         
         public void PlaySoundByName(string nodeName)
         {
-            foreach (var node in nodes)
-            {
-                if (node.Name != nodeName)
-                    continue;
-                source.clip = node.SoundClip;
-                source.pitch = node.Pitch;
-                source.volume = node.Boost + 1;
-                source.PlayDelayed(node.Delay);
-                break;
-            }
+            var node = _hashTable.GetNodeByName(nodeName);
+            source.clip = node.SoundClip;
+            // will replace "1" value by just volume level that will be to set in settings by player
+            source.volume = 1 + node.Boost;
+            source.pitch = node.Pitch;
+            source.PlayDelayed(node.Delay);
         }
     }
 }
