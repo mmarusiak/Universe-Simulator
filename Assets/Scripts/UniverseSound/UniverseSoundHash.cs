@@ -8,7 +8,7 @@ namespace UniverseSound
 
         public int GetHash(UniverseSoundNode node) => node.Name.ToLower()[0] % 4;
         public int GetHash(string name) => name.ToLower()[0] % 4;
-
+        
         public void AddToSet(UniverseSoundNode node)
         {
             int index = GetHash(node);

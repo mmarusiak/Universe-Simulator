@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace UniverseSound
@@ -7,22 +6,39 @@ namespace UniverseSound
     [Serializable]
     public class UniverseSoundNode
     {
-        [SerializeField] public string name;
-        [SerializeField] private AudioClip _soundClip;
-        [SerializeField] private float _delay, _pitch, _boost;
-
-        public string Name => name;
-        public AudioClip SoundClip => _soundClip;
-        public float Delay => _delay;
-        public float Pitch => _pitch;
-        public float Boost => _boost;
-
-        public UniverseSoundNode(AudioClip soundClip, float delay = 0, float pitch = 0, float boost = 0)
+        public enum SoundType
         {
-            _soundClip = soundClip;
-            _delay = delay;
-            _pitch = pitch;
-            _boost = boost;
+            Master,
+            MenuEffects,
+            GameEffects,
+            Music,
+            UIButtonsEffects
+        }
+        
+        [SerializeField] public string name;
+        [SerializeField] private AudioClip soundClip; 
+        [SerializeField] private int delay;
+        [Range(-100, 100)] [SerializeField] private int boost;
+        [Range(-300, 300)] [SerializeField] private int pitch;
+        [SerializeField] private SoundType soundType;
+        
+        public string Name => name;
+        public AudioClip SoundClip => soundClip;
+        // ReSharper disable once PossibleLossOfFraction
+        public float Delay => delay;
+        // ReSharper disable once PossibleLossOfFraction
+        public float Pitch => pitch/100;
+        // ReSharper disable once PossibleLossOfFraction
+        public float Boost => boost/100;
+        public SoundType GetSoundType => soundType;
+
+        public UniverseSoundNode(AudioClip soundClip, SoundType soundType, int delay = 0, int pitch = 0, int boost = 0)
+        {
+            this.soundClip = soundClip;
+            this.delay = delay;
+            this.pitch = pitch;
+            this.boost = boost;
+            this.soundType = soundType;
         }
     }
 }
