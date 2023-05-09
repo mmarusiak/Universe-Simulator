@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UniverseSound;
@@ -8,33 +9,17 @@ namespace Utilities.Settings
     {
         public static SoundSettingsController Instance;
 
-        private readonly List<SoundSettings> _soundsSettings = new();
+        private readonly SoundSettings[] _settings = new SoundSettings[Enum.GetNames(typeof(UniverseSoundNode.SoundType)).Length];
         private SoundSettings _master;
 
         void Awake() => Instance = this;
 
         public void AddNewSound(SoundSettings settings)
         {
-            if (settings.SettingSoundType == UniverseSoundNode.SoundType.Master)
-            {
-                _master = settings;
-                return;
-            }
-            _soundsSettings.Add(settings);
+            _settings[(int)settings.SettingSoundType] = settings;
             Debug.Log("added");
         }
 
-        public SoundSettings GetSoundSetting(UniverseSoundNode.SoundType settingType)
-        {
-            if (settingType == UniverseSoundNode.SoundType.Master)
-                return _master;
-            foreach (SoundSettings sound in _soundsSettings)
-            {
-                if (sound.SettingSoundType == settingType)
-                    return sound;
-            }
-
-            return null;
-        }
+        public SoundSettings GetSoundSetting(UniverseSoundNode.SoundType settingType) => _settings[(int) settingType];
     }
 }
