@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities.UniverseLibraries;
 
 public class PlanetTextInfo : MonoBehaviour
 {

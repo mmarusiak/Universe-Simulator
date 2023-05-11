@@ -1,61 +1,64 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UniverseCamera : MonoBehaviour
+namespace Utilities.UniverseLibraries
 {
-    public static UniverseCamera Instance;
-    public static readonly Vector3 CameraInitialPosition = new (0, 0, - 10);
-    public static readonly float CameraInitialZoom = 85;
-    void Awake() => Instance = this;
-    
-    [SerializeField]
-    private Camera myCamera;
-    [SerializeField] private Text outPos;
-    public Camera Camera => myCamera;
-
-    private bool _isCameraMoving;
-
-    void Start()
+    public class UniverseCamera : MonoBehaviour
     {
-        if (myCamera == null)
+        public static UniverseCamera Instance;
+        public static readonly Vector3 CameraInitialPosition = new (0, 0, - 10);
+        public static readonly float CameraInitialZoom = 85;
+        void Awake() => Instance = this;
+    
+        [SerializeField]
+        private Camera myCamera;
+        [SerializeField] private Text outPos;
+        public Camera Camera => myCamera;
+
+        private bool _isCameraMoving;
+
+        void Start()
         {
-            Debug.LogError("Camera has not been set for UniverseCamera script!");
-            enabled = false;
-            return;
+            if (myCamera == null)
+            {
+                Debug.LogError("Camera has not been set for UniverseCamera script!");
+                enabled = false;
+                return;
+            }
+            UpdatePos();
         }
-        UpdatePos();
-    }
 
 
-    public void SetCameraPosition(Vector3 newPos)
-    {
-        myCamera.transform.position = newPos;
-        UpdatePos();
-    }
+        public void SetCameraPosition(Vector3 newPos)
+        {
+            myCamera.transform.position = newPos;
+            UpdatePos();
+        }
 
-    public void Reset()
-    {
-        SetCameraPosition(CameraInitialPosition);
-        myCamera.orthographicSize = CameraInitialZoom;
-    }
+        public void Reset()
+        {
+            SetCameraPosition(CameraInitialPosition);
+            myCamera.orthographicSize = CameraInitialZoom;
+        }
 
-    public Vector3 WorldToScreen(Vector3 world) => myCamera.WorldToScreenPoint(world);
+        public Vector3 WorldToScreen(Vector3 world) => myCamera.WorldToScreenPoint(world);
 
-    public Vector3 ScreenToWorld(Vector3 screen) => myCamera.ScreenToWorldPoint(screen);
+        public Vector3 ScreenToWorld(Vector3 screen) => myCamera.ScreenToWorldPoint(screen);
 
-    public void ChangeMoveState(bool target) => _isCameraMoving = target;
+        public void ChangeMoveState(bool target) => _isCameraMoving = target;
 
-    public bool GetMoveState() => _isCameraMoving;
+        public bool GetMoveState() => _isCameraMoving;
     
     
-    void UpdatePos()
-    {
-        if (outPos is null) return;
+        void UpdatePos()
+        {
+            if (outPos is null) return;
         
-        string x = "<color=red>" + UniverseTools.RoundOutput(myCamera.transform.position.x) + "</color>";
-        string y = "<color=green>" + UniverseTools.RoundOutput(myCamera.transform.position.y) + "</color>";
+            string x = "<color=red>" + UniverseTools.RoundOutput(myCamera.transform.position.x) + "</color>";
+            string y = "<color=green>" + UniverseTools.RoundOutput(myCamera.transform.position.y) + "</color>";
         
-        string output = $"Camera position ({x}, {y})";
-        outPos.text = output;
+            string output = $"Camera position ({x}, {y})";
+            outPos.text = output;
+        }
     }
 }

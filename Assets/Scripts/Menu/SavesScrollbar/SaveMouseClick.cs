@@ -1,17 +1,21 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using Utilities.SaveSystem;
 
-public class SaveMouseClick : MonoBehaviour, IPointerClickHandler
+namespace Menu.SavesScrollbar
 {
-    private string _saveName;
-
-    void Start() => _saveName = transform.parent.parent.GetComponent<SaveContainer>().SaveName;
-
-    public async void OnPointerClick(PointerEventData eventData)
+    public class SaveMouseClick : MonoBehaviour, IPointerClickHandler
     {
-        DontDestroyOnLoad(SavingHandler.Instance);
-        SceneManager.LoadScene("Game");
-        await SavingHandler.Instance.LoadLevel(true, _saveName);
+        private string _saveName;
+
+        void Start() => _saveName = transform.parent.parent.GetComponent<SaveContainer>().SaveName;
+
+        public async void OnPointerClick(PointerEventData eventData)
+        {
+            DontDestroyOnLoad(SavingHandler.Instance);
+            SceneManager.LoadScene("Game");
+            await SavingHandler.Instance.LoadLevel(true, _saveName);
+        }
     }
 }

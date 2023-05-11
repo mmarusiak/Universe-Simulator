@@ -1,40 +1,45 @@
 using System.Collections.Generic;
+using Menu.SavesScrollbar;
 using UnityEngine;
+using Utilities.UniverseLibraries;
 
-public class MenuSaves : MonoBehaviour
+namespace Menu
 {
-    private string _pathToSaves;
-    [SerializeField] private GameObject saveContainerPrefab;
-    private List<SaveContainer> _containers = new ();
-    [SerializeField] private Transform savesParent;
-
-    void Start()
+    public class MenuSaves : MonoBehaviour
     {
-        _pathToSaves = Application.persistentDataPath + "/Saves";
-        UniverseDirectories.CreateDirectoryIfNotExists(_pathToSaves);
-        InitializeSavesLoader();
-    }
+        private string _pathToSaves;
+        [SerializeField] private GameObject saveContainerPrefab;
+        private List<SaveContainer> _containers = new ();
+        [SerializeField] private Transform savesParent;
 
-    async void InitializeSavesLoader()
-    {
-        savesParent.gameObject.SetActive(false);
-        var saves = UniverseDirectories.GetFoldersInDirectory(_pathToSaves);
-        foreach (var saveName in saves)
+        void Start()
         {
-            SaveContainer container = Instantiate(saveContainerPrefab,  savesParent).GetComponent<SaveContainer>();
-            await container.Initialize(saveName);
-            _containers.Add(container);
+            _pathToSaves = Application.persistentDataPath + "/Saves";
+            UniverseDirectories.CreateDirectoryIfNotExists(_pathToSaves);
+            InitializeSavesLoader();
         }
-        SortSaves();
-        savesParent.gameObject.SetActive(true);
-    }
 
-    void SortSaves()
-    {
-        _containers.Sort((x, y) => y.LastModified.CompareTo(x.LastModified));
-        for (int i = 0; i < _containers.Count; i++)
+        async void InitializeSavesLoader()
         {
-            _containers[i].GetComponent<RectTransform>().position = new Vector3(400, 550 - 350 * i);
+            savesParent.gameObject.SetActive(false);
+            var saves = UniverseDirectories.GetFoldersInDirectory(_pathToSaves);
+            foreach (var saveName in saves)
+            {
+                SaveContainer container = Instantiate(saveContainerPrefab,  savesParent).GetComponent<SaveContainer>();
+                await container.Initialize(saveName);
+                _containers.Add(container);
+            }
+            SortSaves();
+            savesParent.gameObject.SetActive(true);
+        }
+
+        void SortSaves()
+        {
+            _containers.Sort((x, y) => y.LastModified.CompareTo(x.LastModified));
+            for (int i = 0; i < _containers.Count; i++)
+            {
+                _containers[i].GetComponent<RectTransform>().position = new Vector3(400, 550 - 350 * i);
+            }
         }
     }
 }

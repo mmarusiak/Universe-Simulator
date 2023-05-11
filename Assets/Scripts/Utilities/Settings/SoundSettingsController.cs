@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UniverseSound;
 
@@ -16,8 +15,8 @@ namespace Utilities.Settings
 
         public void AddNewSound(SoundSettings settings)
         {
-            _settings[(int)settings.SettingSoundType] = settings;
-            Debug.Log("added");
+            if(_settings[(int)settings.SettingSoundType] != null) Debug.LogWarning("Added multiple settings type to: " + settings.SettingSoundType.ToString());
+                _settings[(int)settings.SettingSoundType] = settings;
         }
 
         public SoundSettings GetSoundSetting(UniverseSoundNode.SoundType settingType) => _settings[(int) settingType];

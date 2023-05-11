@@ -1,10 +1,7 @@
-public class UniverseTimer
+namespace Utilities.UniverseLibraries.Timer
 {
-    private float _time;
-
-    public float Time
+    public class UniverseTimer
     {
-        get => _time;
-        set => _time = value;
+        public float Time { get; set; }
     }
 }
