@@ -24,8 +24,11 @@ namespace GameCore.SimulationCore
         private SpriteRenderer _renderer;
         private SpriteMask _mask;
         private readonly Rigidbody2D _rigidbody;
-        private UniverseTrail _universeTrail;
+        private readonly UniverseTrail _universeTrail;
         private Transform _planetTransform;
+        private float _lastAngularAcceleration; 
+        // if is not 0 - loaded from file, then we should have some angular acceleration
+        private float _angularAcceleration;
         // boolean that indicate if this planet is new created planet - only position is assigned in constructor
         // basically with this bool we assign not only current pos, but also initial pos if game is not reseted
         private bool _firstTouch = true;
@@ -73,7 +76,9 @@ namespace GameCore.SimulationCore
             get => _mass;
             set => SetPlanetMass(value);
         }
-
+        
+        public float LastAngularAcceleration => _lastAngularAcceleration;
+        
         public Vector2 CurrentPosition
         {
             get => _currentPosition;
@@ -143,6 +148,12 @@ namespace GameCore.SimulationCore
             get => _rigidbody.inertia;
             set => _rigidbody.inertia = value;
         }
+
+        public float AngularVelocity
+        {
+            get => _rigidbody.angularVelocity;
+            set => _rigidbody.angularVelocity = value;
+        }
     
         public UniverseTrail UniverseTrail => _universeTrail;
 
@@ -189,6 +200,7 @@ namespace GameCore.SimulationCore
         }
 
         private static float _temporaryMultiplier = 5;
+        private float _lastAngularVelocity = 0;
         public void AddForce()
         {
             float gConstant = GlobalVariables.GravitationalConstant;
@@ -224,6 +236,8 @@ namespace GameCore.SimulationCore
             }
         
             GetPosFromTransform();
+            _lastAngularAcceleration = _lastAngularVelocity - AngularVelocity;
+            _lastAngularVelocity = AngularVelocity;
             _rigidbody.AddForce(currentGravityForce, ForceMode2D.Impulse);
         }
 

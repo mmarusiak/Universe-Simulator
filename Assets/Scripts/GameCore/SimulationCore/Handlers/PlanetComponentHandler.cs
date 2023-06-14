@@ -18,6 +18,8 @@ namespace GameCore.SimulationCore.Handlers
         public PlanetTextInfo OnNameChanged => _onNameChanged;
         public PlanetTextInfo OnVelocityChanged => _onVelocityChanged;
         public PlanetComponent MyComponent => _myComponent;
+
+        private bool _calculatingAngularAcceleration = false;
         public bool IsCloned
         {
             get => isCloned;
@@ -47,6 +49,7 @@ namespace GameCore.SimulationCore.Handlers
             while (PlanetComponentsController.Instance == null) await Task.Yield();
             // whole component loads from saving handler script
             PlanetComponentsController.Instance.AddNewGravityComponent(MyComponent);
+            
         }
 
         public void LoadAsSlice(PlanetComponent src)
@@ -76,6 +79,8 @@ namespace GameCore.SimulationCore.Handlers
         {
             if(!PlaybackController.Instance.Playback.IsPaused && _myComponent != null) _myComponent.AddForce();
         }
+        
+        
 
         public void NullTexts()
         {

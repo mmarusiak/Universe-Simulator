@@ -88,6 +88,7 @@ namespace Utilities.SaveSystem
             LevelInfoHolder.Instance.LevelName = name;
             Instance = _next;
             Instance.SaveLevel();
+            Instance.InitializeNewLevel();
             Destroy(gameObject);
         }
     
@@ -104,5 +105,8 @@ namespace Utilities.SaveSystem
             string json = File.ReadAllText(targetPath);
             return JsonConvert.DeserializeObject<T>(json);
         }
+
+        private void InitializeNewLevel() => PlaybackController.Instance.ResetLevel();
+        
     }
 }

@@ -24,6 +24,7 @@ namespace Utilities.UniverseLibraries
         {
             if (Time.timeScale <= 0) return;
         
+            Debug.Log(Time.timeScale);
             CreateNewPoint();
         }
 
