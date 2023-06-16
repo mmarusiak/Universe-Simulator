@@ -19,7 +19,7 @@ public class LeftSideButtonsController : MonoBehaviour
         _isCutable = false;
         _cutsVectors = new Vector2[2];
         _cutState = false;
-        UniverseSoundTree.Instance.PlaySoundByName("TEST");
+        UniverseSoundTree.Instance.PlaySoundByName("TEST", "Add", this);
 
         UpdateButtons();
     }
@@ -31,7 +31,7 @@ public class LeftSideButtonsController : MonoBehaviour
         _isCutable = false;
         _cutsVectors = new Vector2[2];
         _cutState = false;
-        UniverseSoundTree.Instance.PlaySoundByName("TEST");
+        UniverseSoundTree.Instance.PlaySoundByName("TEST", "Delete", this);
         
         UpdateButtons();
     }
@@ -43,7 +43,7 @@ public class LeftSideButtonsController : MonoBehaviour
         _isCreatingPlanet = false;
         _cutsVectors = new Vector2[2];
         _cutState = false;
-        UniverseSoundTree.Instance.PlaySoundByName("TEST");
+        UniverseSoundTree.Instance.PlaySoundByName("TEST", "Cutter", this);
         
         UpdateButtons();
     }

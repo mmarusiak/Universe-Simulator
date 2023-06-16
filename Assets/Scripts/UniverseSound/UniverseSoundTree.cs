@@ -24,15 +24,19 @@ namespace UniverseSound
                 _hashTable.AddToSet(node);
         }
         
-        public void PlaySoundByName(string nodeName)
+        public void PlaySoundByName(string nodeName, string actionName, object sender)
         {
             var node = _hashTable.GetNodeByName(nodeName);
+            if (node == null)
+            {
+                Debug.LogError($"DIDNT FIND SOUND NODE {nodeName}! Error from {actionName}, {sender}");
+                return;
+            }
             source.clip = node.SoundClip;
-            // will replace "1" value by just volume level that will be to set in settings by player
             float volumeFromMenu = SoundSettingsController.Instance.GetSoundSetting(node.GetSoundType).CurrentVolume *
                                    SoundSettingsController.Instance.GetSoundSetting(UniverseSoundNode.SoundType.Master).CurrentVolume;
-            Debug.Log(volumeFromMenu);
             source.volume = volumeFromMenu + node.Boost;
+            Debug.Log(volumeFromMenu);
             source.pitch = node.Pitch;
             source.PlayDelayed(node.Delay);
         }

@@ -6,8 +6,12 @@ namespace Utilities.Settings
     public class SoundSlider : MonoBehaviour
     {
         [SerializeField] private SoundSettings mySetting;
-        
-        public void OnSliderChanged(Single input) => mySetting.SetVolume((int) input);
+
+        public void OnSliderChanged(Single input)
+        {
+            Debug.Log((int)input);
+            mySetting.SetVolume((int) input);
+        }
 
         private void Start() => SoundSettingsController.Instance.AddNewSound(mySetting);
     }

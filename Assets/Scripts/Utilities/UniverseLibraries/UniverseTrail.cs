@@ -23,8 +23,7 @@ namespace Utilities.UniverseLibraries
         void Update()
         {
             if (Time.timeScale <= 0) return;
-        
-            Debug.Log(Time.timeScale);
+            
             CreateNewPoint();
         }
 
