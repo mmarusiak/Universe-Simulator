@@ -12,6 +12,8 @@ public class LeftSideButtonsController : MonoBehaviour
     private Vector2[] _cutsVectors = new Vector2[2];
 
     void Start() => UpdateButtons();
+    
+    // setting on add/create new planet mode
     public void AddPlanet()
     { 
         _isCreatingPlanet = !_isCreatingPlanet;
@@ -24,6 +26,7 @@ public class LeftSideButtonsController : MonoBehaviour
         UpdateButtons();
     }
 
+    // setting on delete/remove mode
     public void DeletePlanet()
     {
         _isRemovingPlanet = !_isRemovingPlanet;
@@ -36,6 +39,7 @@ public class LeftSideButtonsController : MonoBehaviour
         UpdateButtons();
     }
 
+    // setting on cutter/slicer
     public void Cutter()
     {
         _isCutable = !_isCutable;
@@ -52,9 +56,9 @@ public class LeftSideButtonsController : MonoBehaviour
     {
         if (GlobalVariables.Instance.OverlayShown) return;
         Vector2 mousePosition = UniverseCamera.Instance.ScreenToWorld(Input.mousePosition);
-        
         if (_cutState) DrawSliceLine(mousePosition);
         else HideSliceLine();
+       
         if (!Input.GetMouseButtonDown(0)) return;
         
         RaycastHit2D[] hits = Physics2D.RaycastAll (mousePosition, new Vector2 (0, 0), 0.01f);
@@ -62,19 +66,22 @@ public class LeftSideButtonsController : MonoBehaviour
         // if player wants to place new planet on existing planet
         if(_isCreatingPlanet) foreach(var hit in hits) if (hit.collider.CompareTag("Planet")) return;
         
+        // actual adding new planet happens here
         if (_isCreatingPlanet)
         {
             PlanetComponentsController.Instance.CreatePlanet();
             _isCreatingPlanet = false;
         }
         
+        // actual removing planet happens here
         if(_isRemovingPlanet) foreach(var hit in hits)
             if (hit.collider.CompareTag("Planet"))
             {
                 PlanetComponentsController.Instance.DestroyPlanet(hit.collider.gameObject.GetComponent<PlanetComponentHandler>());
                 _isRemovingPlanet = false;
             }
-
+        
+        // actual cut/slice happens here
         if (_isCutable)
         {
             if (!_cutState)

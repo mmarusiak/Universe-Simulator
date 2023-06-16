@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utilities.Settings;
 
-// we dont have audio space, so we dont need to worry about different audio sources positions
+// we dont have spatial audio, so we dont need to worry about different audio sources positions
+// actually we have only 1 main sound source, so that fixes our worries
 
 namespace UniverseSound
 {
@@ -26,17 +27,22 @@ namespace UniverseSound
         
         public void PlaySoundByName(string nodeName, string actionName, object sender)
         {
+            // try to get node of that name
             var node = _hashTable.GetNodeByName(nodeName);
+            // if not found - node with that name doesn't exist. we throw expected nodeName, actionName and sender which is object data container
             if (node == null)
             {
-                Debug.LogError($"DIDNT FIND SOUND NODE {nodeName}! Error from {actionName}, {sender}");
+                Debug.LogError($"DIDNT FIND SOUND NODE [{nodeName}]! Error from [{actionName}, {sender}]");
                 return;
             }
+            // get correct sound clip
             source.clip = node.SoundClip;
+            // get volume from menu settings
             float volumeFromMenu = SoundSettingsController.Instance.GetSoundSetting(node.GetSoundType).CurrentVolume *
                                    SoundSettingsController.Instance.GetSoundSetting(UniverseSoundNode.SoundType.Master).CurrentVolume;
+            // adjusting volume
             source.volume = volumeFromMenu + node.Boost;
-            Debug.Log(volumeFromMenu);
+            // setting pitch and play!
             source.pitch = node.Pitch;
             source.PlayDelayed(node.Delay);
         }

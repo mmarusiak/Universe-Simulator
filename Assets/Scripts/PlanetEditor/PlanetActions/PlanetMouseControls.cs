@@ -17,6 +17,7 @@ public class PlanetMouseControls : MonoBehaviour
     
     private void OnMouseDown()
     {
+        if (GlobalVariables.Instance.OverlayShown) return;
         _planetOffset = OffsetPlanetDrag();
         EditorsController.Instance.LastEditedComponent = _myHandler.MyComponent;
         TimersController.Instance.StartTimer(_timer);
@@ -31,6 +32,7 @@ public class PlanetMouseControls : MonoBehaviour
 
     private void OnMouseDrag()
     {
+        if (GlobalVariables.Instance.OverlayShown) return;
         if (_timer.Time > _timeToShowEditor)
         {
             _myHandler.BeginDrag(_planetOffset);
@@ -45,6 +47,7 @@ public class PlanetMouseControls : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (_timer.Time <= _timeToShowEditor && GlobalVariables.Instance.OverlayShown) return;
         _myHandler.MyComponent.UniverseTrail.Clear();
         TimersController.Instance.StopTimer(_timer);
         

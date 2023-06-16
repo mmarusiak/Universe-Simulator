@@ -3171,7 +3171,7 @@ MonoBehaviour:
     delay: 0
     boost: 0
     pitch: 100
-    soundType: 2
+    soundType: 3
 --- !u!114 &1228959679
 MonoBehaviour:
   m_ObjectHideFlags: 0
