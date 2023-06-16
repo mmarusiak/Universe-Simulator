@@ -1,4 +1,5 @@
-![logo](https://user-images.githubusercontent.com/20907620/224792498-8602d768-855d-4970-aa48-97af0a27e074.png)
+![universesimulatorbanner](https://github.com/mmarusiak/Universe-Simulator/assets/20907620/c0d5eba8-8c07-422a-a917-9a0d2c8fc973)
+
 
 
 
@@ -16,7 +17,12 @@ Each level can be created thru menu by player. Level data contains informations 
 
 Player can create his own universe by creating or deleting planets and tweeking with them:
 
-![sandbox](https://user-images.githubusercontent.com/20907620/224785774-85e79327-b69e-47c7-8cd4-77e46c843333.gif)
+![sandbox](https://github.com/mmarusiak/Universe-Simulator/assets/20907620/3975567d-681b-4e6c-bbd0-f4a08f3845ef)
+
+Now player is able to:
+* play with look of the planets;
+* change velocity, position, mass and radius of planets;
+* slice planets;
 
 #### Plans for the future
 
