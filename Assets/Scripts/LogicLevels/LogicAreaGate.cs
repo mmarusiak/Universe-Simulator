@@ -19,8 +19,7 @@ public class LogicAreaGate : MonoBehaviour
             position,
             (position + new Vector2(size.x, 0)),
             (position + size),
-            (position + new Vector2(0, size.y)),
-            position
+            (position + new Vector2(0, size.y))
         };
         renderer.SetPositions(pos);
     }
