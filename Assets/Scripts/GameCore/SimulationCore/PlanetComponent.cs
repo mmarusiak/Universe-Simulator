@@ -201,7 +201,6 @@ namespace GameCore.SimulationCore
         }
 
         private static float _temporaryMultiplier = 5;
-        private float _lastAngularVelocity = 0;
         public void AddForce()
         {
             float gConstant = GlobalVariables.GravitationalConstant;
@@ -237,8 +236,6 @@ namespace GameCore.SimulationCore
             }
         
             GetPosFromTransform();
-            _lastAngularAcceleration = _lastAngularVelocity - AngularVelocity;
-            _lastAngularVelocity = AngularVelocity;
             _rigidbody.AddForce(currentGravityForce, ForceMode2D.Impulse);
         }
 
