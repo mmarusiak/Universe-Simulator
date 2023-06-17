@@ -42,7 +42,7 @@ public class PlanetMouseControls : MonoBehaviour
 
     Vector2 OffsetPlanetDrag()
     {
-        return   UniverseCamera.Instance.ScreenToWorld(Input.mousePosition) - _myHandler.MyComponent.PlanetTransform.position;
+        return UniverseCamera.Instance.ScreenToWorld(Input.mousePosition) - _myHandler.MyComponent.PlanetTransform.position;
     }
 
     private void OnMouseUp()

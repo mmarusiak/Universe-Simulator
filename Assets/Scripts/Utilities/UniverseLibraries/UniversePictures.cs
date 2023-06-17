@@ -22,7 +22,7 @@ namespace Utilities.UniverseLibraries
             toHide.SetActive(true);
         }
 
-        public static void TakeViewScrenshot(string path)
+        public static void TakeViewScreenshot(string path)
         {
             ScreenCapture.CaptureScreenshot(path);
         }

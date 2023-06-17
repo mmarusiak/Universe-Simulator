@@ -16,6 +16,7 @@ namespace GameCore.SimulationCore
         // basic info
         private float _radius;
         private float _mass;
+        private float _initialMass;
         private Vector2 _initialPosition;
         private Vector2 _initialVelocity;
         private string _name;
@@ -268,6 +269,7 @@ namespace GameCore.SimulationCore
         void SetPlanetMass(float newMass)
         {
             if (newMass <= 0) return;
+            if (PlaybackController.Instance.Playback.IsReset) _initialMass = newMass;
             _mass = newMass;
             _rigidbody.mass = _mass;
         }
@@ -306,6 +308,7 @@ namespace GameCore.SimulationCore
             _universeTrail.Clear();
             CurrentPosition = InitialPosition;
             CurrentVelocity = InitialVelocity;
+            Mass = _initialMass;
             Mask.sprite = BasicPlanetEditor.Instance.DefaultPlanetSprite;
         
             ClearPivot();

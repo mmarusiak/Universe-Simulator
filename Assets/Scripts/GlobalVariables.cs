@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utilities.UniverseLibraries;
 
 public class GlobalVariables : MonoBehaviour
 {
@@ -25,7 +26,9 @@ public class GlobalVariables : MonoBehaviour
     }
     
     // Update is called once per frame
-    void Update()
+    async void Update()
     {
+        if (Input.GetKey(KeyCode.P))
+            await UniversePictures.TakeGameScreenshot("/home/mmarusiak/Documents/UniverseScreens/NEWCAPTURE");
     }
 }
