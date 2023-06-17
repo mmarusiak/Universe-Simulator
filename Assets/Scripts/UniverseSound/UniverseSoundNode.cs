@@ -11,8 +11,8 @@ namespace UniverseSound
             Master,
             MenuEffects,
             GameEffects,
-            Music,
-            UIButtonsEffects
+            GameMusic,
+            MenuMusic
         }
         
         [SerializeField] public string name;
@@ -24,12 +24,9 @@ namespace UniverseSound
         
         public string Name => name;
         public AudioClip SoundClip => soundClip;
-        // ReSharper disable once PossibleLossOfFraction
         public float Delay => delay;
-        // ReSharper disable once PossibleLossOfFraction
-        public float Pitch => pitch/100;
-        // ReSharper disable once PossibleLossOfFraction
-        public float Boost => boost/100;
+        public float Pitch => (float) pitch/100;
+        public float Boost => (float) boost/100;
         public SoundType GetSoundType => soundType;
 
         public UniverseSoundNode(AudioClip soundClip, SoundType soundType, int delay = 0, int pitch = 0, int boost = 0)
