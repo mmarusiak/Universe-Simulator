@@ -221,7 +221,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be07072884d675d66b457efd374cbf90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingSceneName: LoadingScreen
   timeBetweenNextTips: 40
   tipsText: {fileID: 1326317468}
 --- !u!114 &427603170
@@ -423,7 +422,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 530, y: -372}
+  m_AnchoredPosition: {x: 0, y: -484}
   m_SizeDelta: {x: 1211.6062, y: 271.2437}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1326317468
@@ -459,7 +458,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: LOREM IPSUM LOREM IPSUM LOREM IPSUM
+  m_Text: LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM
 --- !u!222 &1326317469
 CanvasRenderer:
   m_ObjectHideFlags: 0
