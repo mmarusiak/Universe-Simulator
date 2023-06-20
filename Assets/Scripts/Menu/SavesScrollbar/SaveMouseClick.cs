@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using Utilities.SaveSystem;
+using Utilities.UniverseLibraries;
 
 namespace Menu.SavesScrollbar
 {
@@ -14,7 +15,7 @@ namespace Menu.SavesScrollbar
         public async void OnPointerClick(PointerEventData eventData)
         {
             DontDestroyOnLoad(SavingHandler.Instance);
-            SceneManager.LoadScene("Game");
+            UniverseScenes.LoadScene("Game");
             await SavingHandler.Instance.LoadLevel(true, _saveName);
         }
     }

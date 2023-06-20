@@ -81,7 +81,7 @@ namespace Utilities.SaveSystem
             if (string.Empty == name) return;
 
             DontDestroyOnLoad(this);
-            SceneManager.LoadScene("Game");
+            UniverseScenes.LoadScene("Game");
 
             while (LevelInfoHolder.Instance == null) await Task.Yield();
 

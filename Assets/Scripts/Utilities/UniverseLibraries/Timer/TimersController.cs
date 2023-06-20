@@ -13,13 +13,11 @@ namespace Utilities.UniverseLibraries.Timer
         public void StartTimer(UniverseTimer timer)
         {
             timer.Time = 0;
+            if (_timers.Contains(timer)) StopTimer(timer);
             _timers.Add(timer);
         }
 
-        public void StopTimer(UniverseTimer timer)
-        {
-            _timers.Remove(timer);
-        }
+        public void StopTimer(UniverseTimer timer) => _timers.Remove(timer);
 
         // Update is called once per frame
         void Update()
