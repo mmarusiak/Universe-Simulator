@@ -43,16 +43,15 @@ namespace Utilities.UniverseLibraries
         
         public async Task LoadSceneAsync(string scene)
         {
-            //AsyncOperation loader = SceneManager.LoadSceneAsync(scene);
-            //loader.allowSceneActivation = false;
+            AsyncOperation loader = SceneManager.LoadSceneAsync(scene);
+            loader.allowSceneActivation = false;
             TimersController.Instance.StartTimer(_timer);
 
-            //while (!loader.isDone)
-            while(true)
+            while (!loader.isDone)
             {
                 LoadNextTip();
 
-                //if (loader.progress >= 0.9f) loader.allowSceneActivation = true;
+                if (loader.progress >= 0.9f) loader.allowSceneActivation = true;
                 
                 await Task.Yield();
             }
