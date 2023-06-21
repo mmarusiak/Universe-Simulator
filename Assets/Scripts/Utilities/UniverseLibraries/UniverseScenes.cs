@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utilities.UniverseLibraries.Timer;
 
+// Script was moved to "Tips" text game object
+
 namespace Utilities.UniverseLibraries
 {
     [RequireComponent(typeof(TimersController))]
@@ -12,6 +14,7 @@ namespace Utilities.UniverseLibraries
         public static UniverseScenes Instance;
         [SerializeField] private int timeBetweenNextTips;
         [SerializeField] private Text tipsText;
+        [SerializeField] private Animator tipsFading;
         private static string _targetScene;
         private UniverseTimer _timer = new ();
 
@@ -35,48 +38,39 @@ namespace Utilities.UniverseLibraries
         public static void LoadScene(string target)
         {
             _targetScene = target;
-            SceneManager.LoadScene("Scenes/LoadingScreen");
+            SceneManager.LoadScene("LoadingScreen");
         }
         
         public async Task LoadSceneAsync(string scene)
         {
-            AsyncOperation loader = SceneManager.LoadSceneAsync(scene);
-            loader.allowSceneActivation = false;
+            //AsyncOperation loader = SceneManager.LoadSceneAsync(scene);
+            //loader.allowSceneActivation = false;
             TimersController.Instance.StartTimer(_timer);
 
-            while (!loader.isDone)
+            //while (!loader.isDone)
+            while(true)
             {
-                await LoadNextTip();
+                LoadNextTip();
 
-                if (loader.progress >= 0.9f) loader.allowSceneActivation = true;
+                //if (loader.progress >= 0.9f) loader.allowSceneActivation = true;
                 
                 await Task.Yield();
             }
         }
 
-        private async Task LoadNextTip()
+        private void LoadNextTip()
         {
             if (_timer.Time < timeBetweenNextTips) return;
 
-            // Fade out
-            int fader = 0;
-            while (fader < 40)
-            {
-                tipsText.color = new Color(1, 1, 1, 1 / fader);
-                fader++;
-                await Task.Yield();
-            }
+            tipsFading.Play("TipsFade");
+        }
 
-            tipsText.text = NextTip();
+        public void LoadNewTip()
+        {
+            string newTip = NextTip();
+            while (newTip == tipsText.text) newTip = NextTip();
 
-            // Fade in
-            while (fader > 0)
-            {
-                tipsText.color = new Color(1, 1, 1, 1 / fader);
-                fader--;
-                await Task.Yield();
-            }
-            
+            tipsText.text = newTip;
             TimersController.Instance.StartTimer(_timer);
         }
 
