@@ -13,5 +13,7 @@ namespace LogicLevels
             _triggered = true;
             LogicLevelController.Instance.CheckGates();
         }
+
+        public void Reset() => _triggered = false;
     }
 }

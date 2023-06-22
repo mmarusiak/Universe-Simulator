@@ -38,5 +38,10 @@ namespace LogicLevels
             
             Debug.Log("Level completed!");
         }
+
+        public void ResetGates()
+        {
+            foreach (var gate in _gates) gate.Reset();
+        }
     }
 }
