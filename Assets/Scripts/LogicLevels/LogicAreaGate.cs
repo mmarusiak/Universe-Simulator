@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using GameCore.SimulationCore;
+using LogicLevels;
 using UnityEngine;
 
 public class LogicAreaGate : MonoBehaviour
@@ -8,12 +8,17 @@ public class LogicAreaGate : MonoBehaviour
     [SerializeField] private Vector2 position;
     [SerializeField] private Vector2 size;
     [SerializeField] private float timeInZone;
+    private LogicGate _myGate;
     private readonly List<LogicAreaComponent> _planetsInZone = new();
 
     void Start()
     {
+        _myGate = LogicLevelController.Instance.AddNewGate(this);
+        InitializeArea();
+
+        // will replace it with some image
         LineRenderer renderer = GetComponent<LineRenderer>();
-        renderer.positionCount = 5;
+        renderer.positionCount = 4;
         Vector3[] pos = 
         {
             position,
@@ -22,6 +27,21 @@ public class LogicAreaGate : MonoBehaviour
             (position + new Vector2(0, size.y))
         };
         renderer.SetPositions(pos);
+    }
+
+    void InitializeArea()
+    {
+        if (size.x < 0)
+        {
+            size.x *= -1;
+            position.x -= size.x;
+        }
+
+        if (size.y < 0)
+        {
+            size.y *= -1;
+            position.y -= size.y;
+        }
     }
 
     // helper void for logic area component list
@@ -69,10 +89,7 @@ public class LogicAreaGate : MonoBehaviour
 
     void CheckGate(LogicAreaComponent detector)
     {
-        if (detector.time >= timeInZone)
-        {
-            // gate achieved!
-            Debug.Log("Gate achieved!");
-        }
+        // we will also probably need some indication of completion of that gate
+        if (detector.time >= timeInZone) _myGate.Trigger();
     }
 }
