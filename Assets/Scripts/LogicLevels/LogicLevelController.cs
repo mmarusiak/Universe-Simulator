@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Utilities.UniverseLibraries.Timer;
 using Random = UnityEngine.Random;
 
@@ -10,7 +11,8 @@ namespace LogicLevels
         public static LogicLevelController Instance;
         private readonly List<LogicGate> _gates = new ();
         private readonly UniverseTimer _levelTimer = new();
-
+        private bool _isLevelInEditMode;
+        [SerializeField] private Text modeTxt;
 
         void Awake() => Instance = this;
         
@@ -60,6 +62,20 @@ namespace LogicLevels
             TimersController.Instance.ResetTimer(_levelTimer);
             // reset gates
             foreach (var gate in _gates) gate.Reset();
+        }
+
+        public void ChangeMode()
+        {
+            _isLevelInEditMode = !_isLevelInEditMode;
+            if (_isLevelInEditMode)
+            {
+                modeTxt.text = "Test Level";
+                // reset logic level?
+                PlaybackController.Instance.ResetLevel();
+                return;
+            }
+
+            modeTxt.text = "Edit Level";
         }
     }
 }
