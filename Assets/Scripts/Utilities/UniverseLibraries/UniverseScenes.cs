@@ -45,7 +45,7 @@ namespace Utilities.UniverseLibraries
         {
             AsyncOperation loader = SceneManager.LoadSceneAsync(scene);
             loader.allowSceneActivation = false;
-            TimersController.Instance.StartTimer(_timer);
+            TimersController.Instance.StartNewTimer(_timer);
 
             while (!loader.isDone)
             {
@@ -70,7 +70,7 @@ namespace Utilities.UniverseLibraries
             while (newTip == tipsText.text) newTip = NextTip();
 
             tipsText.text = newTip;
-            TimersController.Instance.StartTimer(_timer);
+            TimersController.Instance.StartNewTimer(_timer);
         }
 
         private string NextTip() => _tips[Random.Range(0, _tips.Length)];

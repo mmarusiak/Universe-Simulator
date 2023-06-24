@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Utilities.UniverseLibraries.Timer;
 using Random = UnityEngine.Random;
 
 namespace LogicLevels
@@ -7,7 +8,9 @@ namespace LogicLevels
     public class LogicLevelController : MonoBehaviour
     {
         public static LogicLevelController Instance;
-        private List<LogicGate> _gates = new ();
+        private readonly List<LogicGate> _gates = new ();
+        private readonly UniverseTimer _levelTimer = new();
+
 
         void Awake() => Instance = this;
         
@@ -36,11 +39,26 @@ namespace LogicLevels
         {
             foreach (var gate in _gates) if (!gate.Triggered) return;
             
-            Debug.Log("Level completed!");
+            TimersController.Instance.StopTimer(_levelTimer);
+            
+            Debug.Log($"Level completed at time: {_levelTimer.Time}");
         }
 
-        public void ResetGates()
+        public void OnPlayLogicController()
         {
+            TimersController.Instance.StartTimer(_levelTimer);
+        }
+
+        public void OnPauseLogicController()
+        {
+            TimersController.Instance.StopTimer(_levelTimer);
+        }
+
+        public void OnResetLogicController()
+        {
+            // reset timer
+            TimersController.Instance.ResetTimer(_levelTimer);
+            // reset gates
             foreach (var gate in _gates) gate.Reset();
         }
     }

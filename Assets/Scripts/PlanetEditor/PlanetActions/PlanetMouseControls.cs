@@ -20,7 +20,7 @@ public class PlanetMouseControls : MonoBehaviour
         if (GlobalVariables.Instance.OverlayShown) return;
         _planetOffset = OffsetPlanetDrag();
         EditorsController.Instance.LastEditedComponent = _myHandler.MyComponent;
-        TimersController.Instance.StartTimer(_timer);
+        TimersController.Instance.StartNewTimer(_timer);
         
         // temp pause if needed
         if (!PlaybackController.Instance.Playback.IsPaused)

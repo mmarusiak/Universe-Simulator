@@ -8,16 +8,29 @@ namespace Utilities.UniverseLibraries.Timer
         public static TimersController Instance;
         void Awake() => Instance = this;
 
-        private List<UniverseTimer> _timers = new ();
+        private readonly List<UniverseTimer> _timers = new ();
 
-        public void StartTimer(UniverseTimer timer)
+        // starts new timer, counting from 0
+        public void StartNewTimer(UniverseTimer timer)
         {
             timer.Time = 0;
-            if (_timers.Contains(timer)) StopTimer(timer);
-            _timers.Add(timer);
+            StartTimer(timer);
         }
 
+        // starting any timer, counting from old Time value
+        public void StartTimer(UniverseTimer timer)
+        {
+            if (_timers.Contains(timer)) return;
+            _timers.Add(timer);
+        }
+        
         public void StopTimer(UniverseTimer timer) => _timers.Remove(timer);
+
+        public void ResetTimer(UniverseTimer timer)
+        {
+            StopTimer(timer);
+            timer.Time = 0;
+        }
 
         // Update is called once per frame
         void Update()
