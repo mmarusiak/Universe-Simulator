@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utilities.UniverseLibraries;
 
+/// <summary>
+/// Planet look editor is editor where player can set planet's look by changing its colors and image.
+/// </summary>
 public class PlanetLookEditor : PlanetEditor
 {
     public static PlanetLookEditor Instance;
@@ -50,7 +53,7 @@ public class PlanetLookEditor : PlanetEditor
         InitializeDropDown();
     }
 
-    // set image of planet to correct dropdown value
+    /// Set image of planet to correct dropdown value.
     void UpdateDropDownValue()
     {
         if (EditorBase.CurrentPlanet == null) return;

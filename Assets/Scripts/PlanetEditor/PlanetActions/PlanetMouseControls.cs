@@ -3,6 +3,9 @@ using UnityEngine;
 using Utilities.UniverseLibraries;
 using Utilities.UniverseLibraries.Timer;
 
+/// <summary>
+/// Controls all mouse events on planet (f.e. drag, down, up).
+/// </summary>
 public class PlanetMouseControls : MonoBehaviour
 {
     // if mouse is down on a planet for less than > 0.3s then show editor

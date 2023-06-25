@@ -17,7 +17,7 @@ namespace PauseOverlay
     
     
         [SerializeField]
-        private KeyCode ActivationKey = KeyCode.Escape;
+        private KeyCode activationKey = KeyCode.Escape;
         [SerializeField]
         private GameObject pauseOverlayHolder;
         [SerializeField] private GameObject[] overlays = new GameObject[3];
@@ -29,7 +29,7 @@ namespace PauseOverlay
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(ActivationKey))
+            if (Input.GetKeyDown(activationKey))
             {
                 GlobalVariables.Instance.OverlayShown = !GlobalVariables.Instance.OverlayShown;
                 TogglePause();
@@ -56,21 +56,21 @@ namespace PauseOverlay
             }
         }
 
-        private bool needToUnpause;
+        private bool _needToUnpause;
     
         void TogglePause()
         {
-            if (needToUnpause) PlaybackController.Instance.PlayLevel();
+            if (_needToUnpause) PlaybackController.Instance.PlayLevel();
 
             if (GlobalVariables.Instance.OverlayShown && !PlaybackController.Instance.Playback.IsPaused)
             {
-                needToUnpause = true;
+                _needToUnpause = true;
                 PlaybackController.Instance.PauseLevel();
                 return;
             }
-            needToUnpause = false;
+            _needToUnpause = false;
         }
     
-        public void OnLoad() => needToUnpause = false;
+        public void OnLoad() => _needToUnpause = false;
     }
 }

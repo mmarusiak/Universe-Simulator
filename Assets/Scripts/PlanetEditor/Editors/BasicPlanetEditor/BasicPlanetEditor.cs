@@ -3,6 +3,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utilities.UniverseLibraries;
 
+
+/// <summary>
+/// Basic planet editor is editor where player can change planet's mass, name and radius.
+/// </summary>
 public class BasicPlanetEditor : PlanetEditor
 {
     public static BasicPlanetEditor Instance;

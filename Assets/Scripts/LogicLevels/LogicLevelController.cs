@@ -23,6 +23,16 @@ namespace LogicLevels
 
         void Awake() => Instance = this;
         
+        
+        /// <summary>
+        /// Creates and add new gate to controller's gates list.
+        /// </summary>
+        /// <param name="sender">
+        /// Object that called function. Used to generate "unique" (unique as possible) ID.
+        /// </param>
+        /// <returns>
+        /// Created gate.
+        /// </returns>
         public LogicGate AddNewGate(object sender)
         {
             LogicGate newGate = new LogicGate
@@ -33,6 +43,13 @@ namespace LogicLevels
             return newGate;
         }
 
+        /// <summary>
+        /// Removes gate from controller's gates list.
+        /// </summary>
+        /// <param name="id">
+        /// Gate's unique ID.
+        /// </param>
+        /// <returns></returns>
         public void RemoveGate(string id)
         {
             foreach (var gate in _gates)
@@ -44,6 +61,10 @@ namespace LogicLevels
             }
         }
 
+        /// <summary>
+        /// Check if all gates were triggered. If were that means that player's completed level.
+        /// </summary>
+        /// <returns></returns>
         public void CheckGates()
         {
             foreach (var gate in _gates) if (!gate.Triggered) return;
@@ -53,16 +74,30 @@ namespace LogicLevels
             Debug.Log($"Level completed at time: {_levelTimer.Time}");
         }
 
+        
+
+        /// <summary>
+        /// Logic controller void that is called when player hits "play" button. It's assigned in Unity Editor.
+        /// </summary>
+        /// <returns></returns>
         public void OnPlayLogicController()
         {
             TimersController.Instance.StartTimer(_levelTimer);
         }
 
+        /// <summary>
+        /// Logic controller void that is called when player hits "pause" button. It's assigned in Unity Editor.
+        /// </summary>
+        /// <returns></returns>
         public void OnPauseLogicController()
         {
             TimersController.Instance.StopTimer(_levelTimer);
         }
 
+        /// <summary>
+        /// Logic controller void that is called when player hits "reset" button. It's assigned in Unity Editor.
+        /// </summary>
+        /// <returns></returns>
         public void OnResetLogicController()
         {
             // reset timer
@@ -71,6 +106,10 @@ namespace LogicLevels
             foreach (var gate in _gates) gate.Reset();
         }
 
+        /// <summary>
+        /// Void to change between "test" and "edit" level modes. It's assigned to button via Unity Editor.
+        /// </summary>
+        /// <returns></returns>
         public void ChangeMode()
         {
             _isLevelInEditMode = !_isLevelInEditMode;
@@ -85,12 +124,20 @@ namespace LogicLevels
             modeTxt.text = "Edit Level";
         }
 
+        /// <summary>
+        /// Called when new planet is created in logic level in test/play mode.
+        /// </summary>
+        /// <returns></returns>
         public void PlanetCreated()
         {
             _planetActions--;
             Debug.Log($"Planet created! : {this.name}");
         }
 
+        /// <summary>
+        /// Called when player's planet is removed in logic level in test/play mode.
+        /// </summary>
+        /// <returns></returns>
         public void PlanetRemoved()
         {
             _planetActions++;

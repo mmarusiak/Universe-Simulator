@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+/// <summary>
+/// Editor base for every editor. It contains bunch of events that are the same for every editor.
+/// </summary>
 [Serializable]
 public class EditorBase
 {

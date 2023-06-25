@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Class for drawing velocity vectors correctly.
+/// </summary>
 public class VectorsRenderer : MonoBehaviour
 {
    public static VectorsRenderer Instance;

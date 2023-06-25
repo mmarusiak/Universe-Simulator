@@ -1,15 +1,21 @@
 using GameCore.SimulationCore;
 
-public class LogicAreaComponent
+namespace LogicLevels
 {
-    public PlanetComponent PlanetComponent;
-    public float time;
-
-    public LogicAreaComponent(PlanetComponent component, float time)
+    /// <summary>
+    /// It holds planet that entered trigger's area and time that is in the area.
+    /// </summary>
+    public class LogicAreaComponent
     {
-        PlanetComponent = component;
-        this.time = time;
-    }
+        public PlanetComponent PlanetComponent;
+        public float Time;
 
-    public static implicit operator LogicAreaComponent(PlanetComponent component) => new (component, 0);
+        public LogicAreaComponent(PlanetComponent component, float time)
+        {
+            PlanetComponent = component;
+            this.Time = time;
+        }
+
+        public static implicit operator LogicAreaComponent(PlanetComponent component) => new (component, 0);
+    }
 }

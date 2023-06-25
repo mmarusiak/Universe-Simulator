@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using GameCore.SimulationCore;
 using UnityEngine;
 
+/// <summary>
+/// Controller for every editor in the game. It updates planet's name, and basically manages all editors.
+/// </summary>
 public class EditorsController : MonoBehaviour
 {
     public static EditorsController Instance;

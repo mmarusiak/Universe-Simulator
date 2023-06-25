@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utilities.UniverseLibraries;
 
+/// <summary>
+/// Base class for all texts that follow the planet.
+/// </summary>
 public class PlanetTextInfo : MonoBehaviour
 {
     [Header("Left Side + Value + RightSide")]
@@ -104,16 +107,10 @@ public class PlanetTextInfo : MonoBehaviour
         _targetOutput.text = _leftSide + value + _rightSide;
     }
 
-    public string GetValue()
-    {
-        return _targetOutput.text;
-    }
-
-    public string GetName()
-    {
-        return _targetOutput.name;
-    }
-
+    public string GetValue() => _targetOutput.text;
+    
+    public string GetName() => _targetOutput.name;
+    
     public void MakeNull()
     {
         _targetOutput = null;

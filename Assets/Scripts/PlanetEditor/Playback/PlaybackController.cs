@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// It controls flow of the game.  
+/// </summary>
 public class PlaybackController : MonoBehaviour
 {
     public static PlaybackController Instance;

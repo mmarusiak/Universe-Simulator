@@ -7,13 +7,16 @@ using Utilities.Settings;
 
 namespace UniverseSound
 {
+    /// <summary>
+    /// Universe Sound controller, here sounds are played.
+    /// </summary>
     public class UniverseSoundTree : MonoBehaviour
     {
-        // nodes - all clips with properties which developer configures in editor
-        // hash table is used to get better performance on loops
         public static UniverseSoundTree Instance;
         [SerializeField] private AudioSource source;
+        /// All clips with properties which developer configures in editor
         [SerializeField] public List<UniverseSoundNode> nodes;
+        // hash table is used to get better performance on loops
         private readonly UniverseSoundHash _hashTable = new ();
         
         public void Awake() => Instance = this;

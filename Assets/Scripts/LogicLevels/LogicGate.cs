@@ -8,6 +8,9 @@ namespace LogicLevels
 
         public bool Triggered => _triggered;
 
+        /// <summary>
+        /// Triggers gate, if condition was met.
+        /// </summary>
         public void Trigger()
         {
             _triggered = true;

@@ -50,7 +50,7 @@ namespace GameCore.SimulationCore.Handlers
         {
             while (PlanetComponentsController.Instance == null) await Task.Yield();
             // whole component loads from saving handler script
-            PlanetComponentsController.Instance.AddNewGravityComponent(MyComponent);
+            PlanetComponentsController.Instance.AddNewPlanetComponent(MyComponent);
         }
 
         public void LoadAsSlice(PlanetComponent src)

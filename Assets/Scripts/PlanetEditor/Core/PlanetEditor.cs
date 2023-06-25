@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Base class for all editors.
+/// </summary>
 public class PlanetEditor : MonoBehaviour
 {
     [SerializeField]

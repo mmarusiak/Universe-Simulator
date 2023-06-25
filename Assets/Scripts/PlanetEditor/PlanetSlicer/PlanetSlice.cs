@@ -6,11 +6,21 @@ using Utilities.SaveSystem.Data;
 using Utilities.UniverseLibraries;
 
 
+/// <summary>
+/// Base class for slicing planets.
+/// </summary>
+
 public class PlanetSlice : MonoBehaviour
 {
     public static PlanetSlice Instance;
     void Awake() => Instance = this;
 
+    /// <summary>
+    /// Gets all planets that are on line between start and end vector.
+    /// </summary>
+    /// <param name="start">Start point for line.</param>
+    /// <param name="end">End point for line.</param>
+    /// <returns></returns>
     List<GameObject> PlanetsOnLine(Vector2 start, Vector2 end)
     {
         List<GameObject> result = new ();
@@ -23,9 +33,14 @@ public class PlanetSlice : MonoBehaviour
         return result;
     }
 
-    public void Slice(Vector2 pointA, Vector2 pointB)
+    /// <summary>
+    /// Slices all planets between point a and b.
+    /// </summary>
+    /// <param name="start">Start point for line.</param>
+    /// <param name="end">End point for line.</param>
+    public void Slice(Vector2 start, Vector2 end)
     {
-        List<GameObject> planetsToCut = PlanetsOnLine(pointA, pointB);
+        List<GameObject> planetsToCut = PlanetsOnLine(start, end);
         foreach (var planet in planetsToCut)
         {
             // NEED TO REFACTOR THIS PIECE 
@@ -35,7 +50,7 @@ public class PlanetSlice : MonoBehaviour
             var originalHandler = planet.GetComponent<PlanetComponentHandler>();
             var originalSprite = planet.GetComponent<SpriteMask>().sprite;
             // slice sprites
-            var slicedSprites = UniversePictures.SlicedSprite(originalSprite, pointA, pointB,planet.transform.position, planet.transform.lossyScale.x/2);
+            var slicedSprites = UniversePictures.SlicedSprite(originalSprite, start, end,planet.transform.position, planet.transform.lossyScale.x/2);
 
             if (slicedSprites is null) continue;
             
@@ -50,10 +65,10 @@ public class PlanetSlice : MonoBehaviour
             
             // apply sliced sprites to planets and slice collider
             ApplySlice(originalHandler, slicedSprites[0], originalArea, true);
-            originalHandler.MyComponent.Slices.Add(new SliceData(pointA - originalPos, pointB - originalPos, 0, PlaybackController.Instance.Playback.IsReset));
+            originalHandler.MyComponent.Slices.Add(new SliceData(start - originalPos, end - originalPos, 0, PlaybackController.Instance.Playback.IsReset));
             
             ApplySlice(clonedHandler, slicedSprites[1], originalArea, true);
-            clonedHandler.MyComponent.Slices.Add(new SliceData(pointA - clonedPos, pointB - clonedPos, 1, PlaybackController.Instance.Playback.IsReset));
+            clonedHandler.MyComponent.Slices.Add(new SliceData(start - clonedPos, end - clonedPos, 1, PlaybackController.Instance.Playback.IsReset));
             
             // apply the same sprite to the slice
             clonedHandler.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = originalHandler.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
@@ -65,10 +80,14 @@ public class PlanetSlice : MonoBehaviour
             clonedHandler.MyComponent.CurrentPosition -= posToMove/10;
         }
     }
-
+    
+    /// <summary>
+    /// Loads slices from handler (loaded from json file) where they are stored just as 2 points - start and end of line.
+    /// </summary>
+    /// <param name="handler">Planet component handler for which slices are loaded.</param>
     public async Task LoadSlices(PlanetComponentHandler handler)
     {
-        // keep values that will change on slice separetly
+        // keep values that will change on slice separately
         var velocity = handler.MyComponent.CurrentVelocity;
         var initialPos = handler.MyComponent.CurrentPosition;
 
@@ -92,6 +111,12 @@ public class PlanetSlice : MonoBehaviour
         handler.MyComponent.CurrentVelocity = velocity;
     }
     
+    /// <summary>
+    /// Creates slice - creates new Game Object.
+    /// </summary>
+    /// <param name="originalHandler">Planet Component Handler that is being sliced.</param>
+    /// <param name="originalT">Transform that is being sliced.</param>
+    /// <returns>Planet Component Handler that is on new Game Object.</returns>
     PlanetComponentHandler CreateSlice(PlanetComponentHandler originalHandler, Transform originalT)
     {
         // making new slice "clone"
@@ -112,6 +137,13 @@ public class PlanetSlice : MonoBehaviour
         return clonedHandler;
     }
 
+    /// <summary>
+    /// Applies slice - slices collider, sets new sprite, centers all children, sets mass.
+    /// </summary>
+    /// <param name="handler">Planet Component Handler for which we apply slice.</param>
+    /// <param name="sprite">New sliced sprite.</param>
+    /// <param name="originalArea">Original planet's area (used to calculate new mass).</param>
+    /// <param name="massApplier">Just for debug, indicates if we'll change the mass or not.</param>
     void ApplySlice(PlanetComponentHandler handler, Sprite sprite, float originalArea, bool massApplier)
     {
         var target = handler.gameObject;
@@ -132,6 +164,11 @@ public class PlanetSlice : MonoBehaviour
         handler.MyComponent.GetPosFromTransform();
     }
 
+    /// <summary>
+    /// Slices collider - makes collider identical to sprite of sprite mask.
+    /// </summary>
+    /// <param name="mask">Sprite mask that is base for our slice.</param>
+    /// <param name="polygonCollider">Collider to be sliced.</param>
     public void SliceCollider(SpriteMask mask, PolygonCollider2D polygonCollider)
     {
         var sprite = mask.sprite;
@@ -142,7 +179,7 @@ public class PlanetSlice : MonoBehaviour
         polygonCollider.pathCount = 1;
     }
 
-    // Helper method to sort the vertices in clockwise order
+    /// Helper method to sort the vertices in clockwise order.
     private Vector2[] SortVerticesClockwise(Vector2[] vertices)
     {
         // Find the center point of the vertices
@@ -160,6 +197,11 @@ public class PlanetSlice : MonoBehaviour
         return sortedVertices.ToArray();
     }
     
+    /// <summary>
+    /// Moves pivot to some position and centers all children.
+    /// </summary>
+    /// <param name="position">Target position.</param>
+    /// <param name="target">Transform on which we want to apply our action.</param>
     void MovePivot(Vector3 position, Transform target)
     {
         Vector3 offset = target.position - position;
@@ -167,7 +209,7 @@ public class PlanetSlice : MonoBehaviour
             child.transform.position += offset;
         target.position = position;
     }
-
+    
     Vector2 GetCenterFromCollider(PolygonCollider2D collider)
     {
         Vector2[] vertices = collider.GetPath(0);

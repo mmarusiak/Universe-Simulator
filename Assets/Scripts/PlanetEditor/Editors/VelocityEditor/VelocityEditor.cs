@@ -3,6 +3,9 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using Utilities.UniverseLibraries;
 
+/// <summary>
+/// Velocity editor is editor where player can change planet's velocity.
+/// </summary>
 public class VelocityEditor : PlanetEditor
 {
     public static VelocityEditor Instance;

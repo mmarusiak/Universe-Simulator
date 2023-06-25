@@ -2,6 +2,9 @@ using System.Collections.Generic;
 
 namespace UniverseSound
 {
+    /// <summary>
+    /// Hash table for Universe Sounds.
+    /// </summary>
     public class UniverseSoundHash
     {
         private List<List<UniverseSoundNode>> _hashSet = new ();

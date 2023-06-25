@@ -5,7 +5,6 @@ using GameCore.SimulationCore;
 using Newtonsoft.Json;
 using PauseOverlay;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utilities.SaveSystem.Data;
 using Utilities.UniverseLibraries;

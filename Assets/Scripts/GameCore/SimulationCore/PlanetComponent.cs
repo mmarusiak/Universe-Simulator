@@ -158,7 +158,7 @@ namespace GameCore.SimulationCore
         public UniverseTrail UniverseTrail => _universeTrail;
 
         public Rigidbody2D PlanetRigidbody => _rigidbody;
-    
+        
         private readonly Color32[] _defaultColorPalette =
         {
             new (107, 129, 140, 255), // #6B818C - slate gray
@@ -191,7 +191,11 @@ namespace GameCore.SimulationCore
             if(currentVelocity == default) currentVelocity = Vector2.zero;
             CurrentVelocity = currentVelocity;
         }
-    
+        
+        /// <summary>
+        /// Adds new gravity component to local list.
+        /// </summary>
+        /// <param name="targetComponents">Component to be added to list.</param>
         public void AddGravityComponent(PlanetComponent targetComponents)
         {
             if (targetComponents == this) return;
@@ -199,6 +203,10 @@ namespace GameCore.SimulationCore
         }
 
         private static float _temporaryMultiplier = 5;
+        
+        /// <summary>
+        /// Calculates and add force to planet's Rigidbody.
+        /// </summary>
         public void AddForce()
         {
             float gConstant = GlobalVariables.GravitationalConstant;
@@ -298,6 +306,9 @@ namespace GameCore.SimulationCore
             _handler.OnNameChanged.ChangeValue(_name);
         }
 
+        /// <summary>
+        /// Resets planet to initial values.
+        /// </summary>
         public void Reset()
         {
             _universeTrail.Clear();
@@ -328,7 +339,9 @@ namespace GameCore.SimulationCore
             PlanetSlice.Instance.SliceCollider(Mask, _planetTransform.GetChild(0).GetComponent<PolygonCollider2D>());
         }
     
-
+        /// <summary>
+        /// Moves all children to local position (0, 0) - centers all children.
+        /// </summary>
         void ClearPivot()
         {
             foreach (Transform child in _planetTransform)

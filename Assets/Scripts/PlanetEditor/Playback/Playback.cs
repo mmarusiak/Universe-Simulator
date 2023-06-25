@@ -3,6 +3,10 @@ using GameCore.SimulationCore;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Base class for playback. It holds pause and reset state and time scale.
+/// </summary>
+
 [Serializable]
 public class Playback
 {

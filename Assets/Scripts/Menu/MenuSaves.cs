@@ -33,6 +33,9 @@ namespace Menu
             savesParent.gameObject.SetActive(true);
         }
 
+        /// <summary>
+        /// Sorts saves by dates.
+        /// </summary>
         void SortSaves()
         {
             _containers.Sort((x, y) => y.LastModified.CompareTo(x.LastModified));

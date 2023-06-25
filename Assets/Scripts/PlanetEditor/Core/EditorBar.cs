@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Bar for every editor. Player can drag editors with this script.
+/// </summary>
 public class EditorBar : MonoBehaviour, IDragHandler, IBeginDragHandler
 {
     [SerializeField] private RectTransform _editorContainer;

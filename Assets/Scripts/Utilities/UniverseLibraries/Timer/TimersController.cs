@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Utilities.UniverseLibraries.Timer
 {
+    /// <summary>
+    /// Here timers are counting time.
+    /// </summary>
     public class TimersController : MonoBehaviour
     {
         public static TimersController Instance;
@@ -10,22 +13,24 @@ namespace Utilities.UniverseLibraries.Timer
 
         private readonly List<UniverseTimer> _timers = new ();
 
-        // starts new timer, counting from 0
+        /// Starts new timer, counting from 0.
         public void StartNewTimer(UniverseTimer timer)
         {
             timer.Time = 0;
             StartTimer(timer);
         }
 
-        // starting any timer, counting from old Time value
+        /// Starting any timer, counting from old Time value.
         public void StartTimer(UniverseTimer timer)
         {
             if (_timers.Contains(timer)) return;
             _timers.Add(timer);
         }
         
+        /// Pausing timer.
         public void StopTimer(UniverseTimer timer) => _timers.Remove(timer);
 
+        /// Resets timer - pausing it and resetting time of it.
         public void ResetTimer(UniverseTimer timer)
         {
             StopTimer(timer);

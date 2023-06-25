@@ -13,7 +13,7 @@ public class LeftSideButtonsController : MonoBehaviour
 
     void Start() => UpdateButtons();
     
-    // setting on add/create new planet mode
+    /// Called when player is on add/create new planet mode
     public void AddPlanet()
     { 
         _isCreatingPlanet = !_isCreatingPlanet;
@@ -26,7 +26,7 @@ public class LeftSideButtonsController : MonoBehaviour
         UpdateButtons();
     }
 
-    // setting on delete/remove mode
+    /// Called when player is on delete/remove mode
     public void DeletePlanet()
     {
         _isRemovingPlanet = !_isRemovingPlanet;
@@ -39,7 +39,7 @@ public class LeftSideButtonsController : MonoBehaviour
         UpdateButtons();
     }
 
-    // setting on cutter/slicer
+    /// Called when player is on cutter/slicer mode
     public void Cutter()
     {
         _isCutable = !_isCutable;
@@ -102,10 +102,13 @@ public class LeftSideButtonsController : MonoBehaviour
         UpdateButtons();
     }
 
-    private Vector2 tempOffset = new (1, 1);
-    void DrawSliceLine(Vector2 mousePos) => SliceRenderer.Instance.DrawLine(_cutsVectors[0], mousePos - tempOffset);
+    private readonly Vector2 _tempOffset = new (1, 1);
+    void DrawSliceLine(Vector2 mousePos) => SliceRenderer.Instance.DrawLine(_cutsVectors[0], mousePos - _tempOffset);
     void HideSliceLine() => SliceRenderer.Instance.Hide();
 
+    /// <summary>
+    /// Updates color of left side buttons.
+    /// </summary>
     void UpdateButtons()
     {
         _buttonsImage[0].color = _isCreatingPlanet ? new Color(1, 1, 1, 1) : new Color(1, 1, 1, 0.6f);
