@@ -1,7 +1,10 @@
+using System;
 using System.Threading.Tasks;
 using Unity.Mathematics;
 using UnityEngine;
 using Utilities.UniverseLibraries;
+
+// there is so much mess in this code. probably the most mess in whole project...
 
 namespace GameCore.SimulationCore.Handlers
 {
@@ -14,12 +17,12 @@ namespace GameCore.SimulationCore.Handlers
     
         private PlanetComponent _myComponent = null;
 
-        [SerializeField] private PlanetTextInfo _onNameChanged, _onVelocityChanged;
-        public PlanetTextInfo OnNameChanged => _onNameChanged;
-        public PlanetTextInfo OnVelocityChanged => _onVelocityChanged;
+        [SerializeField] private PlanetTextInfo onNameChanged, onVelocityChanged;
+        public PlanetTextInfo OnNameChanged => onNameChanged;
+        public PlanetTextInfo OnVelocityChanged => onVelocityChanged;
         public PlanetComponent MyComponent => _myComponent;
-
-        private bool _calculatingAngularAcceleration = false;
+        public bool isCreatedByPlayerInLogicLevel = false;
+        
         public bool IsCloned
         {
             get => isCloned;
@@ -28,14 +31,13 @@ namespace GameCore.SimulationCore.Handlers
     
         private async void Start()
         {
-            if (!isDemoPlanet && !loadedFromSave && !isCloned) spawnPos =  UniverseCamera.Instance.ScreenToWorld(Input.mousePosition);
+            if (!isDemoPlanet && !loadedFromSave && !isCloned) spawnPos = UniverseCamera.Instance.ScreenToWorld(Input.mousePosition);
             // hide it when slicing
             else if (isCloned)
             {
                 // we want to actually set new slice as new planet if it is sliced on reset
                 isCloned = !PlaybackController.Instance.Playback.IsReset;
                 _myComponent.IsOriginalPlanet = !isCloned;
-                Debug.Log(isCloned);
                 return;
             }
             else if (loadedFromSave) BeginLoad();
@@ -49,7 +51,6 @@ namespace GameCore.SimulationCore.Handlers
             while (PlanetComponentsController.Instance == null) await Task.Yield();
             // whole component loads from saving handler script
             PlanetComponentsController.Instance.AddNewGravityComponent(MyComponent);
-            
         }
 
         public void LoadAsSlice(PlanetComponent src)
@@ -70,8 +71,13 @@ namespace GameCore.SimulationCore.Handlers
             await PlanetSlice.Instance.LoadSlices(this);
             _myComponent.PlanetTransform.rotation = rot;
         }
-    
-        public void Initialize() => _myComponent = new PlanetComponent(this, transform.parent, transform.GetChild(0).GetComponent<SpriteRenderer>(), radius, mass, spawnPos, planetName);
+
+        public void Initialize()
+        {
+            _myComponent = new PlanetComponent(this, transform.parent,
+                transform.GetChild(0).GetComponent<SpriteRenderer>(), radius, mass, spawnPos, planetName);
+            
+        }
 
         public void BeginDrag(Vector2 offset) => MyComponent.CurrentPosition = (Vector2)UniverseCamera.Instance.ScreenToWorld(Input.mousePosition) - offset;
     
@@ -80,12 +86,22 @@ namespace GameCore.SimulationCore.Handlers
             if(!PlaybackController.Instance.Playback.IsPaused && _myComponent != null) _myComponent.AddForce();
         }
         
-        
-
         public void NullTexts()
         {
-            _onNameChanged.MakeNull();
-            _onVelocityChanged.MakeNull();
+            onNameChanged.MakeNull();
+            onVelocityChanged.MakeNull();
+        }
+
+        void OnDestroy()
+        {
+            try
+            {
+                PlanetComponentsController.Instance.DestroyPlanet(this);
+            }
+            catch(Exception e)
+            {
+                Debug.Log($"{planetName} : {e}");
+            }
         }
     }
 }

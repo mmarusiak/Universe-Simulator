@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GameCore.SimulationCore.Handlers;
+using LogicLevels;
 using UnityEngine;
 
 namespace GameCore.SimulationCore
@@ -65,8 +66,23 @@ namespace GameCore.SimulationCore
 
         public GameObject CreatePlanet()
         {
-            return Instantiate(_planetPrefab, Camera.main.ScreenToWorldPoint(Input.mousePosition),
+            var newPlanet = Instantiate(_planetPrefab, Camera.main.ScreenToWorldPoint(Input.mousePosition),
                 Quaternion.Euler(0, 0, 0), _planetsHolder);
+
+            if (LogicLevelController.Instance != null && !LogicLevelController.Instance.IsLevelInEditMode)
+            {
+                if (LogicLevelController.Instance.PlanetActions > 0)
+                    LogicLevelController.Instance.PlanetCreated();
+                else if (LogicLevelController.Instance.PlanetActions == 0)
+                {
+                    Destroy(newPlanet);
+                    return null;
+                }
+
+                newPlanet.transform.GetChild(0).GetComponent<PlanetComponentHandler>().isCreatedByPlayerInLogicLevel = true;
+            }
+
+            return newPlanet;
         }
         public GameObject LoadPlanet()
         {
@@ -75,6 +91,15 @@ namespace GameCore.SimulationCore
 
         public void DestroyPlanet(PlanetComponentHandler handler)
         {
+            if (LogicLevelController.Instance != null && !LogicLevelController.Instance.IsLevelInEditMode)
+            {
+                if (handler.isCreatedByPlayerInLogicLevel)
+                {
+                    LogicLevelController.Instance.PlanetRemoved();
+                }
+                else return;
+            }
+
             RemovePlanetOnPlanets(handler.MyComponent);
             RemovePlanet(handler.MyComponent);
             Destroy(handler.transform.parent.gameObject);

@@ -36,7 +36,6 @@ namespace GameCore.SimulationCore
 
         private List<PlanetComponent> _otherComponents;
         private static int _planetCount;
-        private int _planetNum;
 
         private bool _isOriginalPlanet = true;
         private List<SliceData> _slices = new ();
@@ -183,11 +182,10 @@ namespace GameCore.SimulationCore
             PlanetColor = color;
             Inertia = OriginalInertia;
 
-            _planetNum = _planetCount;
             _planetCount++;
 
             // planets will have next colors: 1st planet - 1st color, 2nd planet - 2nd color, 5th planet - first color (only 4 colors)
-            if (color == default) color = _defaultColorPalette[_planetNum % _defaultColorPalette.Length];
+            if (color == default) color = _defaultColorPalette[_planetCount % _defaultColorPalette.Length];
             PlanetColor = color;
         
             if(currentVelocity == default) currentVelocity = Vector2.zero;

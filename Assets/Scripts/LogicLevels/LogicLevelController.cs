@@ -9,10 +9,17 @@ namespace LogicLevels
     public class LogicLevelController : MonoBehaviour
     {
         public static LogicLevelController Instance;
+        
         private readonly List<LogicGate> _gates = new ();
         private readonly UniverseTimer _levelTimer = new();
+        
         private bool _isLevelInEditMode;
+        private int _planetActions = 10; // creates, change velocity etc.
+        
         [SerializeField] private Text modeTxt;
+        
+        public bool IsLevelInEditMode => _isLevelInEditMode;
+        public int PlanetActions => _planetActions;
 
         void Awake() => Instance = this;
         
@@ -76,6 +83,18 @@ namespace LogicLevels
             }
 
             modeTxt.text = "Edit Level";
+        }
+
+        public void PlanetCreated()
+        {
+            _planetActions--;
+            Debug.Log($"Planet created! : {this.name}");
+        }
+
+        public void PlanetRemoved()
+        {
+            _planetActions++;
+            Debug.Log($"Planet removed! : {this.name}");
         }
     }
 }
