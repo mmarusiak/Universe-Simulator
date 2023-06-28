@@ -17,6 +17,7 @@ namespace LogicLevels
         private int _planetActions = 10; // creates, change velocity etc.
         
         [SerializeField] private Text modeTxt;
+        [SerializeField] private GameObject logicEditorSection;
         
         public bool IsLevelInEditMode => _isLevelInEditMode;
         public int PlanetActions => _planetActions;
@@ -113,6 +114,7 @@ namespace LogicLevels
         public void ChangeMode()
         {
             _isLevelInEditMode = !_isLevelInEditMode;
+            logicEditorSection.SetActive(_isLevelInEditMode);
             if (_isLevelInEditMode)
             {
                 modeTxt.text = "Test Level";

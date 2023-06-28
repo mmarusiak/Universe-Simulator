@@ -35,7 +35,7 @@ namespace Utilities.SaveSystem.Data
             _savedComponents = new();
             foreach (var comp in components.AllGravityComponents)
             {
-                _savedComponents.Add(comp);
+                if(!comp.Handler.isCreatedByPlayerInLogicLevel) _savedComponents.Add(comp);
             }
         }
 

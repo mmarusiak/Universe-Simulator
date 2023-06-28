@@ -35,6 +35,7 @@ namespace Utilities.SaveSystem
 
         public async void SaveLevel()
         {
+            // we should make sure that player is author of the level.
             string saveName = LevelInfoHolder.Instance.LevelName;
             string pathToTargetSave = _pathToSaves + "/" + saveName;
             UniverseDirectories.CreateNewDirectory(_pathToSaves, saveName);

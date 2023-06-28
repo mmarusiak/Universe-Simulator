@@ -91,17 +91,5 @@ namespace GameCore.SimulationCore.Handlers
             onNameChanged.MakeNull();
             onVelocityChanged.MakeNull();
         }
-
-        void OnDestroy()
-        {
-            try
-            {
-                PlanetComponentsController.Instance.DestroyPlanet(this);
-            }
-            catch(Exception e)
-            {
-                Debug.Log($"{planetName} : {e}");
-            }
-        }
     }
 }
