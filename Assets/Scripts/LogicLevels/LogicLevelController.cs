@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameCore.SimulationCore;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities.UniverseLibraries.Timer;
@@ -14,9 +15,12 @@ namespace LogicLevels
         private readonly UniverseTimer _levelTimer = new();
         
         private bool _isLevelInEditMode;
+        private int _originalPlanetActions = 10;
         private int _planetActions = 10; // creates, change velocity etc.
         
         [SerializeField] private Text modeTxt;
+        [SerializeField] private Text actionsTxtEditor;
+        [SerializeField] private Text actionsTxtGame;
         [SerializeField] private GameObject logicEditorSection;
         
         public bool IsLevelInEditMode => _isLevelInEditMode;
@@ -101,6 +105,7 @@ namespace LogicLevels
         /// <returns></returns>
         public void OnResetLogicController()
         {
+            _planetActions = _originalPlanetActions;
             // reset timer
             TimersController.Instance.ResetTimer(_levelTimer);
             // reset gates
@@ -118,12 +123,26 @@ namespace LogicLevels
             if (_isLevelInEditMode)
             {
                 modeTxt.text = "Test Level";
-                // reset logic level?
+                ResetLogicLevel();
                 PlaybackController.Instance.ResetLevel();
                 return;
             }
-
+            
+            PlaybackController.Instance.ResetLevel();
             modeTxt.text = "Edit Level";
+        }
+        
+        /// <summary>
+        /// Resets level in logic mode - removes all planets that were created in test mode.
+        /// </summary>
+        private void ResetLogicLevel()
+        {
+            List<PlanetComponent> planets = new List<PlanetComponent>(PlanetComponentsController.Instance.AllGravityComponents);
+
+            foreach (var planet in planets)
+            {
+                if(planet.Handler.isCreatedByPlayerInLogicLevel) planet.DestroySelf();
+            }
         }
 
         /// <summary>
@@ -134,6 +153,7 @@ namespace LogicLevels
         {
             _planetActions--;
             Debug.Log($"Planet created! : {this.name}");
+            UpdateActionsTexts();
         }
 
         /// <summary>
@@ -144,6 +164,29 @@ namespace LogicLevels
         {
             _planetActions++;
             Debug.Log($"Planet removed! : {this.name}");
+            UpdateActionsTexts();
+        }
+        
+        
+        public void AddPlanetAction()
+        {
+            _originalPlanetActions++;
+            _planetActions = _originalPlanetActions;
+            UpdateActionsTexts();
+        }
+
+        public void RemovePlanetAction()
+        {
+            _originalPlanetActions--;
+            _planetActions = _originalPlanetActions;
+            UpdateActionsTexts();
+        }
+
+        private void UpdateActionsTexts()
+        {
+            actionsTxtEditor.text = _originalPlanetActions.ToString();
+            actionsTxtGame.text = _planetActions.ToString();
+            actionsTxtGame.text = _planetActions.ToString();
         }
     }
 }
