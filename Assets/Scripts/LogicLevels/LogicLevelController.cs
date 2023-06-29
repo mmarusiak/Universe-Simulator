@@ -105,7 +105,8 @@ namespace LogicLevels
         /// <returns></returns>
         public void OnResetLogicController()
         {
-            _planetActions = _originalPlanetActions;
+            _planetActions = _originalPlanetActions; 
+            UpdateActionsTexts();
             // reset timer
             TimersController.Instance.ResetTimer(_levelTimer);
             // reset gates
@@ -185,7 +186,6 @@ namespace LogicLevels
         private void UpdateActionsTexts()
         {
             actionsTxtEditor.text = _originalPlanetActions.ToString();
-            actionsTxtGame.text = _planetActions.ToString();
             actionsTxtGame.text = _planetActions.ToString();
         }
     }
