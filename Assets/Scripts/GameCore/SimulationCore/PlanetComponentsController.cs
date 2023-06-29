@@ -123,6 +123,7 @@ namespace GameCore.SimulationCore
         /// <param name="handler">Planet Component Handler to be destroyed.</param>
         public void DestroyPlanet(PlanetComponentHandler handler)
         {
+            EditorsController.Instance.PlanetDestroyed(handler.MyComponent);
             if (LogicLevelController.Instance != null && !LogicLevelController.Instance.IsLevelInEditMode)
             {
                 if (handler.isCreatedByPlayerInLogicLevel)

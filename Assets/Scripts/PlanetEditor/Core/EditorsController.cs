@@ -11,8 +11,7 @@ public class EditorsController : MonoBehaviour
     private void Awake() => Instance = this;
 
     private PlanetComponent _lastEditedComponent;
-    [SerializeField]
-    private List<PlanetEditor> _editors = new ();
+    [SerializeField] private List<PlanetEditor> _editors = new ();
     
     public PlanetComponent LastEditedComponent
     {
@@ -24,6 +23,11 @@ public class EditorsController : MonoBehaviour
         }
     }
 
+    public void PlanetDestroyed(PlanetComponent comp)
+    {
+        if (comp == _lastEditedComponent) LastEditedComponent = null;
+    }
+    
     // When last edited component is changed make sure that the new one is being edited, not the old one
     void ChangeComponentInWindows()
     {

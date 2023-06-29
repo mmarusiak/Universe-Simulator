@@ -39,6 +39,11 @@ public class EditorBase
         set
         {
             _currentPlanet = value;
+            if (_currentPlanet == null)
+            {
+                Shown = false;
+                return;
+            }
             UpdateDisplayedPlanetName();
             _onEditedPlanetChanged.Invoke();
         }
