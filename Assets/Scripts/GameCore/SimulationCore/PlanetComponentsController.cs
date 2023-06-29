@@ -130,7 +130,11 @@ namespace GameCore.SimulationCore
                 {
                     LogicLevelController.Instance.PlanetRemoved();
                 }
-                else return;
+                else
+                {
+                    EditorsController.Instance.LastEditedComponent = handler.MyComponent;
+                    return;
+                }
             }
 
             RemovePlanetOnPlanets(handler.MyComponent);
