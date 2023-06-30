@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using GameCore.SimulationCore;
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities.SaveSystem.Data;
 using Utilities.UniverseLibraries.Timer;
 using Random = UnityEngine.Random;
 
@@ -10,7 +11,10 @@ namespace LogicLevels
     public class LogicLevelController : MonoBehaviour
     {
         public static LogicLevelController Instance;
-        
+
+        public List<LogicAreaData> AreaDataList = new ();
+        public List<LogicVelocityData> VelocityDataList = new ();
+
         private readonly List<LogicGate> _gates = new ();
         private readonly UniverseTimer _levelTimer = new();
         
@@ -187,6 +191,18 @@ namespace LogicLevels
         {
             actionsTxtEditor.text = _originalPlanetActions.ToString();
             actionsTxtGame.text = _planetActions.ToString();
+        }
+
+        public void LoadLogicFromJson(LevelSaveData data)
+        {
+            _planetActions = data.PlanetActions;
+            _originalPlanetActions = data.PlanetActions;
+            UpdateActionsTexts();
+            // create gates should go here:
+            // but we need to add create gates functionality first...
+            
+            
+            ResetLogicLevel();
         }
     }
 }

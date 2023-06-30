@@ -2,6 +2,7 @@ using System.IO;
 using System.Threading.Tasks;
 using GameCore.LevelController;
 using GameCore.SimulationCore;
+using LogicLevels;
 using Newtonsoft.Json;
 using PauseOverlay;
 using UnityEngine;
@@ -35,12 +36,12 @@ namespace Utilities.SaveSystem
 
         public async void SaveLevel()
         {
-            // we should make sure that player is author of the level.
+            // we should make sure that player is author of the level and check if level has logic or not.
             string saveName = LevelInfoHolder.Instance.LevelName;
             string pathToTargetSave = _pathToSaves + "/" + saveName;
             UniverseDirectories.CreateNewDirectory(_pathToSaves, saveName);
         
-            // saving save data
+            // saving save data we should save somehow logic???
             LevelSaveData newData = new LevelSaveData(PlanetComponentsController.Instance, PlaybackController.Instance);
             var settings = new JsonSerializerSettings
             {
@@ -56,6 +57,14 @@ namespace Utilities.SaveSystem
             while (PlanetComponentsController.Instance == null) await Task.Yield();
             PlanetComponentsController.Instance.ClearLevel();
             LevelSaveData newData = GetLoadedData<LevelSaveData>(saveName);
+            if (!newData.IsSandbox)
+            {
+                await UniverseScenes.Instance.LoadSceneAsync("LogicGame_Editable");
+                while (PlanetComponentsController.Instance == null) await Task.Yield();
+                PlanetComponentsController.Instance.ClearLevel();
+                // load logic
+                LogicLevelController.Instance.LoadLogicFromJson(newData);
+            }
             // load planets
             newData.LoadList();
             // load playback

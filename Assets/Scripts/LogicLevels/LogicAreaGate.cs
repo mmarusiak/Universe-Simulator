@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using GameCore.SimulationCore;
 using UnityEngine;
+using Utilities.SaveSystem.Data;
 
 namespace LogicLevels
 {
@@ -9,12 +10,18 @@ namespace LogicLevels
         [SerializeField] private Vector2 position;
         [SerializeField] private Vector2 size;
         [SerializeField] private float timeInZone;
+
+        public Vector2 Position => position;
+        public Vector2 Size => size;
+        public float TimeInZone => timeInZone;
+
         private LogicGate _myGate;
         private readonly List<LogicAreaComponent> _planetsInZone = new();
 
         void Start()
         {
             _myGate = LogicLevelController.Instance.AddNewGate(this);
+            LogicLevelController.Instance.AreaDataList.Add(this);
             InitializeArea();
 
             // will replace it with some image

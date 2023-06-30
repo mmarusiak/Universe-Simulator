@@ -7,10 +7,13 @@ namespace LogicLevels
     {
         [SerializeField] private float velocity;
         private LogicGate _myGate;
-    
+
+        public float Velocity => velocity;
+
         void Start()
         {
             _myGate = LogicLevelController.Instance.AddNewGate(this);
+            LogicLevelController.Instance.VelocityDataList.Add(this);
         }
 
         void Update()
