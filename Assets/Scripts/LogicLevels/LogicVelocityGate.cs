@@ -8,7 +8,11 @@ namespace LogicLevels
         [SerializeField] private float velocity;
         private LogicGate _myGate;
 
-        public float Velocity => velocity;
+        public float Velocity
+        {
+            get => velocity;
+            set => velocity = value;
+        }
 
         void Start()
         {

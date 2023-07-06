@@ -11,9 +11,31 @@ namespace LogicLevels
         [SerializeField] private Vector2 size;
         [SerializeField] private float timeInZone;
 
-        public Vector2 Position => position;
-        public Vector2 Size => size;
-        public float TimeInZone => timeInZone;
+        public Vector2 Position
+        {
+            get => position;
+            set
+            {
+                DrawSelf();
+                position = value;
+            }
+        }
+
+        public Vector2 Size
+        {
+            get => size;
+            set
+            {
+                DrawSelf();
+                size = value;
+            }
+        }
+
+        public float TimeInZone
+        {
+            get => timeInZone;
+            set => timeInZone = value;
+        }
 
         private LogicGate _myGate;
         private readonly List<LogicAreaComponent> _planetsInZone = new();
@@ -24,6 +46,11 @@ namespace LogicLevels
             LogicLevelController.Instance.AreaDataList.Add(this);
             InitializeArea();
 
+            DrawSelf();
+        }
+
+        void DrawSelf()
+        {
             // will replace it with some image
             LineRenderer renderer = GetComponent<LineRenderer>();
             renderer.positionCount = 4;

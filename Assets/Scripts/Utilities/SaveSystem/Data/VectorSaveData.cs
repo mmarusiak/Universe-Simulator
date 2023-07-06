@@ -18,6 +18,7 @@ namespace Utilities.SaveSystem.Data
         }
 
         public static implicit operator Vector2 (VectorSaveData data) => new(data.X, data.Y);
+        public static implicit operator Vector3 (VectorSaveData data) => new(data.X, data.Y);
         public static implicit operator VectorSaveData(Vector2 vec) => new(vec.x, vec.y);
     }
 }

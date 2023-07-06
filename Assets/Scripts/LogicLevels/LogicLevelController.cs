@@ -26,13 +26,18 @@ namespace LogicLevels
         [SerializeField] private Text actionsTxtEditor;
         [SerializeField] private Text actionsTxtGame;
         [SerializeField] private GameObject logicEditorSection;
+        [SerializeField] private GameObject areaGatePrefab, velocityGatePrefab;
         
         public bool IsLevelInEditMode => _isLevelInEditMode;
         public int PlanetActions => _planetActions;
 
-        void Awake() => Instance = this;
-        
-        
+        void Awake()
+        {
+            Instance = this;
+            LogicEditor.Controller = this;
+        }
+
+
         /// <summary>
         /// Creates and add new gate to controller's gates list.
         /// </summary>
@@ -193,14 +198,34 @@ namespace LogicLevels
             actionsTxtGame.text = _planetActions.ToString();
         }
 
+        public void CreateAreaGate(Vector2 position, Vector2 size, float time = 10)
+        {
+            GameObject newGate = Instantiate(areaGatePrefab);
+            LogicAreaGate areaController = newGate.GetComponent<LogicAreaGate>();
+
+            areaController.Position = position;
+            areaController.Size = size;
+            areaController.TimeInZone = time;
+        }
+
+        public void CreateVelocityGate(float targetVelocity)
+        {
+            GameObject newGate = Instantiate(velocityGatePrefab);
+            LogicVelocityGate velocityController = newGate.GetComponent<LogicVelocityGate>();
+
+            velocityController.Velocity = targetVelocity;
+        }
+
         public void LoadLogicFromJson(LevelSaveData data)
         {
             _planetActions = data.PlanetActions;
             _originalPlanetActions = data.PlanetActions;
             UpdateActionsTexts();
-            // create gates should go here:
-            // but we need to add create gates functionality first...
             
+            // creating area gates
+            foreach (var areaData in data.LogicAreaDataList) CreateAreaGate(areaData.Position, areaData.Size, areaData.TimeInZone);
+            // creating velocity gates
+            foreach (var velocityData in data.LogicVelocityList) CreateVelocityGate(velocityData.TargetVelocity);
             
             ResetLogicLevel();
         }

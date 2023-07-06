@@ -10,7 +10,7 @@ namespace Utilities.SaveSystem.Data
     {
         [JsonProperty] private List<PlanetComponentSaveData> _savedComponents;
         [JsonProperty] public List<LogicAreaData> LogicAreaDataList = new();
-        [JsonProperty] public List<LogicVelocityData> LogicAreaVelocityList = new();
+        [JsonProperty] public List<LogicVelocityData> LogicVelocityList = new();
         [JsonProperty] public bool IsSandbox { get; }
         [JsonProperty] public bool IsPaused { get; }
         [JsonProperty] public bool IsReset { get; }
@@ -31,7 +31,7 @@ namespace Utilities.SaveSystem.Data
             LevelName = levelName;
             PlanetActions = planetActions;
             LogicAreaDataList = areas;
-            LogicAreaVelocityList = velocities;
+            LogicVelocityList = velocities;
         }
     
         public LevelSaveData(PlanetComponentsController components, PlaybackController playback)
@@ -45,7 +45,7 @@ namespace Utilities.SaveSystem.Data
             if (!IsSandbox)
             {
                 LogicAreaDataList = LogicLevelController.Instance.AreaDataList;
-                LogicAreaVelocityList = LogicLevelController.Instance.VelocityDataList;
+                LogicVelocityList = LogicLevelController.Instance.VelocityDataList;
                 PlanetActions = LogicLevelController.Instance.PlanetActions;
             }
         
