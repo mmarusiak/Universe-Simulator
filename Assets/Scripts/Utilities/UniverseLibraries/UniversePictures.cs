@@ -228,5 +228,19 @@ namespace Utilities.UniverseLibraries
 
             return outlinePoints;
         }
+        
+        public static bool AreSpritesOverlapping(SpriteRenderer spriteRenderer1, SpriteRenderer spriteRenderer2)
+        {
+            Bounds bounds1 = spriteRenderer1.bounds;
+            Bounds bounds2 = spriteRenderer2.bounds;
+
+            // Ignore the Z coordinate
+            bounds1.center = new Vector3(bounds1.center.x, bounds1.center.y, 0f);
+            bounds1.size = new Vector3(bounds1.size.x, bounds1.size.y, float.PositiveInfinity);
+            bounds2.center = new Vector3(bounds2.center.x, bounds2.center.y, 0f);
+            bounds2.size = new Vector3(bounds2.size.x, bounds2.size.y, float.PositiveInfinity);
+
+            return bounds1.Intersects(bounds2);
+        }
     }
 }

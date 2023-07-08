@@ -32,16 +32,14 @@ public class LogicEditor : MonoBehaviour
         {
             _newGatePos =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
             _areaFlag = true;
-            Debug.Log("Hello?");
         }
         
         if (_state == EditorState.CreatingArea && Input.GetMouseButtonUp(0) && _areaFlag)
         {
-            Debug.Log("Hello!");
             _areaFlag = false;
             _newGateSize =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
             _newGateSize -= _newGatePos;
-
+            /*
             if (_newGateSize.x < 0)
             {
                 _newGateSize.x *= -1;
@@ -53,8 +51,8 @@ public class LogicEditor : MonoBehaviour
                 _newGateSize.y *= -1;
                 _newGatePos.y -= _newGateSize.y;
             }
-            
-            Controller.CreateAreaGate(_newGatePos, _newGateSize);
+            */
+            Controller.CreateAreaGate(_newGatePos, _newGateSize * new Vector2(1, -1));
             
             _state = EditorState.Idle;
         }

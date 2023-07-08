@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace LogicLevels
 {
     public class LogicGate
@@ -13,6 +15,7 @@ namespace LogicLevels
         /// </summary>
         public void Trigger()
         {
+            Debug.Log("triggered....");
             _triggered = true;
             LogicLevelController.Instance.CheckGates();
         }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using GameCore.SimulationCore;
 using UnityEngine;
-using Utilities.SaveSystem.Data;
+using Utilities.UniverseLibraries;
 
 namespace LogicLevels
 {
@@ -11,6 +11,9 @@ namespace LogicLevels
         [SerializeField] private Vector2 size;
         [SerializeField] private float timeInZone;
 
+        [SerializeField] private GameObject panel;
+        [SerializeField] private GameObject timer;
+        [SerializeField] private SpriteRenderer timerSprite;
         public Vector2 Position
         {
             get => position;
@@ -44,41 +47,17 @@ namespace LogicLevels
         {
             _myGate = LogicLevelController.Instance.AddNewGate(this);
             LogicLevelController.Instance.AreaDataList.Add(this);
-            InitializeArea();
 
             DrawSelf();
         }
 
         void DrawSelf()
         {
-            // will replace it with some image
-            LineRenderer renderer = GetComponent<LineRenderer>();
-            renderer.positionCount = 4;
-            Vector3[] pos = 
-            {
-                position,
-                (position + new Vector2(size.x, 0)),
-                (position + size),
-                (position + new Vector2(0, size.y))
-            };
-            renderer.SetPositions(pos);
+            transform.position = position;
+            panel.transform.localScale = size;
+            timer.transform.localPosition = new Vector3(size.x / 2, size.y / -2, -1);
         }
-
-        void InitializeArea()
-        {
-            if (size.x < 0)
-            {
-                size.x *= -1;
-                position.x -= size.x;
-            }
-
-            if (size.y < 0)
-            {
-                size.y *= -1;
-                position.y -= size.y;
-            }
-        }
-
+        
         /// <summary>
         /// Helper void for logic area component list. It checks if planet is already in zone, or if it just entered it.
         /// </summary>
@@ -100,27 +79,25 @@ namespace LogicLevels
             if (PlaybackController.Instance.Playback.IsPaused) return;
         
             List<LogicAreaComponent> copyOf_planetsInZone = new List<LogicAreaComponent>(_planetsInZone);
+            float maxTime = 0;
             foreach (var planet in copyOf_planetsInZone)
             {
-                var lastPlanetInZone = planet.PlanetComponent;
-            
                 // check if last planet is still in zone
-                if (lastPlanetInZone.CurrentPosition.x >= position.x &&
-                    lastPlanetInZone.CurrentPosition.x <= position.x + size.x &&
-                    lastPlanetInZone.CurrentPosition.y >= position.y &&
-                    lastPlanetInZone.CurrentPosition.y <= position.y + size.y)
+                if (UniversePictures.AreSpritesOverlapping(panel.transform.GetChild(0).GetComponent<SpriteRenderer>(), planet.PlanetComponent.Renderer))
                 {
                     planet.Time += Time.deltaTime;
+                    if (maxTime < planet.Time) maxTime = planet.Time;
                     CheckGate(planet);
                 } 
                 else _planetsInZone.Remove(planet);
             }
+            
+            timerSprite.color = maxTime == 0 ? Color.white : new Color(1, 1, 1, 1 - maxTime/timeInZone);
         
             // find if there are new planets in zone
             foreach (var planet in PlanetComponentsController.Instance.AllGravityComponents)
             {
-                if (planet.CurrentPosition.x >= position.x && planet.CurrentPosition.x < position.x + size.x &&
-                    planet.CurrentPosition.y >= position.y && planet.CurrentPosition.y < position.y + size.y)
+                if (UniversePictures.AreSpritesOverlapping(panel.transform.GetChild(0).GetComponent<SpriteRenderer>(), planet.Renderer))
                 {
                     if (!IsPlanetAlreadyInZone(planet)) _planetsInZone.Add(planet);
                     break;
