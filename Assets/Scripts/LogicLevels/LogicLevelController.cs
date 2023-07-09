@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GameCore.SimulationCore;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace LogicLevels
 {
     public class LogicLevelController : MonoBehaviour
     {
+
         public static LogicLevelController Instance;
 
         public List<LogicAreaData> AreaDataList = new ();
@@ -36,7 +38,7 @@ namespace LogicLevels
             Instance = this;
             LogicEditor.Controller = this;
         }
-
+        
 
         /// <summary>
         /// Creates and add new gate to controller's gates list.
@@ -87,8 +89,6 @@ namespace LogicLevels
             
             Debug.Log($"Level completed at time: {_levelTimer.Time}");
         }
-
-        
 
         /// <summary>
         /// Logic controller void that is called when player hits "play" button. It's assigned in Unity Editor.
@@ -200,12 +200,13 @@ namespace LogicLevels
 
         public void CreateAreaGate(Vector2 position, Vector2 size, float time = 10)
         {
+            Debug.Log("HELLO????????");
             GameObject newGate = Instantiate(areaGatePrefab);
             LogicAreaGate areaController = newGate.GetComponent<LogicAreaGate>();
 
+            areaController.TimeInZone = time;
             areaController.Position = position;
             areaController.Size = size;
-            areaController.TimeInZone = time;
         }
 
         public void CreateVelocityGate(float targetVelocity)

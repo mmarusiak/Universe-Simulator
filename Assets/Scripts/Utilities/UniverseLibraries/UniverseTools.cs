@@ -23,7 +23,10 @@ namespace Utilities.UniverseLibraries
                 }
             }
             else
-                output += ".000";
+            {
+                output += ".";
+                for (int i = 0; i < lenRound; i++) output += "0";
+            }
 
             return output;
         }

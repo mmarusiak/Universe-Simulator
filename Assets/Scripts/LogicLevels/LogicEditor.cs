@@ -39,19 +39,8 @@ public class LogicEditor : MonoBehaviour
             _areaFlag = false;
             _newGateSize =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
             _newGateSize -= _newGatePos;
-            /*
-            if (_newGateSize.x < 0)
-            {
-                _newGateSize.x *= -1;
-                _newGatePos.x -= _newGateSize.x;
-            }
             
-            if (_newGateSize.y < 0)
-            {
-                _newGateSize.y *= -1;
-                _newGatePos.y -= _newGateSize.y;
-            }
-            */
+            Debug.Log(Controller == null);
             Controller.CreateAreaGate(_newGatePos, _newGateSize * new Vector2(1, -1));
             
             _state = EditorState.Idle;

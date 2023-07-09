@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using GameCore.SimulationCore;
 using UnityEngine;
+using UnityEngine.UI;
 using Utilities.UniverseLibraries;
 
 namespace LogicLevels
@@ -13,7 +14,8 @@ namespace LogicLevels
 
         [SerializeField] private GameObject panel;
         [SerializeField] private GameObject timer;
-        [SerializeField] private SpriteRenderer timerSprite;
+        [SerializeField] private Text timerText;
+        [SerializeField] private GameObject timerTextGameObject;
         public Vector2 Position
         {
             get => position;
@@ -47,15 +49,26 @@ namespace LogicLevels
         {
             _myGate = LogicLevelController.Instance.AddNewGate(this);
             LogicLevelController.Instance.AreaDataList.Add(this);
-
+            if (timerText == null) CreateText();
             DrawSelf();
         }
-
+        
         void DrawSelf()
         {
             transform.position = position;
             panel.transform.localScale = size;
             timer.transform.localPosition = new Vector3(size.x / 2, size.y / -2, -1);
+            if (timerText == null) CreateText();
+            timerTextGameObject.transform.position =
+                Camera.main.WorldToScreenPoint(timer.transform.position) - new Vector3(0, timerText.fontSize * 2.25f);
+        }
+
+        void CreateText()
+        {
+            timerTextGameObject = Instantiate(timerTextGameObject, GameObject.Find("LogicGatesTexts").transform);
+            timerTextGameObject.name = TimeInZone + " : " + position + " : " + size;
+            timerText = timerTextGameObject.GetComponent<Text>();
+            timerText.text = UniverseTools.RoundOutput(timeInZone, 2) + " s";
         }
         
         /// <summary>
@@ -92,8 +105,8 @@ namespace LogicLevels
                 else _planetsInZone.Remove(planet);
             }
             
-            timerSprite.color = maxTime == 0 ? Color.white : new Color(1, 1, 1, 1 - maxTime/timeInZone);
-        
+            if(!_myGate.Triggered) timerText.text = UniverseTools.RoundOutput((timeInZone - maxTime), 2) + " s";
+
             // find if there are new planets in zone
             foreach (var planet in PlanetComponentsController.Instance.AllGravityComponents)
             {
@@ -115,7 +128,11 @@ namespace LogicLevels
         void CheckGate(LogicAreaComponent detector)
         {
             // we will also probably need some indication of completion of that gate
-            if (detector.Time >= timeInZone) _myGate.Trigger();
+            if (detector.Time >= timeInZone)
+            {
+                timerText.text = "0.00 s";
+                _myGate.Trigger();
+            }
         }
     }
 }
