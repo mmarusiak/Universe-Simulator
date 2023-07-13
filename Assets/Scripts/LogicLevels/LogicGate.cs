@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace LogicLevels
 {
     public class LogicGate
     {
         private bool _triggered = false;
+        public UnityEvent OnGateReset = new();
 
         public string ID { get; set; }
 
@@ -20,6 +22,10 @@ namespace LogicLevels
             LogicLevelController.Instance.CheckGates();
         }
 
-        public void Reset() => _triggered = false;
+        public void Reset()
+        {
+            OnGateReset.Invoke();
+            _triggered = false;
+        }
     }
 }

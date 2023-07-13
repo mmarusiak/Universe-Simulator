@@ -43,11 +43,12 @@ namespace LogicLevels
         }
 
         private LogicGate _myGate;
-        private readonly List<LogicAreaComponent> _planetsInZone = new();
+        private List<LogicAreaComponent> _planetsInZone = new();
 
         void Start()
         {
             _myGate = LogicLevelController.Instance.AddNewGate(this);
+            _myGate.OnGateReset.AddListener(ResetAreaGate);
             LogicLevelController.Instance.AreaDataList.Add(this);
             if (timerText == null) CreateText();
             DrawSelf();
@@ -92,20 +93,20 @@ namespace LogicLevels
             if (PlaybackController.Instance.Playback.IsPaused) return;
         
             List<LogicAreaComponent> copyOf_planetsInZone = new List<LogicAreaComponent>(_planetsInZone);
-            float maxTime = 0;
+            float minTime = TimeInZone;
             foreach (var planet in copyOf_planetsInZone)
             {
                 // check if last planet is still in zone
                 if (UniversePictures.AreSpritesOverlapping(panel.transform.GetChild(0).GetComponent<SpriteRenderer>(), planet.PlanetComponent.Renderer))
                 {
                     planet.Time += Time.deltaTime;
-                    if (maxTime < planet.Time) maxTime = planet.Time;
+                    if (minTime > TimeInZone - planet.Time) minTime = TimeInZone - planet.Time;
                     CheckGate(planet);
                 } 
                 else _planetsInZone.Remove(planet);
             }
             
-            if(!_myGate.Triggered) timerText.text = UniverseTools.RoundOutput((timeInZone - maxTime), 2) + " s";
+            if(!_myGate.Triggered) timerText.text = UniverseTools.RoundOutput((minTime), 2) + " s";
 
             // find if there are new planets in zone
             foreach (var planet in PlanetComponentsController.Instance.AllGravityComponents)
@@ -130,9 +131,15 @@ namespace LogicLevels
             // we will also probably need some indication of completion of that gate
             if (detector.Time >= timeInZone)
             {
-                timerText.text = "0.00 s";
+                timerText.text = "Gate reached!";
                 _myGate.Trigger();
             }
+        }
+
+        void ResetAreaGate()
+        {
+            _planetsInZone = new();
+            timerText.text = UniverseTools.RoundOutput(timeInZone, 2) + " s";
         }
     }
 }

@@ -200,7 +200,6 @@ namespace LogicLevels
 
         public void CreateAreaGate(Vector2 position, Vector2 size, float time = 10)
         {
-            Debug.Log("HELLO????????");
             GameObject newGate = Instantiate(areaGatePrefab);
             LogicAreaGate areaController = newGate.GetComponent<LogicAreaGate>();
 
