@@ -10,10 +10,9 @@ namespace Utilities.UniverseLibraries
     {
         public static string RoundOutput(float input, int lenRound = 3)
         {
-            int negOrPosFlag = input > 0 ? 1 : -1;
-            int rounder = Math.Abs((int) Mathf.Pow(10, ((int) input).ToString(CultureInfo.InvariantCulture).Length));
+            int rounder = (int)Mathf.Pow(10, lenRound);
             string output =
-                (negOrPosFlag * Mathf.Round(input * rounder) / rounder).ToString(CultureInfo.InvariantCulture);
+                ((float)( (int)(input * rounder)) / rounder).ToString(CultureInfo.InvariantCulture);
 
             if (output.Contains("."))
             {
