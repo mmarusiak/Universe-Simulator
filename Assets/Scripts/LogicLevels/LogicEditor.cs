@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class LogicEditor : MonoBehaviour
 {
-    public static LogicLevelController Controller;
+    public static LogicLevelController Controller = LogicLevelController.Instance;
 
     enum EditorState
     {

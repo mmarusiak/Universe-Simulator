@@ -52,6 +52,7 @@ namespace LogicLevels
             LogicLevelController.Instance.AreaDataList.Add(this);
             if (timerText == null) CreateText();
             DrawSelf();
+            GatesController.Instance.AddAreaGate(this);
         }
         
         void DrawSelf()

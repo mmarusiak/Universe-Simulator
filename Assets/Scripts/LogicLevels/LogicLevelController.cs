@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using GameCore.SimulationCore;
 using UnityEngine;
@@ -33,12 +32,8 @@ namespace LogicLevels
         public bool IsLevelInEditMode => _isLevelInEditMode;
         public int PlanetActions => _planetActions;
 
-        void Awake()
-        {
-            Instance = this;
-            LogicEditor.Controller = this;
-        }
-        
+        void Awake() => Instance = this;
+
 
         /// <summary>
         /// Creates and add new gate to controller's gates list.
