@@ -60,5 +60,21 @@ namespace Utilities.UniverseLibraries
             string output = $"Camera position ({x}, {y})";
             outPos.text = output;
         }
+
+        public bool IsMouseOverGameObject(Transform target)
+        {
+            Vector2 mousePos = ScreenToWorld(Input.mousePosition);
+
+            var position = target.position;
+            var lossyScale = target.lossyScale;
+
+            float leftEdge = position.x;
+            float rightEdge = position.x + (lossyScale.x);
+            float lowerEdge = position.y - (lossyScale.y);
+            float upperEdge = position.y;
+
+            return (mousePos.x >= leftEdge && mousePos.x <= rightEdge && mousePos.y >= lowerEdge &&
+                    mousePos.y <= upperEdge);
+        }
     }
 }

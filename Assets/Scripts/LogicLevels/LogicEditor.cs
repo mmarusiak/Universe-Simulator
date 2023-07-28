@@ -4,8 +4,6 @@ using UnityEngine.EventSystems;
 
 public class LogicEditor : MonoBehaviour
 {
-    public static LogicLevelController Controller = LogicLevelController.Instance;
-
     enum EditorState
     {
         Idle,
@@ -17,8 +15,8 @@ public class LogicEditor : MonoBehaviour
     private Vector2 _newGatePos, _newGateSize;
     private EditorState _state;
 
-    public void BtnAddPlanetAction() => Controller.AddPlanetAction();
-    public void BtnRemovePlanetAction() => Controller.RemovePlanetAction();
+    public void BtnAddPlanetAction() => LogicLevelController.Instance.AddPlanetAction();
+    public void BtnRemovePlanetAction() => LogicLevelController.Instance.RemovePlanetAction();
 
     public void BtnCreateAreaGate() => _state = EditorState.CreatingArea;
     
@@ -40,7 +38,7 @@ public class LogicEditor : MonoBehaviour
             _newGateSize =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
             _newGateSize -= _newGatePos;
             
-            Controller.CreateAreaGate(_newGatePos, _newGateSize * new Vector2(1, -1));
+            LogicLevelController.Instance.CreateAreaGate(_newGatePos, _newGateSize * new Vector2(1, -1));
             
             _state = EditorState.Idle;
         }

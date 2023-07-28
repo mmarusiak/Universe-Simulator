@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Utilities.UniverseLibraries;
 
 // Handles all action that player can make on already existing gate
 namespace LogicLevels
@@ -21,9 +22,15 @@ namespace LogicLevels
 
         void Update()
         {
+            if (_areaGates.Count == 0 || !Input.GetMouseButton(0)) return;
             foreach (var areaGate in _areaGates)
             {
-                // check mouse input and handle it
+                if (UniverseCamera.Instance.IsMouseOverGameObject(areaGate.Panel.transform))
+                {
+                    Debug.Log("We are handling input of: " + areaGate.Position);
+                    // handle controls!
+                    // move / scale ?
+                }
             }
         }
     }

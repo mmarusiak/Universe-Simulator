@@ -42,6 +42,8 @@ namespace LogicLevels
             set => timeInZone = value;
         }
 
+        public GameObject Panel => panel;
+
         private LogicGate _myGate;
         private List<LogicAreaComponent> _planetsInZone = new();
 
