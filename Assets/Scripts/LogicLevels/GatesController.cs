@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using Utilities.UniverseLibraries;
 
@@ -20,18 +21,73 @@ namespace LogicLevels
             _areaGates.Add(gate);
         }
 
+        private bool _isGateMoving = false, _isGateScaling = false;
+        
         void Update()
         {
-            if (_areaGates.Count == 0 || !Input.GetMouseButton(0)) return;
+            if (_areaGates.Count == 0 || !Input.GetMouseButton(0))
+            {
+                _isGateMoving = false;
+                _isGateScaling = false;
+                return;
+            }
+
+            if (_isGateScaling)
+            {
+                ScaleAreaGate(_lastGate);
+                return;
+            }
             foreach (var areaGate in _areaGates)
             {
                 if (UniverseCamera.Instance.IsMouseOverGameObject(areaGate.Panel.transform))
                 {
                     Debug.Log("We are handling input of: " + areaGate.Position);
-                    // handle controls!
-                    // move / scale ?
+                    // scale control
+                    if (Input.GetKey(KeyCode.S))
+                    {
+                        _isGateMoving = false;
+                        ScaleAreaGate(areaGate);
+                        return;
+                    }
+
+                    _isGateScaling = false;
+                    MoveAreaGate(areaGate);
                 }
             }
+        }
+
+        // in moving it's offset, in scaling it's last position of the mouse
+        private Vector2 _helperVector;
+        private Vector2 _initialScale;
+        private LogicAreaGate _lastGate;
+        void ScaleAreaGate(LogicAreaGate gate)
+        {
+            _lastGate = gate;
+            if (!_isGateScaling)
+            {
+                _helperVector = UniverseCamera.Instance.GetMousePosInWorld();
+                _initialScale = gate.Size;
+                _isGateScaling = true;
+                return;
+            }
+
+            Vector2 currentPos = UniverseCamera.Instance.GetMousePosInWorld();
+            Vector2 scale = currentPos - _helperVector;
+            _helperVector = currentPos;
+            gate.Size += scale;
+        }
+        
+        
+        void MoveAreaGate(LogicAreaGate gate)
+        {
+            if (!_isGateMoving)
+            {
+                _helperVector = (Vector2)UniverseCamera.Instance.GetMousePosInWorld() - gate.Position;
+                _isGateMoving = true;
+            }
+
+            Vector2 currentPos = UniverseCamera.Instance.GetMousePosInWorld();
+            gate.Position = (currentPos - _helperVector);
         }
     }
 }

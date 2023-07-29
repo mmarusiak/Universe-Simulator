@@ -45,6 +45,8 @@ namespace Utilities.UniverseLibraries
 
         public Vector3 ScreenToWorld(Vector3 screen) => myCamera.ScreenToWorldPoint(screen);
 
+        public Vector3 GetMousePosInWorld() => ScreenToWorld(Input.mousePosition);
+
         public void ChangeMoveState(bool target) => _isCameraMoving = target;
 
         public bool GetMoveState() => _isCameraMoving;
