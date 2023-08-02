@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GameCore.SimulationCore;
+using LogicLevels.Gates.AreaGate;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities.SaveSystem.Data;

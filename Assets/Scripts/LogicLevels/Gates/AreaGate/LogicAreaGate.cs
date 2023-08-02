@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utilities.UniverseLibraries;
 
-namespace LogicLevels
+namespace LogicLevels.Gates.AreaGate
 {
     public class LogicAreaGate : MonoBehaviour
     {
@@ -57,7 +57,7 @@ namespace LogicLevels
             GatesController.Instance.AddAreaGate(this);
         }
         
-        void DrawSelf()
+        public void DrawSelf()
         {
             transform.position = position;
             panel.transform.localScale = size;

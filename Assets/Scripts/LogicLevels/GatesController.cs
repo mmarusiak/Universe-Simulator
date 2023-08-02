@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Unity.Mathematics;
+using LogicLevels.Gates.AreaGate;
 using UnityEngine;
 using Utilities.UniverseLibraries;
 
@@ -25,7 +25,7 @@ namespace LogicLevels
         
         void Update()
         {
-            if (_areaGates.Count == 0 || !Input.GetMouseButton(0))
+            if (_areaGates.Count == 0 || !Input.GetMouseButton(0) || !PlaybackController.Instance.Playback.IsPaused || !LogicLevelController.Instance.IsLevelInEditMode)
             {
                 _isGateMoving = false;
                 _isGateScaling = false;
@@ -37,6 +37,17 @@ namespace LogicLevels
                 ScaleAreaGate(_lastGate);
                 return;
             }
+            
+            CheckForGate();
+        }
+
+        public void UpdateGatesPositions()
+        {
+            foreach (var gate in _areaGates) gate.DrawSelf();
+        }
+        
+        void CheckForGate()
+        {
             foreach (var areaGate in _areaGates)
             {
                 if (UniverseCamera.Instance.IsMouseOverGameObject(areaGate.Panel.transform))

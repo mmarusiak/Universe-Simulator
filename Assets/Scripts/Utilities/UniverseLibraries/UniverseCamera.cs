@@ -1,3 +1,4 @@
+using LogicLevels;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,10 +55,12 @@ namespace Utilities.UniverseLibraries
     
         void UpdatePos()
         {
-            if (outPos is null) return;
-        
-            string x = "<color=red>" + UniverseTools.RoundOutput(myCamera.transform.position.x) + "</color>";
-            string y = "<color=green>" + UniverseTools.RoundOutput(myCamera.transform.position.y) + "</color>";
+            if (GatesController.Instance != null) GatesController.Instance.UpdateGatesPositions();
+            if (outPos == null) return;
+            
+            var position = myCamera.transform.position;
+            string x = "<color=red>" + UniverseTools.RoundOutput(position.x) + "</color>";
+            string y = "<color=green>" + UniverseTools.RoundOutput(position.y) + "</color>";
         
             string output = $"Camera position ({x}, {y})";
             outPos.text = output;

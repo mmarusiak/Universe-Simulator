@@ -1,4 +1,5 @@
 using LogicLevels;
+using LogicLevels.Gates.AreaGate;
 using Newtonsoft.Json;
 
 namespace Utilities.SaveSystem.Data
