@@ -12,22 +12,22 @@ namespace Utilities.UniverseLibraries
         [SerializeField] private float vertSize = 0.5f;
         [SerializeField] private int amountOfPoints = 1000;
 
-        void Start()
+        private void Start()
         { 
             InitializeRenderer();
             _lastPos = transform.position;
         }
 
-        void InitializeRenderer() => _renderer = GetComponent<LineRenderer>();
+        private void InitializeRenderer() => _renderer = GetComponent<LineRenderer>();
 
-        void Update()
+        private void Update()
         {
             if (Time.timeScale <= 0) return;
             
             CreateNewPoint();
         }
 
-        void CreateNewPoint()
+        private void CreateNewPoint()
         {
             if (Vector3.Distance(_lastPos, transform.position) < vertSize) return;
         
@@ -37,7 +37,7 @@ namespace Utilities.UniverseLibraries
             DeleteOldPoints();
         }
 
-        void DeleteOldPoints()
+        private void DeleteOldPoints()
         {
             if (_renderer.positionCount <= amountOfPoints) return;
 

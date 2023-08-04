@@ -9,7 +9,7 @@ using Utilities.UniverseLibraries;
 public class VelocityEditor : PlanetEditor
 {
     public static VelocityEditor Instance;
-    void Awake() => Instance = this;
+    private void Awake() => Instance = this;
     [SerializeField] private InputField[] axisComponents = new InputField[2];
     [SerializeField] private Text magComponent;
 
@@ -49,11 +49,12 @@ public class VelocityEditor : PlanetEditor
         }
         UpdateMagnitudeTxt();
     }
-    
-    void UpdateMagnitudeTxt() => magComponent.text = UniverseTools.RoundOutput(EditorBase.CurrentPlanet.CurrentVelocity.magnitude);
 
-    void ChangeYAxis() => EditorBase.CurrentPlanet.CurrentVelocity =
+    private void UpdateMagnitudeTxt() => magComponent.text = UniverseTools.RoundOutput(EditorBase.CurrentPlanet.CurrentVelocity.magnitude);
+
+    private void ChangeYAxis() => EditorBase.CurrentPlanet.CurrentVelocity =
         new(EditorBase.CurrentPlanet.CurrentVelocity.x, UniverseMath.StringToFloat(axisComponents[1].text));
-    void ChangeXAxis() => EditorBase.CurrentPlanet.CurrentVelocity =
+
+    private void ChangeXAxis() => EditorBase.CurrentPlanet.CurrentVelocity =
         new(UniverseMath.StringToFloat(axisComponents[0].text), EditorBase.CurrentPlanet.CurrentVelocity.y);
 }

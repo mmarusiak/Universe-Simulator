@@ -113,7 +113,7 @@ namespace Utilities.UniverseLibraries
         }
 
         // Helper method to slice a texture along a line
-        static Texture2D[] SliceTexture(Texture2D texture, Vector2 startCoord, Vector2 endCoord)
+        private static Texture2D[] SliceTexture(Texture2D texture, Vector2 startCoord, Vector2 endCoord)
         {
             int width = texture.width;
             int height = texture.height;

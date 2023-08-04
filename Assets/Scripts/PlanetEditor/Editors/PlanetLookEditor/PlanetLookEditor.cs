@@ -11,7 +11,7 @@ public class PlanetLookEditor : PlanetEditor
     public static PlanetLookEditor Instance;
     private static string[] filters = new[] {"jpg","png","JPEG"};
 
-    void Awake() => Instance = this;
+    private void Awake() => Instance = this;
     
     [SerializeField] private Image _planetPreviewImage;
     [SerializeField] private ColorWheelControl _colorWheelControl;
@@ -25,8 +25,8 @@ public class PlanetLookEditor : PlanetEditor
         get => _pathToImages;
         set => SetNewPath(value);
     }
-    
-    void Start()
+
+    private void Start()
     {
         Show(false);
         // only for debug
@@ -54,7 +54,7 @@ public class PlanetLookEditor : PlanetEditor
     }
 
     /// Set image of planet to correct dropdown value.
-    void UpdateDropDownValue()
+    private void UpdateDropDownValue()
     {
         if (EditorBase.CurrentPlanet == null) return;
         
@@ -70,7 +70,7 @@ public class PlanetLookEditor : PlanetEditor
         _imageDropdownPlanet.value = 0;
     }
 
-    void InitializeDropDown()
+    private void InitializeDropDown()
     {
         _imageDropdownPlanet.options.Clear();
         _imageDropdownPlanet.options.Add(new Dropdown.OptionData("None", BasicPlanetEditor.Instance.DefaultPlanetSprite));
@@ -81,7 +81,7 @@ public class PlanetLookEditor : PlanetEditor
         UpdateDropDownValue();
     }
 
-    async void LoadSpriteFromPathToDropDown(string path)
+    private async void LoadSpriteFromPathToDropDown(string path)
     {
         var loaded = await UniversePictures.LoadSpriteFromPath(path, 128, 128);
         _imageDropdownPlanet.options.Add(new Dropdown.OptionData(path.Replace(_pathToImages + "/", ""), loaded));

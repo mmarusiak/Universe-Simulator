@@ -9,7 +9,7 @@ namespace Utilities.UniverseLibraries
         public static UniverseCamera Instance;
         public static readonly Vector3 CameraInitialPosition = new (0, 0, - 10);
         public static readonly float CameraInitialZoom = 85;
-        void Awake() => Instance = this;
+        private void Awake() => Instance = this;
     
         [SerializeField]
         private Camera myCamera;
@@ -18,7 +18,7 @@ namespace Utilities.UniverseLibraries
 
         private bool _isCameraMoving;
 
-        void Start()
+        private void Start()
         {
             if (myCamera == null)
             {
@@ -51,9 +51,9 @@ namespace Utilities.UniverseLibraries
         public void ChangeMoveState(bool target) => _isCameraMoving = target;
 
         public bool GetMoveState() => _isCameraMoving;
-    
-    
-        void UpdatePos()
+
+
+        private void UpdatePos()
         {
             if (GatesController.Instance != null) GatesController.Instance.UpdateGatesPositions();
             if (outPos == null) return;

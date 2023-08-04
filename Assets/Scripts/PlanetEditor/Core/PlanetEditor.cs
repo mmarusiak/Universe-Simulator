@@ -9,6 +9,6 @@ public class PlanetEditor : MonoBehaviour
     private EditorBase _editorBase;
     public EditorBase EditorBase => _editorBase;
 
-    void Start() => Show(false);
+    private void Start() => Show(false);
     public void Show(bool targetState) => EditorBase.Shown = targetState;
 }

@@ -9,17 +9,17 @@ namespace Menu
     {
         private string _pathToSaves;
         [SerializeField] private GameObject saveContainerPrefab;
-        private List<SaveContainer> _containers = new ();
+        private readonly List<SaveContainer> _containers = new ();
         [SerializeField] private Transform savesParent;
 
-        void Start()
+        private void Start()
         {
             _pathToSaves = Application.persistentDataPath + "/Saves";
             UniverseDirectories.CreateDirectoryIfNotExists(_pathToSaves);
             InitializeSavesLoader();
         }
 
-        async void InitializeSavesLoader()
+        private async void InitializeSavesLoader()
         {
             savesParent.gameObject.SetActive(false);
             var saves = UniverseDirectories.GetFoldersInDirectory(_pathToSaves);
@@ -36,7 +36,7 @@ namespace Menu
         /// <summary>
         /// Sorts saves by dates.
         /// </summary>
-        void SortSaves()
+        private void SortSaves()
         {
             _containers.Sort((x, y) => y.LastModified.CompareTo(x.LastModified));
             for (int i = 0; i < _containers.Count; i++)

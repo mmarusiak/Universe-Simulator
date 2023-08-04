@@ -11,7 +11,7 @@ public class VectorsRenderer : MonoBehaviour
    private bool _shown = false;
    [SerializeField] private PlanetEditor _attachedEditor;
 
-   void Awake() => Instance = this;
+   private void Awake() => Instance = this;
    
    public void ShowRenderer(bool shown)
    {
@@ -54,8 +54,8 @@ public class VectorsRenderer : MonoBehaviour
          UpdateVector(i, start, end);
       }
    }
-   
-   void UpdateVector(int index, Vector2 start, Vector2 end)
+
+   private void UpdateVector(int index, Vector2 start, Vector2 end)
    {
       vectorsRenderer[index].SetPosition(0, start);
       vectorsRenderer[index].SetPosition(1, start + end);
@@ -64,13 +64,13 @@ public class VectorsRenderer : MonoBehaviour
       else SetArrowEnd(index, start, start + end);
    }
 
-   void HideArrow(int index)
+   private void HideArrow(int index)
    {
       Transform arrow = vectorsRenderer[index].transform.GetChild(0);
       arrow.position = new Vector3(10000, 10000, arrow.position.z);
    }
-   
-   void SetArrowEnd(int index, Vector2 start, Vector2 end)
+
+   private void SetArrowEnd(int index, Vector2 start, Vector2 end)
    { 
       Transform arrow = vectorsRenderer[index].transform.GetChild(0);
       arrow.position = new Vector3(end.x, end.y, arrow.position.z);

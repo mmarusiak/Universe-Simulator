@@ -9,7 +9,7 @@ public class EditorAnimTrigger : MonoBehaviour
     private Vector2 _targetPos;
     void Start() => ChangePos(true);
 
-    void Update()
+    private void Update()
     {
         if (!_isHideable) return;
         _container.localPosition = Vector2.Lerp(_container.localPosition, _targetPos, _time);

@@ -34,7 +34,7 @@ public class Playback
         set => ChangeTimeScale(value);
     }
 
-    void ChangePause(bool targetState)
+    private void ChangePause(bool targetState)
     {
         _isPaused = targetState;
         Time.timeScale = _isPaused ? 0 : TimeScale;
@@ -44,7 +44,7 @@ public class Playback
         SetButtonsColors();
     }
 
-    void ChangeReset(bool targetState)
+    private void ChangeReset(bool targetState)
     {
         _isReset = targetState;
         
@@ -56,7 +56,7 @@ public class Playback
         SetButtonsColors();
     }
 
-    void ChangeTimeScale(float targetScale)
+    private void ChangeTimeScale(float targetScale)
     {
         _timeScale = targetScale;
         if(IsPaused) return;

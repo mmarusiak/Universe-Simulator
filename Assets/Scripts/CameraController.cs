@@ -9,10 +9,10 @@ public class CameraController : MonoBehaviour
     private Vector2 _pointerStartPos, _scaler;
     
     // Start is called before the first frame update
-    void Start() => _cam = UniverseCamera.Instance.Camera.transform;
+    private void Start() => _cam = UniverseCamera.Instance.Camera.transform;
     
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // triggers while user pressed
         if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -42,7 +42,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    void MoveCamera()
+    private void MoveCamera()
     { 
         Vector3 newPos = new Vector3(Input.mousePosition.x*sensitivity + _scaler.x, Input.mousePosition.y*sensitivity + _scaler.y, -10);
         UniverseCamera.Instance.SetCameraPosition(newPos);

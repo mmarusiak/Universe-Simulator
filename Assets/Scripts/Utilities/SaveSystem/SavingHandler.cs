@@ -86,15 +86,15 @@ namespace Utilities.SaveSystem
 
         public async Task CreateNewLevel(InputField inputName)
         {
-            string name = inputName.text;
-            if (string.Empty == name) return;
+            string inputNameText = inputName.text;
+            if (string.Empty == inputNameText) return;
 
             DontDestroyOnLoad(this);
             UniverseScenes.LoadScene("Game");
 
             while (LevelInfoHolder.Instance == null) await Task.Yield();
 
-            LevelInfoHolder.Instance.LevelName = name;
+            LevelInfoHolder.Instance.LevelName = inputNameText;
             Instance = _next;
             Instance.SaveLevel();
             Instance.InitializeNewLevel();

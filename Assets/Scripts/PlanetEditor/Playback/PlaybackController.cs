@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class PlaybackController : MonoBehaviour
 {
     public static PlaybackController Instance;
-    void Awake() => Instance = this;
+    private void Awake() => Instance = this;
 
     [SerializeField]
     private Playback _playback;
@@ -19,7 +19,7 @@ public class PlaybackController : MonoBehaviour
     [SerializeField] private UnityEvent _onReset;
     public Playback Playback => _playback;
 
-    void Start()
+    private void Start()
     {
         _playback.SetButtonsColors();
     }

@@ -248,28 +248,28 @@ namespace GameCore.SimulationCore
         public void GetPosFromTransform() => CurrentPosition = PlanetTransform.position;
     
         // setters
-        void SetPlanetSprite(Sprite newSprite)
+        private void SetPlanetSprite(Sprite newSprite)
         {
             _planetSprite = newSprite;
             _renderer.sprite = _planetSprite;
             PlanetLookEditor.Instance.PlanetPreviewImage.sprite = _planetSprite;
         }
 
-        void SetPlanetColor(Color newColor)
+        private void SetPlanetColor(Color newColor)
         {
             _planetColor = newColor;
             _renderer.color = _planetColor;
             _universeTrail.SetColor(_planetColor);
         }
 
-        void SetPlanetRadius(float newRadius)
+        private void SetPlanetRadius(float newRadius)
         {
             if (newRadius <= 0) return;
             _radius = newRadius;
             _planetTransform.localScale = new(_radius * 2, _radius * 2, _radius * 2);
         }
 
-        void SetPlanetMass(float newMass)
+        private void SetPlanetMass(float newMass)
         {
             if (newMass <= 0) return;
             if (PlaybackController.Instance.Playback.IsReset) _initialMass = newMass;
@@ -277,7 +277,7 @@ namespace GameCore.SimulationCore
             _rigidbody.mass = _mass;
         }
     
-        void SetPlanetCurrentVelocity(Vector2 newVel)
+        private void SetPlanetCurrentVelocity(Vector2 newVel)
         {
             _rigidbody.velocity = newVel;
 
@@ -287,7 +287,7 @@ namespace GameCore.SimulationCore
             _handler.OnVelocityChanged.ChangeValue(UniverseTools.RoundOutput(CurrentVelocity.magnitude));
         }
 
-        void SetPlanetCurrentPosition(Vector2 newPos)
+        private void SetPlanetCurrentPosition(Vector2 newPos)
         {
             if (PlaybackController.Instance.Playback.IsReset || _firstTouch) InitialPosition = newPos;
             _currentPosition = newPos;
@@ -295,9 +295,9 @@ namespace GameCore.SimulationCore
             _firstTouch = false;
         }
 
-        void SetInitialVelocity(Vector2 newVel) => _initialVelocity = newVel;
-    
-        void SetPlanetName(string newName)
+        private void SetInitialVelocity(Vector2 newVel) => _initialVelocity = newVel;
+
+        private void SetPlanetName(string newName)
         {
             _name = newName;
             _planetTransform.gameObject.name = _name;
@@ -342,7 +342,7 @@ namespace GameCore.SimulationCore
         /// <summary>
         /// Moves all children to local position (0, 0) - centers all children.
         /// </summary>
-        void ClearPivot()
+        private void ClearPivot()
         {
             foreach (Transform child in _planetTransform)
                 child.localPosition = Vector3.zero;

@@ -11,7 +11,7 @@ public class LeftSideButtonsController : MonoBehaviour
     private bool _isCreatingPlanet = false, _isRemovingPlanet = false, _isCutable = false, _cutState;
     private Vector2[] _cutsVectors = new Vector2[2];
 
-    void Start() => UpdateButtons();
+    private void Start() => UpdateButtons();
     
     /// Called when player is on add/create new planet mode
     public void AddPlanet()
@@ -52,7 +52,7 @@ public class LeftSideButtonsController : MonoBehaviour
         UpdateButtons();
     }
 
-    void Update()
+    private void Update()
     {
         if (GlobalVariables.Instance.OverlayShown) return;
         Vector2 mousePosition = UniverseCamera.Instance.ScreenToWorld(Input.mousePosition);
@@ -103,13 +103,13 @@ public class LeftSideButtonsController : MonoBehaviour
     }
 
     private readonly Vector2 _tempOffset = new (1, 1);
-    void DrawSliceLine(Vector2 mousePos) => SliceRenderer.Instance.DrawLine(_cutsVectors[0], mousePos - _tempOffset);
-    void HideSliceLine() => SliceRenderer.Instance.Hide();
+    private void DrawSliceLine(Vector2 mousePos) => SliceRenderer.Instance.DrawLine(_cutsVectors[0], mousePos - _tempOffset);
+    private static void HideSliceLine() => SliceRenderer.Instance.Hide();
 
     /// <summary>
     /// Updates color of left side buttons.
     /// </summary>
-    void UpdateButtons()
+    private void UpdateButtons()
     {
         _buttonsImage[0].color = _isCreatingPlanet ? new Color(1, 1, 1, 1) : new Color(1, 1, 1, 0.6f);
         _buttonsImage[1].color = _isRemovingPlanet ? new Color(1, 1, 1, 1) : new Color(1, 1, 1, 0.6f);

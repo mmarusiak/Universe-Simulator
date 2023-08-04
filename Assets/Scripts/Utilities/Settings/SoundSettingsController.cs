@@ -11,7 +11,7 @@ namespace Utilities.Settings
         private readonly SoundSettings[] _settings = new SoundSettings[Enum.GetNames(typeof(UniverseSoundNode.SoundType)).Length];
         private SoundSettings _master;
 
-        void Awake() => Instance = this;
+        private void Awake() => Instance = this;
 
         public void AddNewSound(SoundSettings settings)
         {

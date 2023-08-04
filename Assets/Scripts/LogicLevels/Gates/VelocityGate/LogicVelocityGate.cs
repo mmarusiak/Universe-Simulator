@@ -14,13 +14,13 @@ namespace LogicLevels
             set => velocity = value;
         }
 
-        void Start()
+        private void Start()
         {
             _myGate = LogicLevelController.Instance.AddNewGate(this);
             LogicLevelController.Instance.VelocityDataList.Add(this);
         }
 
-        void Update()
+        private void Update()
         {
             if (PlaybackController.Instance.Playback.IsPaused) return;
         

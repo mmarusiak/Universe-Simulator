@@ -13,7 +13,7 @@ using Utilities.UniverseLibraries;
 public class PlanetSlice : MonoBehaviour
 {
     public static PlanetSlice Instance;
-    void Awake() => Instance = this;
+    private void Awake() => Instance = this;
 
     /// <summary>
     /// Gets all planets that are on line between start and end vector.
@@ -21,7 +21,7 @@ public class PlanetSlice : MonoBehaviour
     /// <param name="start">Start point for line.</param>
     /// <param name="end">End point for line.</param>
     /// <returns></returns>
-    List<GameObject> PlanetsOnLine(Vector2 start, Vector2 end)
+    private static List<GameObject> PlanetsOnLine(Vector2 start, Vector2 end)
     {
         List<GameObject> result = new ();
        
@@ -117,7 +117,7 @@ public class PlanetSlice : MonoBehaviour
     /// <param name="originalHandler">Planet Component Handler that is being sliced.</param>
     /// <param name="originalT">Transform that is being sliced.</param>
     /// <returns>Planet Component Handler that is on new Game Object.</returns>
-    PlanetComponentHandler CreateSlice(PlanetComponentHandler originalHandler, Transform originalT)
+    private static PlanetComponentHandler CreateSlice(PlanetComponentHandler originalHandler, Transform originalT)
     {
         // making new slice "clone"
         bool isOriginalClone = originalHandler.IsCloned;
@@ -144,7 +144,7 @@ public class PlanetSlice : MonoBehaviour
     /// <param name="sprite">New sliced sprite.</param>
     /// <param name="originalArea">Original planet's area (used to calculate new mass).</param>
     /// <param name="massApplier">Just for debug, indicates if we'll change the mass or not.</param>
-    void ApplySlice(PlanetComponentHandler handler, Sprite sprite, float originalArea, bool massApplier)
+    private void ApplySlice(PlanetComponentHandler handler, Sprite sprite, float originalArea, bool massApplier)
     {
         var target = handler.gameObject;
         // slice sprite
@@ -202,21 +202,21 @@ public class PlanetSlice : MonoBehaviour
     /// </summary>
     /// <param name="position">Target position.</param>
     /// <param name="target">Transform on which we want to apply our action.</param>
-    void MovePivot(Vector3 position, Transform target)
+    private static void MovePivot(Vector3 position, Transform target)
     {
         Vector3 offset = target.position - position;
         foreach (Transform child in target)
             child.transform.position += offset;
         target.position = position;
     }
-    
-    Vector2 GetCenterFromCollider(PolygonCollider2D collider)
+
+    private Vector2 GetCenterFromCollider(PolygonCollider2D collider)
     {
         Vector2[] vertices = collider.GetPath(0);
         return collider.transform.TransformPoint(GetCenterFromVertices(vertices));
     }
 
-    Vector2 GetCenterFromVertices(Vector2[] vertices)
+    private static Vector2 GetCenterFromVertices(Vector2[] vertices)
     {
         Vector2 center = Vector2.zero;
         foreach (var vert in vertices)
@@ -226,8 +226,8 @@ public class PlanetSlice : MonoBehaviour
         center /= vertices.Length;
         return center;
     }
-    
-    float CalculatePolygonArea(Vector2[] points)
+
+    private static float CalculatePolygonArea(Vector2[] points)
     {
         float area = 0;
 

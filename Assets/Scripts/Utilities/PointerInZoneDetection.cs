@@ -9,7 +9,7 @@ public class PointerInZoneDetection : MonoBehaviour
 
     private bool _enteredZone = true;
 
-    void OnValidate()
+    private void OnValidate()
     {
         // Calculate the zone dimensions based on screen size and percentage values
         float zoneWidth = Screen.width * zoneWidthPercentage;
@@ -21,8 +21,8 @@ public class PointerInZoneDetection : MonoBehaviour
 
         zone = new Rect(zoneX, zoneY, zoneWidth, zoneHeight);
     }
-    
-    void Update()
+
+    private void Update()
     {
         if (_enteredZone != zone.Contains(Input.mousePosition))
         {

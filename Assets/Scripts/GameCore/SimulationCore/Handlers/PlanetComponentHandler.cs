@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Unity.Mathematics;
 using UnityEngine;
@@ -46,7 +45,7 @@ namespace GameCore.SimulationCore.Handlers
             await AddToController();
         }
 
-        async Task AddToController()
+        private async Task AddToController()
         {
             while (PlanetComponentsController.Instance == null) await Task.Yield();
             // whole component loads from saving handler script
@@ -61,7 +60,7 @@ namespace GameCore.SimulationCore.Handlers
             AddToController();
         }
 
-        async void BeginLoad()
+        private async void BeginLoad()
         {
             _myComponent.Handler = this;
             _myComponent.PlanetTransform = transform.parent;
@@ -80,8 +79,8 @@ namespace GameCore.SimulationCore.Handlers
         }
 
         public void BeginDrag(Vector2 offset) => MyComponent.CurrentPosition = (Vector2)UniverseCamera.Instance.ScreenToWorld(Input.mousePosition) - offset;
-    
-        void Update()
+
+        private void Update()
         {
             if(!PlaybackController.Instance.Playback.IsPaused && _myComponent != null) _myComponent.AddForce();
         }

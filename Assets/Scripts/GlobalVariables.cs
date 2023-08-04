@@ -1,6 +1,7 @@
 using UnityEngine;
 using Utilities.UniverseLibraries;
 
+// TO REFACTOR !!!
 public class GlobalVariables : MonoBehaviour
 {
     public static GlobalVariables Instance { get; private set; }

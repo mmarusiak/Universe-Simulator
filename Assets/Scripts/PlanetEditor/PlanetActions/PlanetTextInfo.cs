@@ -21,13 +21,13 @@ public class PlanetTextInfo : MonoBehaviour
     private Vector2 _targetPos;
     private Vector2 _iconOffset = Vector2.zero;
 
-    void Start()
+    private void Start()
     { 
         if (_textTransform != null) return;
         _targetOutput = null;
     }
 
-    void Initialize()
+    private void Initialize()
     {
         var text = CreateNewText();
         if (_icon == null) return;
@@ -35,7 +35,7 @@ public class PlanetTextInfo : MonoBehaviour
         StrictFollow(CalculateTargetPos());
     }
 
-    GameObject CreateNewText()
+    private GameObject CreateNewText()
     {
         var textHolder = new GameObject(transform.parent.name);
         _targetOutput = textHolder.AddComponent<Text>();
@@ -54,7 +54,7 @@ public class PlanetTextInfo : MonoBehaviour
         return textHolder;
     }
 
-    void CreateIcon(GameObject holder)
+    private void CreateIcon(GameObject holder)
     {
         var iconHolder = new GameObject(transform.parent.name + "Icon");
         var img = iconHolder.AddComponent<Image>();
@@ -64,8 +64,8 @@ public class PlanetTextInfo : MonoBehaviour
         iconHolder.GetComponent<RectTransform>().position = new Vector3(-_textSize.x/2 - iconHolder.GetComponent<RectTransform>().sizeDelta.x/2 - _xDistanceBetweenIconAndText, 0, 0);
         _iconOffset = new Vector2(iconHolder.GetComponent<RectTransform>().sizeDelta.x + _xDistanceBetweenIconAndText, 0);
     }
-    
-    void LateUpdate()
+
+    private void LateUpdate()
     {
         if (_targetOutput == null) return;
         // calculating target pos - each next text container should have position of y + 1 - that will make them to display one row below
@@ -75,7 +75,7 @@ public class PlanetTextInfo : MonoBehaviour
         else SmoothFollow(_targetPos);
     }
 
-    Vector3 CalculateTargetPos()
+    private Vector3 CalculateTargetPos()
     {
         if(Camera.main is null) return Vector3.zero;
         
@@ -91,10 +91,10 @@ public class PlanetTextInfo : MonoBehaviour
         
         return Camera.main.WorldToScreenPoint(parent.position - basePos) + new Vector3(_textSize.x / 1.8f, -_textSize.y/2, 0) + (Vector3) _iconOffset - (Vector3) camSizeOffset * localPosition.y;
     }
-    
-    void StrictFollow(Vector3 target) => _textTransform.position = target;
 
-    void SmoothFollow(Vector3 target)
+    private void StrictFollow(Vector3 target) => _textTransform.position = target;
+
+    private void SmoothFollow(Vector3 target)
     {
         Vector3 smoothFollow = Vector3.Lerp(_textTransform.position,target, _smoothSpeed);
         _textTransform.position = smoothFollow;

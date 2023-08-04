@@ -47,7 +47,7 @@ namespace LogicLevels.Gates.AreaGate
         private LogicGate _myGate;
         private List<LogicAreaComponent> _planetsInZone = new();
 
-        void Start()
+        private void Start()
         {
             _myGate = LogicLevelController.Instance.AddNewGate(this);
             _myGate.OnGateReset.AddListener(ResetAreaGate);
@@ -67,7 +67,7 @@ namespace LogicLevels.Gates.AreaGate
                 Camera.main.WorldToScreenPoint(timer.transform.position) - new Vector3(0, timerText.fontSize * 2.25f);
         }
 
-        void CreateText()
+        private void CreateText()
         {
             timerTextGameObject = Instantiate(timerTextGameObject, GameObject.Find("LogicGatesTexts").transform);
             timerTextGameObject.name = TimeInZone + " : " + position + " : " + size;
@@ -82,7 +82,7 @@ namespace LogicLevels.Gates.AreaGate
         /// Planet to check.
         /// </param>
         /// <returns></returns>
-        bool IsPlanetAlreadyInZone(PlanetComponent planet)
+        private bool IsPlanetAlreadyInZone(PlanetComponent planet)
         {
             foreach (var p in _planetsInZone)
             {
@@ -91,14 +91,14 @@ namespace LogicLevels.Gates.AreaGate
             return false;
         }
 
-        void Update()
+        private void Update()
         {
             if (PlaybackController.Instance.Playback.IsPaused) return;
         
             CheckTimeForPlanets();
         }
 
-        void CheckTimeForPlanets()
+        private void CheckTimeForPlanets()
         {
             List<LogicAreaComponent> copyOf_planetsInZone = new List<LogicAreaComponent>(_planetsInZone);
             float minTime = TimeInZone;
@@ -134,7 +134,7 @@ namespace LogicLevels.Gates.AreaGate
         /// Gate area to check.
         /// </param>
         /// <returns></returns>
-        void CheckGate(LogicAreaComponent detector)
+        private void CheckGate(LogicAreaComponent detector)
         {
             // we will also probably need some indication of completion of that gate
             if (detector.Time >= timeInZone)
@@ -144,7 +144,7 @@ namespace LogicLevels.Gates.AreaGate
             }
         }
 
-        void ResetAreaGate()
+        private void ResetAreaGate()
         {
             _planetsInZone = new();
             timerText.text = UniverseTools.RoundOutput(timeInZone, 2) + " s";

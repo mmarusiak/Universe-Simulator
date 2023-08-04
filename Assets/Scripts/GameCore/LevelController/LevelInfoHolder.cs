@@ -37,14 +37,14 @@ namespace GameCore.LevelController
             SavingHandler.Instance.SaveLevel();
         }
     
-        void SetNewName(string value)
+        private void SetNewName(string value)
         {
             // set new level name to new value
             _levelName = value;
             nameField.text = _levelName;
         }
 
-        void MoveSaves(string oldPath, string newPath)
+        private void MoveSaves(string oldPath, string newPath)
         {
             if (!Directory.Exists(oldPath)) return;
             UniverseDirectories.RenameDirectory(oldPath, newPath);

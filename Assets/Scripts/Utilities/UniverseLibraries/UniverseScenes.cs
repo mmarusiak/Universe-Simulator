@@ -27,9 +27,9 @@ namespace Utilities.UniverseLibraries
             "You can add some image to your planet by editing it in view editor."
         };
 
-        public void Awake() => Instance = this;
+        private void Awake() => Instance = this;
 
-        async void Start()
+        private async void Start()
         {
             tipsText.text = NextTip();
             await LoadSceneAsync(_targetScene);

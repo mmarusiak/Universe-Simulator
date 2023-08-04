@@ -21,7 +21,7 @@ namespace UniverseSound
         
         public void Awake() => Instance = this;
 
-        void Start()
+        private void Start()
         {
             // initializing hashset
             foreach(var node in nodes)

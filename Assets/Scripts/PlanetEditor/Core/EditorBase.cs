@@ -49,13 +49,13 @@ public class EditorBase
         }
     }
 
-    void Show(bool target)
+    private void Show(bool target)
     {
         _shown = target;
         ChangeDisplay();
     }
 
-    void ChangeDisplay()
+    private void ChangeDisplay()
     {
         if (_shown)
         {

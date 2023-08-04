@@ -41,7 +41,7 @@ namespace Menu.SavesScrollbar
         
         }
 
-        void Update()
+        private void Update()
         {
             _view.gameObject.SetActive(_view.position.y < Screen.currentResolution.height/1.65);
         }

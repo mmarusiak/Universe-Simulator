@@ -16,7 +16,7 @@ public class PlanetMouseControls : MonoBehaviour
 
     private static bool _isOnTempPause;
 
-    void Awake() => _myHandler = transform.GetChild(0).GetComponent<PlanetComponentHandler>();
+    private void Awake() => _myHandler = transform.GetChild(0).GetComponent<PlanetComponentHandler>();
     
     private void OnMouseDown()
     {
@@ -43,7 +43,7 @@ public class PlanetMouseControls : MonoBehaviour
         }
     }
 
-    Vector2 OffsetPlanetDrag()
+    private Vector2 OffsetPlanetDrag()
     {
         return UniverseCamera.Instance.ScreenToWorld(Input.mousePosition) - _myHandler.MyComponent.PlanetTransform.position;
     }

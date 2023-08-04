@@ -9,7 +9,7 @@ namespace Utilities.UniverseLibraries.Timer
     public class TimersController : MonoBehaviour
     {
         public static TimersController Instance;
-        void Awake() => Instance = this;
+        private void Awake() => Instance = this;
 
         private readonly List<UniverseTimer> _timers = new ();
 
@@ -38,7 +38,7 @@ namespace Utilities.UniverseLibraries.Timer
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             foreach (var rTimer in _timers)
             {
