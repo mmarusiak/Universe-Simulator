@@ -20,7 +20,7 @@ namespace LogicLevels
         private readonly List<LogicGate> _gates = new ();
         private readonly UniverseTimer _levelTimer = new();
         
-        private bool _isLevelInEditMode;
+        private bool _isLevelInEditMode = true;
         private int _originalPlanetActions = 10;
         private int _planetActions = 10; // creates, change velocity etc.
         

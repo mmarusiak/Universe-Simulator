@@ -95,6 +95,11 @@ namespace LogicLevels.Gates.AreaGate
         {
             if (PlaybackController.Instance.Playback.IsPaused) return;
         
+            CheckTimeForPlanets();
+        }
+
+        void CheckTimeForPlanets()
+        {
             List<LogicAreaComponent> copyOf_planetsInZone = new List<LogicAreaComponent>(_planetsInZone);
             float minTime = TimeInZone;
             foreach (var planet in copyOf_planetsInZone)
