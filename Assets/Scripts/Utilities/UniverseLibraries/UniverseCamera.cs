@@ -68,7 +68,7 @@ namespace Utilities.UniverseLibraries
 
         public bool IsMouseOverGameObject(Transform target)
         {
-            Vector2 mousePos = ScreenToWorld(Input.mousePosition);
+            Vector2 mousePos = GetMousePosInWorld();
 
             var position = target.position;
             var lossyScale = target.lossyScale;

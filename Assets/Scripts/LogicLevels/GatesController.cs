@@ -39,7 +39,8 @@ namespace LogicLevels
                 return;
             }
 
-            if (!EventSystem.current.IsPointerOverGameObject()) return;
+            // THAT WAS CAUSING BUGS !!! IT DETECTED ONLY GAMEOBJECTS THAT ARE IN CANVAS !!!! - F.E. TEXTS, ICONS !!!! 
+            //if (!EventSystem.current.IsPointerOverGameObject()) return;
             
             CheckForGate();
         }
@@ -51,6 +52,7 @@ namespace LogicLevels
 
         private void CheckForGate()
         {
+            Debug.Log("Checking!");
             foreach (var areaGate in _areaGates)
             {
                 if (UniverseCamera.Instance.IsMouseOverGameObject(areaGate.Panel.transform))
