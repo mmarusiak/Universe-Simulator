@@ -12,6 +12,8 @@ namespace Utilities.UniverseLibraries
         {
             // hide all UI
             GameObject toHide = GameObject.FindWithTag("NoScreenshotable");
+            if (!toHide)
+                return;
             toHide.SetActive(false);
             // wait for next frame, to capture hidden overlay
             await Task.Yield();

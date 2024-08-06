@@ -29,7 +29,8 @@ public class GlobalVariables : MonoBehaviour
     // Update is called once per frame
     async void Update()
     {
-        if (Input.GetKey(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
+            
             await UniversePictures.TakeGameScreenshot("/home/mmarusiak/Documents/UniverseScreens/NEWCAPTURE");
     }
 }
